@@ -1,0 +1,3 @@
+# SPA routing for React app on Render
+/api/* https://adoorrealestate.onrender.com/api/:splat 200
+/* /index.html 200
