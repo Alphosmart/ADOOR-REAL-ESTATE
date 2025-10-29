@@ -84,14 +84,24 @@ const AddProduct = () => {
 
     const [uploadProductImageInput, setUploadProductImageInput] = useState("");
 
+    // Currency mapping for countries
+    const countryCurrencyMap = {
+        "Nigeria": "NGN",
+        "United States": "USD",
+        "United Kingdom": "GBP",
+        "Canada": "CAD",
+        "South Africa": "ZAR"
+    };
+
     // Location loading functions
     const loadStatesForCountry = (country) => {
         const countryData = locationData[country];
         if (countryData) {
             const statesList = Object.keys(countryData.states || countryData.regions || countryData.provinces || {});
             setStates(statesList);
-            // Reset state and LGA when country changes
-            setData(prev => ({ ...prev, state: "", lga: "" }));
+            // Reset state and LGA when country changes, and set currency based on country
+            const defaultCurrency = countryCurrencyMap[country] || "NGN";
+            setData(prev => ({ ...prev, state: "", lga: "", currency: defaultCurrency }));
             setLgas([]);
         }
     };
@@ -371,7 +381,38 @@ const AddProduct = () => {
                     {/* 🏡 Property Details Section */}
                     <h3 className='font-bold text-md mt-4 mb-2 text-blue-600'>🏡 Property Details</h3>
                     
-                    <label htmlFor='productName'>Property Title <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='country'>Country <span className='text-red-600'>*</span>:</label>
+                    <select
+                        id='country'
+                        name='country'
+                        value={data.country}
+                        onChange={handleOnChange}
+                        className='p-2 bg-slate-100 border rounded'
+                        required
+                    >
+                        <option value="">Select Country</option>
+                        {Object.keys(locationData).map(country => (
+                            <option key={country} value={country}>{country}</option>
+                        ))}
+                    </select>
+
+                    <label htmlFor='currency' className='mt-3'>Currency <span className='text-red-600'>*</span>:</label>
+                    <select 
+                        required 
+                        value={data.currency} 
+                        name='currency' 
+                        onChange={handleOnChange}
+                        className='p-2 bg-slate-100 border rounded'
+                    >
+                        <option value="NGN">₦ Nigerian Naira (NGN)</option>
+                        <option value="USD">$ US Dollar (USD)</option>
+                        <option value="EUR">€ Euro (EUR)</option>
+                        <option value="GBP">£ British Pound (GBP)</option>
+                        <option value="CAD">$ Canadian Dollar (CAD)</option>
+                        <option value="ZAR">R South African Rand (ZAR)</option>
+                    </select>
+
+                    <label htmlFor='productName' className='mt-3'>Property Title <span className='text-red-600'>*</span>:</label>
                     <input 
                         type='text' 
                         id='productName' 
@@ -397,21 +438,7 @@ const AddProduct = () => {
                         <option value="Shortlet">Shortlet</option>
                     </select>
 
-                    <label htmlFor='currency' className='mt-3'>Currency <span className='text-red-600'>*</span>:</label>
-                    <select 
-                        required 
-                        value={data.currency} 
-                        name='currency' 
-                        onChange={handleOnChange}
-                        className='p-2 bg-slate-100 border rounded'
-                    >
-                        <option value="NGN">₦ Nigerian Naira (NGN)</option>
-                        <option value="USD">$ US Dollar (USD)</option>
-                        <option value="EUR">€ Euro (EUR)</option>
-                        <option value="GBP">£ British Pound (GBP)</option>
-                    </select>
-
-                    <label htmlFor='price' className='mt-3'>Price <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='price' className='mt-3'>Price ({data.currency}) <span className='text-red-600'>*</span>:</label>
                     <input 
                         type='number' 
                         id='price' 
@@ -454,22 +481,7 @@ const AddProduct = () => {
                     {/* 📍 Location Section */}
                     <h3 className='font-bold text-md mt-4 mb-2 text-blue-600'>📍 Location</h3>
                     
-                    <label htmlFor='country'>Country <span className='text-red-600'>*</span>:</label>
-                    <select
-                        id='country'
-                        name='country'
-                        value={data.country}
-                        onChange={handleOnChange}
-                        className='p-2 bg-slate-100 border rounded'
-                        required
-                    >
-                        <option value="">Select Country</option>
-                        {Object.keys(locationData).map(country => (
-                            <option key={country} value={country}>{country}</option>
-                        ))}
-                    </select>
-
-                    <label htmlFor='address' className='mt-3'>Address <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='address'>Address <span className='text-red-600'>*</span>:</label>
                     <input 
                         type='text' 
                         id='address' 

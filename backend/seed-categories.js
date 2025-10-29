@@ -18,8 +18,8 @@ const seedCategories = async () => {
             
             const defaultCategories = [
                 'houses', 'apartments', 'villas', 'condos', 'land', 'commercial', 
-                'brushes-rollers', 'decorative-panels', 'wall-decals', 'murals', 
-                'tiles', 'flooring', 'curtains', 'blinds', 'lighting', 'mirrors'
+                'townhouses', 'duplexes', 'penthouses', 'studios', 'bungalow', 
+                'mansion', 'short-let', 'agricultural', 'farm'
             ];
 
             // Create admin user ID (you can replace this with actual admin ID)
