@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
     FaBed, FaBath, FaRulerCombined, FaMapMarkerAlt, FaCar, 
-    FaHeart, FaShare, FaPhone, FaEnvelope, FaCalendar 
+    FaHeart, FaShare, FaPhone, FaEnvelope, FaCalendar, FaWhatsapp 
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
@@ -248,16 +248,29 @@ const PropertyDetail = () => {
                 {/* Right Column - Contact and Actions */}
                 <div className="lg:col-span-1">
                     <div className="sticky top-4">
-                        {/* Agent Info */}
+                        {/* Contact Admin */}
                         <div className="bg-white border rounded-lg p-6 mb-4 shadow-md">
-                            <h3 className="text-xl font-bold mb-4">Contact Agent</h3>
+                            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
                             
-                            {property.agentInfo && (
-                                <div className="mb-4">
-                                    <p className="font-semibold text-gray-800">{property.agentInfo.name}</p>
-                                    <p className="text-sm text-gray-600">{property.agentInfo.role}</p>
-                                </div>
-                            )}
+                            <button 
+                                onClick={() => {
+                                    const propertyUrl = window.location.href;
+                                    const propertyTitle = property.name || property.productName;
+                                    const propertyPrice = property.pricing?.sellingPrice?.amount || property.sellingPrice || property.price;
+                                    const propertyLocation = property.location?.city ? `${property.location.city}, ${property.location.state}` : (property.location?.address || '');
+                                    
+                                    const message = `Hi! I'm interested in this property:\n\n*${propertyTitle}*\nPrice: ₦${propertyPrice?.toLocaleString()}\nLocation: ${propertyLocation}\n\nProperty Link: ${propertyUrl}`;
+                                    
+                                    const whatsappNumber = '+2348012345678'; // Replace with your actual WhatsApp number
+                                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                                    
+                                    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+                                }}
+                                className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 mb-2 flex items-center justify-center"
+                            >
+                                <FaWhatsapp className="mr-2 text-2xl" />
+                                Chat on WhatsApp
+                            </button>
 
                             <button 
                                 onClick={() => setShowInquiryForm(!showInquiryForm)}
@@ -269,7 +282,7 @@ const PropertyDetail = () => {
 
                             <button 
                                 onClick={() => setShowAppointmentForm(!showAppointmentForm)}
-                                className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 flex items-center justify-center"
+                                className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 flex items-center justify-center"
                             >
                                 <FaCalendar className="mr-2" />
                                 Schedule Viewing

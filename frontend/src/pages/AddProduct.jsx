@@ -70,11 +70,7 @@ const AddProduct = () => {
         // Images
         productImage: [],
         
-        // Agent Information
-        agentName: "",
-        agentPhone: "",
-        agentEmail: "",
-        agency: "",
+
         
         // Metadata
         status: "Active",
@@ -1062,53 +1058,6 @@ const AddProduct = () => {
                             <p className='text-secondary-600 text-xs'>*Please upload at least one property image</p>
                         )}
                     </div>
-
-                    {/* 👤 Agent Information Section */}
-                    <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>👤 Agent Information</h3>
-                    
-                    <label htmlFor='agentName'>Agent Name:</label>
-                    <input 
-                        type='text' 
-                        id='agentName' 
-                        placeholder='Alphonsus Gabriel' 
-                        value={data.agentName} 
-                        name='agentName' 
-                        onChange={handleOnChange}
-                        className='p-2 bg-slate-100 border rounded'
-                    />
-
-                    <label htmlFor='agentPhone' className='mt-3'>Agent Phone:</label>
-                    <input 
-                        type='tel' 
-                        id='agentPhone' 
-                        placeholder='+2348012345678' 
-                        value={data.agentPhone} 
-                        name='agentPhone' 
-                        onChange={handleOnChange}
-                        className='p-2 bg-slate-100 border rounded'
-                    />
-
-                    <label htmlFor='agentEmail' className='mt-3'>Agent Email:</label>
-                    <input 
-                        type='email' 
-                        id='agentEmail' 
-                        placeholder='alphonsus@agency.com' 
-                        value={data.agentEmail} 
-                        name='agentEmail' 
-                        onChange={handleOnChange}
-                        className='p-2 bg-slate-100 border rounded'
-                    />
-
-                    <label htmlFor='agency' className='mt-3'>Agency Name:</label>
-                    <input 
-                        type='text' 
-                        id='agency' 
-                        placeholder='OKSA Realty' 
-                        value={data.agency} 
-                        name='agency' 
-                        onChange={handleOnChange}
-                        className='p-2 bg-slate-100 border rounded'
-                    />
 
                     {/* ⚙️ Additional Metadata */}
                     <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>⚙️ Additional Metadata</h3>
