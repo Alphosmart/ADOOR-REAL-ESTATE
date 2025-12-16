@@ -3,10 +3,10 @@ const Property = require('../models/propertyModel');
 const User = require('../models/userModel');
 const logger = require('../utils/logger');
 
-// Submit inquiry (guest or authenticated)
+// Submit inquiry (guest or authenticated - no login required)
 const submitInquiry = async (req, res) => {
     try {
-        const sessionUser = req.userId;
+        const sessionUser = req.userId; // Will be undefined for guests
         const { property, subject, message, inquiryType, guestInfo, preferredContact, proposedBudget, needsFinancing } = req.body;
 
         // Verify property exists
@@ -29,15 +29,19 @@ const submitInquiry = async (req, res) => {
             ipAddress: req.ip
         };
 
-        if (sessionUser) {
-            inquiryData.inquirer = sessionUser;
-        } else if (guestInfo) {
-            inquiryData.guestInfo = guestInfo;
-        } else {
+        // For guests, require guestInfo
+        if (!sessionUser && !guestInfo) {
             return res.status(400).json({
                 success: false,
-                message: 'Either login or provide contact information'
+                message: 'Please provide your contact information'
             });
+        }
+
+        // Set inquirer data based on authentication status
+        if (sessionUser) {
+            inquiryData.inquirer = sessionUser;
+        } else {
+            inquiryData.guestInfo = guestInfo;
         }
 
         if (proposedBudget) {
@@ -53,7 +57,7 @@ const submitInquiry = async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message: 'Inquiry submitted successfully',
+            message: 'Inquiry submitted successfully. We will contact you shortly.',
             data: savedInquiry
         });
     } catch (error) {

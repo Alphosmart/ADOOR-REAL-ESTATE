@@ -12,7 +12,6 @@ const staticPages = [
   { url: '/help', priority: '0.7', changefreq: 'monthly' },
   { url: '/privacy-policy', priority: '0.5', changefreq: 'yearly' },
   { url: '/terms-of-service', priority: '0.5', changefreq: 'yearly' },
-  { url: '/shipping-policy', priority: '0.6', changefreq: 'monthly' },
   { url: '/return-policy', priority: '0.6', changefreq: 'monthly' },
   { url: '/become-seller', priority: '0.7', changefreq: 'monthly' },
   { url: '/categories', priority: '0.9', changefreq: 'weekly' },

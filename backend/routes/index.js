@@ -177,15 +177,14 @@ const {
 } = require('../controller/contactMessageController');
 // const resetAdminPassword = require('../controller/resetAdminPassword');
 
-// User authentication routes
-router.post('/signup', checkDatabaseConnection, userSignUpController);
-router.post('/signin', checkDatabaseConnection, userSignInController);
+// Admin/Staff authentication routes only - User accounts removed
+router.post('/admin/signin', checkDatabaseConnection, userSignInController);
 router.get('/user-details', checkDatabaseConnection, authToken, userDetailsController);
-// Profile routes - Protect during maintenance
+// Profile routes for admin/staff only
 router.put('/update-profile', checkMaintenanceMode, checkDatabaseConnection, authToken, updateProfile);
-router.get('/user-preferences', checkMaintenanceMode, checkDatabaseConnection, authToken, getUserPreferences);
-router.put('/user-preferences', checkMaintenanceMode, checkDatabaseConnection, authToken, updateUserPreferences);
 router.get('/userLogout', userLogout);
+
+// User signup, signin, and preferences routes removed - no regular user accounts
 
 // Maintenance mode status (public endpoint)
 router.get('/maintenance-status', getMaintenanceStatus);
@@ -213,31 +212,31 @@ router.get('/user-properties', checkMaintenanceMode, authToken, getUserPropertie
 router.put('/properties/:propertyId', checkMaintenanceMode, authToken, updatePropertyController);
 router.delete('/properties/:propertyId', checkMaintenanceMode, authToken, deletePropertyController);
 
-// Property inquiry routes
-router.post('/inquiries', checkMaintenanceMode, submitInquiry); // Guest or authenticated
-router.get('/user-inquiries', checkMaintenanceMode, authToken, getUserInquiries);
-router.get('/inquiries/:inquiryId', checkMaintenanceMode, authToken, getInquiry);
+// Property inquiry routes - Guest submissions only, admin management
+router.post('/inquiries', checkMaintenanceMode, submitInquiry); // Public - no auth required
 router.get('/admin/inquiries', authToken, getAllInquiries);
+router.get('/inquiries/:inquiryId', authToken, getInquiry); // Admin only
 router.post('/inquiries/:inquiryId/respond', checkMaintenanceMode, authToken, respondToInquiry);
 router.put('/inquiries/:inquiryId/status', checkMaintenanceMode, authToken, updateInquiryStatus);
+// router.get('/user-inquiries', checkMaintenanceMode, authToken, getUserInquiries); // Removed - no user accounts
 
-// Property appointment/viewing routes
-router.post('/appointments', checkMaintenanceMode, authToken, createAppointment);
-router.get('/user-appointments', checkMaintenanceMode, authToken, getUserAppointments);
-router.get('/agent-appointments', checkMaintenanceMode, authToken, getAgentAppointments);
+// Property appointment/viewing routes - Guest bookings, admin/staff management
+router.post('/appointments', checkMaintenanceMode, createAppointment); // Public - no auth required
+router.get('/agent-appointments', checkMaintenanceMode, authToken, getAgentAppointments); // Admin/staff only
 router.put('/appointments/:appointmentId/status', checkMaintenanceMode, authToken, updateAppointmentStatus);
 router.post('/appointments/:appointmentId/reschedule', checkMaintenanceMode, authToken, rescheduleAppointment);
+// router.get('/user-appointments', checkMaintenanceMode, authToken, getUserAppointments); // Removed - no user accounts
 
 // ===== END REAL ESTATE ROUTES =====
 
-// Social features routes
-router.post('/products/:productId/like', checkMaintenanceMode, authToken, likeProduct);
-router.post('/products/:productId/rate', checkMaintenanceMode, authToken, rateProduct);
-router.post('/products/:productId/review', checkMaintenanceMode, authToken, addReview);
-router.get('/products/:productId/reviews', checkMaintenanceMode, getProductReviews);
-router.post('/products/:productId/review/:reviewId/like', checkMaintenanceMode, authToken, likeReview);
-router.post('/products/:productId/share', checkMaintenanceMode, authToken, shareProduct);
-router.get('/products/:productId/stats', checkMaintenanceMode, getProductStats);
+// Social features routes - Guest can view, admin can manage
+router.post('/products/:productId/like', checkMaintenanceMode, authToken, likeProduct); // Admin only
+router.post('/products/:productId/rate', checkMaintenanceMode, authToken, rateProduct); // Admin only
+router.post('/products/:productId/review', checkMaintenanceMode, authToken, addReview); // Admin only
+router.get('/products/:productId/reviews', checkMaintenanceMode, getProductReviews); // Public
+router.post('/products/:productId/review/:reviewId/like', checkMaintenanceMode, authToken, likeReview); // Admin only
+router.post('/products/:productId/share', checkMaintenanceMode, authToken, shareProduct); // Admin only
+router.get('/products/:productId/stats', checkMaintenanceMode, getProductStats); // Public
 
 // Enhanced review routes
 router.post('/products/:productId/enhanced-review', checkMaintenanceMode, authToken, addEnhancedReview);

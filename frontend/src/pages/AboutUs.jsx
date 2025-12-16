@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUsers, FaGlobe, FaAward, FaShieldAlt, FaHeart, FaClock, FaTruck, FaHeadset } from 'react-icons/fa';
+import { FaUsers, FaGlobe, FaAward, FaShieldAlt, FaHeart, FaClock, FaHome, FaHeadset } from 'react-icons/fa';
 import useSiteContent from '../hooks/useSiteContent';
 
 const AboutUs = () => {
@@ -15,7 +15,7 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Dynamic Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
+      <div className="bg-gradient-to-br from-accent-800 via-accent-700 to-primary-500 text-white py-20">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">{heroContent.title}</h1>
           <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto mb-4">
@@ -54,22 +54,22 @@ const AboutUs = () => {
             <div className="bg-white rounded-lg shadow-lg p-8">
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
-                    <FaUsers className="text-blue-600 text-2xl" />
+                  <div className="bg-primary-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                    <FaUsers className="text-primary-500 text-2xl" />
                   </div>
                   <h3 className="font-semibold text-gray-800">10K+</h3>
                   <p className="text-gray-600 text-sm">Happy Customers</p>
                 </div>
                 <div className="text-center">
-                  <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
-                    <FaGlobe className="text-green-600 text-2xl" />
+                  <div className="bg-primary-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                    <FaGlobe className="text-primary-500 text-2xl" />
                   </div>
                   <h3 className="font-semibold text-gray-800">50+</h3>
                   <p className="text-gray-600 text-sm">Countries Served</p>
                 </div>
                 <div className="text-center">
-                  <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
-                    <FaAward className="text-purple-600 text-2xl" />
+                  <div className="bg-primary-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                    <FaAward className="text-primary-500 text-2xl" />
                   </div>
                   <h3 className="font-semibold text-gray-800">500+</h3>
                   <p className="text-gray-600 text-sm">Trusted Sellers</p>
@@ -98,8 +98,8 @@ const AboutUs = () => {
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-              <div className="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <FaHeart className="text-red-600 text-2xl" />
+              <div className="bg-primary-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <FaHeart className="text-primary-500 text-2xl" />
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-3">Quality First</h3>
               <p className="text-gray-600">
@@ -109,8 +109,8 @@ const AboutUs = () => {
             </div>
             
             <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-              <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <FaUsers className="text-blue-600 text-2xl" />
+              <div className="bg-primary-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <FaUsers className="text-primary-500 text-2xl" />
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-3">Client Focused</h3>
               <p className="text-gray-600">
@@ -120,8 +120,8 @@ const AboutUs = () => {
             </div>
             
             <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-              <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <FaGlobe className="text-green-600 text-2xl" />
+              <div className="bg-primary-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <FaGlobe className="text-primary-500 text-2xl" />
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-3">Global Reach</h3>
               <p className="text-gray-600">
@@ -138,8 +138,8 @@ const AboutUs = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                <FaShieldAlt className="text-blue-600 text-3xl" />
+              <div className="bg-primary-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                <FaShieldAlt className="text-primary-500 text-3xl" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Trust & Security</h3>
               <p className="text-gray-600 text-sm">
@@ -148,8 +148,8 @@ const AboutUs = () => {
             </div>
             
             <div className="text-center">
-              <div className="bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                <FaClock className="text-green-600 text-3xl" />
+              <div className="bg-primary-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                <FaClock className="text-primary-500 text-3xl" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Reliability</h3>
               <p className="text-gray-600 text-sm">
@@ -158,8 +158,8 @@ const AboutUs = () => {
             </div>
             
             <div className="text-center">
-              <div className="bg-purple-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                <FaTruck className="text-purple-600 text-3xl" />
+              <div className="bg-primary-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                <FaHome className="text-primary-500 text-3xl" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Innovation</h3>
               <p className="text-gray-600 text-sm">
@@ -168,8 +168,8 @@ const AboutUs = () => {
             </div>
             
             <div className="text-center">
-              <div className="bg-orange-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                <FaHeadset className="text-orange-600 text-3xl" />
+              <div className="bg-primary-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                <FaHeadset className="text-primary-500 text-3xl" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Support</h3>
               <p className="text-gray-600 text-sm">
@@ -187,8 +187,8 @@ const AboutUs = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-blue-100 rounded-lg p-2 flex-shrink-0">
-                    <FaAward className="text-blue-600 text-lg" />
+                  <div className="bg-primary-50 rounded-lg p-2 flex-shrink-0">
+                    <FaAward className="text-primary-500 text-lg" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-1">Premium Quality Products</h3>
@@ -199,8 +199,8 @@ const AboutUs = () => {
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-green-100 rounded-lg p-2 flex-shrink-0">
-                    <FaShieldAlt className="text-green-600 text-lg" />
+                  <div className="bg-primary-50 rounded-lg p-2 flex-shrink-0">
+                    <FaShieldAlt className="text-primary-500 text-lg" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-1">Secure Transactions</h3>
@@ -211,13 +211,13 @@ const AboutUs = () => {
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-purple-100 rounded-lg p-2 flex-shrink-0">
-                    <FaTruck className="text-purple-600 text-lg" />
+                  <div className="bg-primary-50 rounded-lg p-2 flex-shrink-0">
+                    <FaHome className="text-primary-500 text-lg" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Fast & Reliable Shipping</h3>
+                    <h3 className="font-semibold text-gray-800 mb-1">Verified Properties</h3>
                     <p className="text-gray-600 text-sm">
-                      Quick processing and delivery with real-time tracking and shipping updates.
+                      All properties are thoroughly verified to ensure authenticity and quality.
                     </p>
                   </div>
                 </div>
@@ -225,8 +225,8 @@ const AboutUs = () => {
               
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-orange-100 rounded-lg p-2 flex-shrink-0">
-                    <FaHeadset className="text-orange-600 text-lg" />
+                  <div className="bg-primary-50 rounded-lg p-2 flex-shrink-0">
+                    <FaHeadset className="text-primary-500 text-lg" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-1">24/7 Customer Support</h3>
@@ -237,8 +237,8 @@ const AboutUs = () => {
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-red-100 rounded-lg p-2 flex-shrink-0">
-                    <FaHeart className="text-red-600 text-lg" />
+                  <div className="bg-primary-50 rounded-lg p-2 flex-shrink-0">
+                    <FaHeart className="text-primary-500 text-lg" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-1">Easy Returns</h3>
@@ -249,8 +249,8 @@ const AboutUs = () => {
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-yellow-100 rounded-lg p-2 flex-shrink-0">
-                    <FaGlobe className="text-yellow-600 text-lg" />
+                  <div className="bg-primary-50 rounded-lg p-2 flex-shrink-0">
+                    <FaGlobe className="text-primary-500 text-lg" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-1">Global Marketplace</h3>

@@ -1,14 +1,21 @@
 const backendDomain = process.env.NODE_ENV === 'production' 
-    ? "https://adoorrealestate.onrender.com" 
+    ? "https://adoor-real-estate.onrender.com" 
     : "http://localhost:8080"  // Use local backend for development
 
 const SummaryApi = {
-    signUP : {
-        url : `${backendDomain}/api/signup`,
-        method : "post"
-    },
-    signIn : {
-        url : `${backendDomain}/api/signin`,
+    // User signup removed - no regular user accounts
+    // signUP : {
+    //     url : `${backendDomain}/api/signup`,
+    //     method : "post"
+    // },
+    // Regular user signin removed
+    // signIn : {
+    //     url : `${backendDomain}/api/signin`,
+    //     method : "post"
+    // },
+    // Admin/Staff signin only
+    adminSignIn : {
+        url : `${backendDomain}/api/admin/signin`,
         method : "post"
     },
     current_user : {

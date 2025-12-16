@@ -26,7 +26,10 @@ const EnhancedSearchResults = () => {
         minPrice: '',
         maxPrice: '',
         inStock: true,
-        sortBy: 'relevance'
+        sortBy: 'relevance',
+        country: '',
+        state: '',
+        location: ''
     });
     const [showFilters, setShowFilters] = useState(false);
     const [availableFilters, setAvailableFilters] = useState({
@@ -82,6 +85,9 @@ const EnhancedSearchResults = () => {
             if (searchFilters.brand) searchParams.append('brand', searchFilters.brand);
             if (searchFilters.minPrice) searchParams.append('minPrice', searchFilters.minPrice);
             if (searchFilters.maxPrice) searchParams.append('maxPrice', searchFilters.maxPrice);
+            if (searchFilters.country) searchParams.append('country', searchFilters.country);
+            if (searchFilters.state) searchParams.append('state', searchFilters.state);
+            if (searchFilters.location) searchParams.append('location', searchFilters.location);
 
             const searchUrl = `${SummaryApi.baseURL}/api/search/smart?${searchParams}`;
             console.log('🔍 Making search request to:', searchUrl);
@@ -413,6 +419,55 @@ const EnhancedSearchResults = () => {
                 {/* Quick Filters - Show automatically when there are results */}
                 {totalResults > 0 && (
                     <div className="bg-white rounded-lg p-4 mb-4 border border-gray-200">
+                        {/* Active Filters Display */}
+                        {(filters.country || filters.state || filters.location || filters.category || filters.minPrice || filters.maxPrice) && (
+                            <div className="mb-3 pb-3 border-b border-gray-200">
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <span className="text-sm font-medium text-gray-600">Active Filters:</span>
+                                    {filters.country && (
+                                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                                            🌍 {filters.country}
+                                            <button onClick={() => handleFilterChange('country', '')} className="ml-1 hover:text-blue-900">
+                                                <FaTimes className="text-xs" />
+                                            </button>
+                                        </span>
+                                    )}
+                                    {filters.state && (
+                                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
+                                            📍 {filters.state}
+                                            <button onClick={() => handleFilterChange('state', '')} className="ml-1 hover:text-green-900">
+                                                <FaTimes className="text-xs" />
+                                            </button>
+                                        </span>
+                                    )}
+                                    {filters.location && (
+                                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
+                                            🏘️ {filters.location}
+                                            <button onClick={() => handleFilterChange('location', '')} className="ml-1 hover:text-purple-900">
+                                                <FaTimes className="text-xs" />
+                                            </button>
+                                        </span>
+                                    )}
+                                    {filters.category && (
+                                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">
+                                            {filters.category}
+                                            <button onClick={() => handleFilterChange('category', '')} className="ml-1 hover:text-orange-900">
+                                                <FaTimes className="text-xs" />
+                                            </button>
+                                        </span>
+                                    )}
+                                    {(filters.minPrice || filters.maxPrice) && (
+                                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">
+                                            💰 {filters.minPrice && `₦${filters.minPrice}`}{filters.minPrice && filters.maxPrice && ' - '}{filters.maxPrice && `₦${filters.maxPrice}`}
+                                            <button onClick={() => { handleFilterChange('minPrice', ''); handleFilterChange('maxPrice', ''); }} className="ml-1 hover:text-yellow-900">
+                                                <FaTimes className="text-xs" />
+                                            </button>
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                        
                         <div className="flex flex-wrap items-center gap-3">
                             <span className="text-sm font-medium text-gray-700">Quick Filters:</span>
                             
@@ -582,6 +637,48 @@ const EnhancedSearchResults = () => {
                                 />
                                 <span className="text-sm text-gray-700">In Stock Only</span>
                             </label>
+                        </div>
+                    </div>
+
+                    {/* Location Filters Section */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 pt-6 border-t border-gray-200">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                🌍 Country
+                            </label>
+                            <input
+                                type="text"
+                                value={filters.country}
+                                onChange={(e) => handleFilterChange('country', e.target.value)}
+                                placeholder="e.g., Nigeria, USA, UK"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                📍 State/Province
+                            </label>
+                            <input
+                                type="text"
+                                value={filters.state}
+                                onChange={(e) => handleFilterChange('state', e.target.value)}
+                                placeholder="e.g., Lagos, California"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                🏘️ City/Area/LGA
+                            </label>
+                            <input
+                                type="text"
+                                value={filters.location}
+                                onChange={(e) => handleFilterChange('location', e.target.value)}
+                                placeholder="e.g., Ikeja, Manhattan"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            />
                         </div>
                     </div>
 

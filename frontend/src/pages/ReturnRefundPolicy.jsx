@@ -132,7 +132,7 @@ const ReturnRefundPolicy = () => {
                   <h3 className="font-medium text-gray-800 mb-2">Receive Return Authorization</h3>
                   <p className="text-gray-700 text-sm">
                     We'll review your request and provide a Return Authorization (RA) number along with 
-                    return shipping instructions.
+                    return instructions.
                   </p>
                 </div>
               </div>
@@ -143,10 +143,9 @@ const ReturnRefundPolicy = () => {
                   <span className="text-blue-600 font-semibold">3</span>
                 </div>
                 <div>
-                  <h3 className="font-medium text-gray-800 mb-2">Package and Ship</h3>
+                  <h3 className="font-medium text-gray-800 mb-2">Package Item</h3>
                   <p className="text-gray-700 text-sm">
-                    Securely package the item(s) with the RA number clearly marked. Use the provided 
-                    shipping label or arrange your own shipping.
+                    Securely package the item(s) with the RA number clearly marked.
                   </p>
                 </div>
               </div>
@@ -186,8 +185,6 @@ const ReturnRefundPolicy = () => {
                 <h3 className="font-medium text-yellow-800 mb-2">Refund Amounts</h3>
                 <ul className="text-sm text-yellow-700 space-y-1">
                   <li>• Full product price for eligible returns</li>
-                  <li>• Original shipping costs (if item was defective)</li>
-                  <li>• Return shipping costs may be deducted</li>
                   <li>• Processing fees are non-refundable</li>
                 </ul>
               </div>
@@ -239,7 +236,6 @@ const ReturnRefundPolicy = () => {
                 <h3 className="font-medium text-gray-800 mb-2">Special Considerations</h3>
                 <ul className="text-sm text-gray-700 space-y-1">
                   <li>• Extended return window (45 days)</li>
-                  <li>• Customer responsible for return shipping</li>
                   <li>• Customs fees are non-refundable</li>
                   <li>• Additional processing time may apply</li>
                 </ul>
@@ -250,7 +246,6 @@ const ReturnRefundPolicy = () => {
                   <li>• Customs declaration form</li>
                   <li>• Original purchase receipt</li>
                   <li>• Return authorization number</li>
-                  <li>• Proof of return shipping</li>
                 </ul>
               </div>
             </div>

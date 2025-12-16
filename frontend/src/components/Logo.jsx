@@ -4,11 +4,11 @@ const Logo = ({ w = 120, h = 40, showText = true, className = "" }) => {
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
       <img 
-        src="/logo.svg" 
+        src="/adoor.jpeg" 
         alt="Adoor Real Estate Logo"
         width={h}
         height={h}
-        className="object-contain"
+        className="object-contain rounded"
       />
       {showText && (
         <div className='text-xl font-bold text-gray-800'>

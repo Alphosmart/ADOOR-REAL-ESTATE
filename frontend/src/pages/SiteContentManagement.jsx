@@ -80,15 +80,6 @@ const SiteContentManagement = () => {
                 ]
             },
             announcements: [
-                {
-                    id: 1,
-                    enabled: false,
-                    text: "🚀 Fast shipping available nationwide! Order today",
-                    link: "/products",
-                    backgroundColor: "#3B82F6",
-                    textColor: "#FFFFFF",
-                    order: 1
-                }
             ],
             searchPlaceholder: "Search for properties, locations, types..."
         },

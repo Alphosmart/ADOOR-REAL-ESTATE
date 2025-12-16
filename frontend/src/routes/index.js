@@ -1,11 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App.jsx';
 import Home from '../pages/Home';
-import Login from '../pages/Login.jsx';
-import SignUp from '../pages/SignUp';
+import AdminLogin from '../pages/AdminLogin.jsx';
 import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
-import Profile from '../pages/Profile';
 import ErrorPage from '../components/ErrorPage';
 import AdminPanel from '../pages/AdminPanel';
 import Dashboard from '../pages/Dashboard';
@@ -16,18 +14,14 @@ import EditProduct from '../pages/EditProduct';
 import CategoryManagement from '../pages/CategoryManagement';
 import MyProducts from '../pages/MyProducts';
 import ProductDetail from '../pages/ProductDetail';
-import Cart from '../pages/Cart';
-import Checkout from '../pages/Checkout';
-// Seller routes removed - single company model
+// Cart and checkout removed - no user accounts
 import Analytics from '../pages/Analytics';
 import Settings from '../pages/Settings';
 import SiteContentManagement from '../pages/SiteContentManagement';
 import BannerManagement from '../pages/BannerManagement';
 import TestimonialsManagement from '../pages/TestimonialsManagement';
-// SellerOrders removed - single company model
 import OrderTracking from '../pages/OrderTracking';
 import TrackByNumber from '../pages/TrackByNumber';
-import MyOrders from '../pages/MyOrders';
 import EnhancedSearchResults from '../pages/EnhancedSearchResults';
 import HelpCenter from '../pages/HelpCenter';
 import HowToOrder from '../pages/HowToOrder';
@@ -47,7 +41,7 @@ import StaffManagement from '../pages/StaffManagement';
 import EmailTemplateManager from '../components/EmailTemplateManager';
 import PaymentConfiguration from '../pages/PaymentConfiguration';
 import DevLogin from '../pages/DevLogin';
-import { ProtectedRoute, GuestRoute, AdminRoute } from '../components/AuthGuard';
+import { AdminRoute } from '../components/AuthGuard';
 
 
 const router = createBrowserRouter([
@@ -67,8 +61,8 @@ const router = createBrowserRouter([
                 errorElement: <ErrorPage />
             },
             {
-                path: "login",
-                element: <GuestRoute><Login /></GuestRoute>,
+                path: "admin-login",
+                element: <AdminLogin />,
                 errorElement: <ErrorPage />
             },
             {
@@ -78,24 +72,25 @@ const router = createBrowserRouter([
             },
             {
                 path: "forgot-password",
-                element: <GuestRoute><ForgotPassword /></GuestRoute>,
+                element: <ForgotPassword />,
                 errorElement: <ErrorPage />
             },
             {
                 path: "reset-password",
-                element: <GuestRoute><ResetPassword /></GuestRoute>,
+                element: <ResetPassword />,
                 errorElement: <ErrorPage />
             },
-            {
-                path: "sign-up",
-                element: <GuestRoute><SignUp /></GuestRoute>,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: "profile",
-                element: <ProtectedRoute><Profile /></ProtectedRoute>,
-                errorElement: <ErrorPage />
-            },
+            // User signup and login removed - no regular user accounts
+            // {
+            //     path: "sign-up",
+            //     element: <GuestRoute><SignUp /></GuestRoute>,
+            //     errorElement: <ErrorPage />
+            // },
+            // {
+            //     path: "profile",
+            //     element: <ProtectedRoute><Profile /></ProtectedRoute>,
+            //     errorElement: <ErrorPage />
+            // },
             {
                 path: "add-product",
                 element: <AdminRoute><AddProduct /></AdminRoute>,
@@ -111,19 +106,30 @@ const router = createBrowserRouter([
                 element: <ProductDetail />,
                 errorElement: <ErrorPage />
             },
-            {
-                path: "cart",
-                element: <ProtectedRoute><Cart /></ProtectedRoute>,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: "checkout",
-                element: <ProtectedRoute><Checkout /></ProtectedRoute>,
-                errorElement: <ErrorPage />
-            },
+            // Cart and checkout removed - no user accounts
+            // {
+            //     path: "cart",
+            //     element: <ProtectedRoute><Cart /></ProtectedRoute>,
+            //     errorElement: <ErrorPage />
+            // },
+            // {
+            //     path: "checkout",
+            //     element: <ProtectedRoute><Checkout /></ProtectedRoute>,
+            //     errorElement: <ErrorPage />
+            // },
+            // {
+            //     path: "my-orders",
+            //     element: <ProtectedRoute><MyOrders /></ProtectedRoute>,
+            //     errorElement: <ErrorPage />
+            // },
+            // {
+            //     path: "order-history",
+            //     element: <ProtectedRoute><MyOrders /></ProtectedRoute>,
+            //     errorElement: <ErrorPage />
+            // },
             {
                 path: "order-tracking/:orderId",
-                element: <ProtectedRoute><OrderTracking /></ProtectedRoute>,
+                element: <AdminRoute><OrderTracking /></AdminRoute>,
                 errorElement: <ErrorPage />
             },
             {
@@ -131,21 +137,6 @@ const router = createBrowserRouter([
                 element: <TrackByNumber />,
                 errorElement: <ErrorPage />
             },
-            {
-                path: "my-orders",
-                element: <ProtectedRoute><MyOrders /></ProtectedRoute>,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: "order-history",
-                element: <ProtectedRoute><MyOrders /></ProtectedRoute>,
-                errorElement: <ErrorPage />
-            },
-            // {
-            //     path: "become-seller",
-            //     element: <ProtectedRoute><BecomeSellerPage /></ProtectedRoute>,
-            //     errorElement: <ErrorPage />
-            // },
             {
                 path: "search",
                 element: <EnhancedSearchResults />,
@@ -218,7 +209,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "analytics",
-                element: <ProtectedRoute><Analytics /></ProtectedRoute>,
+                element: <AdminRoute><Analytics /></AdminRoute>,
                 errorElement: <ErrorPage />
             },
             {

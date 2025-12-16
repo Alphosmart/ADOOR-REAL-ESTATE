@@ -3,19 +3,12 @@ const Property = require('../models/propertyModel');
 const User = require('../models/userModel');
 const logger = require('../utils/logger');
 
-// Create appointment
+// Create appointment (guest or authenticated - no login required)
 const createAppointment = async (req, res) => {
     try {
-        const sessionUser = req.userId;
+        const sessionUser = req.userId; // Will be undefined for guests
 
-        if (!sessionUser) {
-            return res.status(401).json({
-                success: false,
-                message: 'Please login to schedule an appointment'
-            });
-        }
-
-        const { property, appointmentDate, appointmentTime, viewingType, notes, numberOfAttendees } = req.body;
+        const { property, appointmentDate, appointmentTime, viewingType, notes, numberOfAttendees, guestInfo } = req.body;
 
         // Verify property exists
         const propertyExists = await Property.findById(property);
@@ -26,17 +19,30 @@ const createAppointment = async (req, res) => {
             });
         }
 
-        // Get client info
-        const client = await User.findById(sessionUser);
+        let clientInfo;
 
-        const appointment = new Appointment({
-            property,
-            client: sessionUser,
-            clientInfo: {
+        if (sessionUser) {
+            // Get client info from user account (admin/staff)
+            const client = await User.findById(sessionUser);
+            clientInfo = {
                 name: client.name,
                 email: client.email,
                 phone: client.phone
-            },
+            };
+        } else if (guestInfo) {
+            // Use guest provided info
+            clientInfo = guestInfo;
+        } else {
+            return res.status(400).json({
+                success: false,
+                message: 'Please provide your contact information'
+            });
+        }
+
+        const appointment = new Appointment({
+            property,
+            client: sessionUser || null, // null for guests
+            clientInfo,
             agent: propertyExists.agent,
             appointmentDate,
             appointmentTime,
@@ -50,11 +56,13 @@ const createAppointment = async (req, res) => {
 
         // Populate references for response
         await savedAppointment.populate('property', 'title location images');
-        await savedAppointment.populate('agent', 'name email phone');
+        if (savedAppointment.agent) {
+            await savedAppointment.populate('agent', 'name email phone');
+        }
 
         res.status(201).json({
             success: true,
-            message: 'Appointment scheduled successfully',
+            message: 'Appointment scheduled successfully. We will contact you to confirm.',
             data: savedAppointment
         });
     } catch (error) {

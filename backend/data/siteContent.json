@@ -81,13 +81,6 @@
   "header": {
     "announcementBanners": [
       {
-        "text": "🎉 Free shipping on orders over $100! Use code: FREESHIP",
-        "link": "/products",
-        "backgroundColor": "#3B82F6",
-        "textColor": "#FFFFFF",
-        "isActive": true
-      },
-      {
         "text": "🔥 Limited Time: 25% Off Premium Properties!",
         "link": "/sale",
         "backgroundColor": "#EF4444",

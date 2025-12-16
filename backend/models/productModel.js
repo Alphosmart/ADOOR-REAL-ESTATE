@@ -163,7 +163,31 @@ const productSchema = new mongoose.Schema({
         enum: ['ACTIVE', 'SOLD', 'PENDING', 'INACTIVE'],
         default: 'ACTIVE'
     },
-    location: String,
+    // Detailed location for real estate properties
+    location: {
+        country: {
+            type: String,
+            default: ''
+        },
+        state: {
+            type: String,
+            default: ''
+        },
+        city: {
+            type: String,
+            default: ''
+        },
+        lga: {
+            type: String,
+            default: ''
+        },
+        address: {
+            type: String,
+            default: ''
+        },
+        latitude: Number,
+        longitude: Number
+    },
     tags: [String]
 }, {
     timestamps: true
@@ -193,6 +217,13 @@ productSchema.index({ status: 1, createdAt: -1 });
 productSchema.index({ 'pricing.sellingPrice.amount': 1, status: 1 });
 productSchema.index({ 'pricing.originalPrice.amount': 1, status: 1 });
 productSchema.index({ userId: 1, status: 1 });
+
+// Location indexes for real estate search
+productSchema.index({ 'location.country': 1, status: 1 });
+productSchema.index({ 'location.state': 1, status: 1 });
+productSchema.index({ 'location.city': 1, status: 1 });
+productSchema.index({ 'location.lga': 1 });
+productSchema.index({ 'location.country': 1, 'location.state': 1, 'location.city': 1 });
 
 // Analytics indexes
 productSchema.index({ 'analytics.views': -1 });

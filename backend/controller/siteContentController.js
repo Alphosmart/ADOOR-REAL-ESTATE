@@ -167,13 +167,6 @@ const getSiteContent = async (req, res) => {
             header: {
                 announcementBanners: [
                     {
-                        text: "🚀 Fast shipping available nationwide! Order today",
-                        link: "/products",
-                        backgroundColor: "#3B82F6",
-                        textColor: "#FFFFFF",
-                        isActive: false
-                    },
-                    {
                         text: "🔥 Limited Time: 25% Off Premium Properties!",
                         link: "/sale",
                         backgroundColor: "#EF4444",

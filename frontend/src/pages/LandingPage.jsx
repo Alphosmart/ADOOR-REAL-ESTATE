@@ -65,7 +65,7 @@ const LandingPage = () => {
           role: "Homeowner",
           image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
           rating: 5,
-          text: "I renovated my entire home using products from this platform. The customer service was exceptional and the shipping was incredibly fast."
+          text: "I found my dream home using this platform. The customer service was exceptional and the process was incredibly smooth."
         },
         {
           name: "Emma Rodriguez",
@@ -229,12 +229,6 @@ const LandingPage = () => {
                 >
                   🏠 View Properties <FaArrowRight />
                 </Link>
-                <button 
-                  onClick={() => trackLandingPageInteraction('watch_demo', 'hero_section')}
-                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all flex items-center justify-center gap-2"
-                >
-                  <FaPlay /> Watch Demo
-                </button>
               </div>
 
               {/* Trust Indicators */}
@@ -244,8 +238,8 @@ const LandingPage = () => {
                   <span className="text-sm">SSL Secured</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FaTruck className="text-blue-300" />
-                  <span className="text-sm">Fast Shipping</span>
+                  <FaHome className="text-blue-300" />
+                  <span className="text-sm">Verified Listings</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <FaAward className="text-yellow-300" />

@@ -97,13 +97,6 @@ const getDefaultContent = () => {
         },
         header: {
             announcementBanners: [
-                {
-                    text: "🚀 Fast shipping available nationwide! Order today",
-                    link: "/products",
-                    backgroundColor: "#3B82F6",
-                    textColor: "#FFFFFF",
-                    isActive: false
-                }
             ],
             logo: {
                 text: "Adoor Real Estate",

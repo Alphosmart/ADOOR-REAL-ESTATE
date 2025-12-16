@@ -1,25 +1,25 @@
 {
   "short_name": "Adoor Real Estate",
-  "name": "Adoor Real Estate - Premium Interior Decoration & E-commerce Marketplace",
+  "name": "Adoor Real Estate - Premium Properties & Professional Real Estate Services",
   "icons": [
     {
-      "src": "uwi.png",
+      "src": "adoor.jpeg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
-      "src": "uwi.png",
-      "type": "image/png",
+      "src": "adoor.jpeg",
+      "type": "image/jpeg",
       "sizes": "192x192"
     },
     {
-      "src": "uwi.png",
-      "type": "image/png",
+      "src": "adoor.jpeg",
+      "type": "image/jpeg",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#18f47b",
+  "theme_color": "#d89439",
   "background_color": "#ffffff"
 }

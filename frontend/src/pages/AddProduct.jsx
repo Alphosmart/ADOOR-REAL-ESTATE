@@ -379,9 +379,9 @@ const AddProduct = () => {
                 <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
                     
                     {/* 🏡 Property Details Section */}
-                    <h3 className='font-bold text-md mt-4 mb-2 text-blue-600'>🏡 Property Details</h3>
+                    <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>🏡 Property Details</h3>
                     
-                    <label htmlFor='country'>Country <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='country'>Country <span className='text-secondary-600'>*</span>:</label>
                     <select
                         id='country'
                         name='country'
@@ -479,9 +479,9 @@ const AddProduct = () => {
                     </textarea>
 
                     {/* 📍 Location Section */}
-                    <h3 className='font-bold text-md mt-4 mb-2 text-blue-600'>📍 Location</h3>
+                    <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>📍 Location</h3>
                     
-                    <label htmlFor='address'>Address <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='address'>Address <span className='text-secondary-600'>*</span>:</label>
                     <input 
                         type='text' 
                         id='address' 
@@ -564,7 +564,7 @@ const AddProduct = () => {
                     </div>
 
                     {/* 🏠 Property-Specific Features Section */}
-                    <h3 className='font-bold text-md mt-4 mb-2 text-blue-600'>🏠 Property Features</h3>
+                    <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>🏠 Property Features</h3>
                     
                     {/* RESIDENTIAL FIELDS */}
                     {categoryType === 'residential' && (
@@ -1015,7 +1015,7 @@ const AddProduct = () => {
                     )}
 
                     {/* 🖼️ Images Section */}
-                    <h3 className='font-bold text-md mt-4 mb-2 text-blue-600'>🖼️ Property Images</h3>
+                    <h3 className='font-bold text-md mt-4 mb-2 text-primary-500'>🖼️ Property Images</h3>
                     
                     <label htmlFor='productImage'>Upload Images <span className='text-red-600'>*</span>:</label>
                     <label htmlFor='uploadImageInput'>
@@ -1059,12 +1059,12 @@ const AddProduct = () => {
                                 ))}
                             </div>
                         ) : (
-                            <p className='text-red-600 text-xs'>*Please upload at least one property image</p>
+                            <p className='text-secondary-600 text-xs'>*Please upload at least one property image</p>
                         )}
                     </div>
 
                     {/* 👤 Agent Information Section */}
-                    <h3 className='font-bold text-md mt-4 mb-2 text-blue-600'>👤 Agent Information</h3>
+                    <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>👤 Agent Information</h3>
                     
                     <label htmlFor='agentName'>Agent Name:</label>
                     <input 
@@ -1111,7 +1111,7 @@ const AddProduct = () => {
                     />
 
                     {/* ⚙️ Additional Metadata */}
-                    <h3 className='font-bold text-md mt-4 mb-2 text-blue-600'>⚙️ Additional Metadata</h3>
+                    <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>⚙️ Additional Metadata</h3>
                     
                     <label htmlFor='status'>Status:</label>
                     <select 
@@ -1139,7 +1139,7 @@ const AddProduct = () => {
                     <p className='text-xs text-gray-500'>Leave empty to auto-generate from title</p>
 
                     <button 
-                        className='px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700 rounded mt-5'
+                        className='px-3 py-2 bg-gradient-to-r from-primary-500 to-accent-500 text-white mb-10 hover:from-primary-600 hover:to-accent-600 rounded-lg mt-5 shadow-md transition-all font-medium'
                         type='submit'
                     >
                         Add Property

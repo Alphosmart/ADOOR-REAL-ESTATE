@@ -10,7 +10,7 @@ import {
   FaMapMarkerAlt,
   FaCreditCard,
   FaShieldAlt,
-  FaTruck
+  FaHome
 } from 'react-icons/fa';
 import useSiteContent from '../hooks/useSiteContent';
 
@@ -36,7 +36,7 @@ const Footer = () => {
           <div className='space-y-4'>
             <div className='flex items-center space-x-2'>
               <div className='bg-gradient-to-r from-blue-500 to-purple-600 p-2 rounded-lg'>
-                <FaTruck className='text-white text-xl' />
+                <FaHome className='text-white text-xl' />
               </div>
               <h3 className='text-xl font-bold'>{companyInfo.name}</h3>
             </div>
@@ -177,8 +177,8 @@ const Footer = () => {
                 <span className='text-gray-400 text-sm'>SSL Protected</span>
               </div>
               <div className='flex items-center space-x-2'>
-                <FaTruck className='text-purple-400 text-lg' />
-                <span className='text-gray-400 text-sm'>Fast Shipping</span>
+                <FaHome className='text-purple-400 text-lg' />
+                <span className='text-gray-400 text-sm'>Verified Properties</span>
               </div>
             </div>
 

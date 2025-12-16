@@ -11,7 +11,10 @@ const smartSearch = async (req, res) => {
             sortBy = 'relevance',
             page = 1,
             limit = 20,
-            inStock = true
+            inStock = true,
+            country,
+            state,
+            location
         } = req.query;
 
         let query = {};
@@ -39,6 +42,27 @@ const smartSearch = async (req, res) => {
         // Category filter
         if (category && category !== 'all') {
             query.category = new RegExp(category, 'i');
+        }
+
+        // Location filters
+        if (country) {
+            query['location.country'] = new RegExp(country, 'i');
+        }
+        
+        if (state) {
+            query['location.state'] = new RegExp(state, 'i');
+        }
+        
+        if (location) {
+            // Search across multiple location fields
+            query.$and = query.$and || [];
+            query.$and.push({
+                $or: [
+                    { 'location.city': new RegExp(location, 'i') },
+                    { 'location.lga': new RegExp(location, 'i') },
+                    { 'location.address': new RegExp(location, 'i') }
+                ]
+            });
         }
 
         // Price range filter
@@ -154,7 +178,12 @@ const smartSearch = async (req, res) => {
                 filters: {
                     category,
                     priceRange: { min: minPrice, max: maxPrice },
-                    inStock
+                    inStock,
+                    location: {
+                        country,
+                        state,
+                        location
+                    }
                 }
             }
         });
