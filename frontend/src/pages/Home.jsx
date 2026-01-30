@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import HorizontalCardProduct from '../components/HorizontalCardProduct.jsx'
 import VerticalCardProduct from '../components/VerticalCardProduct.jsx'
 import useSiteContent from '../hooks/useSiteContent'
@@ -7,7 +6,6 @@ import { Link } from 'react-router-dom'
 import { FaHome, FaBuilding, FaKey, FaHandshake, FaStar, FaMapMarkerAlt, FaPhone, FaCheckCircle, FaUsers, FaAward, FaShieldAlt } from 'react-icons/fa'
 
 const Home = () => {
-  const user = useSelector(state => state?.user?.user)
   const { content: homeContent } = useSiteContent('homePage')
 
   // Default content fallback

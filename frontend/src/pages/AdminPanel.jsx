@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, Link } from 'react-router-dom';
-import { FaHome, FaUsers, FaBoxOpen, FaChartBar, FaCog, FaImage, FaEnvelope, FaUserCog, FaTags, FaCreditCard, FaStar } from 'react-icons/fa';
+import { FaHome, FaUsers, FaBoxOpen, FaChartBar, FaCog, FaImage, FaEnvelope, FaUserCog, FaTags, FaStar } from 'react-icons/fa';
 
 const AdminPanel = () => {
   const user = useSelector(state => state?.user?.user);

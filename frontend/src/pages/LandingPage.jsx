@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { trackLandingPageInteraction, trackShopButtonClick, trackNewsletterSignup, trackUserEngagement } from '../utils/analytics';
+import { trackLandingPageInteraction, trackShopButtonClick, trackNewsletterSignup } from '../utils/analytics';
 import SummaryApi from '../common';
 import { 
-  FaPlay, 
   FaStar, 
   FaShieldAlt, 
-  FaTruck, 
   FaHeadset, 
   FaUsers, 
   FaAward,
@@ -14,7 +12,6 @@ import {
   FaArrowRight,
   FaCheck,
   FaHeart,
-  FaPalette,
   FaHome,
   FaBrush,
   FaRuler
