@@ -139,6 +139,9 @@ const Header = () => {
           <Link to='/search' className='bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-all font-medium shadow-md'>
             🏠 Browse Properties
           </Link>
+          <Link to='/' className='hover:text-primary-600 transition-colors font-medium'>
+            🏡 Home
+          </Link>
           <Link to='/about-us' className='hover:text-primary-600 transition-colors font-medium'>
             About
           </Link>
