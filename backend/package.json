@@ -12,7 +12,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "echo 'No linter configured'",
-    "build": "echo 'Use root package.json build script'",
+    "build": "npm install",
     "migrate": "node migrate-tracking-numbers.js"
   },
   "author": "",
