@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react'
 import Logo from './Logo';
 import SmartSearchBar from './SmartSearchBar';
 import {FaRegCircleUser} from 'react-icons/fa6';
-import { FaChevronDown, FaEnvelope, FaSignOutAlt, FaShieldAlt } from 'react-icons/fa';
+import { FaChevronDown, FaEnvelope, FaSignOutAlt, FaShieldAlt, FaBars, FaTimes } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SummaryApi from '../common';
@@ -14,6 +14,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [menuDisplay, setMenuDisplay] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const dropdownRef = useRef(null)
 
   // Only show if user is admin or staff
@@ -63,8 +64,16 @@ const Header = () => {
     setMenuDisplay(prev => !prev)
   }, [])
 
+  const toggleMobileMenu = useCallback(() => {
+    setMobileMenuOpen(prev => !prev)
+  }, [])
+
   const closeMenu = useCallback(() => {
     setMenuDisplay(false)
+  }, [])
+
+  const closeMobileMenu = useCallback(() => {
+    setMobileMenuOpen(false)
   }, [])
 
   const userProfileImage = useMemo(() => {
@@ -150,10 +159,72 @@ const Header = () => {
           </Link>
         </nav>
 
-        <div className='flex items-center gap-7'>
+        {/* Mobile Menu Button */}
+        <button 
+          className='lg:hidden text-2xl text-gray-700 p-2'
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+
+        {/* Mobile Menu Overlay */}
+        {mobileMenuOpen && (
+          <div 
+            className='fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden'
+            onClick={closeMobileMenu}
+          />
+        )}
+
+        {/* Mobile Menu Drawer */}
+        <div className={`fixed top-16 right-0 h-[calc(100vh-4rem)] w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 lg:hidden ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <nav className='flex flex-col p-4 gap-2'>
+            <Link 
+              to='/search' 
+              className='bg-primary-500 text-white px-4 py-3 rounded-lg hover:bg-primary-600 transition-all font-medium shadow-md text-center'
+              onClick={closeMobileMenu}
+            >
+              🏠 Browse Properties
+            </Link>
+            <Link 
+              to='/' 
+              className='px-4 py-3 hover:bg-gray-100 rounded-lg transition-colors font-medium'
+              onClick={closeMobileMenu}
+            >
+              🏡 Home
+            </Link>
+            <Link 
+              to='/about-us' 
+              className='px-4 py-3 hover:bg-gray-100 rounded-lg transition-colors font-medium'
+              onClick={closeMobileMenu}
+            >
+              About
+            </Link>
+            <Link 
+              to='/contact-us' 
+              className='px-4 py-3 hover:bg-gray-100 rounded-lg transition-colors font-medium'
+              onClick={closeMobileMenu}
+            >
+              Contact
+            </Link>
+            
+            {!isAdminOrStaff && (
+              <Link 
+                to={"/admin-login"} 
+                className='mt-4 px-4 py-3 rounded-lg text-white bg-accent-700 hover:bg-accent-800 transition-colors flex items-center justify-center gap-2'
+                onClick={closeMobileMenu}
+              >
+                <FaShieldAlt />
+                Staff Login
+              </Link>
+            )}
+          </nav>
+        </div>
+
+        <div className='hidden lg:flex items-center gap-7'>
           
           {isAdminOrStaff && user?.role === 'ADMIN' && (
-            <Link to={"/add-product"} className='px-3 py-1 rounded-full text-white bg-primary-500 hover:bg-primary-600 hidden md:block shadow-md transition-all font-medium'>
+            <Link to={"/add-product"} className='px-3 py-1 rounded-full text-white bg-primary-500 hover:bg-primary-600 shadow-md transition-all font-medium'>
               Add Property
             </Link>
           )}
