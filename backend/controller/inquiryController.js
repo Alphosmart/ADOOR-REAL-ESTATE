@@ -147,7 +147,7 @@ const getAllInquiries = async (req, res) => {
         res.json({
             success: true,
             message: 'Inquiries fetched successfully',
-            data: inquiries,
+            inquiries: inquiries,
             pagination: {
                 page: Number(page),
                 limit: Number(limit),
