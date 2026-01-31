@@ -4,7 +4,7 @@ const Logo = ({ w = 120, h = 40, showText = true, className = "" }) => {
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
       <img 
-        src="/adoor.jpeg" 
+        src="/grren png.png" 
         alt="Adoor Real Estate Logo"
         width={h}
         height={h}
