@@ -1,176 +1,163 @@
 # Adoor Real Estate - Brand Colors
 
-## Color Palette (From Logo: adoor.jpeg)
+## Color Palette (From Official Logo: grren png.png)
 
-### Primary Color (Orange/Gold)
-- **Main**: `#d89439` - Orange/gold from "ADOO" text in logo
-- **Light**: `#fef3c7` (50), `#fde68a` (100) - Subtle backgrounds, hover states
-- **Dark**: `#b87729` (600), `#975a16` (700) - Strong emphasis, darker buttons
-- **Usage**: Main branding, primary buttons, call-to-action elements, section headers, key icons, links
+### Primary Color (Lime Green)
+- **Main**: `#92bc1b` - Lime green from logo icon
+- **Light**: `#e5f2c7` (100), `#d3e89f` (200) - Subtle backgrounds, hover states
+- **Dark**: `#7fa318` (600), `#6a8714` (700) - Strong emphasis, darker buttons
+- **Usage**: Main branding, primary buttons, call-to-action elements, section headers, key icons, links, accents
 
-### Secondary Color (Gray/Neutral)
-- **Light**: `#f3f4f6` (100), `#e5e7eb` (200) - Subtle backgrounds
-- **Mid**: `#9ca3af` (400), `#6b7280` (500) - Text, borders, disabled states
-- **Dark**: `#4b5563` (600), `#374151` (700) - Secondary text
-- **Usage**: Backgrounds, neutral elements, borders, form fields, secondary text
+### Secondary Color (Navy/Dark Blue)
+- **Light**: `#dde2e8` (100), `#c3ccd6` (200) - Subtle backgrounds
+- **Mid**: `#7d8c9f` (400), `#5d6d80` (500) - Text, borders, disabled states
+- **Dark**: `#475566` (600), `#35404d` (700) - Secondary text
+- **Usage**: Backgrounds, neutral elements, borders, form fields, secondary text, cards
 
-### Accent Color (Dark Gray/Black)
-- **Main**: `#2d2d2d` - Dark gray from house roofs and "REAL ESTATE LIMITED" text
-- **Mid**: `#525252` (700), `#404040` (800) - Gradients, emphasis
-- **Dark**: `#1a1a1a` (900) - Deepest black for strong contrast, footer, headers
-- **Light**: `#e5e5e5` (100), `#d4d4d4` (200) - Very light backgrounds
-- **Usage**: Gradients (dark-to-orange), text on light backgrounds, strong emphasis, footer, navigation backgrounds
+### Accent Color (Dark Navy)
+- **Main**: `#121f2f` - Dark navy from logo background
+- **Mid**: `#35404d` (700), `#2d3845` (800) - Gradients, emphasis
+- **Dark**: `#0a1219` (900) - Deepest navy for strong contrast, footer, headers
+- **Light**: `#dde2e8` (100), `#c3ccd6` (200) - Very light backgrounds
+- **Usage**: Headers, footers, navigation backgrounds, dark sections, text on light backgrounds, strong emphasis
 
 ### Neutral Colors
-- **Dark**: `#1f2937` - Main body text
-- **Darker**: `#111827` - Headlines, important text
+- **Dark**: `#2d3845` - Main body text
+- **Darker**: `#1a2530` - Headlines, important text
 - **Light**: `#f3f4f6` - Light backgrounds
 - **Lighter**: `#f9fafb` - Very light backgrounds, page background
-- **White**: `#ffffff` - Cards, clean sections (like house walls in logo)
+- **White**: `#ffffff` - Cards, clean sections
 
 ## Tailwind CSS Classes
 
-### Primary Colors (Orange/Gold - #d89439)
+### Primary Colors (Lime Green - #92bc1b)
 ```css
-bg-primary-500    /* #d89439 - Logo orange */
+bg-primary-500    /* #92bc1b - Logo lime green */
 text-primary-500
 hover:bg-primary-600
 border-primary-500
-bg-primary-50     /* Light orange background */
+bg-primary-50     /* Light green background */
 ```
 
-### Secondary Colors (Gray - Neutrals)
+### Secondary Colors (Navy/Blue - Neutrals)
 ```css
-bg-secondary-500  /* #9a9a9a - Gray */
+bg-secondary-500  /* #5d6d80 - Mid navy */
 text-secondary-600
-bg-secondary-100  /* Light gray backgrounds */
+bg-secondary-100  /* Light navy backgrounds */
 ```
 
-### Accent Colors (Dark Gray/Black - #2d2d2d, #1a1a1a)
+### Accent Colors (Dark Navy - #121f2f, #0a1219)
 ```css
-bg-accent-800     /* #2d2d2d - Logo dark */
-bg-accent-900     /* #1a1a1a - Deepest black */
+bg-accent-800     /* #121f2f - Main brand navy */
+bg-accent-900     /* #0a1219 - Deepest navy */
 text-accent-800
 hover:bg-accent-700
 ```
 
 ### Brand Color Shortcuts
 ```css
-brand.orange      /* #d89439 - Quick access to primary orange */
-brand.dark        /* #2d2d2d - Quick access to dark accent */
-brand.darker      /* #1a1a1a - Quick access to deepest black */
+brand.green       /* #92bc1b - Quick access to primary green */
+brand.navy        /* #121f2f - Quick access to dark navy */
+brand.dark        /* #0a1219 - Quick access to deepest navy */
 ```
 
 ## Gradient Combinations
 
-### Dark to Orange (Logo Style - Hero Sections & Features)
+### Navy to Green (Brand Style - Hero Sections & Features)
 ```css
 bg-gradient-to-br from-accent-800 via-accent-700 to-primary-500
-/* Creates dark gray to orange gradient like logo aesthetic */
+/* Creates dark navy to lime green gradient */
 ```
 
-### Orange to Dark (Buttons & CTAs)
+### Green to Navy (Buttons & CTAs)
 ```css
 bg-gradient-to-r from-primary-500 to-accent-800
 hover:from-primary-600 hover:to-accent-900
-/* Orange transitioning to dark - subtle and professional */
+/* Green transitioning to navy - fresh and professional */
 ```
 
-### Solid Orange (Primary Actions)
+### Solid Green (Primary Actions)
 ```css
 bg-primary-500
 hover:bg-primary-600
-/* Clean, simple orange for buttons and key actions */
+/* Clean lime green for buttons and key actions */
 ```
 
 ## CSS Variables
 
 The following CSS variables are available globally:
 ```css
---color-primary: #d89439    /* Orange from logo text */
---color-accent: #2d2d2d     /* Dark from logo roofs/text */
---color-darker: #1a1a1a     /* Deepest black */
+--color-primary: #92bc1b    /* Lime green from logo */
+--color-accent: #121f2f     /* Dark navy from logo background */
+--color-darker: #0a1219     /* Deepest navy */
 
---color-dark: #1f2937       /* Body text */
---color-darker-text: #111827 /* Headlines */
+--color-dark: #2d3845       /* Body text */
+--color-darker-text: #1a2530 /* Headlines */
 --color-light: #f3f4f6      /* Light backgrounds */
 --color-lighter: #f9fafb    /* Lightest backgrounds */
 ```
 
 ## Updated Components
 
-The following components have been updated with the actual logo colors:
+The following components use the new brand colors:
 
 1. **tailwind.config.js**
-   - Primary scale: Orange (#d89439 at 500)
-   - Secondary scale: Gray neutrals
-   - Accent scale: Dark grays/blacks (#2d2d2d at 800, #1a1a1a at 900)
-   - Brand shortcuts: orange, dark, darker
+   - Primary scale: Lime Green (#92bc1b at 500)
+   - Secondary scale: Navy/Blue neutrals
+   - Accent scale: Dark navy (#121f2f at 800, #0a1219 at 900)
+   - Brand shortcuts: green, navy, dark
 
 2. **index.css**
-   - CSS variables: --color-primary (#d89439), --color-accent (#2d2d2d)
+   - CSS variables: --color-primary (#92bc1b), --color-accent (#121f2f)
 
 3. **index.html & manifest.json**
-   - Theme colors updated to #d89439 (orange)
+   - Theme colors updated to #92bc1b (lime green)
 
 4. **Header.jsx**
-   - Browse Properties button: Solid orange (bg-primary-500)
-   - Add Property button: Solid orange with hover
-   - Links: Orange hover states
+   - Browse Properties button: Solid green (bg-primary-500)
+   - Add Property button: Solid green with hover
+   - Links: Green hover states
 
 5. **Home.jsx**
-   - Hero gradient: Dark-to-orange (from-accent-800 to-primary-500)
-   - Primary CTA: Solid orange
-   - Secondary CTA: White with dark text
+   - Hero gradient: Navy-to-green (from-accent-800 to-primary-500)
+   - Primary CTA: Solid green
+   - Secondary CTA: White with navy text
 
-6. **AboutUs.jsx**
-   - Hero: Dark-to-orange gradient
-   - All icon backgrounds: Light orange (bg-primary-50)
-   - All icons: Orange (text-primary-500)
-
-7. **AddProduct.jsx**
-   - Section headers: Orange (text-primary-500)
-   - Submit button: Orange-to-dark gradient (from-primary-500 to-accent-500)
-
-8. **Logo.jsx**
-   - Uses `/adoor.jpeg` - the actual logo image
+6. **Logo.jsx**
+   - Uses `/grren png.png` - the official company logo
 
 ## Usage Guidelines
 
-- **Primary Orange (`#d89439`)**: Main branding color. Use for primary buttons, call-to-action elements, key icons, section headers, and links. This is the dominant color from the "ADOO" text in the logo.
+- **Primary Lime Green (`#92bc1b`)**: Main branding color. Use for primary buttons, call-to-action elements, key icons, section headers, and links. This is the vibrant accent color from the logo.
 
-- **Accent Dark (`#2d2d2d`)**: Strong emphasis color. Use for gradients with orange, text on light backgrounds, navigation backgrounds, and professional contrast elements. Matches the house roofs and "REAL ESTATE LIMITED" text.
+- **Accent Navy (`#121f2f`)**: Strong professional color. Use for headers, footers, navigation backgrounds, text on light backgrounds, and creating contrast with the lime green. Matches the dark navy background in the logo.
 
-- **Darkest Black (`#1a1a1a`)**: For deepest contrast. Use in gradients, footer backgrounds, and areas needing maximum emphasis.
+- **Darkest Navy (`#0a1219`)**: For deepest contrast. Use in gradients, footer backgrounds, and areas needing maximum emphasis.
 
-- **Gray Neutrals**: Use secondary colors for backgrounds, form fields, disabled states, and subtle borders.
+- **Navy Neutrals**: Use secondary colors for backgrounds, form fields, borders, and subtle UI elements.
 
-- **White (`#ffffff`)**: Clean sections, card backgrounds, buttons with dark text. Matches the house walls and background of the logo.
+- **White (`#ffffff`)**: Clean sections, card backgrounds, buttons with dark text.
 
-- **Dark-to-Orange Gradients**: The signature look inspired by the logo's color scheme - use for hero sections, featured banners, and impactful UI elements.
+- **Navy-to-Green Gradients**: The signature look inspired by the logo - use for hero sections, featured banners, and impactful UI elements.
 
-- **Solid Orange Actions**: For straightforward buttons and primary actions - clean, professional, and highly visible.
+- **Solid Green Actions**: For straightforward buttons and primary actions - fresh, vibrant, and highly visible.
 
 ## Color Scheme Inspiration
 
-The brand colors are directly extracted from the **Adoor Real Estate logo (adoor.jpeg)**, which features:
-- **Orange/Gold "ADOO" text** (#d89439) - Bold, warm, and inviting
-- **Dark gray/black house roofs and company text** (#2d2d2d, #1a1a1a) - Professional and grounded
-- **White background and house walls** - Clean and modern
-- **Overall aesthetic**: Professional real estate brand with warm, approachable orange paired with sophisticated dark elements
+The brand colors are directly from the **Adoor Real Estate official logo (grren png.png)**, which features:
+- **Lime Green icon** (#92bc1b) - Fresh, modern, and energetic
+- **Dark Navy background** (#121f2f) - Professional, trustworthy, and sophisticated
+- **White text** - Clean and readable
+- **Overall aesthetic**: Modern real estate brand with vibrant green paired with professional navy elements
 
 ## Migration Status
 
-✅ Logo uses adoor.jpeg (actual brand logo)
-✅ Tailwind configuration updated to orange/dark colors
-✅ CSS variables updated (orange #d89439, dark #2d2d2d)
-✅ Theme colors in manifest/HTML updated (#d89439)
-✅ Header component updated (orange buttons, dark-to-orange gradient removed for simplicity)
-✅ Home page hero updated (dark-to-orange gradient)
-✅ AboutUs page updated (all icon colors to orange, hero to dark-to-orange)
-✅ AddProduct form updated (section headers orange, button gradient orange-to-dark)
-✅ All gradients now use orange and dark (logo color scheme)
-✅ Brand documentation updated with actual logo colors
+✅ Logo uses grren png.png (official company logo)
+✅ Tailwind configuration updated to lime green/navy colors
+✅ CSS variables updated (green #92bc1b, navy #121f2f)
+✅ Brand documentation updated with official logo colors
+✅ All components ready for navy/green color scheme
+
 ---
 
-Last updated: October 31, 2025
+Last updated: January 31, 2026
