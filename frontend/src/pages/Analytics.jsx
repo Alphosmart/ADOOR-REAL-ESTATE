@@ -253,36 +253,48 @@ const Analytics = () => {
 
     // Generate location analytics data
     const generateLocationAnalytics = (stats, period) => {
-        const nigerianCities = [
-            'Lagos', 'Abuja', 'Port Harcourt', 'Kano', 'Ibadan', 
-            'Benin City', 'Enugu', 'Kaduna', 'Calabar', 'Warri'
+        const globalCities = [
+            { city: 'Lagos', country: 'Nigeria' },
+            { city: 'Abuja', country: 'Nigeria' },
+            { city: 'Dubai', country: 'UAE' },
+            { city: 'London', country: 'UK' },
+            { city: 'New York', country: 'USA' },
+            { city: 'Toronto', country: 'Canada' },
+            { city: 'Port Harcourt', country: 'Nigeria' },
+            { city: 'Accra', country: 'Ghana' },
+            { city: 'Johannesburg', country: 'South Africa' },
+            { city: 'Paris', country: 'France' },
+            { city: 'Kano', country: 'Nigeria' },
+            { city: 'Ibadan', country: 'Nigeria' }
         ];
 
-        const topLocations = nigerianCities.slice(0, 8).map(city => ({
-            city,
+        const topLocations = globalCities.slice(0, 8).map(location => ({
+            city: `${location.city}, ${location.country}`,
             properties: Math.floor(Math.random() * 100) + 20,
             inquiries: Math.floor(Math.random() * 300) + 50,
             revenue: Math.floor(Math.random() * 50000000) + 10000000,
             growth: (Math.random() * 40 - 10).toFixed(1)
         })).sort((a, b) => b.inquiries - a.inquiries);
 
-        const locationRevenue = nigerianCities.slice(0, 6).map(city => ({
-            name: city,
+        const locationRevenue = globalCities.slice(0, 6).map(location => ({
+            name: `${location.city}, ${location.country}`,
             revenue: Math.floor(Math.random() * 30000000) + 5000000,
             properties: Math.floor(Math.random() * 80) + 15
         })).sort((a, b) => b.revenue - a.revenue);
 
-        const locationInquiries = nigerianCities.slice(0, 6).map(city => ({
-            city,
+        const locationInquiries = globalCities.slice(0, 6).map(location => ({
+            city: `${location.city}, ${location.country}`,
             inquiries: Math.floor(Math.random() * 250) + 50,
             conversions: Math.floor(Math.random() * 50) + 10,
             conversionRate: (Math.random() * 20 + 10).toFixed(1)
         })).sort((a, b) => b.inquiries - a.inquiries);
 
         let locationTrends = [];
+        const topThreeCities = ['Lagos, Nigeria', 'Dubai, UAE', 'London, UK'];
+        
         switch (period) {
             case 'hour':
-                locationTrends = nigerianCities.slice(0, 3).flatMap(city =>
+                locationTrends = topThreeCities.flatMap(city =>
                     Array.from({ length: 24 }, (_, i) => {
                         const date = new Date();
                         date.setHours(date.getHours() - (23 - i));
@@ -309,7 +321,7 @@ const Analytics = () => {
                     const obj = {
                         time: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
                     };
-                    nigerianCities.slice(0, 3).forEach(city => {
+                    topThreeCities.forEach(city => {
                         obj[city] = Math.floor(Math.random() * 80) + 20;
                     });
                     return obj;
@@ -320,7 +332,7 @@ const Analytics = () => {
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 locationTrends = months.map(month => {
                     const obj = { time: month };
-                    nigerianCities.slice(0, 3).forEach(city => {
+                    topThreeCities.forEach(city => {
                         obj[city] = Math.floor(Math.random() * 500) + 100;
                     });
                     return obj;
@@ -331,7 +343,7 @@ const Analytics = () => {
                 locationTrends = Array.from({ length: 5 }, (_, i) => {
                     const year = new Date().getFullYear() - (4 - i);
                     const obj = { time: year.toString() };
-                    nigerianCities.slice(0, 3).forEach(city => {
+                    topThreeCities.forEach(city => {
                         obj[city] = Math.floor(Math.random() * 5000) + 1000;
                     });
                     return obj;
@@ -961,9 +973,9 @@ const Analytics = () => {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Line type="monotone" dataKey="Lagos" stroke="#92bc1b" strokeWidth={2} />
-                            <Line type="monotone" dataKey="Abuja" stroke="#121f2f" strokeWidth={2} />
-                            <Line type="monotone" dataKey="Port Harcourt" stroke="#82ca9d" strokeWidth={2} />
+                            <Line type="monotone" dataKey="Lagos, Nigeria" stroke="#92bc1b" strokeWidth={2} name="Lagos, Nigeria" />
+                            <Line type="monotone" dataKey="Dubai, UAE" stroke="#121f2f" strokeWidth={2} name="Dubai, UAE" />
+                            <Line type="monotone" dataKey="London, UK" stroke="#82ca9d" strokeWidth={2} name="London, UK" />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
@@ -1002,9 +1014,16 @@ const Analytics = () => {
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={analyticsData.locationAnalytics.locationRevenue}>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
-                                <YAxis tickFormatter={(value) => `₦${(value / 1000000).toFixed(1)}M`} />
-                                <Tooltip formatter={(value) => [`₦${value.toLocaleString()}`, 'Revenue']} />
+                                <XAxis 
+                                    dataKey="name" 
+                                    angle={-15}
+                                    textAnchor="end"
+                                    height={80}
+                                    interval={0}
+                                    tick={{ fontSize: 11 }}
+                                />
+                                <YAxis tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`} />
+                                <Tooltip formatter={(value) => [`$${value.toLocaleString()}`, 'Revenue']} />
                                 <Bar dataKey="revenue" fill="#92bc1b" radius={[8, 8, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
