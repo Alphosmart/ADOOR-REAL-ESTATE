@@ -219,8 +219,7 @@ const getInquiry = async (req, res) => {
 // Respond to inquiry (admin/staff)
 const respondToInquiry = async (req, res) => {
     try {
-        const { inquiryId } = req.params;
-        const { message } = req.body;
+        const { inquiryId, message } = req.body;
         const sessionUser = req.userId;
 
         if (!sessionUser) {
@@ -360,11 +359,63 @@ const updateInquiryStatus = async (req, res) => {
     }
 };
 
+// Update inquiry priority
+const updateInquiryPriority = async (req, res) => {
+    try {
+        const { inquiryId, priority } = req.body;
+        const sessionUser = req.userId;
+
+        if (!sessionUser) {
+            return res.status(401).json({
+                success: false,
+                message: 'Authentication required'
+            });
+        }
+
+        // Verify user is admin or staff
+        const user = await User.findById(sessionUser);
+        if (!user || !['ADMIN', 'STAFF'].includes(user.role)) {
+            return res.status(403).json({
+                success: false,
+                message: 'Insufficient permissions'
+            });
+        }
+
+        const inquiry = await Inquiry.findById(inquiryId);
+        if (!inquiry) {
+            return res.status(404).json({
+                success: false,
+                message: 'Inquiry not found'
+            });
+        }
+
+        inquiry.priority = priority;
+        await inquiry.save();
+
+        logger.info(`Inquiry priority updated: ${inquiryId} to ${priority} by ${sessionUser}`);
+
+        res.json({
+            success: true,
+            message: 'Priority updated successfully',
+            data: inquiry
+        });
+
+    } catch (error) {
+        logger.error('Update inquiry priority error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to update priority',
+            error: error.message
+        });
+    }
+};
+
 module.exports = {
     submitInquiry,
     getUserInquiries,
     getAllInquiries,
     getInquiry,
     respondToInquiry,
-    updateInquiryStatus
+    updateInquiryStatus,
+    updateInquiryPriority
 };

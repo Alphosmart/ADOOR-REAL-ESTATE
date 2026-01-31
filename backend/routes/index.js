@@ -144,7 +144,8 @@ const {
     getAllInquiries,
     getInquiry,
     respondToInquiry,
-    updateInquiryStatus
+    updateInquiryStatus,
+    updateInquiryPriority
 } = require('../controller/inquiryController');
 
 // Social features controller for real database
@@ -214,10 +215,11 @@ router.delete('/properties/:propertyId', checkMaintenanceMode, authToken, delete
 
 // Property inquiry routes - Guest submissions only, admin management
 router.post('/inquiries', checkMaintenanceMode, submitInquiry); // Public - no auth required
-router.get('/admin/inquiries', authToken, getAllInquiries);
+router.get('/inquiries', authToken, getAllInquiries); // Admin - get all inquiries
 router.get('/inquiries/:inquiryId', authToken, getInquiry); // Admin only
-router.post('/inquiries/:inquiryId/respond', checkMaintenanceMode, authToken, respondToInquiry);
-router.put('/inquiries/:inquiryId/status', checkMaintenanceMode, authToken, updateInquiryStatus);
+router.post('/inquiries/respond', checkMaintenanceMode, authToken, respondToInquiry); // Admin respond
+router.put('/inquiries/status', checkMaintenanceMode, authToken, updateInquiryStatus); // Admin update status
+router.put('/inquiries/priority', checkMaintenanceMode, authToken, updateInquiryPriority); // Admin update priority
 // router.get('/user-inquiries', checkMaintenanceMode, authToken, getUserInquiries); // Removed - no user accounts
 
 // Property appointment/viewing routes - Guest bookings, admin/staff management
