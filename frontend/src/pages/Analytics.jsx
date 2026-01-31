@@ -21,8 +21,11 @@ const Analytics = () => {
     const [categories, setCategories] = useState([]);
     const [analyticsData, setAnalyticsData] = useState({
         salesTrend: [],
+        previousSalesTrend: [],
         categoryPerformance: [],
+        previousCategoryPerformance: [],
         revenueMetrics: {},
+        previousRevenueMetrics: {},
         userGrowth: [],
         topAgents: [],
         topProperties: [],
@@ -30,13 +33,15 @@ const Analytics = () => {
             topLocations: [],
             locationRevenue: [],
             locationInquiries: [],
-            locationTrends: []
+            locationTrends: [],
+            previousLocationTrends: []
         },
         newUserAnalytics: {
             registrationSources: [],
             userDemographics: [],
             conversionMetrics: {},
-            dailyRegistrations: []
+            dailyRegistrations: [],
+            previousDailyRegistrations: []
         },
         loading: true
     });
@@ -186,6 +191,36 @@ const Analytics = () => {
         }
 
         return dataPoints;
+    };
+
+    // Generate previous period data for comparison
+    const generatePreviousPeriodData = (currentData, period) => {
+        // Generate data with slightly different values (80-95% of current period)
+        return currentData.map(item => {
+            const variance = 0.8 + Math.random() * 0.15; // 80-95% range
+            return {
+                time: item.time,
+                sales: Math.floor(item.sales * variance),
+                revenue: Math.floor(item.revenue * variance),
+                inquiries: Math.floor(item.inquiries * variance),
+                customers: Math.floor(item.customers * variance)
+            };
+        });
+    };
+
+    // Merge current and previous data for comparison charts
+    const mergeComparisonData = (current, previous) => {
+        return current.map((item, index) => ({
+            time: item.time,
+            currentSales: item.sales,
+            previousSales: previous[index]?.sales || 0,
+            currentRevenue: item.revenue,
+            previousRevenue: previous[index]?.revenue || 0,
+            currentInquiries: item.inquiries,
+            previousInquiries: previous[index]?.inquiries || 0,
+            currentCustomers: item.customers,
+            previousCustomers: previous[index]?.customers || 0
+        }));
     };
 
     // Generate category performance data
@@ -485,15 +520,66 @@ const Analytics = () => {
                     const newUserAnalyticsData = generateNewUserAnalytics(data.data, timePeriod);
                     const locationAnalyticsData = generateLocationAnalytics(data.data, timePeriod);
 
+                    // Generate previous period data if comparison mode is enabled
+                    const previousSalesTrendData = comparisonMode 
+                        ? generatePreviousPeriodData(salesTrendData, timePeriod)
+                        : [];
+                    
+                    const previousCategoryData = comparisonMode
+                        ? generateCategoryData(data.data).map(cat => ({
+                            ...cat,
+                            sales: Math.floor(cat.sales * (0.8 + Math.random() * 0.15)),
+                            properties: Math.floor(cat.properties * (0.85 + Math.random() * 0.1))
+                        }))
+                        : [];
+
+                    const previousRevenueMetrics = comparisonMode
+                        ? {
+                            totalRevenue: Math.floor(125680 * (0.85 + Math.random() * 0.1)),
+                            monthlyGrowth: (Math.random() * 10 + 5).toFixed(1),
+                            averageOrderValue: (65.50 * (0.9 + Math.random() * 0.1)).toFixed(2),
+                            conversionRate: (4.1 * (0.85 + Math.random() * 0.15)).toFixed(1)
+                        }
+                        : {};
+
+                    const previousDailyRegistrations = comparisonMode
+                        ? newUserAnalyticsData.dailyRegistrations.map(item => ({
+                            time: item.time,
+                            registrations: Math.floor(item.registrations * (0.8 + Math.random() * 0.15)),
+                            activations: Math.floor(item.activations * (0.8 + Math.random() * 0.15))
+                        }))
+                        : [];
+
+                    const previousLocationTrends = comparisonMode
+                        ? locationAnalyticsData.locationTrends.map(item => {
+                            const newItem = { time: item.time };
+                            Object.keys(item).forEach(key => {
+                                if (key !== 'time') {
+                                    newItem[key] = Math.floor(item[key] * (0.8 + Math.random() * 0.15));
+                                }
+                            });
+                            return newItem;
+                        })
+                        : [];
+
                     setAnalyticsData({
                         salesTrend: salesTrendData,
+                        previousSalesTrend: previousSalesTrendData,
                         categoryPerformance: categoryData,
+                        previousCategoryPerformance: previousCategoryData,
                         revenueMetrics: calculateRevenueMetrics(data.data),
+                        previousRevenueMetrics: previousRevenueMetrics,
                         userGrowth: [],
                         topAgents: topAgentsData,
                         topProperties: topPropertiesData,
-                        locationAnalytics: locationAnalyticsData,
-                        newUserAnalytics: newUserAnalyticsData,
+                        locationAnalytics: {
+                            ...locationAnalyticsData,
+                            previousLocationTrends: previousLocationTrends
+                        },
+                        newUserAnalytics: {
+                            ...newUserAnalyticsData,
+                            previousDailyRegistrations: previousDailyRegistrations
+                        },
                         loading: false
                     });
                 } else {
@@ -509,7 +595,7 @@ const Analytics = () => {
 
         fetchCategories();
         fetchData();
-    }, [timePeriod, customDateMode, selectedDate.year, selectedDate.month, selectedDate.day, selectedDate.hour]);
+    }, [timePeriod, customDateMode, selectedDate.year, selectedDate.month, selectedDate.day, selectedDate.hour, comparisonMode]);
 
     // Loading state
     if (analyticsData.loading) {
@@ -798,6 +884,11 @@ const Analytics = () => {
                             <p className="text-2xl font-bold text-green-600">
                                 ${analyticsData.revenueMetrics.totalRevenue?.toLocaleString()}
                             </p>
+                            {comparisonMode && analyticsData.previousRevenueMetrics.totalRevenue && (
+                                <p className="text-xs text-gray-500 mt-1">
+                                    vs ${analyticsData.previousRevenueMetrics.totalRevenue?.toLocaleString()}
+                                </p>
+                            )}
                         </div>
                         <div className="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center">
                             <svg className="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -806,8 +897,19 @@ const Analytics = () => {
                         </div>
                     </div>
                     <div className="mt-2">
-                        <span className="text-sm text-green-600">+{analyticsData.revenueMetrics.monthlyGrowth}%</span>
-                        <span className="text-sm text-gray-500"> from last month</span>
+                        {comparisonMode && analyticsData.previousRevenueMetrics.totalRevenue ? (
+                            <span className={`text-sm ${
+                                analyticsData.revenueMetrics.totalRevenue > analyticsData.previousRevenueMetrics.totalRevenue 
+                                    ? 'text-green-600' 
+                                    : 'text-red-600'
+                            }`}>
+                                {analyticsData.revenueMetrics.totalRevenue > analyticsData.previousRevenueMetrics.totalRevenue ? '+' : ''}
+                                {(((analyticsData.revenueMetrics.totalRevenue - analyticsData.previousRevenueMetrics.totalRevenue) / analyticsData.previousRevenueMetrics.totalRevenue) * 100).toFixed(1)}%
+                            </span>
+                        ) : (
+                            <span className="text-sm text-green-600">+{analyticsData.revenueMetrics.monthlyGrowth}%</span>
+                        )}
+                        <span className="text-sm text-gray-500"> {comparisonMode ? 'vs previous period' : 'from last month'}</span>
                     </div>
                 </div>
 
@@ -904,50 +1006,141 @@ const Analytics = () => {
             <div className="bg-white p-6 rounded-lg shadow mb-8">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-xl font-semibold text-gray-900">Sales Trend</h2>
-                    <span className="text-sm text-gray-500">{getPeriodDescription()}</span>
+                    <div className="flex items-center space-x-3">
+                        {comparisonMode && (
+                            <div className="flex items-center space-x-2 text-sm">
+                                <span className="flex items-center">
+                                    <div className="w-3 h-3 rounded-full bg-accent-600 mr-1"></div>
+                                    Current Period
+                                </span>
+                                <span className="flex items-center">
+                                    <div className="w-3 h-3 rounded-full bg-gray-400 mr-1"></div>
+                                    Previous Period
+                                </span>
+                            </div>
+                        )}
+                        <span className="text-sm text-gray-500">{getPeriodDescription()}</span>
+                    </div>
                 </div>
                 <ResponsiveContainer width="100%" height={getChartHeight()}>
-                    <AreaChart data={analyticsData.salesTrend}>
-                        <defs>
-                            <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-                            </linearGradient>
-                            <linearGradient id="colorInquiries" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
-                                <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
-                            </linearGradient>
-                        </defs>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis 
-                            dataKey="time" 
-                            angle={timePeriod === 'hour' ? -45 : 0}
-                            textAnchor={timePeriod === 'hour' ? 'end' : 'middle'}
-                            height={timePeriod === 'hour' ? 80 : 60}
-                        />
-                        <YAxis />
-                        <Tooltip formatter={(value, name) => [
-                            name === 'revenue' ? `$${value.toLocaleString()}` : value.toLocaleString(),
-                            name === 'revenue' ? 'Revenue' : 'Inquiries'
-                        ]} />
-                        <Legend />
-                        <Area
-                            type="monotone"
-                            dataKey="revenue"
-                            stroke="#8884d8"
-                            fillOpacity={1}
-                            fill="url(#colorRevenue)"
-                            name="Revenue"
-                        />
-                        <Area
-                            type="monotone"
-                            dataKey="inquiries"
-                            stroke="#82ca9d"
-                            fillOpacity={1}
-                            fill="url(#colorInquiries)"
-                            name="Inquiries"
-                        />
-                    </AreaChart>
+                    {comparisonMode ? (
+                        <AreaChart data={mergeComparisonData(analyticsData.salesTrend, analyticsData.previousSalesTrend)}>
+                            <defs>
+                                <linearGradient id="colorCurrentRevenue" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#121f2f" stopOpacity={0.8}/>
+                                    <stop offset="95%" stopColor="#121f2f" stopOpacity={0}/>
+                                </linearGradient>
+                                <linearGradient id="colorPreviousRevenue" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#9CA3AF" stopOpacity={0.6}/>
+                                    <stop offset="95%" stopColor="#9CA3AF" stopOpacity={0}/>
+                                </linearGradient>
+                                <linearGradient id="colorCurrentInquiries" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#92bc1b" stopOpacity={0.8}/>
+                                    <stop offset="95%" stopColor="#92bc1b" stopOpacity={0}/>
+                                </linearGradient>
+                                <linearGradient id="colorPreviousInquiries" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#D1D5DB" stopOpacity={0.6}/>
+                                    <stop offset="95%" stopColor="#D1D5DB" stopOpacity={0}/>
+                                </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis 
+                                dataKey="time" 
+                                angle={timePeriod === 'hour' ? -45 : 0}
+                                textAnchor={timePeriod === 'hour' ? 'end' : 'middle'}
+                                height={timePeriod === 'hour' ? 80 : 60}
+                            />
+                            <YAxis />
+                            <Tooltip formatter={(value, name) => {
+                                const isRevenue = name.includes('Revenue');
+                                return [
+                                    isRevenue ? `$${value.toLocaleString()}` : value.toLocaleString(),
+                                    name
+                                ];
+                            }} />
+                            <Legend />
+                            <Area
+                                type="monotone"
+                                dataKey="previousRevenue"
+                                stroke="#9CA3AF"
+                                strokeWidth={1}
+                                strokeDasharray="5 5"
+                                fillOpacity={1}
+                                fill="url(#colorPreviousRevenue)"
+                                name="Previous Revenue"
+                            />
+                            <Area
+                                type="monotone"
+                                dataKey="currentRevenue"
+                                stroke="#121f2f"
+                                strokeWidth={2}
+                                fillOpacity={1}
+                                fill="url(#colorCurrentRevenue)"
+                                name="Current Revenue"
+                            />
+                            <Area
+                                type="monotone"
+                                dataKey="previousInquiries"
+                                stroke="#D1D5DB"
+                                strokeWidth={1}
+                                strokeDasharray="5 5"
+                                fillOpacity={1}
+                                fill="url(#colorPreviousInquiries)"
+                                name="Previous Inquiries"
+                            />
+                            <Area
+                                type="monotone"
+                                dataKey="currentInquiries"
+                                stroke="#92bc1b"
+                                strokeWidth={2}
+                                fillOpacity={1}
+                                fill="url(#colorCurrentInquiries)"
+                                name="Current Inquiries"
+                            />
+                        </AreaChart>
+                    ) : (
+                        <AreaChart data={analyticsData.salesTrend}>
+                            <defs>
+                                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                                </linearGradient>
+                                <linearGradient id="colorInquiries" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+                                    <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+                                </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis 
+                                dataKey="time" 
+                                angle={timePeriod === 'hour' ? -45 : 0}
+                                textAnchor={timePeriod === 'hour' ? 'end' : 'middle'}
+                                height={timePeriod === 'hour' ? 80 : 60}
+                            />
+                            <YAxis />
+                            <Tooltip formatter={(value, name) => [
+                                name === 'revenue' ? `$${value.toLocaleString()}` : value.toLocaleString(),
+                                name === 'revenue' ? 'Revenue' : 'Inquiries'
+                            ]} />
+                            <Legend />
+                            <Area
+                                type="monotone"
+                                dataKey="revenue"
+                                stroke="#8884d8"
+                                fillOpacity={1}
+                                fill="url(#colorRevenue)"
+                                name="Revenue"
+                            />
+                            <Area
+                                type="monotone"
+                                dataKey="inquiries"
+                                stroke="#82ca9d"
+                                fillOpacity={1}
+                                fill="url(#colorInquiries)"
+                                name="Inquiries"
+                            />
+                        </AreaChart>
+                    )}
                 </ResponsiveContainer>
             </div>
 
