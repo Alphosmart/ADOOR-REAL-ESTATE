@@ -7,7 +7,11 @@ import {
     Legend,
     ResponsiveContainer,
     AreaChart,
-    Area
+    Area,
+    LineChart,
+    Line,
+    BarChart,
+    Bar
 } from 'recharts';
 import AdvancedCalendarPicker from '../components/AdvancedCalendarPicker';
 import SummaryApi from '../common';
@@ -22,6 +26,12 @@ const Analytics = () => {
         userGrowth: [],
         topAgents: [],
         topProperties: [],
+        locationAnalytics: {
+            topLocations: [],
+            locationRevenue: [],
+            locationInquiries: [],
+            locationTrends: []
+        },
         newUserAnalytics: {
             registrationSources: [],
             userDemographics: [],
@@ -241,6 +251,105 @@ const Analytics = () => {
         };
     };
 
+    // Generate location analytics data
+    const generateLocationAnalytics = (stats, period) => {
+        const nigerianCities = [
+            'Lagos', 'Abuja', 'Port Harcourt', 'Kano', 'Ibadan', 
+            'Benin City', 'Enugu', 'Kaduna', 'Calabar', 'Warri'
+        ];
+
+        const topLocations = nigerianCities.slice(0, 8).map(city => ({
+            city,
+            properties: Math.floor(Math.random() * 100) + 20,
+            inquiries: Math.floor(Math.random() * 300) + 50,
+            revenue: Math.floor(Math.random() * 50000000) + 10000000,
+            growth: (Math.random() * 40 - 10).toFixed(1)
+        })).sort((a, b) => b.inquiries - a.inquiries);
+
+        const locationRevenue = nigerianCities.slice(0, 6).map(city => ({
+            name: city,
+            revenue: Math.floor(Math.random() * 30000000) + 5000000,
+            properties: Math.floor(Math.random() * 80) + 15
+        })).sort((a, b) => b.revenue - a.revenue);
+
+        const locationInquiries = nigerianCities.slice(0, 6).map(city => ({
+            city,
+            inquiries: Math.floor(Math.random() * 250) + 50,
+            conversions: Math.floor(Math.random() * 50) + 10,
+            conversionRate: (Math.random() * 20 + 10).toFixed(1)
+        })).sort((a, b) => b.inquiries - a.inquiries);
+
+        let locationTrends = [];
+        switch (period) {
+            case 'hour':
+                locationTrends = nigerianCities.slice(0, 3).flatMap(city =>
+                    Array.from({ length: 24 }, (_, i) => {
+                        const date = new Date();
+                        date.setHours(date.getHours() - (23 - i));
+                        return {
+                            time: date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }),
+                            [city]: Math.floor(Math.random() * 20) + 5
+                        };
+                    })
+                ).reduce((acc, curr) => {
+                    const existing = acc.find(item => item.time === curr.time);
+                    if (existing) {
+                        Object.assign(existing, curr);
+                    } else {
+                        acc.push(curr);
+                    }
+                    return acc;
+                }, []);
+                break;
+            
+            case 'day':
+                locationTrends = Array.from({ length: 30 }, (_, i) => {
+                    const date = new Date();
+                    date.setDate(date.getDate() - (29 - i));
+                    const obj = {
+                        time: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+                    };
+                    nigerianCities.slice(0, 3).forEach(city => {
+                        obj[city] = Math.floor(Math.random() * 80) + 20;
+                    });
+                    return obj;
+                });
+                break;
+            
+            case 'month':
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                locationTrends = months.map(month => {
+                    const obj = { time: month };
+                    nigerianCities.slice(0, 3).forEach(city => {
+                        obj[city] = Math.floor(Math.random() * 500) + 100;
+                    });
+                    return obj;
+                });
+                break;
+            
+            case 'year':
+                locationTrends = Array.from({ length: 5 }, (_, i) => {
+                    const year = new Date().getFullYear() - (4 - i);
+                    const obj = { time: year.toString() };
+                    nigerianCities.slice(0, 3).forEach(city => {
+                        obj[city] = Math.floor(Math.random() * 5000) + 1000;
+                    });
+                    return obj;
+                });
+                break;
+            
+            default:
+                locationTrends = [];
+        }
+
+        return {
+            topLocations,
+            locationRevenue,
+            locationInquiries,
+            locationTrends
+        };
+    };
+
     // Generate new user analytics data
     const generateNewUserAnalytics = (stats, period) => {
         const registrationSources = [
@@ -362,6 +471,7 @@ const Analytics = () => {
                     const topAgentsData = generateTopAgentsData(data.data);
                     const topPropertiesData = generateTopPropertiesData(data.data);
                     const newUserAnalyticsData = generateNewUserAnalytics(data.data, timePeriod);
+                    const locationAnalyticsData = generateLocationAnalytics(data.data, timePeriod);
 
                     setAnalyticsData({
                         salesTrend: salesTrendData,
@@ -370,6 +480,7 @@ const Analytics = () => {
                         userGrowth: [],
                         topAgents: topAgentsData,
                         topProperties: topPropertiesData,
+                        locationAnalytics: locationAnalyticsData,
                         newUserAnalytics: newUserAnalyticsData,
                         loading: false
                     });
@@ -826,6 +937,128 @@ const Analytics = () => {
                         />
                     </AreaChart>
                 </ResponsiveContainer>
+            </div>
+
+            {/* Location Analytics Section */}
+            <div className="bg-white p-6 rounded-lg shadow mb-8">
+                <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-semibold text-gray-900">Location Analytics</h2>
+                    <span className="text-sm text-gray-500">Property performance by location</span>
+                </div>
+
+                {/* Location Trends Chart */}
+                <div className="mb-8">
+                    <h3 className="text-lg font-medium text-gray-800 mb-4">Inquiry Trends by Top Cities</h3>
+                    <ResponsiveContainer width="100%" height={300}>
+                        <LineChart data={analyticsData.locationAnalytics.locationTrends}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis 
+                                dataKey="time"
+                                angle={timePeriod === 'hour' ? -45 : 0}
+                                textAnchor={timePeriod === 'hour' ? 'end' : 'middle'}
+                                height={timePeriod === 'hour' ? 80 : 60}
+                            />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Line type="monotone" dataKey="Lagos" stroke="#92bc1b" strokeWidth={2} />
+                            <Line type="monotone" dataKey="Abuja" stroke="#121f2f" strokeWidth={2} />
+                            <Line type="monotone" dataKey="Port Harcourt" stroke="#82ca9d" strokeWidth={2} />
+                        </LineChart>
+                    </ResponsiveContainer>
+                </div>
+
+                {/* Top Locations Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    {/* Top Locations by Inquiries */}
+                    <div>
+                        <h3 className="text-lg font-medium text-gray-800 mb-4">Top Locations by Inquiries</h3>
+                        <div className="space-y-3">
+                            {analyticsData.locationAnalytics.topLocations.map((location, index) => (
+                                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                    <div className="flex items-center space-x-3">
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold ${
+                                            index === 0 ? 'bg-primary-500' : index === 1 ? 'bg-accent-600' : 'bg-gray-400'
+                                        }`}>
+                                            {index + 1}
+                                        </div>
+                                        <div>
+                                            <p className="font-medium text-gray-900">{location.city}</p>
+                                            <p className="text-xs text-gray-500">{location.properties} properties</p>
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="font-semibold text-accent-600">{location.inquiries}</p>
+                                        <p className="text-xs text-gray-500">inquiries</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Location Revenue Chart */}
+                    <div>
+                        <h3 className="text-lg font-medium text-gray-800 mb-4">Revenue by Location</h3>
+                        <ResponsiveContainer width="100%" height={300}>
+                            <BarChart data={analyticsData.locationAnalytics.locationRevenue}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis tickFormatter={(value) => `₦${(value / 1000000).toFixed(1)}M`} />
+                                <Tooltip formatter={(value) => [`₦${value.toLocaleString()}`, 'Revenue']} />
+                                <Bar dataKey="revenue" fill="#92bc1b" radius={[8, 8, 0, 0]} />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+
+                {/* Location Performance Table */}
+                <div>
+                    <h3 className="text-lg font-medium text-gray-800 mb-4">Location Performance Summary</h3>
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-gray-50">
+                                <tr>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inquiries</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Conversions</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Conversion Rate</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Growth</th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                                {analyticsData.locationAnalytics.locationInquiries.map((location, index) => (
+                                    <tr key={index} className="hover:bg-gray-50">
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="flex items-center">
+                                                <div className="text-sm font-medium text-gray-900">{location.city}</div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm text-gray-900">{location.inquiries}</div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm text-gray-900">{location.conversions}</div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                {location.conversionRate}%
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <span className={`text-sm font-medium ${
+                                                parseFloat(analyticsData.locationAnalytics.topLocations.find(l => l.city === location.city)?.growth || 0) >= 0 
+                                                    ? 'text-green-600' 
+                                                    : 'text-red-600'
+                                            }`}>
+                                                {analyticsData.locationAnalytics.topLocations.find(l => l.city === location.city)?.growth || '0'}%
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             {/* Analytics Summary */}
