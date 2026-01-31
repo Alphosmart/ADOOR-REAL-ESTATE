@@ -434,6 +434,31 @@ const SummaryApi = {
     respondToInquiry : {
         url : `${backendDomain}/api/inquiries/respond`,
         method : 'post'
+    },
+    // Property Management (Real Estate)
+    allProperties : {
+        url : `${backendDomain}/api/properties`,
+        method : 'get'
+    },
+    getSingleProperty : {
+        url : `${backendDomain}/api/properties`,
+        method : 'get'
+    },
+    addProperty : {
+        url : `${backendDomain}/api/properties`,
+        method : 'post'
+    },
+    updateProperty : {
+        url : `${backendDomain}/api/properties`,
+        method : 'put'
+    },
+    deleteProperty : {
+        url : `${backendDomain}/api/properties`,
+        method : 'delete'
+    },
+    getUserProperties : {
+        url : `${backendDomain}/api/user-properties`,
+        method : 'get'
     }
 }
 

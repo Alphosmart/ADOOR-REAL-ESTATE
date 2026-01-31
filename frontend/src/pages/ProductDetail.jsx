@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { FaStar, FaStarHalf, FaShoppingCart, FaHeart, FaRegHeart, FaPlus, FaMinus, FaChevronLeft, FaChevronRight, FaExpand } from 'react-icons/fa';
+import { FaStar, FaStarHalf, FaShoppingCart, FaHeart, FaRegHeart, FaChevronLeft, FaChevronRight, FaExpand } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import SummaryApi from '../common';
-import { useCart } from '../context/CartContext';
 import SocialFeatures from '../components/SocialFeatures';
 import EnhancedReviews from '../components/EnhancedReviews';
 
@@ -13,32 +12,51 @@ const ProductDetail = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [selectedImage, setSelectedImage] = useState('');
-    const [quantity, setQuantity] = useState(1);
     const [isFavorite, setIsFavorite] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [relatedLoading, setRelatedLoading] = useState(false);
-    const { addToCart, isInCart, getCartItem } = useCart();
 
     const fetchProductDetails = useCallback(async () => {
         try {
-            const response = await fetch(`${SummaryApi.getSingleProduct.url}/${id}`, {
-                method: SummaryApi.getSingleProduct.method
+            // Get backend domain
+            const backendDomain = process.env.NODE_ENV === 'production' 
+                ? "https://adoor-real-estate.onrender.com" 
+                : "http://localhost:8080";
+            
+            // Use property endpoint instead of product
+            const response = await fetch(`${backendDomain}/api/properties/${id}`, {
+                method: 'GET'
             });
             const data = await response.json();
 
             if (data.success) {
-                setProduct(data.data);
-                setSelectedImage(data.data.productImage[0] || '');
+                const propertyData = data.data;
+                // Map property data to product format for compatibility
+                const mappedProduct = {
+                    ...propertyData,
+                    productName: propertyData.title || propertyData.productName,
+                    productImage: propertyData.images || propertyData.productImage || [],
+                    brandName: propertyData.location?.neighborhood || propertyData.brandName,
+                    category: propertyData.propertyType || propertyData.category,
+                    pricing: {
+                        sellingPrice: {
+                            amount: propertyData.pricing?.amount || 0,
+                            currency: propertyData.pricing?.currency || 'NGN'
+                        }
+                    }
+                };
+                setProduct(mappedProduct);
+                setSelectedImage(mappedProduct.productImage[0] || '');
                 setCurrentImageIndex(0);
             } else {
-                toast.error(data.message || 'Product not found');
+                toast.error(data.message || 'Property not found');
                 navigate('/');
             }
         } catch (error) {
-            console.error('Error fetching product:', error);
-            toast.error('Failed to load product details');
+            console.error('Error fetching property:', error);
+            toast.error('Failed to load property details');
             navigate('/');
         } finally {
             setLoading(false);
@@ -87,33 +105,31 @@ const ProductDetail = () => {
         }).format(price);
     };
 
-    const handleAddToCart = () => {
+    const handleContactAgent = () => {
         if (!product) return;
         
-        addToCart(product, quantity);
+        // Scroll to inquiry form or show contact modal
+        const inquirySection = document.getElementById('inquiry-form');
+        if (inquirySection) {
+            inquirySection.scrollIntoView({ behavior: 'smooth' });
+        }
+        toast.info('Please fill out the inquiry form below to contact us about this property');
     };
 
-    const handleBuyNow = () => {
+    const handleScheduleViewing = () => {
         if (!product) return;
         
-        // Add to cart first, then navigate to cart
-        addToCart(product, quantity);
-        navigate('/cart');
+        // Navigate to contact or schedule viewing
+        toast.info('Viewing scheduling feature coming soon! Please use the inquiry form below.');
+        const inquirySection = document.getElementById('inquiry-form');
+        if (inquirySection) {
+            inquirySection.scrollIntoView({ behavior: 'smooth' });
+        }
     };
 
     const toggleFavorite = () => {
         setIsFavorite(!isFavorite);
         toast.success(isFavorite ? 'Removed from favorites' : 'Added to favorites');
-    };
-
-    const increaseQuantity = () => {
-        setQuantity(prev => prev + 1);
-    };
-
-    const decreaseQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(prev => prev - 1);
-        }
     };
 
     const getDiscountPercentage = () => {
@@ -342,7 +358,11 @@ const ProductDetail = () => {
                         </p>
                         {product.location && (
                             <p className="text-gray-700">
-                                <span className="font-medium">Location:</span> {product.location}
+                                <span className="font-medium">Location:</span> {
+                                    typeof product.location === 'string' 
+                                        ? product.location 
+                                        : `${product.location.neighborhood || product.location.address || ''}, ${product.location.city || ''}, ${product.location.state || ''}`
+                                }
                             </p>
                         )}
                     </div>
@@ -374,47 +394,21 @@ const ProductDetail = () => {
                         </div>
                     )}
 
-                    {/* Quantity and Actions */}
+                    {/* Contact Actions */}
                     <div className="border-t pt-6">
-                        <div className="flex items-center gap-4 mb-4">
-                            <span className="font-semibold">Quantity:</span>
-                            <div className="flex items-center border rounded">
-                                <button 
-                                    className="px-3 py-2 hover:bg-gray-100 flex items-center justify-center"
-                                    onClick={decreaseQuantity}
-                                    disabled={quantity <= 1}
-                                >
-                                    <FaMinus className="text-sm" />
-                                </button>
-                                <span className="px-4 py-2 border-x min-w-[60px] text-center">{quantity}</span>
-                                <button 
-                                    className="px-3 py-2 hover:bg-gray-100 flex items-center justify-center"
-                                    onClick={increaseQuantity}
-                                    disabled={quantity >= product.stock}
-                                >
-                                    <FaPlus className="text-sm" />
-                                </button>
-                            </div>
-                            <span className="text-sm text-gray-600">
-                                {product.stock} available
-                            </span>
-                        </div>
-
                         <div className="flex gap-4">
                             <button 
-                                className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
-                                onClick={handleAddToCart}
-                                disabled={product.stock === 0}
+                                className="flex-1 bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+                                onClick={handleContactAgent}
                             >
                                 <FaShoppingCart />
-                                {isInCart(product._id) ? 'Update Cart' : 'Add to Cart'}
+                                Contact Agent
                             </button>
                             <button 
-                                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-                                onClick={handleBuyNow}
-                                disabled={product.stock === 0}
+                                className="flex-1 bg-accent-700 hover:bg-accent-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                                onClick={handleScheduleViewing}
                             >
-                                Buy Now
+                                Schedule Viewing
                             </button>
                             <button 
                                 className={`px-4 py-3 rounded-lg border transition-colors ${
@@ -427,18 +421,6 @@ const ProductDetail = () => {
                                 {isFavorite ? <FaHeart /> : <FaRegHeart />}
                             </button>
                         </div>
-
-                        {product.stock === 0 && (
-                            <p className="text-red-600 text-center mt-2 font-medium">
-                                Out of Stock
-                            </p>
-                        )}
-
-                        {isInCart(product._id) && (
-                            <p className="text-green-600 text-center mt-2 text-sm">
-                                ✓ This item is already in your cart ({getCartItem(product._id)?.quantity} items)
-                            </p>
-                        )}
                     </div>
                 </div>
             </div>
