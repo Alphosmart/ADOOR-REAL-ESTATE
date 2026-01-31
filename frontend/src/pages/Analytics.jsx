@@ -20,8 +20,8 @@ const Analytics = () => {
         categoryPerformance: [],
         revenueMetrics: {},
         userGrowth: [],
-        topSellers: [],
-        topProducts: [],
+        topAgents: [],
+        topProperties: [],
         newUserAnalytics: {
             registrationSources: [],
             userDemographics: [],
@@ -59,8 +59,8 @@ const Analytics = () => {
         const data = analyticsData.salesTrend;
         if (format === 'csv') {
             const csvContent = [
-                ['Time', 'Sales', 'Revenue', 'Orders', 'Customers'],
-                ...data.map(row => [row.time, row.sales, row.revenue, row.orders, row.customers])
+                ['Time', 'Sales', 'Revenue', 'Inquiries', 'Customers'],
+                ...data.map(row => [row.time, row.sales, row.revenue, row.inquiries, row.customers])
             ].map(row => row.join(',')).join('\n');
             
             const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -124,7 +124,7 @@ const Analytics = () => {
                         time: date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }),
                         sales: Math.floor(Math.random() * 5000) + 1000,
                         revenue: Math.floor(Math.random() * 10000) + 2000,
-                        orders: Math.floor(Math.random() * 50) + 10,
+                        inquiries: Math.floor(Math.random() * 50) + 10,
                         customers: Math.floor(Math.random() * 20) + 5
                     };
                 });
@@ -139,7 +139,7 @@ const Analytics = () => {
                         time: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
                         sales: Math.floor(Math.random() * 20000) + 5000,
                         revenue: Math.floor(Math.random() * 40000) + 10000,
-                        orders: Math.floor(Math.random() * 200) + 50,
+                        inquiries: Math.floor(Math.random() * 200) + 50,
                         customers: Math.floor(Math.random() * 100) + 20
                     };
                 });
@@ -152,7 +152,7 @@ const Analytics = () => {
                     time: month,
                     sales: Math.floor(Math.random() * 50000) + 10000,
                     revenue: Math.floor(Math.random() * 100000) + 20000,
-                    orders: Math.floor(Math.random() * 500) + 100,
+                    inquiries: Math.floor(Math.random() * 500) + 100,
                     customers: Math.floor(Math.random() * 200) + 50
                 }));
                 break;
@@ -165,7 +165,7 @@ const Analytics = () => {
                         time: year.toString(),
                         sales: Math.floor(Math.random() * 500000) + 100000,
                         revenue: Math.floor(Math.random() * 1000000) + 200000,
-                        orders: Math.floor(Math.random() * 5000) + 1000,
+                        inquiries: Math.floor(Math.random() * 5000) + 1000,
                         customers: Math.floor(Math.random() * 2000) + 500
                     };
                 });
@@ -184,12 +184,12 @@ const Analytics = () => {
         return categories.map(category => ({
             name: category,
             sales: Math.floor(Math.random() * 15000) + 2000,
-            products: Math.floor(Math.random() * 50) + 10
+            properties: Math.floor(Math.random() * 50) + 10
         }));
     };
 
-    // Generate top sellers data
-    const generateTopSellersData = (stats) => {
+    // Generate top agents data
+    const generateTopAgentsData = (stats) => {
         const sellerNames = [
             'Interior Pro', 'Decor Hub', 'Paint Masters', 'Wall Art Studio', 
             'Design Centre', 'Home Accents', 'Color Works', 'Tile Gallery',
@@ -200,26 +200,26 @@ const Analytics = () => {
             id: index + 1,
             name,
             totalSales: Math.floor(Math.random() * 150000) + 50000,
-            totalOrders: Math.floor(Math.random() * 500) + 100,
+            totalInquiries: Math.floor(Math.random() * 500) + 100,
             averageRating: (Math.random() * 1.5 + 3.5).toFixed(1),
-            productsCount: Math.floor(Math.random() * 50) + 10,
+            propertiesCount: Math.floor(Math.random() * 50) + 10,
             revenue: Math.floor(Math.random() * 200000) + 75000,
             growth: (Math.random() * 50 - 10).toFixed(1)
         })).sort((a, b) => b.totalSales - a.totalSales);
     };
 
-    // Generate top products data
-    const generateTopProductsData = (stats) => {
-        const products = [
-            { name: 'Luxury Villa Lekki', category: 'Houses', image: '/api/placeholder/80/80' },
-            { name: 'Eggshell Wall Paint', category: 'Wall Paint', image: '/api/placeholder/80/80' },
-            { name: '3D Decorative Panels', category: 'Decorative Panels', image: '/api/placeholder/80/80' },
-            { name: 'Ceramic Floor Tiles', category: 'Tiles', image: '/api/placeholder/80/80' },
-            { name: 'LED Pendant Lights', category: 'Lighting', image: '/api/placeholder/80/80' },
-            { name: 'Luxury Vinyl Flooring', category: 'Flooring', image: '/api/placeholder/80/80' }
+    // Generate top properties data
+    const generateTopPropertiesData = (stats) => {
+        const properties = [
+            { name: '3 Bed Apartment - Lekki', category: 'Houses', image: '/api/placeholder/80/80' },
+            { name: '4 Bed Duplex - Ikoyi', category: 'Wall Paint', image: '/api/placeholder/80/80' },
+            { name: '5 Bed Villa - Victoria Island', category: 'Decorative Panels', image: '/api/placeholder/80/80' },
+            { name: 'Office Space - Marina', category: 'Tiles', image: '/api/placeholder/80/80' },
+            { name: 'Land - Ajah', category: 'Lighting', image: '/api/placeholder/80/80' },
+            { name: '2 Bed Flat - Ikeja', category: 'Flooring', image: '/api/placeholder/80/80' }
         ];
 
-        return products.slice(0, 6).map((product, index) => ({
+        return properties.slice(0, 6).map((product, index) => ({
             id: index + 1,
             ...product,
             totalSales: Math.floor(Math.random() * 2000) + 500,
@@ -260,8 +260,8 @@ const Analytics = () => {
         ];
 
         const conversionMetrics = {
-            signupToFirstPurchase: (Math.random() * 15 + 10).toFixed(1),
-            averageTimeToFirstPurchase: Math.floor(Math.random() * 5) + 2,
+            signupToFirstInquiry: (Math.random() * 15 + 10).toFixed(1),
+            averageTimeToFirstInquiry: Math.floor(Math.random() * 5) + 2,
             userRetentionRate: (Math.random() * 20 + 70).toFixed(1),
             averageLifetimeValue: Math.floor(Math.random() * 200) + 150
         };
@@ -359,8 +359,8 @@ const Analytics = () => {
                 if (data.success) {
                     const salesTrendData = generateSalesTrendData(data.data, timePeriod);
                     const categoryData = generateCategoryData(data.data);
-                    const topSellersData = generateTopSellersData(data.data);
-                    const topProductsData = generateTopProductsData(data.data);
+                    const topAgentsData = generateTopAgentsData(data.data);
+                    const topPropertiesData = generateTopPropertiesData(data.data);
                     const newUserAnalyticsData = generateNewUserAnalytics(data.data, timePeriod);
 
                     setAnalyticsData({
@@ -368,8 +368,8 @@ const Analytics = () => {
                         categoryPerformance: categoryData,
                         revenueMetrics: calculateRevenueMetrics(data.data),
                         userGrowth: [],
-                        topSellers: topSellersData,
-                        topProducts: topProductsData,
+                        topAgents: topAgentsData,
+                        topProperties: topPropertiesData,
                         newUserAnalytics: newUserAnalyticsData,
                         loading: false
                     });
@@ -418,7 +418,7 @@ const Analytics = () => {
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                     <div className="mb-4 lg:mb-0">
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">Analytics Dashboard</h1>
-                        <p className="text-gray-600">Monitor your business performance and growth</p>
+                        <p className="text-gray-600">Monitor your real estate business performance and growth</p>
                     </div>
                     
                     {/* Enhanced Controls */}
@@ -688,13 +688,13 @@ const Analytics = () => {
                     </div>
                 </div>
 
-                {/* Total Orders Card */}
+                {/* Property Inquiries Card */}
                 <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm font-medium text-gray-600">Total Orders</p>
+                            <p className="text-sm font-medium text-gray-600">Property Inquiries</p>
                             <p className="text-2xl font-bold text-accent-600">
-                                {analyticsData.salesTrend.reduce((acc, curr) => acc + (curr.orders || 0), 0).toLocaleString()}
+                                {analyticsData.salesTrend.reduce((acc, curr) => acc + (curr.inquiries || 0), 0).toLocaleString()}
                             </p>
                         </div>
                         <div className="h-12 w-12 bg-accent-100 rounded-lg flex items-center justify-center">
@@ -709,11 +709,11 @@ const Analytics = () => {
                     </div>
                 </div>
 
-                {/* New Users Card */}
+                {/* New Clients Card */}
                 <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm font-medium text-gray-600">New Users</p>
+                            <p className="text-sm font-medium text-gray-600">New Clients</p>
                             <p className="text-2xl font-bold text-accent-600">
                                 {analyticsData.newUserAnalytics.dailyRegistrations.reduce((acc, curr) => acc + (curr.registrations || 0), 0).toLocaleString()}
                             </p>
@@ -725,18 +725,18 @@ const Analytics = () => {
                         </div>
                     </div>
                     <div className="mt-2">
-                        <span className="text-sm text-accent-600">+{analyticsData.newUserAnalytics.conversionMetrics.signupToFirstPurchase}%</span>
+                        <span className="text-sm text-accent-600">+{analyticsData.newUserAnalytics.conversionMetrics.signupToFirstInquiry}%</span>
                         <span className="text-sm text-gray-500"> conversion rate</span>
                     </div>
                 </div>
 
-                {/* Top Seller Revenue Card */}
+                {/* Top Agent Revenue Card */}
                 <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm font-medium text-gray-600">Top Seller Revenue</p>
+                            <p className="text-sm font-medium text-gray-600">Top Agent Revenue</p>
                             <p className="text-2xl font-bold text-primary-600">
-                                ${analyticsData.topSellers.length > 0 ? analyticsData.topSellers[0]?.totalSales?.toLocaleString() : '0'}
+                                ${analyticsData.topAgents.length > 0 ? analyticsData.topAgents[0]?.totalSales?.toLocaleString() : '0'}
                             </p>
                         </div>
                         <div className="h-12 w-12 bg-primary-100 rounded-lg flex items-center justify-center">
@@ -747,19 +747,19 @@ const Analytics = () => {
                     </div>
                     <div className="mt-2">
                         <span className="text-sm text-primary-600">
-                            {analyticsData.topSellers.length > 0 ? analyticsData.topSellers[0]?.name : 'No data'}
+                            {analyticsData.topAgents.length > 0 ? analyticsData.topAgents[0]?.name : 'No data'}
                         </span>
                         <span className="text-sm text-gray-500"> leading seller</span>
                     </div>
                 </div>
 
-                {/* Best Product Sales Card */}
+                {/* Top Property Views Card */}
                 <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm font-medium text-gray-600">Best Product Sales</p>
+                            <p className="text-sm font-medium text-gray-600">Top Property Views</p>
                             <p className="text-2xl font-bold text-orange-600">
-                                {analyticsData.topProducts.length > 0 ? analyticsData.topProducts[0]?.totalSales?.toLocaleString() : '0'}
+                                {analyticsData.topProperties.length > 0 ? analyticsData.topProperties[0]?.totalSales?.toLocaleString() : '0'}
                             </p>
                         </div>
                         <div className="h-12 w-12 bg-orange-100 rounded-lg flex items-center justify-center">
@@ -770,9 +770,9 @@ const Analytics = () => {
                     </div>
                     <div className="mt-2">
                         <span className="text-sm text-orange-600">
-                            {analyticsData.topProducts.length > 0 ? analyticsData.topProducts[0]?.name : 'No data'}
+                            {analyticsData.topProperties.length > 0 ? analyticsData.topProperties[0]?.name : 'No data'}
                         </span>
-                        <span className="text-sm text-gray-500"> units sold</span>
+                        <span className="text-sm text-gray-500"> views</span>
                     </div>
                 </div>
             </div>
@@ -790,7 +790,7 @@ const Analytics = () => {
                                 <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
                                 <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
                             </linearGradient>
-                            <linearGradient id="colorOrders" x1="0" y1="0" x2="0" y2="1">
+                            <linearGradient id="colorInquiries" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
                                 <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
                             </linearGradient>
@@ -805,7 +805,7 @@ const Analytics = () => {
                         <YAxis />
                         <Tooltip formatter={(value, name) => [
                             name === 'revenue' ? `$${value.toLocaleString()}` : value.toLocaleString(),
-                            name === 'revenue' ? 'Revenue' : 'Orders'
+                            name === 'revenue' ? 'Revenue' : 'Inquiries'
                         ]} />
                         <Legend />
                         <Area
@@ -818,11 +818,11 @@ const Analytics = () => {
                         />
                         <Area
                             type="monotone"
-                            dataKey="orders"
+                            dataKey="inquiries"
                             stroke="#82ca9d"
                             fillOpacity={1}
-                            fill="url(#colorOrders)"
-                            name="Orders"
+                            fill="url(#colorInquiries)"
+                            name="Inquiries"
                         />
                     </AreaChart>
                 </ResponsiveContainer>
