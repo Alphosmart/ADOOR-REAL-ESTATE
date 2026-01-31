@@ -163,7 +163,7 @@ const Reviews = ({ productId }) => {
                 {user?._id && (
                     <button
                         onClick={() => setShowAddReview(!showAddReview)}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                        className="px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors"
                     >
                         {showAddReview ? 'Cancel' : 'Write Review'}
                     </button>

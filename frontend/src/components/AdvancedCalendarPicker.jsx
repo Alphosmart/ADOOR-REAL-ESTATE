@@ -159,10 +159,10 @@ const AdvancedCalendarPicker = ({
         <div className="relative">
             <div
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer bg-white flex items-center justify-between hover:border-blue-400 transition-colors"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer bg-white flex items-center justify-between hover:border-accent-400 transition-colors"
             >
                 <div className="flex items-center space-x-2">
-                    <FaCalendarAlt className="text-blue-500" />
+                    <FaCalendarAlt className="text-accent-500" />
                     <span className={tempRange.startDate ? 'text-gray-900' : 'text-gray-500'}>
                         {formatDateDisplay()}
                     </span>
@@ -186,7 +186,7 @@ const AdvancedCalendarPicker = ({
                                     <button
                                         key={preset.label}
                                         onClick={() => applyPreset(preset)}
-                                        className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors"
+                                        className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-blue-50 hover:text-accent-600 rounded transition-colors"
                                         type="button"
                                     >
                                         {preset.label}
@@ -194,7 +194,7 @@ const AdvancedCalendarPicker = ({
                                 ))}
                                 <button
                                     onClick={resetToToday}
-                                    className="w-full text-left px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded transition-colors font-medium"
+                                    className="w-full text-left px-3 py-2 text-sm text-accent-600 hover:bg-blue-50 rounded transition-colors font-medium"
                                     type="button"
                                 >
                                     Reset to Last Week
@@ -270,9 +270,9 @@ const AdvancedCalendarPicker = ({
                                                     className={`
                                                         p-2 text-sm rounded transition-colors relative
                                                         ${!isCurrentMonth ? 'text-gray-300' : 'text-gray-900'}
-                                                        ${isSelected ? 'bg-blue-600 text-white font-semibold' : ''}
-                                                        ${isInRange && !isSelected ? 'bg-blue-100 text-blue-700' : ''}
-                                                        ${isToday && !isSelected && !isInRange ? 'bg-blue-50 text-blue-600 font-semibold' : ''}
+                                                        ${isSelected ? 'bg-accent-600 text-white font-semibold' : ''}
+                                                        ${isInRange && !isSelected ? 'bg-accent-100 text-accent-700' : ''}
+                                                        ${isToday && !isSelected && !isInRange ? 'bg-blue-50 text-accent-600 font-semibold' : ''}
                                                         ${isCurrentMonth && !isSelected && !isInRange ? 'hover:bg-gray-100' : ''}
                                                     `}
                                                 >
@@ -292,7 +292,7 @@ const AdvancedCalendarPicker = ({
                                             onClick={() => handleMonthSelect(index)}
                                             className={`p-3 text-sm rounded transition-colors ${
                                                 index === currentMonth.getMonth()
-                                                    ? 'bg-blue-600 text-white'
+                                                    ? 'bg-accent-600 text-white'
                                                     : 'text-gray-700 hover:bg-gray-100'
                                             }`}
                                             type="button"
@@ -311,7 +311,7 @@ const AdvancedCalendarPicker = ({
                                             onClick={() => handleYearSelect(year)}
                                             className={`p-3 text-sm rounded transition-colors ${
                                                 year === currentYear
-                                                    ? 'bg-blue-600 text-white'
+                                                    ? 'bg-accent-600 text-white'
                                                     : 'text-gray-700 hover:bg-gray-100'
                                             }`}
                                             type="button"
@@ -374,7 +374,7 @@ const AdvancedCalendarPicker = ({
                             <button
                                 onClick={applyChanges}
                                 disabled={!tempRange.startDate}
-                                className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                                className="px-4 py-2 text-sm bg-accent-600 text-white rounded hover:bg-accent-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                                 type="button"
                             >
                                 Apply

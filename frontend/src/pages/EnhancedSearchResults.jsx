@@ -264,7 +264,7 @@ const EnhancedSearchResults = () => {
                         onClick={() => handlePageChange(page)}
                         className={`px-3 py-2 rounded-lg border ${
                             page === currentPage
-                                ? 'bg-blue-600 text-white border-blue-600'
+                                ? 'bg-accent-600 text-white border-accent-600'
                                 : 'border-gray-300 text-gray-700 hover:bg-gray-50'
                         }`}
                     >
@@ -301,7 +301,7 @@ const EnhancedSearchResults = () => {
             <div className="container mx-auto px-4 py-8">
                 <div className="flex justify-center items-center h-64">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-600 mx-auto mb-4"></div>
                         <div className="text-lg text-gray-600">Searching products...</div>
                     </div>
                 </div>
@@ -326,7 +326,7 @@ const EnhancedSearchResults = () => {
                             {searchTerm ? (
                                 <>
                                     <span className="font-medium">{totalResults}</span> results for "
-                                    <span className="font-medium text-blue-600">{searchTerm}</span>"
+                                    <span className="font-medium text-accent-600">{searchTerm}</span>"
                                 </>
                             ) : (
                                 <>Showing <span className="font-medium">{totalResults}</span> products</>
@@ -367,7 +367,7 @@ const EnhancedSearchResults = () => {
                                                 setSortDropdownOpen(false);
                                             }}
                                             className={`w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 ${
-                                                filters.sortBy === option.value ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                                                filters.sortBy === option.value ? 'bg-blue-50 text-accent-700' : 'text-gray-700'
                                             }`}
                                         >
                                             <span>{option.icon}</span>
@@ -384,7 +384,7 @@ const EnhancedSearchResults = () => {
                                 onClick={() => setViewMode('grid')}
                                 className={`px-3 py-2 text-sm ${
                                     viewMode === 'grid' 
-                                        ? 'bg-blue-600 text-white' 
+                                        ? 'bg-accent-600 text-white' 
                                         : 'bg-white text-gray-700 hover:bg-gray-50'
                                 }`}
                             >
@@ -394,7 +394,7 @@ const EnhancedSearchResults = () => {
                                 onClick={() => setViewMode('list')}
                                 className={`px-3 py-2 text-sm ${
                                     viewMode === 'list' 
-                                        ? 'bg-blue-600 text-white' 
+                                        ? 'bg-accent-600 text-white' 
                                         : 'bg-white text-gray-700 hover:bg-gray-50'
                                 }`}
                             >
@@ -410,7 +410,7 @@ const EnhancedSearchResults = () => {
                             <FaFilter />
                             <span className="text-sm">Filters</span>
                             {Object.values(filters).some(v => v && v !== 'relevance' && v !== true) && (
-                                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                                <div className="w-2 h-2 bg-accent-600 rounded-full"></div>
                             )}
                         </button>
                     </div>
@@ -425,9 +425,9 @@ const EnhancedSearchResults = () => {
                                 <div className="flex flex-wrap items-center gap-2">
                                     <span className="text-sm font-medium text-gray-600">Active Filters:</span>
                                     {filters.country && (
-                                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-accent-100 text-accent-700 rounded-full text-sm">
                                             🌍 {filters.country}
-                                            <button onClick={() => handleFilterChange('country', '')} className="ml-1 hover:text-blue-900">
+                                            <button onClick={() => handleFilterChange('country', '')} className="ml-1 hover:text-accent-900">
                                                 <FaTimes className="text-xs" />
                                             </button>
                                         </span>
@@ -441,9 +441,9 @@ const EnhancedSearchResults = () => {
                                         </span>
                                     )}
                                     {filters.location && (
-                                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
+                                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
                                             🏘️ {filters.location}
-                                            <button onClick={() => handleFilterChange('location', '')} className="ml-1 hover:text-purple-900">
+                                            <button onClick={() => handleFilterChange('location', '')} className="ml-1 hover:text-primary-900">
                                                 <FaTimes className="text-xs" />
                                             </button>
                                         </span>
@@ -479,7 +479,7 @@ const EnhancedSearchResults = () => {
                                         onClick={() => handleFilterChange('category', filters.category === category ? '' : category)}
                                         className={`px-3 py-1 text-sm rounded-full border transition-colors ${
                                             filters.category === category
-                                                ? 'bg-blue-600 text-white border-blue-600'
+                                                ? 'bg-accent-600 text-white border-accent-600'
                                                 : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
                                         }`}
                                     >
@@ -534,7 +534,7 @@ const EnhancedSearchResults = () => {
                             {/* Advanced Filters Toggle */}
                             <button
                                 onClick={() => setShowFilters(!showFilters)}
-                                className="flex items-center gap-1 px-3 py-1 text-sm text-blue-600 border border-blue-200 rounded-full hover:bg-blue-50"
+                                className="flex items-center gap-1 px-3 py-1 text-sm text-accent-600 border border-accent-200 rounded-full hover:bg-blue-50"
                             >
                                 <FaFilter className="text-xs" />
                                 More Filters
@@ -585,7 +585,7 @@ const EnhancedSearchResults = () => {
                             <select
                                 value={filters.category}
                                 onChange={(e) => handleFilterChange('category', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                             >
                                 <option value="">All Categories</option>
                                 {availableFilters.categories.map(category => (
@@ -606,7 +606,7 @@ const EnhancedSearchResults = () => {
                                 value={filters.minPrice}
                                 onChange={(e) => handleFilterChange('minPrice', e.target.value)}
                                 placeholder={`Min $${availableFilters.priceRange.min}`}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                             />
                         </div>
 
@@ -619,7 +619,7 @@ const EnhancedSearchResults = () => {
                                 value={filters.maxPrice}
                                 onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
                                 placeholder={`Max $${availableFilters.priceRange.max}`}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                             />
                         </div>
 
@@ -633,7 +633,7 @@ const EnhancedSearchResults = () => {
                                     type="checkbox"
                                     checked={filters.inStock}
                                     onChange={(e) => handleFilterChange('inStock', e.target.checked)}
-                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    className="rounded border-gray-300 text-accent-600 focus:ring-blue-500"
                                 />
                                 <span className="text-sm text-gray-700">In Stock Only</span>
                             </label>
@@ -651,7 +651,7 @@ const EnhancedSearchResults = () => {
                                 value={filters.country}
                                 onChange={(e) => handleFilterChange('country', e.target.value)}
                                 placeholder="e.g., Nigeria, USA, UK"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                             />
                         </div>
 
@@ -664,7 +664,7 @@ const EnhancedSearchResults = () => {
                                 value={filters.state}
                                 onChange={(e) => handleFilterChange('state', e.target.value)}
                                 placeholder="e.g., Lagos, California"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                             />
                         </div>
 
@@ -677,7 +677,7 @@ const EnhancedSearchResults = () => {
                                 value={filters.location}
                                 onChange={(e) => handleFilterChange('location', e.target.value)}
                                 placeholder="e.g., Ikeja, Manhattan"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                             />
                         </div>
                     </div>
@@ -693,7 +693,7 @@ const EnhancedSearchResults = () => {
                                         onClick={() => handleFilterChange('brand', filters.brand === brand ? '' : brand)}
                                         className={`px-3 py-2 text-sm text-left rounded-lg border transition-colors ${
                                             filters.brand === brand
-                                                ? 'bg-blue-600 text-white border-blue-600'
+                                                ? 'bg-accent-600 text-white border-accent-600'
                                                 : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
                                         }`}
                                     >
@@ -718,7 +718,7 @@ const EnhancedSearchResults = () => {
                                 performSearch(searchTerm, 1, filters);
                                 setShowFilters(false);
                             }}
-                            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                            className="px-6 py-2 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors"
                         >
                             Apply Filters
                         </button>
@@ -729,7 +729,7 @@ const EnhancedSearchResults = () => {
             {/* Results Display */}
             {loading ? (
                 <div className="flex justify-center items-center py-12">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-600"></div>
                 </div>
             ) : products.length > 0 ? (
                 <>
@@ -760,7 +760,7 @@ const EnhancedSearchResults = () => {
 
                                 {/* Product Info */}
                                 <div className={`${viewMode === 'list' ? 'flex-1' : 'p-4'}`}>
-                                    <h3 className="font-semibold text-gray-800 mb-1 line-clamp-2 hover:text-blue-600">
+                                    <h3 className="font-semibold text-gray-800 mb-1 line-clamp-2 hover:text-accent-600">
                                         {product.productName}
                                     </h3>
                                     <p className="text-sm text-gray-600 mb-2">{product.brandName}</p>
@@ -825,7 +825,7 @@ const EnhancedSearchResults = () => {
                     <div className="flex gap-4 justify-center">
                         <button
                             onClick={clearFilters}
-                            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                            className="bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition-colors"
                         >
                             Clear Filters
                         </button>

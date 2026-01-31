@@ -179,7 +179,7 @@ const SellerPaymentSettings = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-64">
-                <FaSpinner className="animate-spin text-2xl text-blue-600 mr-2" />
+                <FaSpinner className="animate-spin text-2xl text-accent-600 mr-2" />
                 <span>Loading payment settings...</span>
             </div>
         );
@@ -246,14 +246,14 @@ const SellerPaymentSettings = () => {
 
                     {/* Selected methods summary */}
                     <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-                        <h3 className="font-semibold text-blue-800 mb-2">Currently Accepting:</h3>
+                        <h3 className="font-semibold text-accent-800 mb-2">Currently Accepting:</h3>
                         <div className="flex flex-wrap gap-2">
                             {paymentPreferences.map(methodId => {
                                 const method = paymentMethods.find(m => m.id === methodId);
                                 return method ? (
                                     <span
                                         key={methodId}
-                                        className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800"
+                                        className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-accent-100 text-accent-800"
                                     >
                                         <method.icon className="mr-1 text-xs" />
                                         {method.name}
@@ -262,7 +262,7 @@ const SellerPaymentSettings = () => {
                             })}
                         </div>
                         {paymentPreferences.length === 0 && (
-                            <p className="text-blue-600 text-sm">No payment methods selected</p>
+                            <p className="text-accent-600 text-sm">No payment methods selected</p>
                         )}
                     </div>
 
@@ -278,7 +278,7 @@ const SellerPaymentSettings = () => {
                             <button
                                 onClick={handleSave}
                                 disabled={saving || paymentPreferences.length === 0}
-                                className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                                className="px-6 py-2 bg-accent-600 text-white rounded-md hover:bg-accent-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                             >
                                 {saving ? (
                                     <>

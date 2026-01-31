@@ -85,7 +85,7 @@ const HowToOrder = () => {
                 <div className="flex items-start gap-6">
                   {/* Step Number */}
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="w-12 h-12 bg-accent-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
                       {step.number}
                     </div>
                   </div>
@@ -93,7 +93,7 @@ const HowToOrder = () => {
                   {/* Content */}
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <step.icon className="text-2xl text-blue-600" />
+                      <step.icon className="text-2xl text-accent-600" />
                       <h3 className="text-xl font-semibold text-gray-900">{step.title}</h3>
                     </div>
                     <p className="text-gray-600 mb-4">{step.description}</p>
@@ -102,7 +102,7 @@ const HowToOrder = () => {
                     <ul className="space-y-2">
                       {step.details.map((detail, detailIndex) => (
                         <li key={detailIndex} className="flex items-start gap-2">
-                          <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <div className="w-2 h-2 bg-accent-400 rounded-full mt-2 flex-shrink-0"></div>
                           <span className="text-gray-700">{detail}</span>
                         </li>
                       ))}
@@ -123,20 +123,20 @@ const HowToOrder = () => {
 
         {/* Call to Action */}
         <div className="mt-12 bg-blue-50 rounded-lg p-8 text-center">
-          <h2 className="text-2xl font-bold text-blue-900 mb-4">Ready to start shopping?</h2>
-          <p className="text-blue-700 mb-6">
+          <h2 className="text-2xl font-bold text-accent-900 mb-4">Ready to start shopping?</h2>
+          <p className="text-accent-700 mb-6">
             Browse our products and place your first order today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/" 
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors"
             >
               Start Shopping
             </Link>
             <Link 
               to="/help-center" 
-              className="px-6 py-3 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+              className="px-6 py-3 border border-accent-300 text-accent-700 rounded-lg hover:bg-accent-100 transition-colors"
             >
               Back to Help Center
             </Link>

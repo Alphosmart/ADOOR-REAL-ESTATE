@@ -249,7 +249,7 @@ const EnhancedReviews = ({ productId }) => {
                     <button
                         onClick={() => setShowAddReview(!showAddReview)}
                         disabled={submittingReview}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50"
+                        className="px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors disabled:opacity-50"
                     >
                         {showAddReview ? 'Cancel' : 'Write Review'}
                     </button>
@@ -336,7 +336,7 @@ const EnhancedReviews = ({ productId }) => {
             <div className="space-y-4">
                 {loading && reviews.length > 0 && (
                     <div className="text-center py-4">
-                        <FaSpinner className="animate-spin mx-auto text-blue-500" size={20} />
+                        <FaSpinner className="animate-spin mx-auto text-accent-500" size={20} />
                     </div>
                 )}
 

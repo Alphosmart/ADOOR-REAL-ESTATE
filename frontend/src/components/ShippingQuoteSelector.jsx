@@ -127,7 +127,7 @@ const ShippingQuoteSelector = ({ order, onSelectShipping, onClose }) => {
 
                 {loading ? (
                     <div className="text-center py-8">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-600 mx-auto"></div>
                         <p className="mt-4 text-gray-600">Loading shipping quotes...</p>
                     </div>
                 ) : quotes.length === 0 ? (
@@ -140,7 +140,7 @@ const ShippingQuoteSelector = ({ order, onSelectShipping, onClose }) => {
                         <div className="mt-4">
                             <button
                                 onClick={refreshShippingQuotes}
-                                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                                className="bg-accent-600 text-white px-4 py-2 rounded-md hover:bg-accent-700"
                             >
                                 Refresh Quotes
                             </button>
@@ -154,7 +154,7 @@ const ShippingQuoteSelector = ({ order, onSelectShipping, onClose }) => {
                                     key={quote._id}
                                     className={`border rounded-lg p-4 cursor-pointer transition-colors ${
                                         selectedQuote?._id === quote._id
-                                            ? 'border-blue-500 bg-blue-50'
+                                            ? 'border-accent-500 bg-blue-50'
                                             : 'border-gray-200 hover:border-gray-300'
                                     }`}
                                     onClick={() => setSelectedQuote(quote)}
@@ -163,7 +163,7 @@ const ShippingQuoteSelector = ({ order, onSelectShipping, onClose }) => {
                                         <div className="flex items-center">
                                             <div className={`w-4 h-4 rounded-full border-2 mr-3 ${
                                                 selectedQuote?._id === quote._id
-                                                    ? 'border-blue-500 bg-blue-500'
+                                                    ? 'border-accent-500 bg-accent-500'
                                                     : 'border-gray-300'
                                             }`}>
                                                 {selectedQuote?._id === quote._id && (
@@ -194,7 +194,7 @@ const ShippingQuoteSelector = ({ order, onSelectShipping, onClose }) => {
                                         </div>
 
                                         <div className="flex items-center">
-                                            <FaClock className="w-4 h-4 text-blue-600 mr-2" />
+                                            <FaClock className="w-4 h-4 text-accent-600 mr-2" />
                                             <div>
                                                 <p className="text-sm text-gray-600">Delivery Time</p>
                                                 <p className="font-semibold">
@@ -204,7 +204,7 @@ const ShippingQuoteSelector = ({ order, onSelectShipping, onClose }) => {
                                         </div>
 
                                         <div className="flex items-center">
-                                            <FaTruck className="w-4 h-4 text-purple-600 mr-2" />
+                                            <FaTruck className="w-4 h-4 text-primary-600 mr-2" />
                                             <div>
                                                 <p className="text-sm text-gray-600">Company Type</p>
                                                 <p className="font-semibold">
@@ -248,7 +248,7 @@ const ShippingQuoteSelector = ({ order, onSelectShipping, onClose }) => {
                                 disabled={!selectedQuote}
                                 className={`px-4 py-2 rounded-md ${
                                     selectedQuote
-                                        ? 'bg-blue-600 text-white hover:bg-blue-700'
+                                        ? 'bg-accent-600 text-white hover:bg-accent-700'
                                         : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                 }`}
                             >

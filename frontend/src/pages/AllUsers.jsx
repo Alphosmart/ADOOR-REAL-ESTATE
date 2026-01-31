@@ -320,7 +320,7 @@ const AllUsers = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-600"></div>
       </div>
     );
   }
@@ -334,8 +334,8 @@ const AllUsers = () => {
           <p className="text-gray-600">Manage and monitor your user base</p>
         </div>
         <div className="flex flex-wrap gap-4">
-          <div className="bg-blue-100 px-4 py-2 rounded-lg">
-            <span className="text-sm font-medium text-blue-800">
+          <div className="bg-accent-100 px-4 py-2 rounded-lg">
+            <span className="text-sm font-medium text-accent-800">
               Total Users: {users.length}
             </span>
           </div>
@@ -344,8 +344,8 @@ const AllUsers = () => {
               Admins: {users.filter(u => u.role === 'ADMIN').length}
             </span>
           </div>
-          <div className="bg-purple-100 px-4 py-2 rounded-lg">
-            <span className="text-sm font-medium text-purple-800">
+          <div className="bg-primary-100 px-4 py-2 rounded-lg">
+            <span className="text-sm font-medium text-primary-800">
               Sellers: {users.filter(u => u.sellerStatus && u.sellerStatus !== 'none').length}
             </span>
           </div>
@@ -416,7 +416,7 @@ const AllUsers = () => {
             </button>
             <button
               onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-              className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+              className="flex items-center px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-md transition-colors"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
@@ -614,7 +614,7 @@ const AllUsers = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-12 w-12">
-                          <div className="h-12 w-12 bg-blue-600 rounded-full flex items-center justify-center">
+                          <div className="h-12 w-12 bg-accent-600 rounded-full flex items-center justify-center">
                             <span className="text-white font-semibold text-lg">
                               {user.name?.charAt(0)?.toUpperCase()}
                             </span>
@@ -677,7 +677,7 @@ const AllUsers = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="space-y-2">
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          user.role === 'ADMIN' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'
+                          user.role === 'ADMIN' ? 'bg-primary-100 text-primary-800' : 'bg-accent-100 text-accent-800'
                         }`}>
                           {user.role}
                         </span>
@@ -715,7 +715,7 @@ const AllUsers = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-2">
                         <button 
-                          className="text-blue-600 hover:text-blue-900 flex items-center" 
+                          className="text-accent-600 hover:text-accent-900 flex items-center" 
                           title="View Profile"
                         >
                           <FaUser className="mr-1" />
@@ -783,7 +783,7 @@ const AllUsers = () => {
                     onClick={() => setCurrentPage(i + 1)}
                     className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                       currentPage === i + 1
-                        ? 'z-10 bg-blue-50 border-blue-500 text-blue-600'
+                        ? 'z-10 bg-blue-50 border-accent-500 text-accent-600'
                         : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
                     }`}
                   >

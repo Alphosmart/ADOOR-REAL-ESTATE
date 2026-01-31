@@ -172,11 +172,11 @@ const SmartSearchBar = ({
     const getSuggestionIcon = (type) => {
         switch (type) {
             case 'category':
-                return <FaLayerGroup className="text-blue-500 text-sm" />;
+                return <FaLayerGroup className="text-accent-500 text-sm" />;
             case 'brand':
                 return <FaStore className="text-green-500 text-sm" />;
             case 'product':
-                return <FaTag className="text-purple-500 text-sm" />;
+                return <FaTag className="text-primary-500 text-sm" />;
             default:
                 return <FaSearch className="text-gray-400 text-sm" />;
         }
@@ -208,12 +208,12 @@ const SmartSearchBar = ({
                     onKeyDown={handleKeyDown}
                     onFocus={() => showSuggestions && setShowDropdown(true)}
                     placeholder={placeholder}
-                    className="w-full px-4 py-3 pl-12 pr-10 text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                    className="w-full px-4 py-3 pl-12 pr-10 text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500 outline-none transition-all"
                 />
                 
                 {/* Search Icon */}
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none">
-                    <FaSearch className="text-blue-500" size={16} />
+                    <FaSearch className="text-accent-500" size={16} />
                 </div>
                 
                 {/* Clear Button */}
@@ -229,7 +229,7 @@ const SmartSearchBar = ({
                 {/* Loading Indicator */}
                 {loading && (
                     <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-accent-500"></div>
                     </div>
                 )}
             </div>
@@ -248,7 +248,7 @@ const SmartSearchBar = ({
                                     key={`suggestion-${index}`}
                                     onClick={() => handleSearch(suggestion.text)}
                                     className={`w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center gap-3 group ${
-                                        selectedIndex === index ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                                        selectedIndex === index ? 'bg-blue-50 text-accent-700' : 'text-gray-700'
                                     }`}
                                 >
                                     {getSuggestionIcon(suggestion.type)}

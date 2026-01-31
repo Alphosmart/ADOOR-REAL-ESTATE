@@ -66,7 +66,7 @@ const DevLogin = () => {
                     <button
                         onClick={handleDevLogin}
                         disabled={loading}
-                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
                     >
                         {loading ? 'Logging in...' : 'Continue with Development Mode'}
                     </button>
@@ -74,16 +74,16 @@ const DevLogin = () => {
                     <div className="text-center">
                         <button
                             onClick={() => navigate('/')}
-                            className="text-blue-600 hover:text-blue-500 text-sm"
+                            className="text-accent-600 hover:text-accent-500 text-sm"
                         >
                             Return to Home
                         </button>
                     </div>
                 </div>
 
-                <div className="mt-6 bg-blue-50 border border-blue-200 rounded-md p-4">
-                    <h4 className="text-sm font-medium text-blue-800 mb-2">What you can test:</h4>
-                    <ul className="text-sm text-blue-700 space-y-1">
+                <div className="mt-6 bg-blue-50 border border-accent-200 rounded-md p-4">
+                    <h4 className="text-sm font-medium text-accent-800 mb-2">What you can test:</h4>
+                    <ul className="text-sm text-accent-700 space-y-1">
                         <li>• Site Content Management (edit page content)</li>
                         <li>• Dynamic content loading on Contact Us page</li>
                         <li>• Dynamic content loading on 404 Error page</li>

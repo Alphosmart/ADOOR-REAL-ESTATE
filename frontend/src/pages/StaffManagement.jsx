@@ -178,7 +178,7 @@ const StaffManagement = () => {
                             onClick={() => setActiveTab('all-staff')}
                             className={`flex items-center px-6 py-3 text-sm font-medium ${
                                 activeTab === 'all-staff'
-                                    ? 'border-b-2 border-blue-500 text-blue-600'
+                                    ? 'border-b-2 border-accent-500 text-accent-600'
                                     : 'text-gray-500 hover:text-gray-700'
                             }`}
                         >
@@ -189,7 +189,7 @@ const StaffManagement = () => {
                             onClick={() => setActiveTab('all-users')}
                             className={`flex items-center px-6 py-3 text-sm font-medium ${
                                 activeTab === 'all-users'
-                                    ? 'border-b-2 border-blue-500 text-blue-600'
+                                    ? 'border-b-2 border-accent-500 text-accent-600'
                                     : 'text-gray-500 hover:text-gray-700'
                             }`}
                         >
@@ -200,7 +200,7 @@ const StaffManagement = () => {
                             onClick={() => setActiveTab('upload-stats')}
                             className={`flex items-center px-6 py-3 text-sm font-medium ${
                                 activeTab === 'upload-stats'
-                                    ? 'border-b-2 border-blue-500 text-blue-600'
+                                    ? 'border-b-2 border-accent-500 text-accent-600'
                                     : 'text-gray-500 hover:text-gray-700'
                             }`}
                         >
@@ -214,7 +214,7 @@ const StaffManagement = () => {
                 <div className="bg-white rounded-lg shadow-sm">
                     {loading ? (
                         <div className="flex items-center justify-center py-12">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-600"></div>
                         </div>
                     ) : (
                         <>
@@ -266,7 +266,7 @@ const StaffManagement = () => {
                                                                 <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                                                                     member.role === 'ADMIN' 
                                                                         ? 'bg-red-100 text-red-800'
-                                                                        : 'bg-blue-100 text-blue-800'
+                                                                        : 'bg-accent-100 text-accent-800'
                                                                 }`}>
                                                                     {member.role}
                                                                 </span>
@@ -289,7 +289,7 @@ const StaffManagement = () => {
                                                                         </span>
                                                                     )}
                                                                     {member.permissions?.canManageOrders && (
-                                                                        <span className="inline-flex px-2 py-1 text-xs bg-purple-100 text-purple-800 rounded">
+                                                                        <span className="inline-flex px-2 py-1 text-xs bg-primary-100 text-primary-800 rounded">
                                                                             Orders
                                                                         </span>
                                                                     )}
@@ -301,7 +301,7 @@ const StaffManagement = () => {
                                                             <td className="px-4 py-4 whitespace-nowrap text-sm font-medium">
                                                                 <button
                                                                     onClick={() => openPermissionModal(member)}
-                                                                    className="text-blue-600 hover:text-blue-900 mr-3"
+                                                                    className="text-accent-600 hover:text-accent-900 mr-3"
                                                                 >
                                                                     Edit Permissions
                                                                 </button>
@@ -359,7 +359,7 @@ const StaffManagement = () => {
                                                             <td className="px-4 py-4 whitespace-nowrap text-sm font-medium">
                                                                 <button
                                                                     onClick={() => openPermissionModal(user)}
-                                                                    className="text-blue-600 hover:text-blue-900 mr-3"
+                                                                    className="text-accent-600 hover:text-accent-900 mr-3"
                                                                 >
                                                                     Grant Permissions
                                                                 </button>
@@ -395,16 +395,16 @@ const StaffManagement = () => {
                                                                 {stat.name}
                                                             </h3>
                                                             <p className="text-sm text-gray-600">{stat.email}</p>
-                                                            <p className="text-xs text-blue-600 font-medium">{stat.role}</p>
+                                                            <p className="text-xs text-accent-600 font-medium">{stat.role}</p>
                                                         </div>
                                                         <div className="text-right">
-                                                            <div className="text-2xl font-bold text-blue-600">
+                                                            <div className="text-2xl font-bold text-accent-600">
                                                                 {stat.totalUploads}
                                                             </div>
                                                             <div className="text-sm text-gray-500">Products</div>
                                                         </div>
                                                     </div>
-                                                    <div className="mt-4 pt-4 border-t border-blue-200">
+                                                    <div className="mt-4 pt-4 border-t border-accent-200">
                                                         <p className="text-sm text-gray-600">
                                                             Last upload: {formatDate(stat.latestUpload)}
                                                         </p>
@@ -490,7 +490,7 @@ const StaffManagement = () => {
                                 </button>
                                 <button
                                     onClick={grantPermissions}
-                                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                    className="px-4 py-2 bg-accent-600 text-white rounded hover:bg-accent-700"
                                 >
                                     Update Permissions
                                 </button>

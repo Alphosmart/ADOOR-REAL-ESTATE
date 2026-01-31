@@ -16,7 +16,7 @@ const OrderConfirmation = () => {
                     <p className="text-gray-600 mb-6">We couldn't find your order information.</p>
                     <button
                         onClick={() => navigate('/')}
-                        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                        className="bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition-colors"
                     >
                         Go Home
                     </button>
@@ -55,7 +55,7 @@ const OrderConfirmation = () => {
                 {/* Order Details */}
                 <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
                     <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                        <FaReceipt className="text-blue-600" />
+                        <FaReceipt className="text-accent-600" />
                         Order Details
                     </h2>
                     
@@ -106,7 +106,7 @@ const OrderConfirmation = () => {
 
                     {orderData.paymentId && (
                         <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                            <p className="text-sm text-blue-800">
+                            <p className="text-sm text-accent-800">
                                 <span className="font-medium">Payment ID:</span> {orderData.paymentId}
                             </p>
                         </div>
@@ -119,8 +119,8 @@ const OrderConfirmation = () => {
                     
                     <div className="space-y-4">
                         <div className="flex items-start gap-4">
-                            <div className="bg-blue-100 p-2 rounded-full">
-                                <FaBox className="text-blue-600" />
+                            <div className="bg-accent-100 p-2 rounded-full">
+                                <FaBox className="text-accent-600" />
                             </div>
                             <div>
                                 <h3 className="font-semibold text-gray-800">Order Processing</h3>
@@ -159,7 +159,7 @@ const OrderConfirmation = () => {
                     <div className="flex flex-col sm:flex-row gap-4">
                         <button
                             onClick={() => navigate('/my-orders')}
-                            className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                            className="flex-1 bg-accent-600 text-white py-3 px-6 rounded-lg hover:bg-accent-700 transition-colors font-semibold"
                         >
                             Track Your Order
                         </button>
@@ -175,7 +175,7 @@ const OrderConfirmation = () => {
                     <div className="mt-4 text-center">
                         <p className="text-sm text-gray-600">
                             Need help? Contact our{' '}
-                            <a href="mailto:support@example.com" className="text-blue-600 hover:underline">
+                            <a href="mailto:support@example.com" className="text-accent-600 hover:underline">
                                 customer support
                             </a>
                         </p>

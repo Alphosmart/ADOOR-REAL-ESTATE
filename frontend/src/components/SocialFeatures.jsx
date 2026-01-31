@@ -169,7 +169,7 @@ const SocialFeatures = ({ product, compact = false }) => {
                         e.stopPropagation();
                         setShowShareModal(true);
                     }}
-                    className="hover:text-blue-500 transition-colors"
+                    className="hover:text-accent-500 transition-colors"
                 >
                     <FaShare size={14} />
                 </button>
@@ -220,7 +220,7 @@ const SocialFeatures = ({ product, compact = false }) => {
                         </div>
                         <button
                             onClick={() => handleRate(userRating)}
-                            className="ml-2 px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                            className="ml-2 px-3 py-1 text-sm bg-accent-500 text-white rounded hover:bg-accent-600 transition-colors"
                             disabled={userRating === 0}
                         >
                             Rate

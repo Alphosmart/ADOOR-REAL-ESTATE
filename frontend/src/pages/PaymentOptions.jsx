@@ -5,14 +5,14 @@ import { FaCreditCard, FaPaypal, FaGooglePay, FaApplePay, FaUniversity, FaMobile
 const PaymentOptions = () => {
   const paymentMethods = [
     {
-      icon: <FaCreditCard className="text-4xl text-blue-600" />,
+      icon: <FaCreditCard className="text-4xl text-accent-600" />,
       title: "Credit & Debit Cards",
       description: "Visa, Mastercard, American Express, and Discover",
       features: ["Instant payment processing", "Secure encryption", "Cashback eligible"],
       popular: true
     },
     {
-      icon: <FaPaypal className="text-4xl text-blue-500" />,
+      icon: <FaPaypal className="text-4xl text-accent-500" />,
       title: "PayPal",
       description: "Pay with your PayPal account or PayPal Credit",
       features: ["Buyer protection", "No card details shared", "Pay in 4 available"]
@@ -30,7 +30,7 @@ const PaymentOptions = () => {
       features: ["Contactless payment", "Privacy protection", "Works across devices"]
     },
     {
-      icon: <FaUniversity className="text-4xl text-purple-600" />,
+      icon: <FaUniversity className="text-4xl text-primary-600" />,
       title: "Bank Transfer",
       description: "Direct bank transfer or wire transfer",
       features: ["Lower fees", "High transfer limits", "Bank-level security"]
@@ -50,12 +50,12 @@ const PaymentOptions = () => {
       description: "All transactions are protected with 256-bit SSL encryption"
     },
     {
-      icon: <FaLock className="text-blue-500" />,
+      icon: <FaLock className="text-accent-500" />,
       title: "PCI Compliance",
       description: "We are PCI DSS compliant for secure payment processing"
     },
     {
-      icon: <FaCheckCircle className="text-purple-500" />,
+      icon: <FaCheckCircle className="text-primary-500" />,
       title: "Fraud Protection",
       description: "Advanced fraud detection and prevention systems"
     }
@@ -67,9 +67,9 @@ const PaymentOptions = () => {
         {/* Breadcrumb */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-blue-600">Home</Link>
+            <Link to="/" className="hover:text-accent-600">Home</Link>
             <span>/</span>
-            <Link to="/help-center" className="hover:text-blue-600">Help Center</Link>
+            <Link to="/help-center" className="hover:text-accent-600">Help Center</Link>
             <span>/</span>
             <span className="text-gray-900">Payment Options</span>
           </div>
@@ -135,8 +135,8 @@ const PaymentOptions = () => {
           <h2 className="text-2xl font-semibold text-gray-900 mb-8 text-center">How Payment Works</h2>
           <div className="grid md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-blue-600">1</span>
+              <div className="bg-accent-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-accent-600">1</span>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Add to Cart</h3>
               <p className="text-gray-600 text-sm">Select your products and add them to cart</p>
@@ -149,8 +149,8 @@ const PaymentOptions = () => {
               <p className="text-gray-600 text-sm">Review your order and shipping details</p>
             </div>
             <div className="text-center">
-              <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-purple-600">3</span>
+              <div className="bg-primary-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-primary-600">3</span>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Pay Securely</h3>
               <p className="text-gray-600 text-sm">Choose your preferred payment method</p>
@@ -199,7 +199,7 @@ const PaymentOptions = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/help-center" 
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors"
             >
               Visit Help Center
             </Link>

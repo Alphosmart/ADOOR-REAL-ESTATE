@@ -40,7 +40,7 @@ const ErrorPage = () => {
         <div className="space-y-3">
           <Link 
             to="/" 
-            className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
+            className="block w-full bg-accent-600 hover:bg-accent-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
           >
             Go Home
           </Link>
@@ -61,7 +61,7 @@ const ErrorPage = () => {
               <Link 
                 key={index}
                 to={link.path} 
-                className="text-blue-600 hover:text-blue-800 underline"
+                className="text-accent-600 hover:text-accent-800 underline"
               >
                 {link.label}
               </Link>
@@ -70,7 +70,7 @@ const ErrorPage = () => {
         </div>
         
         <div className="mt-6 text-sm text-gray-500">
-          <p>If you believe this is an error, please <Link to="/contact-us" className="text-blue-600 hover:text-blue-800 underline">contact support</Link>.</p>
+          <p>If you believe this is an error, please <Link to="/contact-us" className="text-accent-600 hover:text-accent-800 underline">contact support</Link>.</p>
         </div>
       </div>
     </div>

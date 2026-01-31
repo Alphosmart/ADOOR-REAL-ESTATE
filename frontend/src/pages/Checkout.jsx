@@ -287,7 +287,7 @@ const Checkout = () => {
                     <div className="space-y-3">
                         <button
                             onClick={() => navigate('/my-orders')}
-                            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                            className="w-full bg-accent-600 text-white py-3 rounded-lg hover:bg-accent-700 transition-colors"
                         >
                             View My Orders
                         </button>
@@ -309,7 +309,7 @@ const Checkout = () => {
             <div className="container mx-auto px-4 py-8">
                 <div className="flex justify-center items-center h-64">
                     <div className="text-center">
-                        <FaSpinner className="animate-spin text-4xl text-blue-600 mb-4" />
+                        <FaSpinner className="animate-spin text-4xl text-accent-600 mb-4" />
                         <div className="text-lg">Loading checkout...</div>
                     </div>
                 </div>
@@ -322,7 +322,7 @@ const Checkout = () => {
             <div className="container mx-auto px-4 py-8">
                 <div className="flex justify-center items-center h-64">
                     <div className="text-center">
-                        <FaSpinner className="animate-spin text-4xl text-blue-600 mb-4" />
+                        <FaSpinner className="animate-spin text-4xl text-accent-600 mb-4" />
                         <div className="text-lg">Processing your order...</div>
                     </div>
                 </div>
@@ -351,14 +351,14 @@ const Checkout = () => {
                             <React.Fragment key={step}>
                                 <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
                                     currentStep >= step 
-                                        ? 'bg-blue-600 border-blue-600 text-white' 
+                                        ? 'bg-accent-600 border-accent-600 text-white' 
                                         : 'border-gray-300 text-gray-400'
                                 }`}>
                                     {step}
                                 </div>
                                 {step < 4 && (
                                     <div className={`h-1 w-12 mx-2 ${
-                                        currentStep > step ? 'bg-blue-600' : 'bg-gray-300'
+                                        currentStep > step ? 'bg-accent-600' : 'bg-gray-300'
                                     }`} />
                                 )}
                             </React.Fragment>
@@ -424,7 +424,7 @@ const Checkout = () => {
                                 <button
                                     type="button"
                                     onClick={handleStepNext}
-                                    className="w-full mt-6 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                                    className="w-full mt-6 bg-accent-600 text-white py-3 rounded-lg hover:bg-accent-700 transition-colors"
                                 >
                                     Continue to Shipping
                                 </button>
@@ -525,7 +525,7 @@ const Checkout = () => {
                                     <button
                                         type="button"
                                         onClick={handleStepNext}
-                                        className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                                        className="flex-1 bg-accent-600 text-white py-3 rounded-lg hover:bg-accent-700 transition-colors"
                                     >
                                         Continue to Payment
                                     </button>
@@ -555,7 +555,7 @@ const Checkout = () => {
                                         type="button"
                                         onClick={handleStepNext}
                                         disabled={!selectedPaymentMethod}
-                                        className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="flex-1 bg-accent-600 text-white py-3 rounded-lg hover:bg-accent-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         Continue to Payment
                                     </button>
@@ -589,15 +589,15 @@ const Checkout = () => {
                                 {selectedPaymentMethod === 'paypal' && (
                                     <div className="space-y-4">
                                         <div className="bg-blue-50 p-4 rounded-lg">
-                                            <h3 className="font-semibold text-blue-800 mb-2">PayPal Payment</h3>
-                                            <p className="text-blue-700 text-sm">
+                                            <h3 className="font-semibold text-accent-800 mb-2">PayPal Payment</h3>
+                                            <p className="text-accent-700 text-sm">
                                                 You will be redirected to PayPal to complete your payment securely.
                                             </p>
                                         </div>
                                         <button
                                             onClick={handleCompleteOrder}
                                             disabled={isProcessingOrder}
-                                            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                                            className="w-full bg-accent-600 text-white py-3 rounded-lg hover:bg-accent-700 transition-colors disabled:opacity-50"
                                         >
                                             {isProcessingOrder ? (
                                                 <>
@@ -644,12 +644,12 @@ const Checkout = () => {
                                 {selectedPaymentMethod === 'bankTransfer' && (
                                     <div className="space-y-4">
                                         <div className="bg-blue-50 p-4 rounded-lg">
-                                            <h3 className="font-semibold text-blue-800 mb-2">Bank Transfer Instructions</h3>
-                                            <p className="text-blue-700 text-sm mb-3">
+                                            <h3 className="font-semibold text-accent-800 mb-2">Bank Transfer Instructions</h3>
+                                            <p className="text-accent-700 text-sm mb-3">
                                                 After confirming your order, you will receive bank details via email. 
                                                 Your order will be processed once payment is received (2-3 business days).
                                             </p>
-                                            <div className="text-xs text-blue-600 space-y-1">
+                                            <div className="text-xs text-accent-600 space-y-1">
                                                 <p>• Include your order ID in the transfer reference</p>
                                                 <p>• Send payment confirmation to support</p>
                                                 <p>• Order ships after payment verification</p>
@@ -658,7 +658,7 @@ const Checkout = () => {
                                         <button
                                             onClick={handleCompleteOrder}
                                             disabled={isProcessingOrder}
-                                            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                                            className="w-full bg-accent-600 text-white py-3 rounded-lg hover:bg-accent-700 transition-colors disabled:opacity-50"
                                         >
                                             {isProcessingOrder ? (
                                                 <>
@@ -675,18 +675,18 @@ const Checkout = () => {
                                 {selectedPaymentMethod === 'cryptocurrency' && (
                                     <div className="space-y-4">
                                         <div className="bg-purple-50 p-4 rounded-lg">
-                                            <h3 className="font-semibold text-purple-800 mb-2">Cryptocurrency Payment</h3>
-                                            <p className="text-purple-700 text-sm mb-2">
+                                            <h3 className="font-semibold text-primary-800 mb-2">Cryptocurrency Payment</h3>
+                                            <p className="text-primary-700 text-sm mb-2">
                                                 Pay with Bitcoin, Ethereum, or other supported cryptocurrencies.
                                             </p>
-                                            <p className="text-xs text-purple-600">
+                                            <p className="text-xs text-primary-600">
                                                 You will receive wallet address and payment instructions after order confirmation.
                                             </p>
                                         </div>
                                         <button
                                             onClick={handleCompleteOrder}
                                             disabled={isProcessingOrder}
-                                            className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50"
+                                            className="w-full bg-primary-600 text-white py-3 rounded-lg hover:bg-primary-700 transition-colors disabled:opacity-50"
                                         >
                                             {isProcessingOrder ? (
                                                 <>

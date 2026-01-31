@@ -91,7 +91,7 @@ const TrackByNumber = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-8 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {loading ? 'Tracking...' : 'Track Order'}
                     </button>
@@ -147,7 +147,7 @@ const TrackByNumber = () => {
                                         {/* Status icon */}
                                         <div className={`relative z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 ${
                                             isCompleted ? 'bg-green-500 border-green-500 text-white' :
-                                            isCurrent ? 'bg-blue-500 border-blue-500 text-white' :
+                                            isCurrent ? 'bg-accent-500 border-accent-500 text-white' :
                                             'bg-white border-gray-300 text-gray-400'
                                         }`}>
                                             <span className="text-lg">{step.icon}</span>
@@ -157,7 +157,7 @@ const TrackByNumber = () => {
                                         <div className="ml-4">
                                             <h3 className={`font-semibold ${
                                                 isCompleted ? 'text-green-600' :
-                                                isCurrent ? 'text-blue-600' :
+                                                isCurrent ? 'text-accent-600' :
                                                 'text-gray-400'
                                             }`}>
                                                 {step.label}
@@ -176,7 +176,7 @@ const TrackByNumber = () => {
                         {/* Estimated Delivery */}
                         {trackingData.trackingInfo?.estimatedDelivery && (
                             <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                                <p className="text-blue-800">
+                                <p className="text-accent-800">
                                     <strong>Estimated Delivery:</strong> {formatDate(trackingData.trackingInfo.estimatedDelivery)}
                                 </p>
                             </div>

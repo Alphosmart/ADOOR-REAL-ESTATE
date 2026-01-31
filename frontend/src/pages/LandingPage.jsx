@@ -196,7 +196,7 @@ const LandingPage = () => {
       <Link 
         to="/search" 
         onClick={() => trackShopButtonClick('floating_button', '/search')}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold shadow-2xl hover:shadow-3xl transition-all transform hover:scale-110 z-50 flex items-center gap-2"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-accent-800 to-primary-500 text-white px-6 py-3 rounded-full font-semibold shadow-2xl hover:shadow-3xl transition-all transform hover:scale-110 z-50 flex items-center gap-2"
       >
         🏠 View Properties
       </Link>
@@ -222,7 +222,7 @@ const LandingPage = () => {
                 <Link 
                   to="/search" 
                   onClick={() => trackShopButtonClick('hero_section', '/search')}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
+                  className="bg-white text-accent-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
                 >
                   🏠 View Properties <FaArrowRight />
                 </Link>
@@ -235,7 +235,7 @@ const LandingPage = () => {
                   <span className="text-sm">SSL Secured</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FaHome className="text-blue-300" />
+                  <FaHome className="text-accent-300" />
                   <span className="text-sm">Verified Listings</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -266,7 +266,7 @@ const LandingPage = () => {
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <stat.icon className="text-2xl text-blue-600" />
+                  <stat.icon className="text-2xl text-accent-600" />
                 </div>
                 <div className="text-3xl font-bold text-gray-800 mb-2">{stat.number}</div>
                 <div className="text-gray-600">{stat.label}</div>
@@ -299,8 +299,8 @@ const LandingPage = () => {
                   onClick={() => setSelectedCategory(category.key)}
                   className={`px-6 py-3 rounded-md font-medium transition-all ${
                     selectedCategory === category.key
-                      ? 'bg-white text-blue-600 shadow-md'
-                      : 'text-gray-600 hover:text-blue-600'
+                      ? 'bg-white text-accent-600 shadow-md'
+                      : 'text-gray-600 hover:text-accent-600'
                   }`}
                 >
                   {category.label}
@@ -338,12 +338,12 @@ const LandingPage = () => {
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-2xl font-bold text-blue-600">{product.price}</span>
+                      <span className="text-2xl font-bold text-accent-600">{product.price}</span>
                       <span className="text-gray-500 line-through">{product.originalPrice}</span>
                     </div>
                     <Link 
                       to="/search" 
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 font-medium"
+                      className="bg-gradient-to-r from-accent-800 to-primary-500 text-white px-4 py-2 rounded-lg hover:from-accent-900 hover:to-primary-600 transition-all transform hover:scale-105 font-medium"
                     >
                       🏠 View Details
                     </Link>
@@ -356,7 +356,7 @@ const LandingPage = () => {
           <div className="text-center mt-12">
             <Link 
               to="/search" 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-5 rounded-xl font-bold text-xl hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 inline-flex items-center gap-3 shadow-2xl"
+              className="bg-gradient-to-r from-accent-800 to-primary-500 text-white px-12 py-5 rounded-xl font-bold text-xl hover:from-accent-900 hover:to-primary-600 transition-all transform hover:scale-105 inline-flex items-center gap-3 shadow-2xl"
             >
               🛍️ Explore All Products <FaArrowRight />
             </Link>
@@ -380,14 +380,14 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
               <div key={index} className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 text-center">
-                <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                  <service.icon className="text-2xl text-blue-600" />
+                <div className="bg-accent-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                  <service.icon className="text-2xl text-accent-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">{service.title}</h3>
                 <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
                 <Link 
                   to="/search" 
-                  className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1"
+                  className="text-accent-600 hover:text-accent-700 font-medium inline-flex items-center gap-1"
                 >
                   Learn More <FaArrowRight className="text-sm" />
                 </Link>
@@ -398,7 +398,7 @@ const LandingPage = () => {
           <div className="text-center mt-12">
             <Link 
               to="/search" 
-              className="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-700 transition-all transform hover:scale-105 inline-flex items-center gap-2"
+              className="bg-accent-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-accent-700 transition-all transform hover:scale-105 inline-flex items-center gap-2"
             >
               🏠 Explore Our Properties
             </Link>
@@ -434,7 +434,7 @@ const LandingPage = () => {
               <div className="mt-8">
                 <Link 
                   to="/about-us" 
-                  className="text-blue-600 font-semibold text-lg hover:text-blue-700 inline-flex items-center gap-2"
+                  className="text-accent-600 font-semibold text-lg hover:text-accent-700 inline-flex items-center gap-2"
                 >
                   Learn More About Us <FaArrowRight />
                 </Link>
@@ -477,7 +477,7 @@ const LandingPage = () => {
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="bg-white rounded-xl p-8 shadow-lg relative">
-                  <FaQuoteLeft className="text-blue-200 text-3xl mb-4" />
+                  <FaQuoteLeft className="text-accent-200 text-3xl mb-4" />
                   
                   <p className="text-gray-700 mb-6 leading-relaxed">"{testimonial.text}"</p>
                   
@@ -506,7 +506,7 @@ const LandingPage = () => {
       )}
 
       {/* Newsletter Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-20 bg-gradient-to-r from-accent-800 to-primary-500 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-4">Stay Updated with Latest Trends</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
@@ -556,7 +556,7 @@ const LandingPage = () => {
             <Link 
               to="/contact-us" 
               onClick={() => trackLandingPageInteraction('get_consultation', 'final_cta')}
-              className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-600 hover:text-white transition-colors"
+              className="border-2 border-accent-600 text-accent-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-accent-600 hover:text-white transition-colors"
             >
               Get Consultation
             </Link>

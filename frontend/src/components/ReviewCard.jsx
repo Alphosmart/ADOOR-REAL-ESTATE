@@ -119,7 +119,7 @@ const ReviewCard = ({ review, user, onLikeReview, onReportReview, onMarkHelpful 
         {isLongReview && (
           <button
             onClick={() => setExpanded(!expanded)}
-            className="text-blue-600 hover:text-blue-800 text-sm mt-1 font-medium"
+            className="text-accent-600 hover:text-accent-800 text-sm mt-1 font-medium"
           >
             {expanded ? 'Show less' : 'Read more'}
           </button>

@@ -65,7 +65,7 @@ const OrderTracking = () => {
         return (
             <div className="container mx-auto px-4 py-8">
                 <div className="flex justify-center items-center h-64">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-600"></div>
                 </div>
             </div>
         );
@@ -95,7 +95,7 @@ const OrderTracking = () => {
             <div className="mb-8">
                 <button 
                     onClick={() => navigate('/user/orders')}
-                    className="text-blue-600 hover:text-blue-800 mb-4 flex items-center"
+                    className="text-accent-600 hover:text-accent-800 mb-4 flex items-center"
                 >
                     ← Back to Orders
                 </button>
@@ -155,7 +155,7 @@ const OrderTracking = () => {
                                 {/* Status icon */}
                                 <div className={`relative z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 ${
                                     isCompleted ? 'bg-green-500 border-green-500 text-white' :
-                                    isCurrent ? 'bg-blue-500 border-blue-500 text-white' :
+                                    isCurrent ? 'bg-accent-500 border-accent-500 text-white' :
                                     'bg-white border-gray-300 text-gray-400'
                                 }`}>
                                     <span className="text-lg">{step.icon}</span>
@@ -165,7 +165,7 @@ const OrderTracking = () => {
                                 <div className="ml-4">
                                     <h3 className={`font-semibold ${
                                         isCompleted ? 'text-green-600' :
-                                        isCurrent ? 'text-blue-600' :
+                                        isCurrent ? 'text-accent-600' :
                                         'text-gray-400'
                                     }`}>
                                         {step.label}
@@ -184,7 +184,7 @@ const OrderTracking = () => {
                 {/* Estimated Delivery */}
                 {orderData?.trackingInfo?.estimatedDelivery && (
                     <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                        <p className="text-blue-800">
+                        <p className="text-accent-800">
                             <strong>Estimated Delivery:</strong> {formatDate(orderData.trackingInfo.estimatedDelivery)}
                         </p>
                     </div>

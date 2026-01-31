@@ -8,8 +8,8 @@ const TermsOfService = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <div className="bg-blue-100 rounded-full p-4">
-              <FaGavel className="text-3xl text-blue-600" />
+            <div className="bg-accent-100 rounded-full p-4">
+              <FaGavel className="text-3xl text-accent-600" />
             </div>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms of Service</h1>
@@ -43,8 +43,8 @@ const TermsOfService = () => {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Account Registration</h2>
             <div className="space-y-4">
               <div className="bg-blue-50 rounded-lg p-4">
-                <h3 className="font-medium text-blue-800 mb-2">Account Requirements</h3>
-                <ul className="text-sm text-blue-700 space-y-1">
+                <h3 className="font-medium text-accent-800 mb-2">Account Requirements</h3>
+                <ul className="text-sm text-accent-700 space-y-1">
                   <li>• You must be 18 years or older</li>
                   <li>• Provide accurate and complete information</li>
                   <li>• Maintain the security of your account</li>
@@ -72,9 +72,9 @@ const TermsOfService = () => {
                 </ul>
               </div>
               <div className="bg-purple-50 rounded-lg p-4">
-                <FaHandshake className="text-purple-600 text-xl mb-2" />
-                <h3 className="font-medium text-purple-800 mb-2">Sellers</h3>
-                <ul className="text-sm text-purple-700 space-y-1">
+                <FaHandshake className="text-primary-600 text-xl mb-2" />
+                <h3 className="font-medium text-primary-800 mb-2">Sellers</h3>
+                <ul className="text-sm text-primary-700 space-y-1">
                   <li>• List products for sale</li>
                   <li>• Manage inventory</li>
                   <li>• Process orders</li>
@@ -176,8 +176,8 @@ const TermsOfService = () => {
               by copyright and other intellectual property laws.
             </p>
             <div className="bg-blue-50 rounded-lg p-4">
-              <h3 className="font-medium text-blue-800 mb-2">Your Content</h3>
-              <p className="text-sm text-blue-700">
+              <h3 className="font-medium text-accent-800 mb-2">Your Content</h3>
+              <p className="text-sm text-accent-700">
                 By uploading content to our platform, you grant us a non-exclusive, worldwide license to use, 
                 display, and distribute your content in connection with our services.
               </p>

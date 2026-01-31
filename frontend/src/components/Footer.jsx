@@ -45,7 +45,7 @@ const Footer = () => {
             </p>
             <div className='space-y-2'>
               <div className='flex items-center space-x-3 text-gray-300'>
-                <FaMapMarkerAlt className='text-blue-400 flex-shrink-0' />
+                <FaMapMarkerAlt className='text-accent-400 flex-shrink-0' />
                 <span className='text-sm'>{companyInfo.address}</span>
               </div>
               <div className='flex items-center space-x-3 text-gray-300'>
@@ -53,7 +53,7 @@ const Footer = () => {
                 <span className='text-sm'>{companyInfo.phone}</span>
               </div>
               <div className='flex items-center space-x-3 text-gray-300'>
-                <FaEnvelope className='text-purple-400 flex-shrink-0' />
+                <FaEnvelope className='text-primary-400 flex-shrink-0' />
                 <span className='text-sm'>{companyInfo.email}</span>
               </div>
             </div>
@@ -64,27 +64,27 @@ const Footer = () => {
             <h4 className='text-lg font-semibold border-b border-gray-700 pb-2'>Quick Links</h4>
             <ul className='space-y-2'>
               <li>
-                <Link to="/" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <Link to="/" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/search" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <Link to="/search" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   Browse Properties
                 </Link>
               </li>
               <li>
-                <Link to="/about-us" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <Link to="/about-us" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/search" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <Link to="/search" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   Browse Properties
                 </Link>
               </li>
               <li>
-                <Link to="/contact-us" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <Link to="/contact-us" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   Contact Us
                 </Link>
               </li>
@@ -96,12 +96,12 @@ const Footer = () => {
             <h4 className='text-lg font-semibold border-b border-gray-700 pb-2'>Client Services</h4>
             <ul className='space-y-2'>
               <li>
-                <Link to="/about-us" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <Link to="/about-us" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   About Us
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@adoorrealestate.com" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <a href="mailto:support@adoorrealestate.com" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   Support Email
                 </a>
               </li>
@@ -118,17 +118,17 @@ const Footer = () => {
             <h4 className='text-lg font-semibold border-b border-gray-700 pb-2'>Legal & Social</h4>
             <ul className='space-y-2'>
               <li>
-                <Link to="/privacy-policy" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <Link to="/privacy-policy" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms-of-service" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <Link to="/terms-of-service" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link to="/cookie-policy" className='text-gray-300 hover:text-blue-400 transition-colors text-sm'>
+                <Link to="/cookie-policy" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   Cookie Policy
                 </Link>
               </li>
@@ -139,15 +139,15 @@ const Footer = () => {
               <h5 className='text-sm font-medium text-gray-400 mb-3'>Follow Us</h5>
               <div className='flex space-x-3'>
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
-                   className='bg-blue-600 hover:bg-blue-700 p-2 rounded-lg transition-colors'>
+                   className='bg-accent-600 hover:bg-accent-700 p-2 rounded-lg transition-colors'>
                   <FaFacebook className='text-white' />
                 </a>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                   className='bg-pink-600 hover:bg-pink-700 p-2 rounded-lg transition-colors'>
+                   className='bg-primary-600 hover:bg-primary-700 p-2 rounded-lg transition-colors'>
                   <FaInstagram className='text-white' />
                 </a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                   className='bg-blue-400 hover:bg-blue-500 p-2 rounded-lg transition-colors'>
+                   className='bg-accent-400 hover:bg-accent-500 p-2 rounded-lg transition-colors'>
                   <FaTwitter className='text-white' />
                 </a>
                 <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer"
@@ -173,11 +173,11 @@ const Footer = () => {
                 <span className='text-gray-400 text-sm'>Secure Payments</span>
               </div>
               <div className='flex items-center space-x-2'>
-                <FaShieldAlt className='text-blue-400 text-lg' />
+                <FaShieldAlt className='text-accent-400 text-lg' />
                 <span className='text-gray-400 text-sm'>SSL Protected</span>
               </div>
               <div className='flex items-center space-x-2'>
-                <FaHome className='text-purple-400 text-lg' />
+                <FaHome className='text-primary-400 text-lg' />
                 <span className='text-gray-400 text-sm'>Verified Properties</span>
               </div>
             </div>
@@ -189,9 +189,9 @@ const Footer = () => {
                 <input 
                   type="email" 
                   placeholder="Enter your email" 
-                  className='bg-gray-800 border border-gray-600 rounded-l-lg px-3 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-blue-500'
+                  className='bg-gray-800 border border-gray-600 rounded-l-lg px-3 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-accent-500'
                 />
-                <button className='bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-lg text-sm font-medium transition-colors'>
+                <button className='bg-accent-600 hover:bg-accent-700 px-4 py-2 rounded-r-lg text-sm font-medium transition-colors'>
                   Subscribe
                 </button>
               </div>
@@ -211,7 +211,7 @@ const Footer = () => {
             <div className='mt-2 md:mt-0'>
               <p className='text-gray-500 text-xs'>
                 Developed with ❤️ by{' '}
-                <span className='text-blue-400 font-medium' title="YouTube Channel">
+                <span className='text-accent-400 font-medium' title="YouTube Channel">
                   Dynamic Coding with Alphonsus
                 </span>
               </p>

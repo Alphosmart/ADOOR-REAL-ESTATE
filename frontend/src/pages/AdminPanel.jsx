@@ -83,7 +83,7 @@ const AdminPanel = () => {
                 <Link
                   key={index}
                   to={item.path}
-                  className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200"
+                  className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-accent-600 transition duration-200"
                 >
                   <span className="text-lg">{item.icon}</span>
                   <span className="font-medium">{item.label}</span>
@@ -95,7 +95,7 @@ const AdminPanel = () => {
           {/* User Info */}
           <div className="absolute bottom-0 w-64 p-6 border-t bg-gray-50">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-accent-600 rounded-full flex items-center justify-center">
                 <span className="text-white font-semibold">
                   {user?.name?.charAt(0)?.toUpperCase()}
                 </span>

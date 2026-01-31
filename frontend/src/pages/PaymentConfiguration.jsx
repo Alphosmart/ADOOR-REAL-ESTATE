@@ -304,7 +304,7 @@ const PaymentConfiguration = () => {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="text-center">
-                    <FaSpinner className="animate-spin text-4xl text-blue-600 mx-auto mb-4" />
+                    <FaSpinner className="animate-spin text-4xl text-accent-600 mx-auto mb-4" />
                     <p className="text-gray-600">Loading payment configuration...</p>
                 </div>
             </div>
@@ -334,7 +334,7 @@ const PaymentConfiguration = () => {
                                 onChange={() => togglePaymentMethod(methodId)}
                                 className="sr-only peer"
                             />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent-600"></div>
                         </label>
                     </div>
 
@@ -351,7 +351,7 @@ const PaymentConfiguration = () => {
                                         step="0.1"
                                         value={method.processingFee}
                                         onChange={(e) => updatePaymentMethod(methodId, 'processingFee', parseFloat(e.target.value))}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                     />
                                 </div>
                                 <div>
@@ -363,7 +363,7 @@ const PaymentConfiguration = () => {
                                         step="0.01"
                                         value={method.additionalFee}
                                         onChange={(e) => updatePaymentMethod(methodId, 'additionalFee', parseFloat(e.target.value))}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                     />
                                 </div>
                             </div>
@@ -380,7 +380,7 @@ const PaymentConfiguration = () => {
                                             id={`${methodId}_testMode`}
                                             checked={method.testMode}
                                             onChange={(e) => updatePaymentMethod(methodId, 'testMode', e.target.checked)}
-                                            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                            className="h-4 w-4 text-accent-600 border-gray-300 rounded focus:ring-blue-500"
                                         />
                                         <label htmlFor={`${methodId}_testMode`} className="text-sm text-gray-700">
                                             Test Mode (Sandbox)
@@ -397,7 +397,7 @@ const PaymentConfiguration = () => {
                                                 type={showSecrets[`${methodId}_publicKey`] ? 'text' : 'password'}
                                                 value={method.publicKey || method.clientId || ''}
                                                 onChange={(e) => updatePaymentMethod(methodId, methodId === 'paypal' ? 'clientId' : 'publicKey', e.target.value)}
-                                                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                                 placeholder={`Enter ${methodId === 'paypal' ? 'Client ID' : 'Public Key'}`}
                                             />
                                             <button
@@ -420,7 +420,7 @@ const PaymentConfiguration = () => {
                                                 type={showSecrets[`${methodId}_secretKey`] ? 'text' : 'password'}
                                                 value={method.secretKey || method.clientSecret || ''}
                                                 onChange={(e) => updatePaymentMethod(methodId, methodId === 'paypal' ? 'clientSecret' : 'secretKey', e.target.value)}
-                                                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                                 placeholder={`Enter ${methodId === 'paypal' ? 'Client Secret' : 'Secret Key'}`}
                                             />
                                             <button
@@ -444,7 +444,7 @@ const PaymentConfiguration = () => {
                                                     type={showSecrets[`${methodId}_webhookSecret`] ? 'text' : 'password'}
                                                     value={method.webhookSecret || ''}
                                                     onChange={(e) => updatePaymentMethod(methodId, 'webhookSecret', e.target.value)}
-                                                    className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                    className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                                     placeholder="Enter Webhook Secret"
                                                 />
                                                 <button
@@ -468,7 +468,7 @@ const PaymentConfiguration = () => {
                                                     type={showSecrets[`${methodId}_encryptionKey`] ? 'text' : 'password'}
                                                     value={method.encryptionKey || ''}
                                                     onChange={(e) => updatePaymentMethod(methodId, 'encryptionKey', e.target.value)}
-                                                    className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                    className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                                     placeholder="Enter Encryption Key"
                                                 />
                                                 <button
@@ -496,7 +496,7 @@ const PaymentConfiguration = () => {
                                             type="number"
                                             value={method.maxAmount}
                                             onChange={(e) => updatePaymentMethod(methodId, 'maxAmount', parseFloat(e.target.value))}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                         />
                                     </div>
                                     <div className="flex items-center space-x-3">
@@ -505,7 +505,7 @@ const PaymentConfiguration = () => {
                                             id={`${methodId}_verification`}
                                             checked={method.verificationRequired}
                                             onChange={(e) => updatePaymentMethod(methodId, 'verificationRequired', e.target.checked)}
-                                            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                            className="h-4 w-4 text-accent-600 border-gray-300 rounded focus:ring-blue-500"
                                         />
                                         <label htmlFor={`${methodId}_verification`} className="text-sm text-gray-700">
                                             Require Phone Verification
@@ -532,7 +532,7 @@ const PaymentConfiguration = () => {
                                                         newAccounts[index].bankName = e.target.value;
                                                         updatePaymentMethod(methodId, 'bankAccounts', newAccounts);
                                                     }}
-                                                    className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                    className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                                 />
                                             </div>
                                             <div>
@@ -547,7 +547,7 @@ const PaymentConfiguration = () => {
                                                         newAccounts[index].accountNumber = e.target.value;
                                                         updatePaymentMethod(methodId, 'bankAccounts', newAccounts);
                                                     }}
-                                                    className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                    className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                                 />
                                             </div>
                                         </div>
@@ -562,7 +562,7 @@ const PaymentConfiguration = () => {
                                 </label>
                                 <div className="flex flex-wrap gap-2">
                                     {method.supportedCountries?.map((country) => (
-                                        <span key={country} className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                                        <span key={country} className="px-2 py-1 bg-accent-100 text-accent-800 text-xs rounded">
                                             {country}
                                         </span>
                                     ))}
@@ -602,7 +602,7 @@ const PaymentConfiguration = () => {
                         <select
                             value={paymentConfig.general.defaultCurrency}
                             onChange={(e) => updateGeneralSetting('defaultCurrency', null, e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                         >
                             <option value="NGN">Nigerian Naira (NGN)</option>
                             <option value="USD">US Dollar (USD)</option>
@@ -618,7 +618,7 @@ const PaymentConfiguration = () => {
                             type="number"
                             value={paymentConfig.general.minimumAmount}
                             onChange={(e) => updateGeneralSetting('minimumAmount', null, parseFloat(e.target.value))}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                         />
                     </div>
                     <div>
@@ -629,7 +629,7 @@ const PaymentConfiguration = () => {
                             type="number"
                             value={paymentConfig.general.maximumAmount}
                             onChange={(e) => updateGeneralSetting('maximumAmount', null, parseFloat(e.target.value))}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                         />
                     </div>
                 </div>
@@ -648,7 +648,7 @@ const PaymentConfiguration = () => {
                             step="0.1"
                             value={paymentConfig.general.commission.percentage}
                             onChange={(e) => updateGeneralSetting('commission', 'percentage', parseFloat(e.target.value))}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                         />
                     </div>
                     <div>
@@ -659,7 +659,7 @@ const PaymentConfiguration = () => {
                             type="number"
                             value={paymentConfig.general.commission.flatFee}
                             onChange={(e) => updateGeneralSetting('commission', 'flatFee', parseFloat(e.target.value))}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                         />
                     </div>
                     <div className="flex items-center">
@@ -668,7 +668,7 @@ const PaymentConfiguration = () => {
                             id="sellerPaysCommission"
                             checked={paymentConfig.general.commission.sellerPaysCommission}
                             onChange={(e) => updateGeneralSetting('commission', 'sellerPaysCommission', e.target.checked)}
-                            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                            className="h-4 w-4 text-accent-600 border-gray-300 rounded focus:ring-blue-500"
                         />
                         <label htmlFor="sellerPaysCommission" className="ml-2 text-sm text-gray-700">
                             Seller Pays Commission
@@ -688,7 +688,7 @@ const PaymentConfiguration = () => {
                         <select
                             value={paymentConfig.general.payout.schedule}
                             onChange={(e) => updateGeneralSetting('payout', 'schedule', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                         >
                             <option value="daily">Daily</option>
                             <option value="weekly">Weekly</option>
@@ -703,7 +703,7 @@ const PaymentConfiguration = () => {
                             type="number"
                             value={paymentConfig.general.payout.minimumPayout}
                             onChange={(e) => updateGeneralSetting('payout', 'minimumPayout', parseFloat(e.target.value))}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                         />
                     </div>
                 </div>
@@ -720,7 +720,7 @@ const PaymentConfiguration = () => {
                                 id={key}
                                 checked={value}
                                 onChange={(e) => updateGeneralSetting('notifications', key, e.target.checked)}
-                                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                className="h-4 w-4 text-accent-600 border-gray-300 rounded focus:ring-blue-500"
                             />
                             <label htmlFor={key} className="ml-2 text-sm text-gray-700">
                                 {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
@@ -750,7 +750,7 @@ const PaymentConfiguration = () => {
                             onClick={() => setActiveTab(tab.id)}
                             className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-colors ${
                                 activeTab === tab.id
-                                    ? 'bg-white text-blue-600 shadow-sm'
+                                    ? 'bg-white text-accent-600 shadow-sm'
                                     : 'text-gray-600 hover:text-gray-800'
                             }`}
                         >
@@ -783,11 +783,11 @@ const PaymentConfiguration = () => {
                     <div className="bg-white rounded-lg shadow-md p-6">
                         <h2 className="text-xl font-semibold text-gray-800 mb-4">Commission Calculator</h2>
                         <div className="bg-blue-50 p-4 rounded-lg">
-                            <p className="text-sm text-blue-800">
+                            <p className="text-sm text-accent-800">
                                 Current commission: {paymentConfig.general.commission.percentage}% + 
                                 {paymentConfig.general.defaultCurrency} {paymentConfig.general.commission.flatFee}
                             </p>
-                            <p className="text-xs text-blue-600 mt-1">
+                            <p className="text-xs text-accent-600 mt-1">
                                 For a ₦10,000 order: Commission = ₦{((10000 * paymentConfig.general.commission.percentage / 100) + paymentConfig.general.commission.flatFee).toFixed(2)}
                             </p>
                         </div>
@@ -800,7 +800,7 @@ const PaymentConfiguration = () => {
                 <button
                     onClick={savePaymentConfiguration}
                     disabled={saving}
-                    className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                    className="bg-accent-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-accent-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
                 >
                     {saving ? <FaSpinner className="animate-spin" /> : <FaSave />}
                     <span>{saving ? 'Saving...' : 'Save Configuration'}</span>

@@ -19,7 +19,7 @@ const ReturnsRefunds = () => {
       step: 1,
       title: 'Initiate Return',
       description: 'Go to your orders and select the item you want to return',
-      icon: <FaBox className="text-blue-500" />
+      icon: <FaBox className="text-accent-500" />
     },
     {
       step: 2,
@@ -37,7 +37,7 @@ const ReturnsRefunds = () => {
       step: 4,
       title: 'Get Refund',
       description: 'Receive refund within 3-5 days after item verification',
-      icon: <FaCreditCard className="text-purple-500" />
+      icon: <FaCreditCard className="text-primary-500" />
     }
   ];
 
@@ -62,9 +62,9 @@ const ReturnsRefunds = () => {
         {/* Breadcrumb */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-blue-600">Home</Link>
+            <Link to="/" className="hover:text-accent-600">Home</Link>
             <span>/</span>
-            <Link to="/help-center" className="hover:text-blue-600">Help Center</Link>
+            <Link to="/help-center" className="hover:text-accent-600">Help Center</Link>
             <span>/</span>
             <span className="text-gray-900">Returns & Refunds</span>
           </div>
@@ -73,7 +73,7 @@ const ReturnsRefunds = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <FaUndo className="text-6xl text-blue-600" />
+            <FaUndo className="text-6xl text-accent-600" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Returns & Refunds</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -88,7 +88,7 @@ const ReturnsRefunds = () => {
               onClick={() => setSelectedTab('returns')}
               className={`flex-1 py-3 px-6 text-sm font-medium rounded-md transition-colors ${
                 selectedTab === 'returns'
-                  ? 'bg-white text-blue-600 shadow-sm'
+                  ? 'bg-white text-accent-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -98,7 +98,7 @@ const ReturnsRefunds = () => {
               onClick={() => setSelectedTab('eligibility')}
               className={`flex-1 py-3 px-6 text-sm font-medium rounded-md transition-colors ${
                 selectedTab === 'eligibility'
-                  ? 'bg-white text-blue-600 shadow-sm'
+                  ? 'bg-white text-accent-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -108,7 +108,7 @@ const ReturnsRefunds = () => {
               onClick={() => setSelectedTab('refunds')}
               className={`flex-1 py-3 px-6 text-sm font-medium rounded-md transition-colors ${
                 selectedTab === 'refunds'
-                  ? 'bg-white text-blue-600 shadow-sm'
+                  ? 'bg-white text-accent-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -130,8 +130,8 @@ const ReturnsRefunds = () => {
                       <div className="bg-gray-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                         {step.icon}
                       </div>
-                      <div className="bg-blue-100 rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-3">
-                        <span className="text-sm font-bold text-blue-600">{step.step}</span>
+                      <div className="bg-accent-100 rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-3">
+                        <span className="text-sm font-bold text-accent-600">{step.step}</span>
                       </div>
                       <h3 className="font-semibold text-gray-900 mb-2">{step.title}</h3>
                       <p className="text-sm text-gray-600">{step.description}</p>
@@ -148,7 +148,7 @@ const ReturnsRefunds = () => {
                     <div key={index} className="border border-gray-200 rounded-lg p-4">
                       <div className="flex justify-between items-start mb-2">
                         <h3 className="font-medium text-gray-900">{item.reason}</h3>
-                        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">{item.timeLimit}</span>
+                        <span className="text-xs bg-accent-100 text-accent-800 px-2 py-1 rounded-full">{item.timeLimit}</span>
                       </div>
                       <p className="text-sm text-gray-600">{item.description}</p>
                     </div>
@@ -162,7 +162,7 @@ const ReturnsRefunds = () => {
                 <p className="text-gray-600 mb-6">Access your order history to start a return request</p>
                 <Link 
                   to="/my-orders" 
-                  className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center space-x-2 px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors"
                 >
                   <FaBox />
                   <span>View My Orders</span>
@@ -226,12 +226,12 @@ const ReturnsRefunds = () => {
                     </div>
                   </div>
                   
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="bg-blue-50 border border-accent-200 rounded-lg p-4">
                     <div className="flex items-start space-x-3">
-                      <FaInfoCircle className="text-blue-500 mt-1 flex-shrink-0" />
+                      <FaInfoCircle className="text-accent-500 mt-1 flex-shrink-0" />
                       <div>
-                        <h3 className="font-medium text-blue-800 mb-2">Exchange Only Items</h3>
-                        <ul className="text-sm text-blue-700 space-y-1">
+                        <h3 className="font-medium text-accent-800 mb-2">Exchange Only Items</h3>
+                        <ul className="text-sm text-accent-700 space-y-1">
                           <li>• Opened beauty products (can be exchanged if defective)</li>
                           <li>• Software with broken seals (if defective only)</li>
                           <li>• Mattresses and bedding (hygiene policy)</li>
@@ -251,18 +251,18 @@ const ReturnsRefunds = () => {
                 <h2 className="text-2xl font-semibold text-gray-900 mb-6">Refund Methods & Timeline</h2>
                 <div className="space-y-4">
                   {refundMethods.map((method, index) => (
-                    <div key={index} className={`border rounded-lg p-4 ${method.preferred ? 'border-blue-200 bg-blue-50' : 'border-gray-200'}`}>
+                    <div key={index} className={`border rounded-lg p-4 ${method.preferred ? 'border-accent-200 bg-blue-50' : 'border-gray-200'}`}>
                       <div className="flex justify-between items-center">
                         <div>
-                          <h3 className={`font-medium ${method.preferred ? 'text-blue-900' : 'text-gray-900'}`}>
+                          <h3 className={`font-medium ${method.preferred ? 'text-accent-900' : 'text-gray-900'}`}>
                             {method.method}
-                            {method.preferred && <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Recommended</span>}
+                            {method.preferred && <span className="ml-2 text-xs bg-accent-100 text-accent-800 px-2 py-1 rounded-full">Recommended</span>}
                           </h3>
-                          <p className={`text-sm ${method.preferred ? 'text-blue-700' : 'text-gray-600'}`}>
+                          <p className={`text-sm ${method.preferred ? 'text-accent-700' : 'text-gray-600'}`}>
                             Processing time: {method.time}
                           </p>
                         </div>
-                        <FaClock className={method.preferred ? 'text-blue-500' : 'text-gray-400'} />
+                        <FaClock className={method.preferred ? 'text-accent-500' : 'text-gray-400'} />
                       </div>
                     </div>
                   ))}
@@ -362,7 +362,7 @@ const ReturnsRefunds = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/help-center" 
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors"
             >
               Visit Help Center
             </Link>

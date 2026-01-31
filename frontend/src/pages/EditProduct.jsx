@@ -207,7 +207,7 @@ const EditProduct = () => {
                             value={data.productName}
                             onChange={handleOnChange}
                             placeholder="Enter product name"
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                             required
                         />
                     </div>
@@ -224,7 +224,7 @@ const EditProduct = () => {
                             value={data.brandName}
                             onChange={handleOnChange}
                             placeholder="Enter brand name"
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                             required
                         />
                     </div>
@@ -239,7 +239,7 @@ const EditProduct = () => {
                             name="category"
                             value={data.category}
                             onChange={handleOnChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                             required
                         >
                             <option value="">Select Category</option>
@@ -261,7 +261,7 @@ const EditProduct = () => {
                             name="condition"
                             value={data.condition}
                             onChange={handleOnChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                         >
                             <option value="New">New</option>
                             <option value="Like New">Like New</option>
@@ -280,7 +280,7 @@ const EditProduct = () => {
                         {/* Upload Area */}
                         <div className="mb-4">
                             <label htmlFor="uploadImageInput" className="cursor-pointer">
-                                <div className="p-6 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 transition-colors text-center">
+                                <div className="p-6 border-2 border-dashed border-gray-300 rounded-lg hover:border-accent-500 transition-colors text-center">
                                     <FaCloudUploadAlt className="mx-auto text-4xl text-gray-400 mb-2" />
                                     <p className="text-gray-600">Click to upload product images</p>
                                     <p className="text-sm text-gray-500">PNG, JPG, JPEG up to 10MB</p>
@@ -333,7 +333,7 @@ const EditProduct = () => {
                                 placeholder="0.00"
                                 min="0"
                                 step="0.01"
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                 required
                             />
                         </div>
@@ -350,7 +350,7 @@ const EditProduct = () => {
                                 placeholder="0.00"
                                 min="0"
                                 step="0.01"
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                 required
                             />
                         </div>
@@ -368,7 +368,7 @@ const EditProduct = () => {
                             onChange={handleOnChange}
                             placeholder="Enter product description"
                             rows={4}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                         />
                     </div>
 
@@ -387,7 +387,7 @@ const EditProduct = () => {
                             className={`flex-1 py-3 px-6 rounded-lg text-white font-medium transition-colors ${
                                 loading 
                                     ? 'bg-gray-400 cursor-not-allowed' 
-                                    : 'bg-blue-600 hover:bg-blue-700'
+                                    : 'bg-accent-600 hover:bg-accent-700'
                             }`}
                         >
                             {loading ? 'Updating...' : 'Update Product'}

@@ -65,7 +65,7 @@ const CookiePolicy = () => {
             <div className="bg-white rounded-lg p-4 border-2 border-gray-200">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center">
-                  <FaChartBar className="text-blue-600 mr-2" />
+                  <FaChartBar className="text-accent-600 mr-2" />
                   <h3 className="font-medium text-gray-800">Analytics Cookies</h3>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
@@ -75,7 +75,7 @@ const CookiePolicy = () => {
                     checked={cookiePreferences.analytics}
                     onChange={() => handlePreferenceChange('analytics')}
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent-600"></div>
                 </label>
               </div>
               <p className="text-sm text-gray-600">
@@ -87,7 +87,7 @@ const CookiePolicy = () => {
             <div className="bg-white rounded-lg p-4 border-2 border-gray-200">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center">
-                  <FaUsers className="text-purple-600 mr-2" />
+                  <FaUsers className="text-primary-600 mr-2" />
                   <h3 className="font-medium text-gray-800">Marketing Cookies</h3>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
@@ -97,7 +97,7 @@ const CookiePolicy = () => {
                     checked={cookiePreferences.marketing}
                     onChange={() => handlePreferenceChange('marketing')}
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                 </label>
               </div>
               <p className="text-sm text-gray-600">
@@ -130,7 +130,7 @@ const CookiePolicy = () => {
           </div>
           
           <div className="mt-6 text-center">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="bg-accent-600 text-white px-6 py-2 rounded-lg hover:bg-accent-700 transition-colors">
               Save Preferences
             </button>
           </div>
@@ -150,8 +150,8 @@ const CookiePolicy = () => {
               </p>
               
               <div className="bg-blue-50 rounded-lg p-4">
-                <h3 className="font-medium text-blue-800 mb-2">Types of Information Cookies Store</h3>
-                <ul className="text-sm text-blue-700 space-y-1">
+                <h3 className="font-medium text-accent-800 mb-2">Types of Information Cookies Store</h3>
+                <ul className="text-sm text-accent-700 space-y-1">
                   <li>• Login status and session information</li>
                   <li>• Shopping cart contents</li>
                   <li>• Language and region preferences</li>
@@ -236,9 +236,9 @@ const CookiePolicy = () => {
               {/* Performance Cookies */}
               <div className="border rounded-lg p-4">
                 <div className="flex items-center mb-3">
-                  <FaChartBar className="text-blue-600 mr-3" />
+                  <FaChartBar className="text-accent-600 mr-3" />
                   <h3 className="text-lg font-medium text-gray-800">Performance/Analytics Cookies</h3>
-                  <span className="ml-auto bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">
+                  <span className="ml-auto bg-accent-100 text-accent-800 px-2 py-1 rounded text-xs font-medium">
                     Optional
                   </span>
                 </div>
@@ -261,9 +261,9 @@ const CookiePolicy = () => {
               {/* Functional Cookies */}
               <div className="border rounded-lg p-4">
                 <div className="flex items-center mb-3">
-                  <FaCog className="text-purple-600 mr-3" />
+                  <FaCog className="text-primary-600 mr-3" />
                   <h3 className="text-lg font-medium text-gray-800">Functional/Personalization Cookies</h3>
-                  <span className="ml-auto bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">
+                  <span className="ml-auto bg-primary-100 text-primary-800 px-2 py-1 rounded text-xs font-medium">
                     Optional
                   </span>
                 </div>
@@ -321,8 +321,8 @@ const CookiePolicy = () => {
               
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="bg-blue-50 rounded-lg p-4">
-                  <h3 className="font-medium text-blue-800 mb-2">Google Services</h3>
-                  <ul className="text-sm text-blue-700 space-y-1">
+                  <h3 className="font-medium text-accent-800 mb-2">Google Services</h3>
+                  <ul className="text-sm text-accent-700 space-y-1">
                     <li>• Google Analytics (analytics)</li>
                     <li>• Google Ads (advertising)</li>
                     <li>• Google Maps (location services)</li>
@@ -331,8 +331,8 @@ const CookiePolicy = () => {
                 </div>
                 
                 <div className="bg-purple-50 rounded-lg p-4">
-                  <h3 className="font-medium text-purple-800 mb-2">Social Media</h3>
-                  <ul className="text-sm text-purple-700 space-y-1">
+                  <h3 className="font-medium text-primary-800 mb-2">Social Media</h3>
+                  <ul className="text-sm text-primary-700 space-y-1">
                     <li>• Facebook Pixel (advertising)</li>
                     <li>• Instagram integration</li>
                     <li>• Twitter widgets</li>
@@ -396,11 +396,11 @@ const CookiePolicy = () => {
               </div>
 
               <div className="bg-blue-50 rounded-lg p-4">
-                <h3 className="font-medium text-blue-800 mb-2">Opt-Out Tools</h3>
-                <p className="text-blue-700 text-sm mb-3">
+                <h3 className="font-medium text-accent-800 mb-2">Opt-Out Tools</h3>
+                <p className="text-accent-700 text-sm mb-3">
                   You can opt out of certain types of tracking using these tools:
                 </p>
-                <ul className="text-sm text-blue-700 space-y-1">
+                <ul className="text-sm text-accent-700 space-y-1">
                   <li>• Google Analytics Opt-out Browser Add-on</li>
                   <li>• NAI Consumer Opt-Out page</li>
                   <li>• DAA Consumer Choice page</li>
@@ -473,16 +473,16 @@ const CookiePolicy = () => {
               </p>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <h3 className="font-medium text-blue-800 mb-2">General Inquiries</h3>
-                  <ul className="text-sm text-blue-700 space-y-1">
+                  <h3 className="font-medium text-accent-800 mb-2">General Inquiries</h3>
+                  <ul className="text-sm text-accent-700 space-y-1">
                     <li><strong>Email:</strong> privacy@adoorrealestate.com</li>
                     <li><strong>Phone:</strong> +1 (555) 123-4567</li>
                     <li><strong>Hours:</strong> Mon-Fri 9AM-6PM EST</li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-medium text-blue-800 mb-2">Mailing Address</h3>
-                  <address className="text-sm text-blue-700 not-italic">
+                  <h3 className="font-medium text-accent-800 mb-2">Mailing Address</h3>
+                  <address className="text-sm text-accent-700 not-italic">
                     Adoor Real Estate Privacy Team<br />
                     [Your Business Address]<br />
                     [City, State ZIP]<br />

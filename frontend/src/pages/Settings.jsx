@@ -303,7 +303,7 @@ const Settings = () => {
             id="maintenanceMode"
             checked={settings.general.maintenanceMode}
             onChange={(e) => handleSettingChange('general', 'maintenanceMode', e.target.checked)}
-            className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+            className="h-4 w-4 text-accent-600 border-gray-300 rounded"
           />
           <label htmlFor="maintenanceMode" className="ml-2 text-sm text-gray-700">
             Maintenance Mode
@@ -316,7 +316,7 @@ const Settings = () => {
             id="allowRegistration"
             checked={settings.general.allowRegistration}
             onChange={(e) => handleSettingChange('general', 'allowRegistration', e.target.checked)}
-            className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+            className="h-4 w-4 text-accent-600 border-gray-300 rounded"
           />
           <label htmlFor="allowRegistration" className="ml-2 text-sm text-gray-700">
             Allow New User Registration
@@ -328,9 +328,9 @@ const Settings = () => {
 
   const renderNotificationSettings = () => (
     <div className="space-y-6">
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-        <h3 className="text-lg font-medium text-blue-800 mb-2">Email Notifications</h3>
-        <p className="text-sm text-blue-700">Configure when the system sends email notifications</p>
+      <div className="bg-blue-50 border border-accent-200 rounded-lg p-4 mb-6">
+        <h3 className="text-lg font-medium text-accent-800 mb-2">Email Notifications</h3>
+        <p className="text-sm text-accent-700">Configure when the system sends email notifications</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -341,7 +341,7 @@ const Settings = () => {
               id="emailNotifications"
               checked={settings.notifications.emailNotifications}
               onChange={(e) => handleSettingChange('notifications', 'emailNotifications', e.target.checked)}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="emailNotifications" className="ml-2 text-sm text-gray-700">
               Email Notifications
@@ -354,7 +354,7 @@ const Settings = () => {
               id="orderNotifications"
               checked={settings.notifications.orderNotifications}
               onChange={(e) => handleSettingChange('notifications', 'orderNotifications', e.target.checked)}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="orderNotifications" className="ml-2 text-sm text-gray-700">
               Order Notifications
@@ -367,7 +367,7 @@ const Settings = () => {
               id="stockAlerts"
               checked={settings.notifications.stockAlerts}
               onChange={(e) => handleSettingChange('notifications', 'stockAlerts', e.target.checked)}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="stockAlerts" className="ml-2 text-sm text-gray-700">
               Stock Alerts
@@ -382,7 +382,7 @@ const Settings = () => {
               id="userRegistration"
               checked={settings.notifications.userRegistration}
               onChange={(e) => handleSettingChange('notifications', 'userRegistration', e.target.checked)}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="userRegistration" className="ml-2 text-sm text-gray-700">
               User Registration Notifications
@@ -395,7 +395,7 @@ const Settings = () => {
               id="sellerApplications"
               checked={settings.notifications.sellerApplications}
               onChange={(e) => handleSettingChange('notifications', 'sellerApplications', e.target.checked)}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="sellerApplications" className="ml-2 text-sm text-gray-700">
               Seller Application Notifications
@@ -408,7 +408,7 @@ const Settings = () => {
               id="systemAlerts"
               checked={settings.notifications.systemAlerts}
               onChange={(e) => handleSettingChange('notifications', 'systemAlerts', e.target.checked)}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="systemAlerts" className="ml-2 text-sm text-gray-700">
               System Alerts
@@ -434,7 +434,7 @@ const Settings = () => {
               id="requireEmailVerification"
               checked={settings.security.requireEmailVerification}
               onChange={(e) => handleSettingChange('security', 'requireEmailVerification', e.target.checked)}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="requireEmailVerification" className="ml-2 text-sm text-gray-700">
               Require Email Verification
@@ -447,7 +447,7 @@ const Settings = () => {
               id="twoFactorAuth"
               checked={settings.security.twoFactorAuth}
               onChange={(e) => handleSettingChange('security', 'twoFactorAuth', e.target.checked)}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="twoFactorAuth" className="ml-2 text-sm text-gray-700">
               Two-Factor Authentication
@@ -460,7 +460,7 @@ const Settings = () => {
               id="requireStrongPassword"
               checked={settings.security.requireStrongPassword}
               onChange={(e) => handleSettingChange('security', 'requireStrongPassword', e.target.checked)}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="requireStrongPassword" className="ml-2 text-sm text-gray-700">
               Require Strong Password
@@ -517,30 +517,30 @@ const Settings = () => {
 
   const renderPaymentSettings = () => (
     <div className="space-y-6">
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+      <div className="bg-blue-50 border border-accent-200 rounded-lg p-6">
         <div className="flex items-start">
-          <FaCreditCard className="text-blue-600 text-2xl mt-1 mr-4" />
+          <FaCreditCard className="text-accent-600 text-2xl mt-1 mr-4" />
           <div className="flex-1">
-            <h3 className="text-lg font-medium text-blue-800 mb-2">Payment Configuration</h3>
-            <p className="text-sm text-blue-700 mb-4">
+            <h3 className="text-lg font-medium text-accent-800 mb-2">Payment Configuration</h3>
+            <p className="text-sm text-accent-700 mb-4">
               For comprehensive payment gateway configuration, including API keys, fees, and advanced settings, 
               please use the dedicated Payment Configuration panel.
             </p>
             
             <div className="mb-4">
-              <h4 className="font-medium text-blue-800 mb-2">Quick Settings</h4>
+              <h4 className="font-medium text-accent-800 mb-2">Quick Settings</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-blue-700">Minimum Payout: </span>
-                  <span className="font-semibold text-blue-900">${settings.payment.minimumPayout}</span>
+                  <span className="text-accent-700">Minimum Payout: </span>
+                  <span className="font-semibold text-accent-900">${settings.payment.minimumPayout}</span>
                 </div>
                 <div>
-                  <span className="text-blue-700">Payout Schedule: </span>
-                  <span className="font-semibold text-blue-900">{settings.payment.payoutSchedule}</span>
+                  <span className="text-accent-700">Payout Schedule: </span>
+                  <span className="font-semibold text-accent-900">{settings.payment.payoutSchedule}</span>
                 </div>
                 <div>
-                  <span className="text-blue-700">Commission Rate: </span>
-                  <span className="font-semibold text-blue-900">{settings.payment.commissionRate}%</span>
+                  <span className="text-accent-700">Commission Rate: </span>
+                  <span className="font-semibold text-accent-900">{settings.payment.commissionRate}%</span>
                 </div>
               </div>
             </div>
@@ -548,12 +548,12 @@ const Settings = () => {
             <div className="flex flex-col sm:flex-row gap-3">
               <a 
                 href="/admin-panel/payment-config" 
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                className="inline-flex items-center px-4 py-2 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors text-sm font-medium"
               >
                 <FaCog className="mr-2" />
                 Open Payment Configuration
               </a>
-              <div className="text-xs text-blue-600">
+              <div className="text-xs text-accent-600">
                 Configure API keys, payment gateways, fees, and advanced settings
               </div>
             </div>
@@ -613,7 +613,7 @@ const Settings = () => {
           <div className="space-y-3">
             <button 
               onClick={handleDatabaseBackup}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+              className="bg-accent-600 text-white px-4 py-2 rounded hover:bg-accent-700 transition duration-200"
             >
               Create Backup
             </button>
@@ -636,17 +636,17 @@ const Settings = () => {
 
         {/* Backup Statistics */}
         {backupStats && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h3 className="text-lg font-medium text-blue-800 mb-3">Backup Statistics</h3>
+          <div className="bg-blue-50 border border-accent-200 rounded-lg p-4">
+            <h3 className="text-lg font-medium text-accent-800 mb-3">Backup Statistics</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">{backupStats.total}</div>
-                <div className="text-blue-700">Total Backups</div>
+                <div className="text-2xl font-bold text-accent-600">{backupStats.total}</div>
+                <div className="text-accent-700">Total Backups</div>
               </div>
               {backupStats.statusBreakdown.map(stat => (
                 <div key={stat._id} className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">{stat.count}</div>
-                  <div className="text-blue-700 capitalize">{stat._id}</div>
+                  <div className="text-2xl font-bold text-accent-600">{stat.count}</div>
+                  <div className="text-accent-700 capitalize">{stat._id}</div>
                 </div>
               ))}
             </div>
@@ -659,7 +659,7 @@ const Settings = () => {
             <h3 className="text-lg font-medium text-gray-800">Recent Backups</h3>
             <button 
               onClick={loadBackupData}
-              className="text-blue-600 hover:text-blue-700 text-sm"
+              className="text-accent-600 hover:text-accent-700 text-sm"
               disabled={loadingBackups}
             >
               {loadingBackups ? 'Loading...' : 'Refresh'}
@@ -961,10 +961,10 @@ const Settings = () => {
                     disabled={isDisabled}
                     type="button"
                     className={`
-                      p-2 text-sm rounded hover:bg-blue-100 transition-colors
+                      p-2 text-sm rounded hover:bg-accent-100 transition-colors
                       ${!isCurrentMonth ? 'text-gray-300' : 'text-gray-900'}
-                      ${isSelected ? 'bg-blue-600 text-white hover:bg-blue-700' : ''}
-                      ${isToday && !isSelected ? 'bg-blue-100 text-blue-600 font-semibold' : ''}
+                      ${isSelected ? 'bg-accent-600 text-white hover:bg-accent-700' : ''}
+                      ${isToday && !isSelected ? 'bg-accent-100 text-accent-600 font-semibold' : ''}
                       ${isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}
                     `}
                   >
@@ -1004,9 +1004,9 @@ const Settings = () => {
 
   const renderSchedulingSettings = () => (
     <div className="space-y-8">
-      <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4 mb-6">
-        <h3 className="text-lg font-medium text-indigo-800 mb-2">Scheduling & Automation</h3>
-        <p className="text-sm text-indigo-700">Configure automated tasks, maintenance windows, and reporting schedules</p>
+      <div className="bg-indigo-50 border border-accent-200 rounded-lg p-4 mb-6">
+        <h3 className="text-lg font-medium text-accent-800 mb-2">Scheduling & Automation</h3>
+        <p className="text-sm text-accent-700">Configure automated tasks, maintenance windows, and reporting schedules</p>
       </div>
 
       {/* Maintenance Window Settings */}
@@ -1026,7 +1026,7 @@ const Settings = () => {
                 ...settings.scheduling?.maintenanceWindow,
                 enabled: e.target.checked
               })}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="maintenanceEnabled" className="ml-2 text-sm text-gray-700">
               Enable Scheduled Maintenance
@@ -1106,7 +1106,7 @@ const Settings = () => {
                 ...settings.scheduling?.reportGeneration,
                 enabled: e.target.checked
               })}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              className="h-4 w-4 text-accent-600 border-gray-300 rounded"
             />
             <label htmlFor="reportEnabled" className="ml-2 text-sm text-gray-700">
               Enable Automatic Report Generation
@@ -1197,7 +1197,7 @@ const Settings = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <FaSpinner className="text-4xl text-blue-600 animate-spin mx-auto mb-4" />
+          <FaSpinner className="text-4xl text-accent-600 animate-spin mx-auto mb-4" />
           <p className="text-gray-600">Loading settings...</p>
         </div>
       </div>
@@ -1225,7 +1225,7 @@ const Settings = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`w-full flex items-center px-3 py-2 mb-1 text-sm font-medium rounded-lg transition duration-200 ${
                     activeTab === tab.id
-                      ? 'bg-blue-100 text-blue-700 border-r-2 border-blue-500'
+                      ? 'bg-accent-100 text-accent-700 border-r-2 border-accent-500'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
@@ -1254,7 +1254,7 @@ const Settings = () => {
                 <button
                   onClick={handleSaveSettings}
                   disabled={saving}
-                  className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed transition duration-200"
+                  className="flex items-center px-4 py-2 bg-accent-600 text-white rounded-lg hover:bg-accent-700 disabled:bg-accent-400 disabled:cursor-not-allowed transition duration-200"
                 >
                   {saving ? (
                     <FaSpinner className="mr-2 animate-spin" />

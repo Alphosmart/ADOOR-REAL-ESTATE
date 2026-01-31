@@ -50,7 +50,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-600"></div>
       </div>
     );
   }
@@ -68,8 +68,8 @@ const Dashboard = () => {
         {/* Total Users */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-blue-100">
-              <FaUsers className="h-6 w-6 text-blue-600" />
+            <div className="p-3 rounded-full bg-accent-100">
+              <FaUsers className="h-6 w-6 text-accent-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Users</p>
@@ -152,7 +152,7 @@ const Dashboard = () => {
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div 
-                className="bg-blue-600 h-2 rounded-full" 
+                className="bg-accent-600 h-2 rounded-full" 
                 style={{ width: `${(stats.users.general / stats.users.total) * 100}%` }}
               ></div>
             </div>
@@ -203,7 +203,7 @@ const Dashboard = () => {
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="flex items-center justify-center px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+          <button className="flex items-center justify-center px-4 py-3 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors">
             <FaUsers className="mr-2" />
             View All Users
           </button>
@@ -211,7 +211,7 @@ const Dashboard = () => {
             <FaBoxOpen className="mr-2" />
             View All Products
           </button>
-          <button className="flex items-center justify-center px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors">
+          <button className="flex items-center justify-center px-4 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors">
             <FaChartLine className="mr-2" />
             View Analytics
           </button>

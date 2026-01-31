@@ -83,7 +83,7 @@ const ShippingInfo = () => {
         return (
             <div className="min-h-screen flex justify-center items-center">
                 <div className="text-center">
-                    <FaShippingFast className="text-6xl text-blue-600 animate-bounce mx-auto mb-4" />
+                    <FaShippingFast className="text-6xl text-accent-600 animate-bounce mx-auto mb-4" />
                     <p className="text-gray-600">Loading shipping information...</p>
                 </div>
             </div>
@@ -95,7 +95,7 @@ const ShippingInfo = () => {
             <div className="max-w-6xl mx-auto px-4">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <FaShippingFast className="text-6xl text-blue-600 mx-auto mb-4" />
+                    <FaShippingFast className="text-6xl text-accent-600 mx-auto mb-4" />
                     <h1 className="text-4xl font-bold text-gray-800 mb-4">Shipping Information</h1>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                         Learn about our shipping options, delivery times, and policies to help you choose the best option for your order.
@@ -103,10 +103,10 @@ const ShippingInfo = () => {
                 </div>
 
                 {/* Fast Shipping Banner */}
-                <div className="bg-blue-100 border border-blue-400 rounded-lg p-6 mb-8">
+                <div className="bg-accent-100 border border-accent-400 rounded-lg p-6 mb-8">
                     <div className="flex items-center justify-center">
-                        <FaTruck className="text-blue-600 text-2xl mr-3" />
-                        <h2 className="text-2xl font-semibold text-blue-800">
+                        <FaTruck className="text-accent-600 text-2xl mr-3" />
+                        <h2 className="text-2xl font-semibold text-accent-800">
                             Fast Shipping Available Nationwide!
                         </h2>
                     </div>
@@ -117,7 +117,7 @@ const ShippingInfo = () => {
                     {shippingData?.zones?.map((zone, index) => (
                         <div key={index} className="bg-white rounded-lg shadow-lg p-6">
                             <div className="flex items-center mb-4">
-                                <FaGlobe className="text-blue-600 text-2xl mr-3" />
+                                <FaGlobe className="text-accent-600 text-2xl mr-3" />
                                 <h3 className="text-2xl font-semibold text-gray-800">{zone.name} Shipping</h3>
                             </div>
                             
@@ -126,7 +126,7 @@ const ShippingInfo = () => {
                                 <p className="text-gray-600 mb-2">Available in:</p>
                                 <div className="flex flex-wrap gap-2">
                                     {zone.countries?.slice(0, 5).map((country, idx) => (
-                                        <span key={idx} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                                        <span key={idx} className="bg-accent-100 text-accent-800 px-3 py-1 rounded-full text-sm">
                                             {country}
                                         </span>
                                     ))}
@@ -144,7 +144,7 @@ const ShippingInfo = () => {
                                     <div key={rateIndex} className="border border-gray-200 rounded-lg p-4">
                                         <div className="flex justify-between items-start mb-2">
                                             <h4 className="text-lg font-semibold text-gray-800">{rate.name}</h4>
-                                            <span className="text-xl font-bold text-blue-600">
+                                            <span className="text-xl font-bold text-accent-600">
                                                 ${rate.amount?.toFixed(2) || '0.00'}
                                             </span>
                                         </div>
@@ -170,7 +170,7 @@ const ShippingInfo = () => {
                 {/* Shipping Policies */}
                 <div className="bg-white rounded-lg shadow-lg p-8">
                     <h3 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-                        <FaInfoCircle className="text-blue-600 mr-3" />
+                        <FaInfoCircle className="text-accent-600 mr-3" />
                         Shipping Policies & Information
                     </h3>
                     
@@ -226,7 +226,7 @@ const ShippingInfo = () => {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a 
                             href="/contact-us" 
-                            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+                            className="bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition duration-300"
                         >
                             Contact Support
                         </a>

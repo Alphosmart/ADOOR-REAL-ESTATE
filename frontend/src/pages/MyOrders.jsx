@@ -46,13 +46,13 @@ const MyOrders = () => {
             case 'pending':
                 return <FaClock className="text-yellow-600" />;
             case 'confirmed':
-                return <FaCheck className="text-blue-600" />;
+                return <FaCheck className="text-accent-600" />;
             case 'processing':
                 return <FaCog className="text-orange-600" />;
             case 'shipped':
-                return <FaBox className="text-purple-600" />;
+                return <FaBox className="text-primary-600" />;
             case 'out_for_delivery':
-                return <FaTruck className="text-indigo-600" />;
+                return <FaTruck className="text-accent-600" />;
             case 'delivered':
                 return <FaCheck className="text-green-600" />;
             case 'cancelled':
@@ -68,13 +68,13 @@ const MyOrders = () => {
             case 'pending':
                 return 'bg-yellow-100 text-yellow-800';
             case 'confirmed':
-                return 'bg-blue-100 text-blue-800';
+                return 'bg-accent-100 text-accent-800';
             case 'processing':
                 return 'bg-orange-100 text-orange-800';
             case 'shipped':
-                return 'bg-purple-100 text-purple-800';
+                return 'bg-primary-100 text-primary-800';
             case 'out_for_delivery':
-                return 'bg-indigo-100 text-indigo-800';
+                return 'bg-accent-100 text-accent-800';
             case 'delivered':
                 return 'bg-green-100 text-green-800';
             case 'cancelled':
@@ -202,7 +202,7 @@ const MyOrders = () => {
                     <p className="text-gray-600 mb-4">You haven't placed any orders yet.</p>
                     <button
                         onClick={() => window.location.href = '/'}
-                        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                        className="bg-accent-600 text-white px-6 py-2 rounded-lg hover:bg-accent-700 transition-colors"
                     >
                         Start Shopping
                     </button>
@@ -250,7 +250,7 @@ const MyOrders = () => {
                                     {canTrackOrder(order.orderStatus) && (
                                         <Link
                                             to={`/order-tracking/${order._id}`}
-                                            className="text-blue-600 hover:text-blue-800 flex items-center gap-1 px-2 py-1 border border-blue-600 rounded hover:bg-blue-50 transition-colors"
+                                            className="text-accent-600 hover:text-accent-800 flex items-center gap-1 px-2 py-1 border border-accent-600 rounded hover:bg-blue-50 transition-colors"
                                         >
                                             <FaTruck />
                                             Track Order
@@ -259,7 +259,7 @@ const MyOrders = () => {
                                     
                                     <button
                                         onClick={() => viewOrderDetails(order)}
-                                        className="text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                                        className="text-accent-600 hover:text-accent-800 flex items-center gap-1"
                                     >
                                         <FaEye />
                                         View Details
@@ -333,7 +333,7 @@ const MyOrders = () => {
                                     {canTrackOrder(selectedOrder.orderStatus) && (
                                         <Link
                                             to={`/order-tracking/${selectedOrder._id}`}
-                                            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition-colors"
+                                            className="bg-accent-600 text-white px-4 py-2 rounded-lg hover:bg-accent-700 flex items-center gap-2 transition-colors"
                                         >
                                             <FaTruck />
                                             Track Order

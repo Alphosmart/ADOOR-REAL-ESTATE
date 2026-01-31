@@ -10,7 +10,7 @@ const ShippingPartnerBanner = () => {
           <h2 className="text-4xl font-bold mb-4">
             🚚 Join Our Shipping Partner Network
           </h2>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-accent-100 max-w-3xl mx-auto">
             Partner with us to expand your delivery business and reach thousands of customers across Nigeria
           </p>
         </div>
@@ -22,7 +22,7 @@ const ShippingPartnerBanner = () => {
               <FaMoneyBillWave className="text-3xl text-yellow-300" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Increase Revenue</h3>
-            <p className="text-blue-100">
+            <p className="text-accent-100">
               Access hundreds of delivery orders daily and boost your earning potential
             </p>
           </div>
@@ -33,7 +33,7 @@ const ShippingPartnerBanner = () => {
               <FaUsers className="text-3xl text-green-300" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Expand Customer Base</h3>
-            <p className="text-blue-100">
+            <p className="text-accent-100">
               Reach new customers and grow your delivery network across multiple cities
             </p>
           </div>
@@ -41,10 +41,10 @@ const ShippingPartnerBanner = () => {
           {/* Benefit 3 */}
           <div className="text-center">
             <div className="bg-white bg-opacity-10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-              <FaChartLine className="text-3xl text-purple-300" />
+              <FaChartLine className="text-3xl text-primary-300" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Business Growth</h3>
-            <p className="text-blue-100">
+            <p className="text-accent-100">
               Scale your operations with our professional platform and management tools
             </p>
           </div>
@@ -61,7 +61,7 @@ const ShippingPartnerBanner = () => {
             <span className="text-lg">Real-time Order Management</span>
           </div>
           <div className="flex items-center space-x-3">
-            <FaHandshake className="text-purple-300 text-xl" />
+            <FaHandshake className="text-primary-300 text-xl" />
             <span className="text-lg">Competitive Quote System</span>
           </div>
           <div className="flex items-center space-x-3">
@@ -73,7 +73,7 @@ const ShippingPartnerBanner = () => {
             <span className="text-lg">Performance Analytics</span>
           </div>
           <div className="flex items-center space-x-3">
-            <FaUsers className="text-purple-300 text-xl" />
+            <FaUsers className="text-primary-300 text-xl" />
             <span className="text-lg">Dedicated Support</span>
           </div>
         </div>
@@ -82,7 +82,7 @@ const ShippingPartnerBanner = () => {
         <div className="text-center">
           <div className="mb-6">
             <h3 className="text-2xl font-bold mb-2">Ready to Start Delivering?</h3>
-            <p className="text-blue-100 text-lg">
+            <p className="text-accent-100 text-lg">
               Join hundreds of shipping companies already partnered with us
             </p>
           </div>
@@ -90,20 +90,20 @@ const ShippingPartnerBanner = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link 
               to="/shipping-company/register"
-              className="bg-white text-blue-600 font-bold py-4 px-8 rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-lg"
+              className="bg-white text-accent-600 font-bold py-4 px-8 rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-lg"
             >
               🚚 Register as Shipping Partner
             </Link>
             
             <Link 
               to="/contact-us"
-              className="border-2 border-white text-white font-semibold py-4 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition-colors text-lg"
+              className="border-2 border-white text-white font-semibold py-4 px-8 rounded-lg hover:bg-white hover:text-accent-600 transition-colors text-lg"
             >
               📞 Contact Us for Details
             </Link>
           </div>
           
-          <div className="mt-6 text-sm text-blue-200">
+          <div className="mt-6 text-sm text-accent-200">
             <p>💡 Quick registration • 🔍 Instant verification • 🚀 Start earning immediately</p>
           </div>
         </div>

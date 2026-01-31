@@ -137,7 +137,7 @@ const SearchResults = () => {
                         />
                         <button
                             type="submit"
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-600"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-accent-600"
                         >
                             <FaSearch />
                         </button>
@@ -268,7 +268,7 @@ const SearchResults = () => {
                             </div>
                             <div className="p-4">
                                 <h3 
-                                    className="font-semibold text-gray-800 mb-1 cursor-pointer hover:text-blue-600 line-clamp-2"
+                                    className="font-semibold text-gray-800 mb-1 cursor-pointer hover:text-accent-600 line-clamp-2"
                                     onClick={() => navigate(`/product/${product._id}`)}
                                 >
                                     {product.productName}
@@ -313,7 +313,7 @@ const SearchResults = () => {
                             clearFilters();
                             navigate('/');
                         }}
-                        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                        className="bg-accent-600 text-white px-6 py-2 rounded-lg hover:bg-accent-700 transition-colors"
                     >
                         Browse All Products
                     </button>

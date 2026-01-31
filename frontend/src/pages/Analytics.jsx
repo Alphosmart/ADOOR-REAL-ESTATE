@@ -446,7 +446,7 @@ const Analytics = () => {
                                         onChange={(e) => setAutoRefresh(e.target.checked)}
                                         className="sr-only"
                                     />
-                                    <div className={`relative w-10 h-6 rounded-full transition-colors ${autoRefresh ? 'bg-blue-600' : 'bg-gray-300'}`}>
+                                    <div className={`relative w-10 h-6 rounded-full transition-colors ${autoRefresh ? 'bg-accent-600' : 'bg-gray-300'}`}>
                                         <div className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${autoRefresh ? 'translate-x-4' : ''}`}></div>
                                     </div>
                                     <span className="ml-2 text-sm text-gray-700">Auto-refresh</span>
@@ -470,7 +470,7 @@ const Analytics = () => {
                                 onClick={() => setComparisonMode(!comparisonMode)}
                                 className={`flex items-center px-3 py-2 text-sm rounded-lg transition-colors ${
                                     comparisonMode 
-                                        ? 'bg-purple-600 text-white' 
+                                        ? 'bg-primary-600 text-white' 
                                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 }`}
                                 title="Compare with previous period"
@@ -526,12 +526,12 @@ const Analytics = () => {
                             {analyticsData.loading ? 'Loading...' : 'Data updated'}
                         </span>
                         {autoRefresh && (
-                            <span className="text-blue-600">
+                            <span className="text-accent-600">
                                 Auto-refresh: {refreshInterval}s
                             </span>
                         )}
                         {comparisonMode && (
-                            <span className="text-purple-600">
+                            <span className="text-primary-600">
                                 Comparison mode active
                             </span>
                         )}
@@ -565,8 +565,8 @@ const Analytics = () => {
                                             disabled={analyticsData.loading}
                                             className={`px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 ${
                                                 timePeriod === period.value && !customDateMode
-                                                    ? 'bg-blue-600 text-white'
-                                                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                                                    ? 'bg-accent-600 text-white'
+                                                    : 'text-gray-600 hover:text-accent-600 hover:bg-blue-50'
                                             }`}
                                             title={period.desc}
                                         >
@@ -578,8 +578,8 @@ const Analytics = () => {
                                         disabled={analyticsData.loading}
                                         className={`px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 ${
                                             customDateMode
-                                                ? 'bg-purple-600 text-white'
-                                                : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'
+                                                ? 'bg-primary-600 text-white'
+                                                : 'text-gray-600 hover:text-primary-600 hover:bg-purple-50'
                                         }`}
                                         title="Custom date selection"
                                     >
@@ -646,7 +646,7 @@ const Analytics = () => {
                                                 toast.info('Generating analytics for custom date range...');
                                                 // Fetch analytics data for custom range
                                             }}
-                                            className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                                            className="px-4 py-2 text-sm bg-accent-600 text-white rounded hover:bg-accent-700 transition-colors"
                                         >
                                             Generate Report
                                         </button>
@@ -693,18 +693,18 @@ const Analytics = () => {
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm font-medium text-gray-600">Total Orders</p>
-                            <p className="text-2xl font-bold text-blue-600">
+                            <p className="text-2xl font-bold text-accent-600">
                                 {analyticsData.salesTrend.reduce((acc, curr) => acc + (curr.orders || 0), 0).toLocaleString()}
                             </p>
                         </div>
-                        <div className="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <svg className="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="h-12 w-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                            <svg className="h-6 w-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
                         </div>
                     </div>
                     <div className="mt-2">
-                        <span className="text-sm text-blue-600">+8.2%</span>
+                        <span className="text-sm text-accent-600">+8.2%</span>
                         <span className="text-sm text-gray-500"> from last month</span>
                     </div>
                 </div>
@@ -714,18 +714,18 @@ const Analytics = () => {
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm font-medium text-gray-600">New Users</p>
-                            <p className="text-2xl font-bold text-indigo-600">
+                            <p className="text-2xl font-bold text-accent-600">
                                 {analyticsData.newUserAnalytics.dailyRegistrations.reduce((acc, curr) => acc + (curr.registrations || 0), 0).toLocaleString()}
                             </p>
                         </div>
-                        <div className="h-12 w-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                            <svg className="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="h-12 w-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                            <svg className="h-6 w-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                             </svg>
                         </div>
                     </div>
                     <div className="mt-2">
-                        <span className="text-sm text-indigo-600">+{analyticsData.newUserAnalytics.conversionMetrics.signupToFirstPurchase}%</span>
+                        <span className="text-sm text-accent-600">+{analyticsData.newUserAnalytics.conversionMetrics.signupToFirstPurchase}%</span>
                         <span className="text-sm text-gray-500"> conversion rate</span>
                     </div>
                 </div>
@@ -735,18 +735,18 @@ const Analytics = () => {
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm font-medium text-gray-600">Top Seller Revenue</p>
-                            <p className="text-2xl font-bold text-purple-600">
+                            <p className="text-2xl font-bold text-primary-600">
                                 ${analyticsData.topSellers.length > 0 ? analyticsData.topSellers[0]?.totalSales?.toLocaleString() : '0'}
                             </p>
                         </div>
-                        <div className="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <svg className="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="h-12 w-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <svg className="h-6 w-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 100-8 4 4 0 000 8zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </div>
                     </div>
                     <div className="mt-2">
-                        <span className="text-sm text-purple-600">
+                        <span className="text-sm text-primary-600">
                             {analyticsData.topSellers.length > 0 ? analyticsData.topSellers[0]?.name : 'No data'}
                         </span>
                         <span className="text-sm text-gray-500"> leading seller</span>

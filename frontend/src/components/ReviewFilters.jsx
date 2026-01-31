@@ -100,7 +100,7 @@ const ReviewFilters = ({
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="text-xs text-blue-600 hover:text-blue-800 underline"
+              className="text-xs text-accent-600 hover:text-accent-800 underline"
             >
               Clear all
             </button>
@@ -146,7 +146,7 @@ const ReviewFilters = ({
             onClick={() => onFiltersChange({ ...filters, withPhotos: !filters.withPhotos })}
             className={`px-3 py-1 rounded-full text-xs border transition-colors ${
               filters.withPhotos
-                ? 'bg-blue-100 border-blue-300 text-blue-800'
+                ? 'bg-accent-100 border-accent-300 text-accent-800'
                 : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
             }`}
           >

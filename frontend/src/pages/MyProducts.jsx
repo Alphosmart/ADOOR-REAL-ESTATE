@@ -124,7 +124,7 @@ const MyProducts = () => {
 
     const getConditionBadge = (condition) => {
         const colors = {
-            'new': 'bg-blue-100 text-blue-800',
+            'new': 'bg-accent-100 text-accent-800',
             'like-new': 'bg-green-100 text-green-800',
             'good': 'bg-yellow-100 text-yellow-800',
             'fair': 'bg-orange-100 text-orange-800',
@@ -223,7 +223,7 @@ const MyProducts = () => {
                                         </span>
                                         <div className='flex gap-2'>
                                             <button 
-                                                className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors'
+                                                className='p-2 bg-accent-600 text-white rounded hover:bg-accent-700 transition-colors'
                                                 onClick={() => navigate(`/admin-panel/edit-product/${product._id}`)}
                                                 title="Edit Product"
                                             >

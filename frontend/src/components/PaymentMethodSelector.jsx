@@ -94,7 +94,7 @@ const PaymentMethodSelector = ({
             <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">Payment Method</h3>
                 <div className="flex items-center justify-center py-8">
-                    <FaSpinner className="animate-spin text-2xl text-blue-600 mr-2" />
+                    <FaSpinner className="animate-spin text-2xl text-accent-600 mr-2" />
                     <span className="text-gray-600">Loading payment methods...</span>
                 </div>
             </div>
@@ -140,7 +140,7 @@ const PaymentMethodSelector = ({
                             key={method.id}
                             className={`border rounded-lg p-4 cursor-pointer transition-all ${
                                 isSelected
-                                    ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
+                                    ? 'border-accent-500 bg-blue-50 ring-2 ring-blue-200'
                                     : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                             }`}
                             onClick={() => handlePaymentMethodSelect(method.id)}
@@ -153,11 +153,11 @@ const PaymentMethodSelector = ({
                                     value={method.id}
                                     checked={isSelected}
                                     onChange={() => handlePaymentMethodSelect(method.id)}
-                                    className="mr-3 text-blue-600"
+                                    className="mr-3 text-accent-600"
                                 />
                                 
                                 <IconComponent className={`text-xl mr-3 ${
-                                    isSelected ? 'text-blue-600' : 'text-gray-400'
+                                    isSelected ? 'text-accent-600' : 'text-gray-400'
                                 }`} />
                                 
                                 <div className="flex-1">
@@ -187,21 +187,21 @@ const PaymentMethodSelector = ({
             {sellerGroups.length > 1 && (
                 <div className="border-t pt-4">
                     <div className="flex items-center mb-3">
-                        <FaInfoCircle className="text-blue-500 mr-2" />
+                        <FaInfoCircle className="text-accent-500 mr-2" />
                         <span className="text-sm font-medium text-gray-700">
                             Multiple Sellers in Cart
                         </span>
                     </div>
                     <div className="bg-blue-50 p-3 rounded-lg">
-                        <p className="text-sm text-blue-700 mb-2">
+                        <p className="text-sm text-accent-700 mb-2">
                             Your cart contains items from {sellerGroups.length} different sellers. 
                             Only payment methods accepted by all sellers are shown.
                         </p>
                         <div className="space-y-1">
                             {sellerGroups.map((group, index) => (
-                                <div key={index} className="text-xs text-blue-600">
+                                <div key={index} className="text-xs text-accent-600">
                                     <span className="font-medium">{group.seller.name}</span>
-                                    <span className="text-blue-500"> - {group.productCount} item(s)</span>
+                                    <span className="text-accent-500"> - {group.productCount} item(s)</span>
                                 </div>
                             ))}
                         </div>
@@ -232,8 +232,8 @@ const PaymentMethodSelector = ({
                 <div className="border-t pt-4">
                     <div className="bg-blue-50 p-3 rounded-lg">
                         <div className="flex items-start">
-                            <FaInfoCircle className="text-blue-500 mr-2 mt-0.5" />
-                            <div className="text-sm text-blue-700">
+                            <FaInfoCircle className="text-accent-500 mr-2 mt-0.5" />
+                            <div className="text-sm text-accent-700">
                                 <p className="font-medium mb-1">Bank Transfer Instructions:</p>
                                 <p className="text-xs">
                                     Bank details will be provided after order confirmation. 

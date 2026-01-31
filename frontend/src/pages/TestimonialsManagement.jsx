@@ -256,7 +256,7 @@ const TestimonialsManagement = () => {
     if (loading) {
         return (
             <div className="flex justify-center items-center h-64">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-600"></div>
             </div>
         );
     }
@@ -271,7 +271,7 @@ const TestimonialsManagement = () => {
                 </div>
                 <button
                     onClick={handleAdd}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center space-x-2"
+                    className="bg-accent-600 hover:bg-accent-700 text-white px-4 py-2 rounded-md flex items-center space-x-2"
                 >
                     <FaPlus />
                     <span>Add Testimonial</span>
@@ -281,7 +281,7 @@ const TestimonialsManagement = () => {
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-white p-4 rounded-lg shadow">
-                    <div className="text-2xl font-bold text-blue-600">{testimonials.length}</div>
+                    <div className="text-2xl font-bold text-accent-600">{testimonials.length}</div>
                     <div className="text-sm text-gray-600">Total Testimonials</div>
                 </div>
                 <div className="bg-white p-4 rounded-lg shadow">
@@ -297,7 +297,7 @@ const TestimonialsManagement = () => {
                     <div className="text-sm text-gray-600">Featured Testimonials</div>
                 </div>
                 <div className="bg-white p-4 rounded-lg shadow">
-                    <div className="text-2xl font-bold text-purple-600">
+                    <div className="text-2xl font-bold text-primary-600">
                         {testimonials.filter(t => t.rating === 5).length}
                     </div>
                     <div className="text-sm text-gray-600">5-Star Reviews</div>
@@ -391,7 +391,7 @@ const TestimonialsManagement = () => {
                     <p className="text-gray-600 mb-4">Start by adding your first customer testimonial.</p>
                     <button
                         onClick={handleAdd}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+                        className="bg-accent-600 hover:bg-accent-700 text-white px-4 py-2 rounded-md"
                     >
                         Add Testimonial
                     </button>
@@ -472,7 +472,7 @@ const TestimonialsManagement = () => {
                                     onChange={handleUploadImage}
                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
-                                {uploading && <p className="text-sm text-blue-600 mt-1">Uploading...</p>}
+                                {uploading && <p className="text-sm text-accent-600 mt-1">Uploading...</p>}
                             </div>
                         </div>
                     </div>
@@ -568,7 +568,7 @@ const TestimonialsManagement = () => {
                         <button
                             type="submit"
                             disabled={uploading}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                            className="px-4 py-2 bg-accent-600 text-white rounded-md hover:bg-accent-700 disabled:opacity-50"
                         >
                             {uploading ? 'Uploading...' : (showEditModal ? 'Update' : 'Create')}
                         </button>

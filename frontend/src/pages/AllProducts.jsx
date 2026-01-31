@@ -133,7 +133,7 @@ const AllProducts = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-600"></div>
       </div>
     );
   }
@@ -145,7 +145,7 @@ const AllProducts = () => {
         <h1 className="text-3xl font-bold text-gray-800">All Products</h1>
         <button 
           onClick={() => navigate('/admin-panel/add-product')}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+          className="bg-accent-600 hover:bg-accent-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
         >
           <FaPlus />
           <span>Add Product</span>
@@ -308,7 +308,7 @@ const AllProducts = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-accent-100 text-accent-800">
                         {product.category}
                       </span>
                     </td>
@@ -341,7 +341,7 @@ const AllProducts = () => {
                       <div className="flex space-x-2">
                         <button 
                           onClick={() => navigate(`/product/${product._id}`)}
-                          className="text-blue-600 hover:text-blue-900" 
+                          className="text-accent-600 hover:text-accent-900" 
                           title="View"
                         >
                           <FaEye />
@@ -407,7 +407,7 @@ const AllProducts = () => {
                     onClick={() => setCurrentPage(i + 1)}
                     className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                       currentPage === i + 1
-                        ? 'z-10 bg-blue-50 border-blue-500 text-blue-600'
+                        ? 'z-10 bg-blue-50 border-accent-500 text-accent-600'
                         : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
                     }`}
                   >

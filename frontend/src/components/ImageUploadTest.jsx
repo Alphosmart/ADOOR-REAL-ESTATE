@@ -78,7 +78,7 @@ const ImageUploadTest = () => {
           className={`w-full py-2 px-4 rounded-md font-medium ${
             uploading
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700'
+              : 'bg-accent-600 hover:bg-accent-700'
           } text-white transition-colors`}
         >
           {uploading ? 'Uploading...' : 'Upload Image'}

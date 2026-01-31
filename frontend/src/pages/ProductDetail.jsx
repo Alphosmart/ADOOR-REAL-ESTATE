@@ -306,7 +306,7 @@ const ProductDetail = () => {
                             <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">
                                 {product.status}
                             </span>
-                            <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium capitalize">
+                            <span className="bg-accent-100 text-accent-800 px-2 py-1 rounded text-sm font-medium capitalize">
                                 {product.condition}
                             </span>
                         </div>

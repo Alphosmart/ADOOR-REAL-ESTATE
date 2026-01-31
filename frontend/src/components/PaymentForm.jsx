@@ -141,7 +141,7 @@ const StripePaymentForm = ({ onPaymentSuccess, orderData, totalAmount }) => {
                 <button
                     type="submit"
                     disabled={!stripe || isProcessing}
-                    className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium transition-colors"
+                    className="w-full bg-accent-600 text-white py-3 px-4 rounded-lg hover:bg-accent-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium transition-colors"
                 >
                     {isProcessing ? (
                         <>

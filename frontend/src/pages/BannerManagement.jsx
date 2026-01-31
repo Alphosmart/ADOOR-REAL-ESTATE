@@ -238,7 +238,7 @@ const BannerManagement = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-64">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-600"></div>
             </div>
         );
     }
@@ -253,7 +253,7 @@ const BannerManagement = () => {
                         resetForm();
                         setShowAddModal(true);
                     }}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                    className="bg-accent-600 hover:bg-accent-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
                 >
                     <FaPlus />
                     <span>Add Banner</span>
@@ -348,7 +348,7 @@ const BannerManagement = () => {
                             resetForm();
                             setShowAddModal(true);
                         }}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
+                        className="bg-accent-600 hover:bg-accent-700 text-white px-6 py-2 rounded-lg"
                     >
                         Create First Banner
                     </button>
@@ -487,7 +487,7 @@ const BannerManagement = () => {
                         <button
                             type="submit"
                             disabled={uploading}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                            className="px-4 py-2 bg-accent-600 text-white rounded-md hover:bg-accent-700 disabled:opacity-50"
                         >
                             {uploading ? 'Uploading...' : (showEditModal ? 'Update' : 'Create')}
                         </button>

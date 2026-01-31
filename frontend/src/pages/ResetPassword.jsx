@@ -123,7 +123,7 @@ const ResetPassword = () => {
       <section className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full text-center">
           <div className="bg-white rounded-lg shadow-sm p-8">
-            <div className="animate-spin mx-auto h-8 w-8 border-4 border-blue-600 border-t-transparent rounded-full"></div>
+            <div className="animate-spin mx-auto h-8 w-8 border-4 border-accent-600 border-t-transparent rounded-full"></div>
             <p className="mt-4 text-gray-600">Verifying reset link...</p>
           </div>
         </div>
@@ -145,7 +145,7 @@ const ResetPassword = () => {
             <p className="mt-2 text-gray-600">This password reset link is invalid or has expired.</p>
             <Link
               to="/forgot-password"
-              className="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              className="mt-4 inline-block bg-accent-600 text-white px-4 py-2 rounded-md hover:bg-accent-700"
             >
               Request New Reset Link
             </Link>
@@ -182,7 +182,7 @@ const ResetPassword = () => {
                   required
                   value={formData.newPassword}
                   onChange={handleInputChange}
-                  className="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-accent-500 focus:z-10 sm:text-sm"
                   placeholder="Enter new password"
                 />
                 <button
@@ -217,7 +217,7 @@ const ResetPassword = () => {
                 required
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-accent-500 focus:z-10 sm:text-sm"
                 placeholder="Confirm new password"
               />
             </div>
@@ -225,7 +225,7 @@ const ResetPassword = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <div className="flex items-center">
@@ -247,7 +247,7 @@ const ResetPassword = () => {
             Remember your password?{' '}
             <Link
               to="/login"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-accent-600 hover:text-accent-500"
             >
               Sign in here
             </Link>

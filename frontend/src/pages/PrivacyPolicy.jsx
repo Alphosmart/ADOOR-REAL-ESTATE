@@ -8,8 +8,8 @@ const PrivacyPolicy = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <div className="bg-blue-100 rounded-full p-4">
-              <FaShieldAlt className="text-3xl text-blue-600" />
+            <div className="bg-accent-100 rounded-full p-4">
+              <FaShieldAlt className="text-3xl text-accent-600" />
             </div>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
@@ -104,8 +104,8 @@ const PrivacyPolicy = () => {
                 </ul>
               </div>
               <div className="bg-blue-50 rounded-lg p-4">
-                <h3 className="font-medium text-blue-800 mb-2">Your Responsibilities</h3>
-                <ul className="text-sm text-blue-700 space-y-1">
+                <h3 className="font-medium text-accent-800 mb-2">Your Responsibilities</h3>
+                <ul className="text-sm text-accent-700 space-y-1">
                   <li>Keep your account credentials secure</li>
                   <li>Use strong passwords</li>
                   <li>Log out of shared devices</li>
@@ -165,11 +165,11 @@ const PrivacyPolicy = () => {
               </p>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="flex items-center space-x-3">
-                  <FaEnvelope className="text-blue-600" />
+                  <FaEnvelope className="text-accent-600" />
                   <span className="text-gray-700">privacy@adoorrealestate.com</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <FaPhoneAlt className="text-blue-600" />
+                  <FaPhoneAlt className="text-accent-600" />
                   <span className="text-gray-700">+1 (555) 123-4567</span>
                 </div>
               </div>

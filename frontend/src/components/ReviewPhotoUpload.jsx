@@ -106,7 +106,7 @@ const ReviewPhotoUpload = ({ photos, onPhotosChange, maxPhotos = 5 }) => {
         <div
           className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
             dragActive 
-              ? 'border-blue-500 bg-blue-50' 
+              ? 'border-accent-500 bg-blue-50' 
               : 'border-gray-300 hover:border-gray-400'
           } ${uploadingPhotos ? 'opacity-50 pointer-events-none' : ''}`}
           onDragEnter={handleDrag}
@@ -133,7 +133,7 @@ const ReviewPhotoUpload = ({ photos, onPhotosChange, maxPhotos = 5 }) => {
                 <span>Uploading photos...</span>
               ) : (
                 <span>
-                  Drop photos here or <span className="text-blue-600 underline">browse</span>
+                  Drop photos here or <span className="text-accent-600 underline">browse</span>
                   <br />
                   <span className="text-xs text-gray-500">
                     Up to {maxPhotos - photos.length} more photos (Max 5MB each)

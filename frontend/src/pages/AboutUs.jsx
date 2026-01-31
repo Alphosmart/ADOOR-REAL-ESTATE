@@ -318,13 +318,13 @@ const AboutUs = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="/" 
-                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                className="bg-white text-accent-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 View Properties
               </a>
               <a 
                 href="/contact-us" 
-                className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+                className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-accent-600 transition-colors"
               >
                 Contact Us
               </a>

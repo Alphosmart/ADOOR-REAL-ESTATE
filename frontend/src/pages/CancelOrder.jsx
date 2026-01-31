@@ -133,7 +133,7 @@ const CancelOrder = () => {
               <FaCheckCircle className="text-6xl text-green-500 mx-auto mb-6" />
               <h1 className="text-3xl font-bold text-gray-900 mb-4">Order Cancelled Successfully</h1>
               <p className="text-gray-600 mb-6">
-                Your order <span className="font-mono text-blue-600">#{orderNumber}</span> has been cancelled successfully.
+                Your order <span className="font-mono text-accent-600">#{orderNumber}</span> has been cancelled successfully.
               </p>
               <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
                 <h3 className="font-medium text-green-800 mb-2">What happens next?</h3>
@@ -146,7 +146,7 @@ const CancelOrder = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link 
                   to="/my-orders" 
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors"
                 >
                   View My Orders
                 </Link>
@@ -170,9 +170,9 @@ const CancelOrder = () => {
         {/* Breadcrumb */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-blue-600">Home</Link>
+            <Link to="/" className="hover:text-accent-600">Home</Link>
             <span>/</span>
-            <Link to="/help-center" className="hover:text-blue-600">Help Center</Link>
+            <Link to="/help-center" className="hover:text-accent-600">Help Center</Link>
             <span>/</span>
             <span className="text-gray-900">Cancel Order</span>
           </div>
@@ -224,7 +224,7 @@ const CancelOrder = () => {
                       value={orderNumber}
                       onChange={(e) => setOrderNumber(e.target.value)}
                       placeholder="Enter your order number (e.g., ORD123456789)"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                       required
                     />
                     <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -237,7 +237,7 @@ const CancelOrder = () => {
                 <button
                   type="submit"
                   disabled={loading || !orderNumber.trim()}
-                  className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2"
+                  className="w-full bg-accent-600 text-white py-3 px-6 rounded-lg hover:bg-accent-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2"
                 >
                   {loading ? (
                     <>
@@ -256,7 +256,7 @@ const CancelOrder = () => {
               <div className="mt-6 text-center">
                 <Link 
                   to="/my-orders" 
-                  className="text-blue-600 hover:underline text-sm"
+                  className="text-accent-600 hover:underline text-sm"
                 >
                   Or view all your orders →
                 </Link>
@@ -276,7 +276,7 @@ const CancelOrder = () => {
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Order Number:</span>
-                        <span className="font-mono text-blue-600">#{orderNumber}</span>
+                        <span className="font-mono text-accent-600">#{orderNumber}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Order Date:</span>
@@ -327,7 +327,7 @@ const CancelOrder = () => {
                           value={reason}
                           checked={cancelReason === reason}
                           onChange={(e) => setCancelReason(e.target.value)}
-                          className="text-blue-600 focus:ring-blue-500"
+                          className="text-accent-600 focus:ring-blue-500"
                         />
                         <span className="text-sm text-gray-700">{reason}</span>
                       </label>
@@ -414,7 +414,7 @@ const CancelOrder = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/help-center" 
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors"
             >
               Visit Help Center
             </Link>

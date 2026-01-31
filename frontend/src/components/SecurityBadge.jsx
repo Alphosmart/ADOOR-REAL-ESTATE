@@ -13,15 +13,15 @@ const SecurityBadge = ({ type = 'ssl', size = 'medium', showText = true, classNa
     verified: {
       icon: FaCheckCircle,
       text: 'Verified Business',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-100',
+      color: 'text-accent-600',
+      bgColor: 'bg-accent-100',
       description: 'Verified and trusted business'
     },
     secure: {
       icon: FaShieldAlt,
       text: 'Secure Platform',
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-100',
+      color: 'text-primary-600',
+      bgColor: 'bg-primary-100',
       description: 'Protected by advanced security measures'
     },
     certified: {

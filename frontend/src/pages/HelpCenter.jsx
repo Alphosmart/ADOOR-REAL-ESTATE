@@ -72,7 +72,7 @@ const HelpCenter = () => {
               <input
                 type="text"
                 placeholder="Search for help articles..."
-                className="w-full px-6 py-4 pr-12 text-lg border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="w-full px-6 py-4 pr-12 text-lg border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-accent-500 outline-none"
               />
               <FaSearch className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
             </div>
@@ -88,7 +88,7 @@ const HelpCenter = () => {
           </Link>
           
           <Link to="/returns-refunds" className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
-            <FaUndo className="text-3xl text-indigo-500 mb-4" />
+            <FaUndo className="text-3xl text-accent-500 mb-4" />
             <h3 className="text-lg font-semibold mb-2">Returns & Refunds</h3>
             <p className="text-gray-600">Start a return or check refund status</p>
           </Link>
@@ -119,7 +119,7 @@ const HelpCenter = () => {
                     <li key={itemIndex}>
                       <Link 
                         to={item.link} 
-                        className="text-gray-700 hover:text-blue-600 transition-colors block py-1"
+                        className="text-gray-700 hover:text-accent-600 transition-colors block py-1"
                       >
                         {item.title}
                       </Link>
@@ -138,7 +138,7 @@ const HelpCenter = () => {
             Can't find what you're looking for? Our support team is here to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors">
               Contact Support
             </button>
             <Link 

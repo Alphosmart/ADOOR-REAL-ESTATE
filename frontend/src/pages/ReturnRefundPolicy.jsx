@@ -31,12 +31,12 @@ const ReturnRefundPolicy = () => {
               <p className="text-sm text-gray-600">For most products</p>
             </div>
             <div className="text-center">
-              <FaCreditCard className="text-blue-600 text-2xl mx-auto mb-2" />
+              <FaCreditCard className="text-accent-600 text-2xl mx-auto mb-2" />
               <h3 className="font-medium text-gray-800">Full Refunds</h3>
               <p className="text-sm text-gray-600">Original payment method</p>
             </div>
             <div className="text-center">
-              <FaCheckCircle className="text-purple-600 text-2xl mx-auto mb-2" />
+              <FaCheckCircle className="text-primary-600 text-2xl mx-auto mb-2" />
               <h3 className="font-medium text-gray-800">Easy Process</h3>
               <p className="text-sm text-gray-600">Simple return procedure</p>
             </div>
@@ -111,8 +111,8 @@ const ReturnRefundPolicy = () => {
               
               {/* Step 1 */}
               <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 font-semibold">1</span>
+                <div className="bg-accent-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                  <span className="text-accent-600 font-semibold">1</span>
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-800 mb-2">Initiate Return Request</h3>
@@ -125,8 +125,8 @@ const ReturnRefundPolicy = () => {
 
               {/* Step 2 */}
               <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 font-semibold">2</span>
+                <div className="bg-accent-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                  <span className="text-accent-600 font-semibold">2</span>
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-800 mb-2">Receive Return Authorization</h3>
@@ -139,8 +139,8 @@ const ReturnRefundPolicy = () => {
 
               {/* Step 3 */}
               <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 font-semibold">3</span>
+                <div className="bg-accent-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                  <span className="text-accent-600 font-semibold">3</span>
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-800 mb-2">Package Item</h3>
@@ -152,8 +152,8 @@ const ReturnRefundPolicy = () => {
 
               {/* Step 4 */}
               <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 font-semibold">4</span>
+                <div className="bg-accent-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                  <span className="text-accent-600 font-semibold">4</span>
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-800 mb-2">Processing & Refund</h3>
@@ -172,8 +172,8 @@ const ReturnRefundPolicy = () => {
             <div className="space-y-4">
               
               <div className="bg-blue-50 rounded-lg p-4">
-                <h3 className="font-medium text-blue-800 mb-2">Refund Methods</h3>
-                <ul className="text-sm text-blue-700 space-y-1">
+                <h3 className="font-medium text-accent-800 mb-2">Refund Methods</h3>
+                <ul className="text-sm text-accent-700 space-y-1">
                   <li>• Refunds are issued to the original payment method</li>
                   <li>• Credit card refunds may take 3-10 business days to appear</li>
                   <li>• PayPal refunds typically process within 1-3 business days</li>
@@ -195,13 +195,13 @@ const ReturnRefundPolicy = () => {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Exchanges</h2>
             <div className="bg-purple-50 rounded-lg p-4">
-              <p className="text-purple-700 mb-4">
+              <p className="text-primary-700 mb-4">
                 We currently process exchanges as a return followed by a new purchase. This ensures 
                 you get the current pricing and availability for your desired item.
               </p>
               <div className="space-y-2">
-                <h3 className="font-medium text-purple-800">Exchange Process:</h3>
-                <ol className="list-decimal pl-6 text-sm text-purple-700 space-y-1">
+                <h3 className="font-medium text-primary-800">Exchange Process:</h3>
+                <ol className="list-decimal pl-6 text-sm text-primary-700 space-y-1">
                   <li>Initiate a return for the original item</li>
                   <li>Place a new order for the desired item</li>
                   <li>Once the return is processed, you'll receive a refund</li>
@@ -260,16 +260,16 @@ const ReturnRefundPolicy = () => {
               </p>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <h3 className="font-medium text-blue-800 mb-2">Contact Information</h3>
-                  <ul className="text-sm text-blue-700 space-y-1">
+                  <h3 className="font-medium text-accent-800 mb-2">Contact Information</h3>
+                  <ul className="text-sm text-accent-700 space-y-1">
                     <li><strong>Email:</strong> returns@adoorrealestate.com</li>
                     <li><strong>Phone:</strong> +1 (555) 123-4567</li>
                     <li><strong>Hours:</strong> Mon-Fri 9AM-6PM EST</li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-medium text-blue-800 mb-2">Return Address</h3>
-                  <address className="text-sm text-blue-700 not-italic">
+                  <h3 className="font-medium text-accent-800 mb-2">Return Address</h3>
+                  <address className="text-sm text-accent-700 not-italic">
                     Adoor Real Estate Returns<br />
                     [Your Return Address]<br />
                     [City, State ZIP]<br />

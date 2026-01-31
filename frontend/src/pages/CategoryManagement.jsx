@@ -259,7 +259,7 @@ const CategoryManagement = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-64">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-600"></div>
             </div>
         );
     }
@@ -274,7 +274,7 @@ const CategoryManagement = () => {
                 </div>
                 <button
                     onClick={() => setShowAddForm(!showAddForm)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                    className="bg-accent-600 hover:bg-accent-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
                 >
                     <FaPlus />
                     <span>Add Category</span>
@@ -374,7 +374,7 @@ const CategoryManagement = () => {
                                                 <span className="text-sm text-gray-500">
                                                     Slug: {category.name}
                                                     {category.isDefault && (
-                                                        <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded">
+                                                        <span className="ml-2 px-2 py-1 bg-accent-100 text-accent-600 text-xs rounded">
                                                             Default
                                                         </span>
                                                     )}
@@ -406,7 +406,7 @@ const CategoryManagement = () => {
                                         <>
                                             <button
                                                 onClick={() => handleEditCategory(category)}
-                                                className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg"
+                                                className="p-2 text-accent-600 hover:bg-accent-100 rounded-lg"
                                                 title="Edit category"
                                             >
                                                 <FaEdit />
@@ -436,9 +436,9 @@ const CategoryManagement = () => {
             </div>
 
             {/* Info Box */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h4 className="font-semibold text-blue-800 mb-2">📝 Category Management Tips</h4>
-                <ul className="text-blue-700 text-sm space-y-1">
+            <div className="bg-blue-50 border border-accent-200 rounded-lg p-4">
+                <h4 className="font-semibold text-accent-800 mb-2">📝 Category Management Tips</h4>
+                <ul className="text-accent-700 text-sm space-y-1">
                     <li>• Categories marked as "Default" cannot be deleted but can be edited</li>
                     <li>• Category names are automatically converted to URL-friendly slugs</li>
                     <li>• Deleting a category will not delete products, but they will lose their category assignment</li>

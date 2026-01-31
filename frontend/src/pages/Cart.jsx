@@ -62,7 +62,7 @@ const Cart = () => {
                     <p className="text-gray-600 mb-6">Looks like you haven't added any items to your cart yet.</p>
                     <Link 
                         to="/"
-                        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block"
+                        className="bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition-colors inline-block"
                     >
                         Continue Shopping
                     </Link>
@@ -99,13 +99,13 @@ const Cart = () => {
                                 
                                 <div className="flex-1">
                                     <h3 
-                                        className="text-lg font-semibold text-gray-800 cursor-pointer hover:text-blue-600"
+                                        className="text-lg font-semibold text-gray-800 cursor-pointer hover:text-accent-600"
                                         onClick={() => navigate(`/product/${item._id}`)}
                                     >
                                         {item.productName}
                                     </h3>
                                     <p className="text-gray-600">{item.brandName}</p>
-                                    <p className="text-lg font-bold text-blue-600">
+                                    <p className="text-lg font-bold text-accent-600">
                                         {formatPrice(item.sellingPrice || item.price)}
                                     </p>
                                 </div>

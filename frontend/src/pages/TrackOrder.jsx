@@ -34,7 +34,7 @@ const TrackOrder = () => {
             time: '14:30',
             status: 'Package shipped',
             location: 'Warehouse, Delhi',
-            icon: <FaBox className="text-blue-500" />
+            icon: <FaBox className="text-accent-500" />
           },
           {
             date: '2025-08-09',
@@ -48,7 +48,7 @@ const TrackOrder = () => {
             time: '16:45',
             status: 'Arrived at facility',
             location: 'Distribution Center, Mumbai',
-            icon: <FaMapMarkerAlt className="text-purple-500" />
+            icon: <FaMapMarkerAlt className="text-primary-500" />
           },
           {
             date: '2025-08-12',
@@ -78,9 +78,9 @@ const TrackOrder = () => {
         {/* Breadcrumb */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-blue-600">Home</Link>
+            <Link to="/" className="hover:text-accent-600">Home</Link>
             <span>/</span>
-            <Link to="/help-center" className="hover:text-blue-600">Help Center</Link>
+            <Link to="/help-center" className="hover:text-accent-600">Help Center</Link>
             <span>/</span>
             <span className="text-gray-900">Track Order</span>
           </div>
@@ -89,7 +89,7 @@ const TrackOrder = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <FaShippingFast className="text-6xl text-blue-600" />
+            <FaShippingFast className="text-6xl text-accent-600" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Track Your Order</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -112,7 +112,7 @@ const TrackOrder = () => {
                     value={trackingNumber}
                     onChange={(e) => setTrackingNumber(e.target.value)}
                     placeholder="Enter your tracking number (e.g., AS1234567890)"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                   />
                   <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 </div>
@@ -124,7 +124,7 @@ const TrackOrder = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2"
+                className="w-full bg-accent-600 text-white py-3 px-6 rounded-lg hover:bg-accent-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2"
               >
                 {loading ? (
                   <>
@@ -150,7 +150,7 @@ const TrackOrder = () => {
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                   <div>
                     <h2 className="text-2xl font-semibold text-gray-900 mb-2">Order Status</h2>
-                    <p className="text-gray-600">Tracking Number: <span className="font-mono text-blue-600">{trackingResult.trackingNumber}</span></p>
+                    <p className="text-gray-600">Tracking Number: <span className="font-mono text-accent-600">{trackingResult.trackingNumber}</span></p>
                   </div>
                   <div className="mt-4 md:mt-0">
                     <div className="flex items-center space-x-2">
@@ -162,10 +162,10 @@ const TrackOrder = () => {
                 </div>
                 <div className="mt-4 p-4 bg-blue-50 rounded-lg">
                   <div className="flex items-center space-x-3">
-                    <FaMapMarkerAlt className="text-blue-600" />
+                    <FaMapMarkerAlt className="text-accent-600" />
                     <div>
-                      <p className="font-medium text-blue-900">Current Status: {trackingResult.status}</p>
-                      <p className="text-blue-700">{trackingResult.currentLocation}</p>
+                      <p className="font-medium text-accent-900">Current Status: {trackingResult.status}</p>
+                      <p className="text-accent-700">{trackingResult.currentLocation}</p>
                     </div>
                   </div>
                 </div>
@@ -210,7 +210,7 @@ const TrackOrder = () => {
               {trackingExamples.map((example, index) => (
                 <div key={index} className="text-center">
                   <div className="bg-white rounded-lg p-4 shadow-sm">
-                    <p className="font-mono text-lg text-blue-600 mb-2">{example.format}</p>
+                    <p className="font-mono text-lg text-accent-600 mb-2">{example.format}</p>
                     <p className="text-sm text-gray-600">{example.description}</p>
                   </div>
                 </div>
@@ -219,7 +219,7 @@ const TrackOrder = () => {
             <div className="text-center mt-6">
               <p className="text-gray-600">
                 You can find your tracking number in the order confirmation email or in your 
-                <Link to="/my-orders" className="text-blue-600 hover:underline ml-1">order history</Link>.
+                <Link to="/my-orders" className="text-accent-600 hover:underline ml-1">order history</Link>.
               </p>
             </div>
           </div>
@@ -257,7 +257,7 @@ const TrackOrder = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/help-center" 
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors"
             >
               Visit Help Center
             </Link>
