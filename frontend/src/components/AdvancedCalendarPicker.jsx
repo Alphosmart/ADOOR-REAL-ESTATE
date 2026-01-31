@@ -186,7 +186,7 @@ const AdvancedCalendarPicker = ({
                                     <button
                                         key={preset.label}
                                         onClick={() => applyPreset(preset)}
-                                        className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-blue-50 hover:text-accent-600 rounded transition-colors"
+                                        className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-primary-50 hover:text-accent-600 rounded transition-colors"
                                         type="button"
                                     >
                                         {preset.label}
@@ -194,7 +194,7 @@ const AdvancedCalendarPicker = ({
                                 ))}
                                 <button
                                     onClick={resetToToday}
-                                    className="w-full text-left px-3 py-2 text-sm text-accent-600 hover:bg-blue-50 rounded transition-colors font-medium"
+                                    className="w-full text-left px-3 py-2 text-sm text-accent-600 hover:bg-primary-50 rounded transition-colors font-medium"
                                     type="button"
                                 >
                                     Reset to Last Week
@@ -272,7 +272,7 @@ const AdvancedCalendarPicker = ({
                                                         ${!isCurrentMonth ? 'text-gray-300' : 'text-gray-900'}
                                                         ${isSelected ? 'bg-accent-600 text-white font-semibold' : ''}
                                                         ${isInRange && !isSelected ? 'bg-accent-100 text-accent-700' : ''}
-                                                        ${isToday && !isSelected && !isInRange ? 'bg-blue-50 text-accent-600 font-semibold' : ''}
+                                                        ${isToday && !isSelected && !isInRange ? 'bg-gray-50 text-accent-600 font-semibold' : ''}
                                                         ${isCurrentMonth && !isSelected && !isInRange ? 'hover:bg-gray-100' : ''}
                                                     `}
                                                 >

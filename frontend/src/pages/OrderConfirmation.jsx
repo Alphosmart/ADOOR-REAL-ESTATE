@@ -105,7 +105,7 @@ const OrderConfirmation = () => {
                     </div>
 
                     {orderData.paymentId && (
-                        <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                        <div className="mt-4 p-3 bg-gray-50 rounded-lg">
                             <p className="text-sm text-accent-800">
                                 <span className="font-medium">Payment ID:</span> {orderData.paymentId}
                             </p>

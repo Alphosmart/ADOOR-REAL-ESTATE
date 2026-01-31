@@ -328,7 +328,7 @@ const Settings = () => {
 
   const renderNotificationSettings = () => (
     <div className="space-y-6">
-      <div className="bg-blue-50 border border-accent-200 rounded-lg p-4 mb-6">
+      <div className="bg-gray-50 border border-accent-200 rounded-lg p-4 mb-6">
         <h3 className="text-lg font-medium text-accent-800 mb-2">Email Notifications</h3>
         <p className="text-sm text-accent-700">Configure when the system sends email notifications</p>
       </div>
@@ -517,7 +517,7 @@ const Settings = () => {
 
   const renderPaymentSettings = () => (
     <div className="space-y-6">
-      <div className="bg-blue-50 border border-accent-200 rounded-lg p-6">
+      <div className="bg-gray-50 border border-accent-200 rounded-lg p-6">
         <div className="flex items-start">
           <FaCreditCard className="text-accent-600 text-2xl mt-1 mr-4" />
           <div className="flex-1">
@@ -636,7 +636,7 @@ const Settings = () => {
 
         {/* Backup Statistics */}
         {backupStats && (
-          <div className="bg-blue-50 border border-accent-200 rounded-lg p-4">
+          <div className="bg-gray-50 border border-accent-200 rounded-lg p-4">
             <h3 className="text-lg font-medium text-accent-800 mb-3">Backup Statistics</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div className="text-center">

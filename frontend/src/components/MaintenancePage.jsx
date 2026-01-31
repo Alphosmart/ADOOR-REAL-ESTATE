@@ -12,7 +12,7 @@ const MaintenancePage = () => {
         progressPercentage: 45,
         showProgressBar: true,
         showContactInfo: true,
-        backgroundColor: "from-blue-50 to-indigo-100",
+        backgroundColor: "from-gray-50 to-gray-100",
         buttonText: "Refresh Page"
     });
 

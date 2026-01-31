@@ -367,7 +367,7 @@ const EnhancedSearchResults = () => {
                                                 setSortDropdownOpen(false);
                                             }}
                                             className={`w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 ${
-                                                filters.sortBy === option.value ? 'bg-blue-50 text-accent-700' : 'text-gray-700'
+                                                filters.sortBy === option.value ? 'bg-gray-50 text-accent-700' : 'text-gray-700'
                                             }`}
                                         >
                                             <span>{option.icon}</span>
@@ -534,7 +534,7 @@ const EnhancedSearchResults = () => {
                             {/* Advanced Filters Toggle */}
                             <button
                                 onClick={() => setShowFilters(!showFilters)}
-                                className="flex items-center gap-1 px-3 py-1 text-sm text-accent-600 border border-accent-200 rounded-full hover:bg-blue-50"
+                                className="flex items-center gap-1 px-3 py-1 text-sm text-accent-600 border border-accent-200 rounded-full hover:bg-primary-50"
                             >
                                 <FaFilter className="text-xs" />
                                 More Filters

@@ -782,7 +782,7 @@ const PaymentConfiguration = () => {
                 {activeTab === 'commission' && (
                     <div className="bg-white rounded-lg shadow-md p-6">
                         <h2 className="text-xl font-semibold text-gray-800 mb-4">Commission Calculator</h2>
-                        <div className="bg-blue-50 p-4 rounded-lg">
+                        <div className="bg-gray-50 p-4 rounded-lg">
                             <p className="text-sm text-accent-800">
                                 Current commission: {paymentConfig.general.commission.percentage}% + 
                                 {paymentConfig.general.defaultCurrency} {paymentConfig.general.commission.flatFee}

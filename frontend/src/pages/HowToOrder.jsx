@@ -122,7 +122,7 @@ const HowToOrder = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-12 bg-blue-50 rounded-lg p-8 text-center">
+        <div className="mt-12 bg-gray-50 rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold text-accent-900 mb-4">Ready to start shopping?</h2>
           <p className="text-accent-700 mb-6">
             Browse our products and place your first order today!

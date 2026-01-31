@@ -171,7 +171,7 @@ const ReturnRefundPolicy = () => {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Refund Information</h2>
             <div className="space-y-4">
               
-              <div className="bg-blue-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="font-medium text-accent-800 mb-2">Refund Methods</h3>
                 <ul className="text-sm text-accent-700 space-y-1">
                   <li>• Refunds are issued to the original payment method</li>
@@ -254,7 +254,7 @@ const ReturnRefundPolicy = () => {
           {/* Contact Information */}
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Need Help?</h2>
-            <div className="bg-blue-50 rounded-lg p-6">
+            <div className="bg-gray-50 rounded-lg p-6">
               <p className="text-gray-700 mb-4">
                 Our customer service team is here to help with your return or refund questions:
               </p>

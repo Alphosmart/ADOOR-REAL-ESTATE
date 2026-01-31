@@ -249,7 +249,7 @@ const AdminContactMessages = () => {
                                         {selectedMessage.adminNotes && (
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700">Admin Notes:</label>
-                                                <div className="bg-blue-50 p-3 rounded-md">
+                                                <div className="bg-gray-50 p-3 rounded-md">
                                                     <p className="text-gray-900">{selectedMessage.adminNotes}</p>
                                                 </div>
                                             </div>

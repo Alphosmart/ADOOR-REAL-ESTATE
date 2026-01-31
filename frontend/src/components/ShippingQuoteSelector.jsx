@@ -154,7 +154,7 @@ const ShippingQuoteSelector = ({ order, onSelectShipping, onClose }) => {
                                     key={quote._id}
                                     className={`border rounded-lg p-4 cursor-pointer transition-colors ${
                                         selectedQuote?._id === quote._id
-                                            ? 'border-accent-500 bg-blue-50'
+                                            ? 'border-accent-500 bg-gray-50'
                                             : 'border-gray-200 hover:border-gray-300'
                                     }`}
                                     onClick={() => setSelectedQuote(quote)}

@@ -202,7 +202,7 @@ const LandingPage = () => {
       </Link>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 text-white overflow-hidden">
+      <section className="relative bg-gradient-to-br from-accent-800 via-accent-700 to-primary-500 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative container mx-auto px-4 py-20 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -368,7 +368,7 @@ const LandingPage = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gradient-to-r from-gray-50 to-blue-50">
+      <section className="py-20 bg-gradient-to-r from-gray-50 to-gray-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Premium Services</h2>
@@ -549,7 +549,7 @@ const LandingPage = () => {
             <Link 
               to="/search" 
               onClick={() => trackShopButtonClick('final_cta', '/search')}
-              className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:from-green-600 hover:to-blue-700 transition-all transform hover:scale-105 inline-flex items-center gap-3 shadow-2xl"
+              className="bg-gradient-to-r from-primary-500 to-accent-800 text-white px-10 py-5 rounded-xl font-bold text-xl hover:from-primary-600 hover:to-accent-900 transition-all transform hover:scale-105 inline-flex items-center gap-3 shadow-2xl"
             >
               🏠 Browse Properties Now <FaArrowRight />
             </Link>

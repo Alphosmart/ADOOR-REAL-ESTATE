@@ -250,7 +250,7 @@ const MyOrders = () => {
                                     {canTrackOrder(order.orderStatus) && (
                                         <Link
                                             to={`/order-tracking/${order._id}`}
-                                            className="text-accent-600 hover:text-accent-800 flex items-center gap-1 px-2 py-1 border border-accent-600 rounded hover:bg-blue-50 transition-colors"
+                                            className="text-accent-600 hover:text-accent-800 flex items-center gap-1 px-2 py-1 border border-accent-600 rounded hover:bg-primary-50 transition-colors"
                                         >
                                             <FaTruck />
                                             Track Order

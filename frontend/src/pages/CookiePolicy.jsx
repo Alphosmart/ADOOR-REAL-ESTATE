@@ -149,7 +149,7 @@ const CookiePolicy = () => {
                 understanding how you use our site.
               </p>
               
-              <div className="bg-blue-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="font-medium text-accent-800 mb-2">Types of Information Cookies Store</h3>
                 <ul className="text-sm text-accent-700 space-y-1">
                   <li>• Login status and session information</li>
@@ -320,7 +320,7 @@ const CookiePolicy = () => {
               </p>
               
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-blue-50 rounded-lg p-4">
+                <div className="bg-gray-50 rounded-lg p-4">
                   <h3 className="font-medium text-accent-800 mb-2">Google Services</h3>
                   <ul className="text-sm text-accent-700 space-y-1">
                     <li>• Google Analytics (analytics)</li>
@@ -395,7 +395,7 @@ const CookiePolicy = () => {
                 </div>
               </div>
 
-              <div className="bg-blue-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="font-medium text-accent-800 mb-2">Opt-Out Tools</h3>
                 <p className="text-accent-700 text-sm mb-3">
                   You can opt out of certain types of tracking using these tools:
@@ -467,7 +467,7 @@ const CookiePolicy = () => {
           {/* Contact Information */}
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Contact Us</h2>
-            <div className="bg-blue-50 rounded-lg p-6">
+            <div className="bg-gray-50 rounded-lg p-6">
               <p className="text-gray-700 mb-4">
                 If you have any questions about our use of cookies, please contact us:
               </p>

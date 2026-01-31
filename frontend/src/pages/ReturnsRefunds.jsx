@@ -226,7 +226,7 @@ const ReturnsRefunds = () => {
                     </div>
                   </div>
                   
-                  <div className="bg-blue-50 border border-accent-200 rounded-lg p-4">
+                  <div className="bg-gray-50 border border-accent-200 rounded-lg p-4">
                     <div className="flex items-start space-x-3">
                       <FaInfoCircle className="text-accent-500 mt-1 flex-shrink-0" />
                       <div>
@@ -251,7 +251,7 @@ const ReturnsRefunds = () => {
                 <h2 className="text-2xl font-semibold text-gray-900 mb-6">Refund Methods & Timeline</h2>
                 <div className="space-y-4">
                   {refundMethods.map((method, index) => (
-                    <div key={index} className={`border rounded-lg p-4 ${method.preferred ? 'border-accent-200 bg-blue-50' : 'border-gray-200'}`}>
+                    <div key={index} className={`border rounded-lg p-4 ${method.preferred ? 'border-accent-200 bg-gray-50' : 'border-gray-200'}`}>
                       <div className="flex justify-between items-center">
                         <div>
                           <h3 className={`font-medium ${method.preferred ? 'text-accent-900' : 'text-gray-900'}`}>

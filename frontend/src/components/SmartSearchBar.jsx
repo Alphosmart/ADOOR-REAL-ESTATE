@@ -248,7 +248,7 @@ const SmartSearchBar = ({
                                     key={`suggestion-${index}`}
                                     onClick={() => handleSearch(suggestion.text)}
                                     className={`w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center gap-3 group ${
-                                        selectedIndex === index ? 'bg-blue-50 text-accent-700' : 'text-gray-700'
+                                        selectedIndex === index ? 'bg-gray-50 text-accent-700' : 'text-gray-700'
                                     }`}
                                 >
                                     {getSuggestionIcon(suggestion.type)}
@@ -278,7 +278,7 @@ const SmartSearchBar = ({
                                 <div
                                     key={`history-${index}`}
                                     className={`group flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-100 ${
-                                        selectedIndex === suggestions.length + index ? 'bg-blue-50' : ''
+                                        selectedIndex === suggestions.length + index ? 'bg-gray-50' : ''
                                     }`}
                                 >
                                     <FaHistory className="text-gray-400 text-sm" />
@@ -314,7 +314,7 @@ const SmartSearchBar = ({
                                     key={`popular-${index}`}
                                     onClick={() => handleSearch(term)}
                                     className={`w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center gap-3 ${
-                                        selectedIndex === suggestions.length + searchHistory.length + index ? 'bg-blue-50' : ''
+                                        selectedIndex === suggestions.length + searchHistory.length + index ? 'bg-gray-50' : ''
                                     }`}
                                 >
                                     <FaFire className="text-orange-500 text-sm" />

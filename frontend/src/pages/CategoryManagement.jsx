@@ -436,7 +436,7 @@ const CategoryManagement = () => {
             </div>
 
             {/* Info Box */}
-            <div className="bg-blue-50 border border-accent-200 rounded-lg p-4">
+            <div className="bg-gray-50 border border-accent-200 rounded-lg p-4">
                 <h4 className="font-semibold text-accent-800 mb-2">📝 Category Management Tips</h4>
                 <ul className="text-accent-700 text-sm space-y-1">
                     <li>• Categories marked as "Default" cannot be deleted but can be edited</li>

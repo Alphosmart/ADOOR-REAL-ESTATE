@@ -81,7 +81,7 @@ const DevLogin = () => {
                     </div>
                 </div>
 
-                <div className="mt-6 bg-blue-50 border border-accent-200 rounded-md p-4">
+                <div className="mt-6 bg-gray-50 border border-accent-200 rounded-md p-4">
                     <h4 className="text-sm font-medium text-accent-800 mb-2">What you can test:</h4>
                     <ul className="text-sm text-accent-700 space-y-1">
                         <li>• Site Content Management (edit page content)</li>

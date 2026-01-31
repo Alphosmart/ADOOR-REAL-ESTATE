@@ -283,7 +283,7 @@ const ContactUs = () => {
                         </div>
 
                         {/* Response Time Info */}
-                        <div className="bg-blue-50 rounded-lg p-6">
+                        <div className="bg-gray-50 rounded-lg p-6">
                             <h3 className="text-lg font-semibold text-accent-900 mb-3">Response Times</h3>
                             <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">

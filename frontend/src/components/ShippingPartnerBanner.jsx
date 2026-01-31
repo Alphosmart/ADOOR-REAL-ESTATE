@@ -4,7 +4,7 @@ import { FaTruck, FaMoneyBillWave, FaClock, FaUsers, FaChartLine, FaHandshake } 
 
 const ShippingPartnerBanner = () => {
   return (
-    <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 px-4 my-12">
+    <div className="bg-gradient-to-r from-accent-800 to-accent-900 text-white py-16 px-4 my-12">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4">
@@ -90,7 +90,7 @@ const ShippingPartnerBanner = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link 
               to="/shipping-company/register"
-              className="bg-white text-accent-600 font-bold py-4 px-8 rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-lg"
+              className="bg-white text-accent-600 font-bold py-4 px-8 rounded-lg hover:bg-primary-50 transition-colors shadow-lg text-lg"
             >
               🚚 Register as Shipping Partner
             </Link>

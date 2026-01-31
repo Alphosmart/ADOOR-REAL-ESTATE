@@ -140,7 +140,7 @@ const PaymentMethodSelector = ({
                             key={method.id}
                             className={`border rounded-lg p-4 cursor-pointer transition-all ${
                                 isSelected
-                                    ? 'border-accent-500 bg-blue-50 ring-2 ring-blue-200'
+                                    ? 'border-accent-500 bg-gray-50 ring-2 ring-blue-200'
                                     : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                             }`}
                             onClick={() => handlePaymentMethodSelect(method.id)}
@@ -192,7 +192,7 @@ const PaymentMethodSelector = ({
                             Multiple Sellers in Cart
                         </span>
                     </div>
-                    <div className="bg-blue-50 p-3 rounded-lg">
+                    <div className="bg-gray-50 p-3 rounded-lg">
                         <p className="text-sm text-accent-700 mb-2">
                             Your cart contains items from {sellerGroups.length} different sellers. 
                             Only payment methods accepted by all sellers are shown.
@@ -230,7 +230,7 @@ const PaymentMethodSelector = ({
 
             {selectedPaymentMethod === 'bankTransfer' && (
                 <div className="border-t pt-4">
-                    <div className="bg-blue-50 p-3 rounded-lg">
+                    <div className="bg-gray-50 p-3 rounded-lg">
                         <div className="flex items-start">
                             <FaInfoCircle className="text-accent-500 mr-2 mt-0.5" />
                             <div className="text-sm text-accent-700">

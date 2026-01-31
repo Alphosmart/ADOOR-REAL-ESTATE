@@ -106,7 +106,7 @@ const ReviewPhotoUpload = ({ photos, onPhotosChange, maxPhotos = 5 }) => {
         <div
           className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
             dragActive 
-              ? 'border-accent-500 bg-blue-50' 
+              ? 'border-accent-500 bg-gray-50' 
               : 'border-gray-300 hover:border-gray-400'
           } ${uploadingPhotos ? 'opacity-50 pointer-events-none' : ''}`}
           onDragEnter={handleDrag}

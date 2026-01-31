@@ -218,7 +218,7 @@ const ShippingInfo = () => {
                 </div>
 
                 {/* Contact Information */}
-                <div className="bg-blue-50 rounded-lg p-6 mt-8 text-center">
+                <div className="bg-gray-50 rounded-lg p-6 mt-8 text-center">
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">Need Help with Shipping?</h3>
                     <p className="text-gray-600 mb-4">
                         Have questions about shipping options or need assistance with your order?

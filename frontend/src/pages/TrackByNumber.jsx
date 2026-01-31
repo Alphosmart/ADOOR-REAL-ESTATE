@@ -175,7 +175,7 @@ const TrackByNumber = () => {
 
                         {/* Estimated Delivery */}
                         {trackingData.trackingInfo?.estimatedDelivery && (
-                            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
                                 <p className="text-accent-800">
                                     <strong>Estimated Delivery:</strong> {formatDate(trackingData.trackingInfo.estimatedDelivery)}
                                 </p>

@@ -588,7 +588,7 @@ const Checkout = () => {
 
                                 {selectedPaymentMethod === 'paypal' && (
                                     <div className="space-y-4">
-                                        <div className="bg-blue-50 p-4 rounded-lg">
+                                        <div className="bg-gray-50 p-4 rounded-lg">
                                             <h3 className="font-semibold text-accent-800 mb-2">PayPal Payment</h3>
                                             <p className="text-accent-700 text-sm">
                                                 You will be redirected to PayPal to complete your payment securely.
@@ -643,7 +643,7 @@ const Checkout = () => {
 
                                 {selectedPaymentMethod === 'bankTransfer' && (
                                     <div className="space-y-4">
-                                        <div className="bg-blue-50 p-4 rounded-lg">
+                                        <div className="bg-gray-50 p-4 rounded-lg">
                                             <h3 className="font-semibold text-accent-800 mb-2">Bank Transfer Instructions</h3>
                                             <p className="text-accent-700 text-sm mb-3">
                                                 After confirming your order, you will receive bank details via email. 

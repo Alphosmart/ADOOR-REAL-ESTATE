@@ -103,7 +103,7 @@ const PrivacyPolicy = () => {
                   <li>Access controls and monitoring</li>
                 </ul>
               </div>
-              <div className="bg-blue-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="font-medium text-accent-800 mb-2">Your Responsibilities</h3>
                 <ul className="text-sm text-accent-700 space-y-1">
                   <li>Keep your account credentials secure</li>
@@ -159,7 +159,7 @@ const PrivacyPolicy = () => {
           {/* Contact Information */}
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Contact Us</h2>
-            <div className="bg-blue-50 rounded-lg p-6">
+            <div className="bg-gray-50 rounded-lg p-6">
               <p className="text-gray-700 mb-4">
                 If you have questions about this privacy policy or your personal data, please contact us:
               </p>

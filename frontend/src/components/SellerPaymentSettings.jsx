@@ -245,7 +245,7 @@ const SellerPaymentSettings = () => {
                     </div>
 
                     {/* Selected methods summary */}
-                    <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+                    <div className="mt-8 p-4 bg-gray-50 rounded-lg">
                         <h3 className="font-semibold text-accent-800 mb-2">Currently Accepting:</h3>
                         <div className="flex flex-wrap gap-2">
                             {paymentPreferences.map(methodId => {

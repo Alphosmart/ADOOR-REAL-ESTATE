@@ -160,7 +160,7 @@ const TrackOrder = () => {
                     </div>
                   </div>
                 </div>
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                   <div className="flex items-center space-x-3">
                     <FaMapMarkerAlt className="text-accent-600" />
                     <div>

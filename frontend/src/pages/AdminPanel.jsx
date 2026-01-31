@@ -83,7 +83,7 @@ const AdminPanel = () => {
                 <Link
                   key={index}
                   to={item.path}
-                  className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-accent-600 transition duration-200"
+                  className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-primary-50 hover:text-accent-600 transition duration-200"
                 >
                   <span className="text-lg">{item.icon}</span>
                   <span className="font-medium">{item.label}</span>

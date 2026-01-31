@@ -407,7 +407,7 @@ const AllProducts = () => {
                     onClick={() => setCurrentPage(i + 1)}
                     className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                       currentPage === i + 1
-                        ? 'z-10 bg-blue-50 border-accent-500 text-accent-600'
+                        ? 'z-10 bg-gray-50 border-accent-500 text-accent-600'
                         : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
                     }`}
                   >

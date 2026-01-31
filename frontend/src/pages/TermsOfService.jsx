@@ -42,7 +42,7 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Account Registration</h2>
             <div className="space-y-4">
-              <div className="bg-blue-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="font-medium text-accent-800 mb-2">Account Requirements</h3>
                 <ul className="text-sm text-accent-700 space-y-1">
                   <li>• You must be 18 years or older</li>
@@ -175,7 +175,7 @@ const TermsOfService = () => {
               and software, is the property of Adoor Real Estate or its content suppliers and is protected 
               by copyright and other intellectual property laws.
             </p>
-            <div className="bg-blue-50 rounded-lg p-4">
+            <div className="bg-gray-50 rounded-lg p-4">
               <h3 className="font-medium text-accent-800 mb-2">Your Content</h3>
               <p className="text-sm text-accent-700">
                 By uploading content to our platform, you grant us a non-exclusive, worldwide license to use, 
@@ -234,7 +234,7 @@ const TermsOfService = () => {
           {/* Contact */}
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Contact Information</h2>
-            <div className="bg-blue-50 rounded-lg p-6">
+            <div className="bg-gray-50 rounded-lg p-6">
               <p className="text-gray-700 mb-4">
                 If you have questions about these Terms of Service, please contact us:
               </p>
