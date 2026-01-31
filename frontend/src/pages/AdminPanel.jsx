@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, Link } from 'react-router-dom';
-import { FaHome, FaUsers, FaBoxOpen, FaChartBar, FaCog, FaImage, FaEnvelope, FaUserCog, FaTags, FaStar } from 'react-icons/fa';
+import { FaHome, FaUsers, FaBoxOpen, FaChartBar, FaCog, FaImage, FaEnvelope, FaUserCog, FaTags, FaStar, FaUserSecret } from 'react-icons/fa';
 
 const AdminPanel = () => {
   const user = useSelector(state => state?.user?.user);
@@ -38,6 +38,11 @@ const AdminPanel = () => {
       label: 'Contact Messages',
       path: '/admin-panel/contact-messages',
       icon: <FaEnvelope />
+    },
+    {
+      label: 'Guest Inquiries',
+      path: '/admin-panel/guest-inquiries',
+      icon: <FaUserSecret />
     },
     {
       label: 'Banner Management',

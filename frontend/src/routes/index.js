@@ -37,6 +37,7 @@ import TermsOfService from '../pages/TermsOfService';
 import ReturnRefundPolicy from '../pages/ReturnRefundPolicy';
 import CookiePolicy from '../pages/CookiePolicy';
 import AdminContactMessages from '../pages/AdminContactMessages';
+import GuestInquiries from '../pages/GuestInquiries';
 import StaffManagement from '../pages/StaffManagement';
 import EmailTemplateManager from '../components/EmailTemplateManager';
 import PaymentConfiguration from '../pages/PaymentConfiguration';
@@ -244,6 +245,10 @@ const router = createBrowserRouter([
                     {
                         path: "contact-messages",
                         element: <AdminContactMessages />
+                    },
+                    {
+                        path: "guest-inquiries",
+                        element: <GuestInquiries />
                     },
                     {
                         path: "banners",

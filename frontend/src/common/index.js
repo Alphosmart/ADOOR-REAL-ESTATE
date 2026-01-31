@@ -417,6 +417,23 @@ const SummaryApi = {
     adminReorderTestimonials : {
         url : `${backendDomain}/api/admin/testimonials/reorder`,
         method : 'put'
+    },
+    // Guest Inquiry Management
+    getAllInquiries : {
+        url : `${backendDomain}/api/inquiries`,
+        method : 'get'
+    },
+    updateInquiryStatus : {
+        url : `${backendDomain}/api/inquiries/status`,
+        method : 'put'
+    },
+    updateInquiryPriority : {
+        url : `${backendDomain}/api/inquiries/priority`,
+        method : 'put'
+    },
+    respondToInquiry : {
+        url : `${backendDomain}/api/inquiries/respond`,
+        method : 'post'
     }
 }
 
