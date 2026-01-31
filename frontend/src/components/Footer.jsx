@@ -35,7 +35,7 @@ const Footer = () => {
           {/* Dynamic Company Information */}
           <div className='space-y-4'>
             <div className='flex items-center space-x-2'>
-              <div className='bg-gradient-to-r from-blue-500 to-purple-600 p-2 rounded-lg'>
+              <div className='bg-gradient-to-r from-accent-800 to-primary-500 p-2 rounded-lg'>
                 <FaHome className='text-white text-xl' />
               </div>
               <h3 className='text-xl font-bold'>{companyInfo.name}</h3>
@@ -76,11 +76,6 @@ const Footer = () => {
               <li>
                 <Link to="/about-us" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/search" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
-                  Browse Properties
                 </Link>
               </li>
               <li>
@@ -168,10 +163,6 @@ const Footer = () => {
             
             {/* Payment & Security Icons */}
             <div className='flex items-center space-x-6'>
-              <div className='flex items-center space-x-2'>
-                <FaCreditCard className='text-green-400 text-lg' />
-                <span className='text-gray-400 text-sm'>Secure Payments</span>
-              </div>
               <div className='flex items-center space-x-2'>
                 <FaShieldAlt className='text-accent-400 text-lg' />
                 <span className='text-gray-400 text-sm'>SSL Protected</span>
