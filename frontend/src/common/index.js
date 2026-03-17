@@ -1,5 +1,5 @@
 const backendDomain = process.env.NODE_ENV === 'production' 
-    ? "https://adoor-real-estate.onrender.com" 
+    ? "https://adoo-real-estate.onrender.com" 
     : "http://localhost:8080"  // Use local backend for development
 
 const SummaryApi = {

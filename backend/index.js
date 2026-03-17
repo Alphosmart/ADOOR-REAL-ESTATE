@@ -9,7 +9,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') })
 // Ensure JWT secret is available
 if (!process.env.TOKEN_SECRET_KEY) {
     // Set a fallback for production deployment
-    const fallbackSecret = 'adoor-real-estate-jwt-secret-key-' + process.env.NODE_ENV + '-' + Date.now()
+    const fallbackSecret = 'adoo-real-estate-jwt-secret-key-' + process.env.NODE_ENV + '-' + Date.now()
     process.env.TOKEN_SECRET_KEY = fallbackSecret
     console.warn('⚠️  TOKEN_SECRET_KEY not found in environment, using fallback. Please set this in production!')
 }
@@ -68,11 +68,11 @@ app.use(cors({
         'http://localhost:3001',
         'http://192.168.1.100:3000',
         'http://192.168.1.100:3001',
-        'https://adoorrealestate.onrender.com',
-        'https://adoor-real-estate.onrender.com',
-        'https://www.adoorrealestate.com',
-        'https://adoorrealestate.com',
-        'https://adoor-real-estate.vercel.app',
+        'https://adoorealestate.onrender.com',
+        'https://adoo-real-estate.onrender.com',
+        'https://www.adoorealestate.com',
+        'https://adoorealestate.com',
+        'https://adoo-real-estate.vercel.app',
         /\.onrender\.com$/,
         /\.vercel\.app$/
     ],
@@ -91,7 +91,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // Health check route
 app.get('/health', (req, res) => {
-    const FRONTEND_URL = 'https://adoorrealestate.com'
+    const FRONTEND_URL = 'https://adoorealestate.com'
     
     res.json({ 
         status: 'OK',
@@ -100,9 +100,9 @@ app.get('/health', (req, res) => {
         environment: process.env.NODE_ENV || 'development',
         architecture: 'Separate Frontend/Backend Deployments',
         deployment_info: {
-            backend_url: 'https://adoorrealestate.onrender.com',
+            backend_url: 'https://adoorealestate.onrender.com',
             frontend_url: FRONTEND_URL,
-            api_endpoints: 'https://adoorrealestate.onrender.com/api/*',
+            api_endpoints: 'https://adoorealestate.onrender.com/api/*',
             main_website: FRONTEND_URL
         },
         message: 'This is the API server. For the website, visit: ' + FRONTEND_URL

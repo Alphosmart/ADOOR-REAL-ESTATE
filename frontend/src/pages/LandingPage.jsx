@@ -55,7 +55,7 @@ const LandingPage = () => {
           role: "Interior Designer",
           image: "https://images.unsplash.com/photo-1494790108755-2616b612b788?w=100&h=100&fit=crop&crop=face",
           rating: 5,
-          text: "Adoor Real Estate has transformed my design business. The quality and variety are unmatched, and my clients are always thrilled with the results."
+          text: "Adoo Real Estate has transformed my design business. The quality and variety are unmatched, and my clients are always thrilled with the results."
         },
         {
           name: "Michael Chen",
@@ -69,7 +69,7 @@ const LandingPage = () => {
           role: "Property Investor",
           image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
           rating: 5,
-          text: "Working with Adoor Real Estate has been exceptional. Their professionalism and property selection helped me find the perfect investment property."
+          text: "Working with Adoo Real Estate has been exceptional. Their professionalism and property selection helped me find the perfect investment property."
         }
       ]);
     };
@@ -411,7 +411,7 @@ const LandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-8">Why Choose Adoor Real Estate?</h2>
+              <h2 className="text-4xl font-bold text-gray-800 mb-8">Why Choose Adoo Real Estate?</h2>
               
               <div className="space-y-6">
                 {[

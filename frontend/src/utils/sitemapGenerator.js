@@ -1,4 +1,4 @@
-// Sitemap Generator for Adoor Real Estate
+// Sitemap Generator for Adoo Real Estate
 // This can be integrated into your build process or run as a standalone script
 
 const fs = require('fs');
@@ -25,7 +25,7 @@ const categories = [
 ];
 
 function generateSitemap() {
-  const baseUrl = 'https://adoorrealestate.com';
+  const baseUrl = 'https://adoorealestate.com';
   const currentDate = new Date().toISOString();
   
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -69,7 +69,7 @@ function generateSitemap() {
 
 // Generate product-specific sitemap (this would typically fetch from database)
 function generateProductSitemap() {
-  const baseUrl = 'https://adoorrealestate.com';
+  const baseUrl = 'https://adoorealestate.com';
   const currentDate = new Date().toISOString();
   
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>

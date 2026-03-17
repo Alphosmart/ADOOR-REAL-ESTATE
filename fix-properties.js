@@ -8,7 +8,7 @@ async function fixProperties() {
         await client.connect();
         console.log('✅ Connected to MongoDB\n');
         
-        const db = client.db('adoorealestate');
+        const db = client.db('adooealestate');
         
         // Get first admin user
         const admin = await db.collection('users').findOne({ role: 'ADMIN' });
@@ -20,7 +20,7 @@ async function fixProperties() {
             
             const result = await db.collection('users').insertOne({
                 name: 'Admin User',
-                email: 'admin@adoorrealestate.com',
+                email: 'admin@adoorealestate.com',
                 password: hashedPassword,
                 role: 'ADMIN',
                 profilePic: '',

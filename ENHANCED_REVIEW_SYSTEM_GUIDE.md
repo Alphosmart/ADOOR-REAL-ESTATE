@@ -1,7 +1,7 @@
 # Enhanced Customer Review System Implementation
 
 ## Overview
-This document outlines the comprehensive enhancement of the customer review system for Adoor Real Estate, providing advanced features for better user engagement and review quality management.
+This document outlines the comprehensive enhancement of the customer review system for Adoo Real Estate, providing advanced features for better user engagement and review quality management.
 
 ## New Features Implemented
 

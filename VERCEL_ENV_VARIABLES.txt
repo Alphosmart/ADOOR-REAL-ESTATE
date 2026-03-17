@@ -1,8 +1,8 @@
-# Vercel Environment Variables for Adoor Real Estate Frontend
+# Vercel Environment Variables for Adoo Real Estate Frontend
 # Copy these key-value pairs to your Vercel project settings
 
 # === REQUIRED VARIABLES ===
-REACT_APP_API_URL=https://adoorrealestate.onrender.com
+REACT_APP_API_URL=https://adoorealestate.onrender.com
 GENERATE_SOURCEMAP=false
 BUILD_PATH=build
 PUBLIC_URL=/

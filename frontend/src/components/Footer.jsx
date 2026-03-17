@@ -18,11 +18,11 @@ const Footer = () => {
 
   // Default content fallback
   const companyInfo = footerContent?.companyInfo || {
-    name: "Adoor Real Estate",
+    name: "Adoo Real Estate",
     description: "Your premier destination for premium real estate properties and home décor solutions. Transform your space with our extensive collection from trusted sellers worldwide.",
     address: "123 Design Street, Creative District, NY 10001",
     phone: "+1 (555) 123-4567",
-    email: "info@adoorrealestate.com"
+    email: "info@adoorealestate.com"
   };
 
   return (
@@ -95,7 +95,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@adoorrealestate.com" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
+                <a href="mailto:support@adoorealestate.com" className='text-gray-300 hover:text-accent-400 transition-colors text-sm'>
                   Support Email
                 </a>
               </li>
@@ -196,7 +196,7 @@ const Footer = () => {
         <div className='container mx-auto px-4 py-4'>
           <div className='flex flex-col md:flex-row items-center justify-between text-center md:text-left'>
             <p className='text-gray-400 text-sm'>
-              © {new Date().getFullYear()} Adoor Real Estate. All rights reserved.
+              © {new Date().getFullYear()} Adoo Real Estate. All rights reserved.
             </p>
             <div className='mt-2 md:mt-0'>
               <p className='text-gray-500 text-xs'>

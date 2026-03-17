@@ -1,7 +1,7 @@
 # Advanced Search System Implementation Guide
 
 ## Overview
-The Adoor Real Estate real estate platform now features a comprehensive advanced search system with intelligent autocomplete, smart filtering, performance optimization, and analytics integration.
+The Adoo Real Estate real estate platform now features a comprehensive advanced search system with intelligent autocomplete, smart filtering, performance optimization, and analytics integration.
 
 ## 🔍 Key Features
 
@@ -255,4 +255,4 @@ description: 2     // Lower priority
 - **Performance Focused**: Optimized for scale and speed
 - **Analytics Ready**: Built-in tracking and measurement
 
-This advanced search system transforms the Adoor Real Estate platform into a modern, user-friendly e-commerce experience with professional-grade search capabilities.
+This advanced search system transforms the Adoo Real Estate platform into a modern, user-friendly e-commerce experience with professional-grade search capabilities.

@@ -3,7 +3,7 @@
 ## Issue Identified
 The error `"Can't find /product/[any-id] on this server"` occurs because:
 
-1. **Same Domain Issue**: Both frontend and backend use `https://adoorrealestate.onrender.com`
+1. **Same Domain Issue**: Both frontend and backend use `https://adoorealestate.onrender.com`
 2. **Missing SPA Handler**: Backend handles all routes but lacks SPA routing for frontend routes
 3. **Production vs Development**: Frontend routes work in development but fail in production
 
@@ -44,12 +44,12 @@ Combined frontend and backend into single service for same-domain deployment.
 ## How It Works
 
 ### Before Fix:
-1. User visits: `https://adoorrealestate.onrender.com/product/123`
+1. User visits: `https://adoorealestate.onrender.com/product/123`
 2. Backend receives request for `/product/123`
 3. No route matches → 404 error
 
 ### After Fix:
-1. User visits: `https://adoorrealestate.onrender.com/product/123`
+1. User visits: `https://adoorealestate.onrender.com/product/123`
 2. Backend receives request for `/product/123`
 3. Path doesn't start with `/api` → Serves `index.html`
 4. React Router takes over → Renders correct component
@@ -67,10 +67,10 @@ Combined frontend and backend into single service for same-domain deployment.
 ## Testing the Fix
 
 After deployment, these should all work:
-- ✅ `https://adoorrealestate.onrender.com/` - Home page
-- ✅ `https://adoorrealestate.onrender.com/product/123` - Product page (refresh works)
-- ✅ `https://adoorrealestate.onrender.com/admin-panel` - Admin (refresh works)
-- ✅ `https://adoorrealestate.onrender.com/api/health` - API endpoints still work
+- ✅ `https://adoorealestate.onrender.com/` - Home page
+- ✅ `https://adoorealestate.onrender.com/product/123` - Product page (refresh works)
+- ✅ `https://adoorealestate.onrender.com/admin-panel` - Admin (refresh works)
+- ✅ `https://adoorealestate.onrender.com/api/health` - API endpoints still work
 
 ## Next Steps
 

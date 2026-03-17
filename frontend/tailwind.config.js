@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Adoor Brand Colors (from company logo)
+        // Adoo Brand Colors (from company logo)
         primary: {
           50: '#f4f9e8',
           100: '#e5f2c7',

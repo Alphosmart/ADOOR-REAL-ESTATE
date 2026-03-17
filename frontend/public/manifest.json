@@ -1,19 +1,19 @@
 {
-  "short_name": "Adoor Real Estate",
-  "name": "Adoor Real Estate - Premium Properties & Professional Real Estate Services",
+  "short_name": "Adoo Real Estate",
+  "name": "Adoo Real Estate - Premium Properties & Professional Real Estate Services",
   "icons": [
     {
-      "src": "adoor.jpeg",
+      "src": "adoo.jpeg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/jpeg"
     },
     {
-      "src": "adoor.jpeg",
+      "src": "adoo.jpeg",
       "type": "image/jpeg",
       "sizes": "192x192"
     },
     {
-      "src": "adoor.jpeg",
+      "src": "adoo.jpeg",
       "type": "image/jpeg",
       "sizes": "512x512"
     }

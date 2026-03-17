@@ -1,4 +1,4 @@
-// Standalone admin user creation for Adoor Real Estate
+// Standalone admin user creation for Adoo Real Estate
 require('dotenv').config({ path: './backend/.env' });
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');

@@ -1,4 +1,4 @@
-# Adoor Real Estate - Robots.txt
+# Adoo Real Estate - Robots.txt
 User-agent: *
 Allow: /
 
@@ -25,9 +25,9 @@ Allow: /shipping-policy/
 Allow: /return-policy/
 
 # Sitemaps
-Sitemap: https://adoorrealestate.com/sitemap.xml
-Sitemap: https://adoorrealestate.com/sitemap-products.xml
-Sitemap: https://adoorrealestate.com/sitemap-categories.xml
+Sitemap: https://adoorealestate.com/sitemap.xml
+Sitemap: https://adoorealestate.com/sitemap-products.xml
+Sitemap: https://adoorealestate.com/sitemap-categories.xml
 
 # Crawl delay
 Crawl-delay: 1

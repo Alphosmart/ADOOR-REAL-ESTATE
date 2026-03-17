@@ -1,7 +1,7 @@
 services:
   # Combined Frontend + Backend Service
   - type: web
-    name: adoor-real-estate
+    name: adoo-real-estate
     env: node
     plan: free
     rootDir: .

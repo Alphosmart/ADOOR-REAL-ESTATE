@@ -23,7 +23,7 @@ async function getAdminAndCreateProperties() {
             
             adminUser = await User.create({
                 name: 'Admin User',
-                email: 'admin@adoorrealestate.com',
+                email: 'admin@adoorealestate.com',
                 password: hashedPassword,
                 role: 'ADMIN',
                 profilePic: '',

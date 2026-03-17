@@ -475,7 +475,7 @@ const CookiePolicy = () => {
                 <div>
                   <h3 className="font-medium text-accent-800 mb-2">General Inquiries</h3>
                   <ul className="text-sm text-accent-700 space-y-1">
-                    <li><strong>Email:</strong> privacy@adoorrealestate.com</li>
+                    <li><strong>Email:</strong> privacy@adoorealestate.com</li>
                     <li><strong>Phone:</strong> +1 (555) 123-4567</li>
                     <li><strong>Hours:</strong> Mon-Fri 9AM-6PM EST</li>
                   </ul>
@@ -483,7 +483,7 @@ const CookiePolicy = () => {
                 <div>
                   <h3 className="font-medium text-accent-800 mb-2">Mailing Address</h3>
                   <address className="text-sm text-accent-700 not-italic">
-                    Adoor Real Estate Privacy Team<br />
+                    Adoo Real Estate Privacy Team<br />
                     [Your Business Address]<br />
                     [City, State ZIP]<br />
                     [Country]

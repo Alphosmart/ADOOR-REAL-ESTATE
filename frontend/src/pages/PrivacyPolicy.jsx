@@ -28,7 +28,7 @@ const PrivacyPolicy = () => {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Introduction</h2>
             <p className="text-gray-700 leading-relaxed">
-              Adoor Real Estate ("we," "our," or "us") respects your privacy and is committed to protecting your personal data. 
+              Adoo Real Estate ("we," "our," or "us") respects your privacy and is committed to protecting your personal data. 
               This privacy policy explains how we collect, use, and safeguard your information when you visit our website 
               or use our services.
             </p>
@@ -166,7 +166,7 @@ const PrivacyPolicy = () => {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="flex items-center space-x-3">
                   <FaEnvelope className="text-accent-600" />
-                  <span className="text-gray-700">privacy@adoorrealestate.com</span>
+                  <span className="text-gray-700">privacy@adoorealestate.com</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <FaPhoneAlt className="text-accent-600" />

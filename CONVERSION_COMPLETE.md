@@ -208,7 +208,7 @@ npm run seed:properties
 
 ```json
 {
-  "name": "adoor-real-estate",  // Changed from "universal-wallpaper"
+  "name": "adoo-real-estate",  // Changed from "universal-wallpaper"
   "description": "Real estate platform for property listings, viewings, and inquiries",
   "scripts": {
     "migrate:products": "node migrate-products-to-properties.js",

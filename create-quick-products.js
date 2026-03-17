@@ -32,7 +32,7 @@ const Product = mongoose.model('Product', ProductSchema);
 const sampleProducts = [
     {
         productName: "4 Bedroom Duplex in Lekki Phase 1",
-        brandName: "Adoor Real Estate",
+        brandName: "Adoo Real Estate",
         category: "Houses",
         description: "Luxurious 4-bedroom duplex with modern amenities in the heart of Lekki Phase 1. Features include spacious living areas, fitted kitchen, all rooms ensuite, private parking, and 24/7 security.",
         productImage: [
@@ -49,7 +49,7 @@ const sampleProducts = [
     },
     {
         productName: "2 Bedroom Apartment in Victoria Island",
-        brandName: "Adoor Real Estate",
+        brandName: "Adoo Real Estate",
         category: "Apartments",
         description: "Modern 2-bedroom apartment in prime Victoria Island location with stunning city views. Includes gym access, swimming pool, and concierge services.",
         productImage: [
@@ -65,7 +65,7 @@ const sampleProducts = [
     },
     {
         productName: "3 Bedroom Flat in Ikoyi",
-        brandName: "Adoor Real Estate",
+        brandName: "Adoo Real Estate",
         category: "Apartments",
         description: "Elegant 3-bedroom flat in exclusive Ikoyi neighborhood. Features high-end finishes, spacious balcony, and premium security.",
         productImage: [
@@ -81,7 +81,7 @@ const sampleProducts = [
     },
     {
         productName: "5 Bedroom Mansion in Banana Island",
-        brandName: "Adoor Real Estate",
+        brandName: "Adoo Real Estate",
         category: "Houses",
         description: "Exquisite 5-bedroom mansion on prestigious Banana Island. Waterfront property with private jetty, cinema room, and wine cellar.",
         productImage: [

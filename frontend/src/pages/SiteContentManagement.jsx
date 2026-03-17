@@ -17,18 +17,18 @@ const SiteContentManagement = () => {
         },
         aboutUs: {
             hero: {
-                title: "About Adoor Real Estate",
+                title: "About Adoo Real Estate",
                 subtitle: "Your premier destination for premium real estate properties and home décor solutions",
                 description: "We connect homeowners with the world's finest real estate agents and suppliers, making it easy to transform any space into something extraordinary."
             }
         },
         footer: {
             companyInfo: {
-                name: "Adoor Real Estate",
+                name: "Adoo Real Estate",
                 description: "Your premier destination for premium real estate properties and home décor solutions.",
                 address: "123 Design Street, Creative District, NY 10001",
                 phone: "+1 (555) 123-4567",
-                email: "info@adoorrealestate.com"
+                email: "info@adoorealestate.com"
             },
             businessHours: {
                 title: "Business Hours",
@@ -39,10 +39,10 @@ const SiteContentManagement = () => {
                 ]
             },
             socialMedia: [
-                { platform: "Facebook", url: "https://facebook.com/adoorrealestate", icon: "FaFacebook", color: "#1877F2" },
-                { platform: "Instagram", url: "https://instagram.com/adoorrealestate", icon: "FaInstagram", color: "#E4405F" },
-                { platform: "Twitter", url: "https://twitter.com/adoorrealestate", icon: "FaTwitter", color: "#1DA1F2" },
-                { platform: "Pinterest", url: "https://pinterest.com/adoorrealestate", icon: "FaPinterest", color: "#BD081C" }
+                { platform: "Facebook", url: "https://facebook.com/adoorealestate", icon: "FaFacebook", color: "#1877F2" },
+                { platform: "Instagram", url: "https://instagram.com/adoorealestate", icon: "FaInstagram", color: "#E4405F" },
+                { platform: "Twitter", url: "https://twitter.com/adoorealestate", icon: "FaTwitter", color: "#1DA1F2" },
+                { platform: "Pinterest", url: "https://pinterest.com/adoorealestate", icon: "FaPinterest", color: "#BD081C" }
             ],
             quickLinks: {
                 shop: [
@@ -67,7 +67,7 @@ const SiteContentManagement = () => {
         },
         header: {
             logo: {
-                text: "Adoor Real Estate",
+                text: "Adoo Real Estate",
                 tagline: "Transform Your Space"
             },
             navigation: {
@@ -110,9 +110,9 @@ const SiteContentManagement = () => {
             }
         },
         siteSettings: {
-            siteName: "Adoor Real Estate",
+            siteName: "Adoo Real Estate",
             siteDescription: "Your premier destination for premium real estate properties and home décor solutions",
-            supportEmail: "support@adoorrealestate.com",
+            supportEmail: "support@adoorealestate.com",
             maintenanceMode: false
         },
         maintenancePage: {
@@ -120,7 +120,7 @@ const SiteContentManagement = () => {
             message: "We're currently performing scheduled maintenance to improve your experience. We'll be back online shortly.",
             estimatedDowntime: "1-2 hours",
             statusMessage: "Service will resume automatically",
-            contactEmail: "support@adoorrealestate.com",
+            contactEmail: "support@adoorealestate.com",
             progressPercentage: 45,
             showProgressBar: true,
             showContactInfo: true,

@@ -1,4 +1,4 @@
-// Quick admin user creation for Adoor Real Estate
+// Quick admin user creation for Adoo Real Estate
 require('dotenv').config({ path: './backend/.env' });
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');

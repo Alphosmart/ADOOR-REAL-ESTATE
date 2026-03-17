@@ -1,7 +1,7 @@
 # Analytics Implementation Guide
 
 ## Overview
-This guide covers the comprehensive analytics implementation for Adoor Real Estate, including Google Analytics 4 setup, conversion tracking, and user behavior analysis.
+This guide covers the comprehensive analytics implementation for Adoo Real Estate, including Google Analytics 4 setup, conversion tracking, and user behavior analysis.
 
 ## Features Implemented
 
@@ -223,4 +223,4 @@ This will log all analytics events to the browser console.
 - **Annually**: Review and update tracking implementation
 - **Ongoing**: Monitor for tracking errors and data quality issues
 
-This analytics implementation provides comprehensive insights into user behavior, conversion optimization opportunities, and business performance metrics essential for growing the Adoor Real Estate real estate platform.
+This analytics implementation provides comprehensive insights into user behavior, conversion optimization opportunities, and business performance metrics essential for growing the Adoo Real Estate real estate platform.

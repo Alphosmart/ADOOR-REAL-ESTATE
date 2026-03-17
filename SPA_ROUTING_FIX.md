@@ -62,8 +62,8 @@ After deployment:
 3. Refresh the page - it should load correctly instead of showing "Not found"
 
 ## Current Deployment URLs
-- **Frontend**: https://adoorrealestate.onrender.com
-- **Backend**: https://adoorrealestate.onrender.com/api
+- **Frontend**: https://adoorealestate.onrender.com
+- **Backend**: https://adoorealestate.onrender.com/api
 
 ## Next Steps
 1. Redeploy your frontend with the new `_redirects` file

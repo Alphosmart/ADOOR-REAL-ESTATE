@@ -1,4 +1,4 @@
-# 🚀 Quick Start Guide - Adoor Real Estate
+# 🚀 Quick Start Guide - Adoo Real Estate
 
 ## ⚡ Get Started in 5 Minutes
 

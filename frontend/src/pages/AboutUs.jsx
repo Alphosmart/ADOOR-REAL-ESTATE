@@ -7,7 +7,7 @@ const AboutUs = () => {
 
   // Default content fallback
   const heroContent = aboutContent?.hero || {
-    title: "About Adoor Real Estate",
+    title: "About Adoo Real Estate",
     subtitle: "Your premier destination for premium real estate properties and home décor solutions",
     description: "Leading real estate company providing premium properties and professional services across Nigeria through our commitment to excellence."
   };
@@ -36,7 +36,7 @@ const AboutUs = () => {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
               <p className="text-gray-700 mb-4 leading-relaxed">
-                Founded with a vision to revolutionize the real estate industry, Adoor Real Estate 
+                Founded with a vision to revolutionize the real estate industry, Adoo Real Estate 
                 began as a passionate endeavor to connect homeowners, designers, and businesses with 
                 premium quality properties and real estate solutions from our experienced team.
               </p>
@@ -182,7 +182,7 @@ const AboutUs = () => {
         {/* Why Choose Us */}
         <section className="mb-16">
           <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8 md:p-12">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Why Choose Adoor Real Estate?</h2>
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Why Choose Adoo Real Estate?</h2>
             
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-6">
@@ -289,7 +289,7 @@ const AboutUs = () => {
               <p className="text-gray-600 mb-3">Dedicated to your satisfaction</p>
               <p className="text-gray-500 text-sm">
                 Our customer success team works tirelessly to ensure every interaction 
-                with Adoor Real Estate exceeds your expectations.
+                with Adoo Real Estate exceeds your expectations.
               </p>
             </div>
             
