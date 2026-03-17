@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import SummaryApi from '../common';
 
 const ProductContext = createContext();
+const CACHE_DURATION = 5 * 60 * 1000;
 
 export const useProducts = () => {
   const context = useContext(ProductContext);
@@ -20,9 +21,6 @@ export const ProductProvider = ({ children }) => {
   const allProductsRef = useRef([]);
   const lastFetchRef = useRef(null);
   const [currentCurrency, setCurrentCurrency] = useState('NGN');
-
-  // Cache products for 5 minutes
-  const CACHE_DURATION = 5 * 60 * 1000;
 
   // Load user's preferred currency on mount
   useEffect(() => {
