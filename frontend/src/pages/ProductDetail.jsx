@@ -61,9 +61,16 @@ const ProductDetail = () => {
                 : `${product.location.neighborhood || product.location.address || ''}, ${product.location.city || ''}, ${product.location.state || ''}`.replace(/^,\s*|,\s*$/g, ''))
             : '';
         
-        // Build shortened property URL
-        const baseUrl = window.location.origin;
-        const shortUrl = `${baseUrl}/product/${id}`;
+        // Build property URL with explicit protocol
+        let baseUrl = window.location.origin;
+        if (!baseUrl.includes('http')) {
+            baseUrl = `https://${baseUrl}`;
+        }
+        // Ensure https in production
+        if (process.env.NODE_ENV === 'production') {
+            baseUrl = baseUrl.replace('http://', 'https://');
+        }
+        const propertyUrl = `${baseUrl}/product/${id}`;
 
         const message = [
             'Hello, I am interested in this property.',
@@ -71,7 +78,8 @@ const ProductDetail = () => {
             `Price: ₦${Number(propertyPrice || 0).toLocaleString()}`,
             location ? `Location: ${location}` : null,
             '',
-            shortUrl
+            'Link:',
+            propertyUrl
         ].filter(Boolean).join('\n');
 
         const encodedMessage = encodeURIComponent(message);

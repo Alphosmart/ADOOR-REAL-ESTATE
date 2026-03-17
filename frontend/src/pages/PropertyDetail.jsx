@@ -80,9 +80,16 @@ const PropertyDetail = () => {
             return;
         }
 
-        // Build shortened property URL
-        const baseUrl = window.location.origin;
-        const shortUrl = `${baseUrl}/property/${propertyId}`;
+        // Build property URL with explicit protocol
+        let baseUrl = window.location.origin;
+        if (!baseUrl.includes('http')) {
+            baseUrl = `https://${baseUrl}`;
+        }
+        // Ensure https in production
+        if (process.env.NODE_ENV === 'production') {
+            baseUrl = baseUrl.replace('http://', 'https://');
+        }
+        const propertyUrl = `${baseUrl}/property/${propertyId}`;
         
         const propertyTitle = property.title || property.productName || 'Property';
         const propertyPrice = property.pricing?.amount || property.sellingPrice || property.price || 0;
@@ -97,7 +104,8 @@ const PropertyDetail = () => {
             `Price: ₦${Number(propertyPrice).toLocaleString()}`,
             propertyLocation ? `Location: ${propertyLocation}` : null,
             '',
-            shortUrl
+            'Link:',
+            propertyUrl
         ].filter(Boolean).join('\n');
 
         const encodedMessage = encodeURIComponent(message);
