@@ -1,4 +1,4 @@
-# Adoor Real Estate - Brand Colors
+# Adoo Real Estate - Brand Colors
 
 ## Color Palette (From Official Logo: grren png.png)
 
@@ -144,7 +144,7 @@ The following components use the new brand colors:
 
 ## Color Scheme Inspiration
 
-The brand colors are directly from the **Adoor Real Estate official logo (grren png.png)**, which features:
+The brand colors are directly from the **Adoo Real Estate official logo (grren png.png)**, which features:
 - **Lime Green icon** (#92bc1b) - Fresh, modern, and energetic
 - **Dark Navy background** (#121f2f) - Professional, trustworthy, and sophisticated
 - **White text** - Clean and readable

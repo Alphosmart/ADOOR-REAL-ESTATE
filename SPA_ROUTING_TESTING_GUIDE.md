@@ -43,10 +43,10 @@ git push origin main
 ### 3. Test Production Fix
 
 After deployment, test these URLs (replace with your actual domain):
-- ✅ `https://adoorrealestate.onrender.com/` (should work)
-- ✅ `https://adoorrealestate.onrender.com/product/123` (should work after refresh)
-- ✅ `https://adoorrealestate.onrender.com/admin-panel` (should work after refresh)
-- ✅ `https://adoorrealestate.onrender.com/any-random-route` (should show your 404 page, not server 404)
+- ✅ `https://adoorealestate.onrender.com/` (should work)
+- ✅ `https://adoorealestate.onrender.com/product/123` (should work after refresh)
+- ✅ `https://adoorealestate.onrender.com/admin-panel` (should work after refresh)
+- ✅ `https://adoorealestate.onrender.com/any-random-route` (should show your 404 page, not server 404)
 
 ## Files Created for Different Platforms
 

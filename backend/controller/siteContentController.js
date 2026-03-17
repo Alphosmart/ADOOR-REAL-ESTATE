@@ -38,7 +38,7 @@ const getSiteContent = async (req, res) => {
             homePage: {
                 hero: {
                     title: "Find Your Dream Home",
-                    subtitle: "Discover our exclusive collection of premium residential and commercial properties. From modern minimalist to classic elegant designs, professionally curated by Adoor Real Estate.",
+                    subtitle: "Discover our exclusive collection of premium residential and commercial properties. From modern minimalist to classic elegant designs, professionally curated by Adoo Real Estate.",
                     primaryButtonText: "View Properties",
                     primaryButtonLink: "/products",
                     secondaryButtonText: "Learn More",
@@ -75,7 +75,7 @@ const getSiteContent = async (req, res) => {
             },
             aboutUs: {
                 hero: {
-                    title: "About Adoor Real Estate",
+                    title: "About Adoo Real Estate",
                     subtitle: "Your premier destination for premium real estate properties and comprehensive property services",
                     description: "We are a leading real estate company providing quality properties, professional services, and expert guidance to help you find your perfect space."
                 },
@@ -91,7 +91,7 @@ const getSiteContent = async (req, res) => {
                 },
                 story: {
                     title: "Our Story",
-                    content: "Founded in 2020, Adoor Real Estate was built on a vision to provide exceptional real estate services in Nigeria. Starting with a small portfolio of quality properties in Lagos, we've grown into a trusted name in the industry.\n\nToday, we're proud to serve thousands of satisfied clients across Nigeria, offering premium properties, professional services, and expert guidance for all your real estate needs."
+                    content: "Founded in 2020, Adoo Real Estate was built on a vision to provide exceptional real estate services in Nigeria. Starting with a small portfolio of quality properties in Lagos, we've grown into a trusted name in the industry.\n\nToday, we're proud to serve thousands of satisfied clients across Nigeria, offering premium properties, professional services, and expert guidance for all your real estate needs."
                 },
                 team: {
                     title: "Leadership Team",
@@ -104,11 +104,11 @@ const getSiteContent = async (req, res) => {
             },
             footer: {
                 companyInfo: {
-                    name: "Adoor Real Estate",
+                    name: "Adoo Real Estate",
                     description: "Your premier real estate company offering quality properties and comprehensive property services. Transform your future with our expertly curated property portfolio.",
                     address: "123 Design Street, Creative District, NY 10001",
                     phone: "+1 (555) 123-4567",
-                    email: "info@adoorrealestate.com"
+                    email: "info@adoorealestate.com"
                 },
                 businessHours: {
                     title: "Business Hours",
@@ -119,10 +119,10 @@ const getSiteContent = async (req, res) => {
                     ]
                 },
                 socialMedia: [
-                    { platform: "Facebook", url: "https://facebook.com/adoorrealestate", icon: "FaFacebook", color: "#1877F2" },
-                    { platform: "Instagram", url: "https://instagram.com/adoorrealestate", icon: "FaInstagram", color: "#E4405F" },
-                    { platform: "Twitter", url: "https://twitter.com/adoorrealestate", icon: "FaTwitter", color: "#1DA1F2" },
-                    { platform: "Pinterest", url: "https://pinterest.com/adoorrealestate", icon: "FaPinterest", color: "#BD081C" }
+                    { platform: "Facebook", url: "https://facebook.com/adoorealestate", icon: "FaFacebook", color: "#1877F2" },
+                    { platform: "Instagram", url: "https://instagram.com/adoorealestate", icon: "FaInstagram", color: "#E4405F" },
+                    { platform: "Twitter", url: "https://twitter.com/adoorealestate", icon: "FaTwitter", color: "#1DA1F2" },
+                    { platform: "Pinterest", url: "https://pinterest.com/adoorealestate", icon: "FaPinterest", color: "#BD081C" }
                 ],
                 quickLinks: {
                     shop: [
@@ -175,7 +175,7 @@ const getSiteContent = async (req, res) => {
                     }
                 ],
                 logo: {
-                    text: "Adoor Real Estate",
+                    text: "Adoo Real Estate",
                     tagline: "Transform Your Space"
                 },
                 navigation: {
@@ -229,9 +229,9 @@ const getSiteContent = async (req, res) => {
                 searchPlaceholder: "Search for properties, locations, types..."
             },
             siteSettings: {
-                siteName: "Adoor Real Estate",
+                siteName: "Adoo Real Estate",
                 siteDescription: "Your premier real estate company for quality properties, professional services, and expert property guidance",
-                supportEmail: "support@adoorrealestate.com",
+                supportEmail: "support@adoorealestate.com",
                 maintenanceMode: false,
                 lastUpdated: new Date().toISOString()
             }

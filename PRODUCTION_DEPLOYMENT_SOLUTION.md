@@ -3,8 +3,8 @@
 ## 🔍 Issue Identified
 You have **TWO separate Render deployments**:
 
-- **Backend API**: `https://adoorrealestate.onrender.com` 
-- **Frontend App**: `https://adoor-real-estate.onrender.com`
+- **Backend API**: `https://adoorealestate.onrender.com` 
+- **Frontend App**: `https://adoo-real-estate.onrender.com`
 
 ## ❌ Current Problem
 Users are accessing the **backend URL** expecting to see the frontend, but the backend doesn't have the React build files.
@@ -14,8 +14,8 @@ Users are accessing the **backend URL** expecting to see the frontend, but the b
 ### **Option 1: Use Separate Deployments (Recommended)**
 
 **Users should access:**
-- **Main Website**: `https://adoor-real-estate.onrender.com` ← **This is your frontend**
-- **API**: `https://adoorrealestate.onrender.com/api/*` ← **Backend only**
+- **Main Website**: `https://adoo-real-estate.onrender.com` ← **This is your frontend**
+- **API**: `https://adoorealestate.onrender.com/api/*` ← **Backend only**
 
 **Benefits:**
 - ✅ Each service optimized for its purpose
@@ -25,7 +25,7 @@ Users are accessing the **backend URL** expecting to see the frontend, but the b
 
 ### **Option 2: Combine Into Single Deployment**
 
-If you want everything on one domain (`adoorrealestate.onrender.com`):
+If you want everything on one domain (`adoorealestate.onrender.com`):
 
 1. **Delete the separate frontend deployment**
 2. **Ensure frontend builds properly in backend deployment**
@@ -35,7 +35,7 @@ If you want everything on one domain (`adoorrealestate.onrender.com`):
 
 **For immediate solution:**
 
-1. **Direct users to**: `https://adoor-real-estate.onrender.com`
+1. **Direct users to**: `https://adoo-real-estate.onrender.com`
 2. **Update any links/bookmarks** to use the frontend URL
 3. **Test SPA routing** on the frontend deployment
 
@@ -45,9 +45,9 @@ To verify your frontend deployment works:
 
 ```bash
 # Test these URLs on the FRONTEND deployment:
-https://adoor-real-estate.onrender.com/
-https://adoor-real-estate.onrender.com/product/123
-https://adoor-real-estate.onrender.com/login
+https://adoo-real-estate.onrender.com/
+https://adoo-real-estate.onrender.com/product/123
+https://adoo-real-estate.onrender.com/login
 ```
 
 ## 🔧 If Frontend Deployment Needs SPA Fix
@@ -63,5 +63,5 @@ Use the **separate deployments approach** - it's cleaner and more efficient. Jus
 
 ---
 
-**Main Website**: https://adoor-real-estate.onrender.com  
-**API**: https://adoorrealestate.onrender.com/api  
+**Main Website**: https://adoo-real-estate.onrender.com  
+**API**: https://adoorealestate.onrender.com/api  

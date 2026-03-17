@@ -55,7 +55,7 @@ backend/
 └── routes/index.js         - Added property, appointment, inquiry routes
 
 Root directory/
-└── package.json            - Changed name to "adoor-real-estate", added migration scripts
+└── package.json            - Changed name to "adoo-real-estate", added migration scripts
 ```
 
 ## Total Files

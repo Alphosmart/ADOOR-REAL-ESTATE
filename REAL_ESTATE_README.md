@@ -1,4 +1,4 @@
-# Adoor Real Estate Platform
+# Adoo Real Estate Platform
 
 A full-stack real estate web application for property listings, viewings, and inquiries. Converted from an e-commerce platform to a comprehensive real estate solution.
 
@@ -56,7 +56,7 @@ A full-stack real estate web application for property listings, viewings, and in
 
 1. **Clone the repository**
    ```bash
-   cd "ADOOR REAL ESTATE"
+   cd "ADOO REAL ESTATE"
    ```
 
 2. **Install dependencies**
@@ -340,7 +340,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 For issues or questions:
 - Create an issue in the repository
-- Email: support@adoorrealestate.com
+- Email: support@adoorealestate.com
 
 ---
 

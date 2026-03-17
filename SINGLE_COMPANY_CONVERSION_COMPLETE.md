@@ -1,7 +1,7 @@
 # Single Company Conversion Complete
 
 ## Overview
-Successfully converted the Adoor Real Estate platform from a multi-vendor marketplace to a single company model. This involved removing all seller registration, shipping company management, and multi-vendor features while maintaining core e-commerce functionality.
+Successfully converted the Adoo Real Estate platform from a multi-vendor marketplace to a single company model. This involved removing all seller registration, shipping company management, and multi-vendor features while maintaining core e-commerce functionality.
 
 ## Changes Made
 
@@ -118,7 +118,7 @@ Successfully converted the Adoor Real Estate platform from a multi-vendor market
 
 ## Deployment Status
 - **Frontend**: Deployed on Vercel at https://universaldotwalpaper.com
-- **Backend**: Deployed on Render at https://adoorrealestate.onrender.com
+- **Backend**: Deployed on Render at https://adoorealestate.onrender.com
 - **Database**: MongoDB connection maintained
 - **Domain**: Production ready with proper SPA routing
 

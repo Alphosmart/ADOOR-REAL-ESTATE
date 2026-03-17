@@ -1,4 +1,4 @@
-// Security Configuration for Adoor Real Estate
+// Security Configuration for Adoo Real Estate
 // This file contains security-related configurations and utilities
 
 // Content Security Policy configuration

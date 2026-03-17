@@ -106,7 +106,7 @@ const PaymentConfiguration = () => {
                 bankAccounts: [
                     {
                         bankName: 'First Bank of Nigeria',
-                        accountName: 'Adoor Real Estate Ltd',
+                        accountName: 'Adoo Real Estate Ltd',
                         accountNumber: '1234567890',
                         sortCode: '011151003'
                     }

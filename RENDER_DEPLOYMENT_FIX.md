@@ -17,7 +17,7 @@ Added `postinstall` script to package.json that automatically:
 If you want to use render.yaml instead:
 
 1. Go to your Render Dashboard
-2. Select your service "adoor-real-estate"
+2. Select your service "adoo-real-estate"
 3. Go to Settings
 4. Update Build Command to: `npm run build`
 5. Update Start Command to: `npm start`
@@ -30,5 +30,5 @@ After this deployment, you should see:
 
 ## Test Commands
 After deployment:
-- Health check: `https://adoorrealestate.onrender.com/health`
-- SPA test: `https://adoorrealestate.onrender.com/product/123`
+- Health check: `https://adoorealestate.onrender.com/health`
+- SPA test: `https://adoorealestate.onrender.com/product/123`

@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: './backend/.env' });
 const mongoose = require('mongoose');
 const Property = require('./backend/models/propertyModel');
 const Agent = require('./backend/models/agentModel');

@@ -26,7 +26,6 @@ export const GuestRoute = ({ children }) => {
     const from = location.state?.from?.pathname || '/';
     return <Navigate to={from} replace />;
   }
-  
   return children;
 };
 

@@ -81,25 +81,25 @@ const getDefaultContent = () => {
         },
         aboutUs: {
             hero: {
-                title: "About Adoor Real Estate",
+                title: "About Adoo Real Estate",
                 subtitle: "Your premier destination for premium real estate properties and home décor solutions",
                 description: "We connect homeowners with the world's finest real estate agents and suppliers, making it easy to transform any space into something extraordinary."
             }
         },
         footer: {
             companyInfo: {
-                name: "Adoor Real Estate",
+                name: "Adoo Real Estate",
                 description: "Your premier destination for premium real estate properties and home décor solutions.",
                 address: "123 Design Street, Creative District, NY 10001",
                 phone: "+1 (555) 123-4567",
-                email: "info@adoorrealestate.com"
+                email: "info@adoorealestate.com"
             }
         },
         header: {
             announcementBanners: [
             ],
             logo: {
-                text: "Adoor Real Estate",
+                text: "Adoo Real Estate",
                 tagline: "Transform Your Space"
             },
             navigation: {
@@ -130,7 +130,7 @@ const getDefaultContent = () => {
             businessInfo: {
                 address: "123 E-Commerce Street\nBusiness District\nCity, State 12345",
                 phone: "+1 (555) 123-4567",
-                email: "support@adoorrealestate.com",
+                email: "support@adoorealestate.com",
                 hours: "Mon-Fri 9am-6pm"
             },
             responseInfo: {
@@ -140,9 +140,9 @@ const getDefaultContent = () => {
             }
         },
         siteSettings: {
-            siteName: "Adoor Real Estate",
+            siteName: "Adoo Real Estate",
             siteDescription: "Your premier destination for premium real estate properties and home décor solutions",
-            supportEmail: "support@adoorrealestate.com",
+            supportEmail: "support@adoorealestate.com",
             maintenanceMode: false
         }
     };

@@ -29,11 +29,11 @@ const TermsOfService = () => {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
               <p className="text-yellow-800">
-                <strong>By accessing and using Adoor Real Estate, you agree to be bound by these Terms of Service.</strong>
+                <strong>By accessing and using Adoo Real Estate, you agree to be bound by these Terms of Service.</strong>
               </p>
             </div>
             <p className="text-gray-700 leading-relaxed">
-              These Terms of Service ("Terms") govern your use of the Adoor Real Estate website and services. 
+              These Terms of Service ("Terms") govern your use of the Adoo Real Estate website and services. 
               If you do not agree to these terms, please do not use our services.
             </p>
           </section>
@@ -171,8 +171,8 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Intellectual Property</h2>
             <p className="text-gray-700 mb-4">
-              All content on Adoor Real Estate, including but not limited to text, graphics, logos, images, 
-              and software, is the property of Adoor Real Estate or its content suppliers and is protected 
+              All content on Adoo Real Estate, including but not limited to text, graphics, logos, images, 
+              and software, is the property of Adoo Real Estate or its content suppliers and is protected 
               by copyright and other intellectual property laws.
             </p>
             <div className="bg-gray-50 rounded-lg p-4">
@@ -189,13 +189,13 @@ const TermsOfService = () => {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Limitation of Liability</h2>
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
               <p className="text-yellow-800 text-sm">
-                <strong>IMPORTANT:</strong> Adoor Real Estate acts as a marketplace platform. We are not responsible 
+                <strong>IMPORTANT:</strong> Adoo Real Estate acts as a marketplace platform. We are not responsible 
                 for the quality, safety, or legality of products listed by sellers, or the ability of sellers to 
                 complete transactions.
               </p>
             </div>
             <p className="text-gray-700 mt-4">
-              To the maximum extent permitted by law, Adoor Real Estate shall not be liable for any indirect, 
+              To the maximum extent permitted by law, Adoo Real Estate shall not be liable for any indirect, 
               incidental, special, or consequential damages arising out of or in connection with your use of our services.
             </p>
           </section>
@@ -240,7 +240,7 @@ const TermsOfService = () => {
               </p>
               <div className="space-y-2">
                 <p className="text-gray-700">
-                  <strong>Email:</strong> legal@adoorrealestate.com
+                  <strong>Email:</strong> legal@adoorealestate.com
                 </p>
                 <p className="text-gray-700">
                   <strong>Phone:</strong> +1 (555) 123-4567

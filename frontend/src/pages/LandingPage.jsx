@@ -55,7 +55,7 @@ const LandingPage = () => {
           role: "Interior Designer",
           image: "https://images.unsplash.com/photo-1494790108755-2616b612b788?w=100&h=100&fit=crop&crop=face",
           rating: 5,
-          text: "Adoor Real Estate has transformed my design business. The quality and variety are unmatched, and my clients are always thrilled with the results."
+          text: "Adoo Real Estate has transformed my design business. The quality and variety are unmatched, and my clients are always thrilled with the results."
         },
         {
           name: "Michael Chen",
@@ -69,7 +69,7 @@ const LandingPage = () => {
           role: "Property Investor",
           image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
           rating: 5,
-          text: "Working with Adoor Real Estate has been exceptional. Their professionalism and property selection helped me find the perfect investment property."
+          text: "Working with Adoo Real Estate has been exceptional. Their professionalism and property selection helped me find the perfect investment property."
         }
       ]);
     };
@@ -116,7 +116,7 @@ const LandingPage = () => {
   const featuredProducts = {
     houses: [
       {
-        id: 1,
+        id: "697dbd235d42b12cdaa06a1b",
         name: "Luxury Villa Lekki",
         price: "₦85,000,000",
         originalPrice: "₦95,000,000",
@@ -125,7 +125,7 @@ const LandingPage = () => {
         reviews: 127
       },
       {
-        id: 2,
+        id: "697dbd235d42b12cdaa06a1d",
         name: "Modern Duplex Ikoyi",
         price: "₦120,000,000",
         originalPrice: "₦135,000,000",
@@ -134,7 +134,7 @@ const LandingPage = () => {
         reviews: 203
       },
       {
-        id: 3,
+        id: "697dbd235d42b12cdaa06a1e",
         name: "Family Home Victoria Island",
         price: "₦75,000,000",
         originalPrice: "₦88,000,000",
@@ -145,7 +145,7 @@ const LandingPage = () => {
     ],
     apartments: [
       {
-        id: 4,
+        id: "697dbd235d42b12cdaa06a1c",
         name: "3BR Apartment Lekki",
         price: "₦45,000,000",
         originalPrice: "₦52,000,000",
@@ -154,7 +154,7 @@ const LandingPage = () => {
         reviews: 156
       },
       {
-        id: 5,
+        id: "697dbd235d42b12cdaa06a1f",
         name: "2BR Flat Yaba",
         price: "₦28,500,000",
         originalPrice: "₦32,000,000",
@@ -165,7 +165,7 @@ const LandingPage = () => {
     ],
     commercial: [
       {
-        id: 6,
+        id: "697dbd235d42b12cdaa06a1b",
         name: "Office Space Ikeja",
         price: "₦150,000,000",
         originalPrice: "₦175,000,000",
@@ -174,7 +174,7 @@ const LandingPage = () => {
         reviews: 78
       },
       {
-        id: 7,
+        id: "697dbd235d42b12cdaa06a1c",
         name: "Retail Shop VI",
         price: "₦95,000,000",
         originalPrice: "₦110,000,000",
@@ -411,7 +411,7 @@ const LandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-8">Why Choose Adoor Real Estate?</h2>
+              <h2 className="text-4xl font-bold text-gray-800 mb-8">Why Choose Adoo Real Estate?</h2>
               
               <div className="space-y-6">
                 {[
