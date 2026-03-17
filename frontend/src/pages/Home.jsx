@@ -141,7 +141,7 @@ const Home = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-accent-800 mb-4">Featured Properties</h2>
             <p className="text-xl text-gray-600">Explore our handpicked selection of premium properties</p>
           </div>
-          <VerticalCardProduct category={"all"} heading={"Latest Listings"} limit={8} />
+          <VerticalCardProduct featured={true} heading={"Featured Properties"} limit={8} />
         </div>
       </section>
 

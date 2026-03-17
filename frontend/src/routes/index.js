@@ -11,6 +11,7 @@ import AllProducts from '../pages/AllProducts';
 import AllUsers from '../pages/AllUsers';
 import AddProduct from '../pages/AddProduct';
 import EditProduct from '../pages/EditProduct';
+import FeaturedPropertiesManagement from '../pages/FeaturedPropertiesManagement';
 import CategoryManagement from '../pages/CategoryManagement';
 import MyProducts from '../pages/MyProducts';
 import ProductDetail from '../pages/ProductDetail';
@@ -230,6 +231,10 @@ const router = createBrowserRouter([
                     {
                         path: "all-products",
                         element: <AllProducts />
+                    },
+                    {
+                        path: "featured-properties",
+                        element: <FeaturedPropertiesManagement />
                     },
                     {
                         path: "add-product",

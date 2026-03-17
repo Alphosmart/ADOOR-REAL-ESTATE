@@ -97,6 +97,21 @@ const SummaryApi = {
         url : `${backendDomain}/api/admin/update-product-status`,
         method : 'put'
     },
+    
+    // Featured Properties Management APIs
+    adminFeaturedProperties : {
+        url : `${backendDomain}/api/admin/featured-properties`,
+        method : 'get'
+    },
+    adminUpdateFeaturedProperty : {
+        url : `${backendDomain}/api/admin/featured-properties`,
+        method : 'put'
+    },
+    adminTogglePropertyFeatured : {
+        url : `${backendDomain}/api/admin/featured-properties`,
+        method : 'put'
+    },
+    
     adminDashboardStats : {
         url : `${backendDomain}/api/admin/dashboard-stats`,
         method : 'get'

@@ -125,6 +125,10 @@ export const ProductProvider = ({ children }) => {
     );
   }, []);
 
+  const getFeaturedProducts = useCallback(() => {
+    return allProductsRef.current.filter(product => product.isFeatured === true);
+  }, []);
+
   const getProductById = useCallback((id) => {
     return allProductsRef.current.find(product => product._id === id);
   }, []); // No dependencies needed since we use ref
@@ -171,6 +175,7 @@ export const ProductProvider = ({ children }) => {
     currentCurrency,
     fetchAllProducts,
     getProductsByCategory,
+    getFeaturedProducts,
     getProductById,
     changeCurrency,
     refreshProducts: () => fetchAllProducts(true)

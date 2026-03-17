@@ -787,6 +787,151 @@ async function promoteToVerifiedSeller(req, res) {
     }
 }
 
+// Get featured properties for admin management (admin only)
+async function getFeaturedProperties(req, res) {
+    try {
+        // Check if current user is admin
+        const currentUser = await userModel.findById(req.userId);
+        if (!currentUser || currentUser.role !== 'ADMIN') {
+            return res.status(403).json({
+                message: "Access denied. Admin privileges required.",
+                error: true,
+                success: false
+            });
+        }
+
+        // Get all properties (both featured and non-featured for admin to manage)
+        const Property = require('../models/propertyModel');
+        const allProperties = await Property.find({})
+            .populate('agent', 'name email phone')
+            .populate('uploadedBy', 'name email')
+            .sort({ isFeatured: -1, createdAt: -1 });
+
+        res.json({
+            message: "Properties fetched successfully",
+            data: allProperties,
+            success: true,
+            error: false
+        });
+
+    } catch (err) {
+        res.status(400).json({
+            message: err.message || err,
+            error: true,
+            success: false
+        });
+    }
+}
+
+// Update featured property details (admin only)
+async function updateFeaturedProperty(req, res) {
+    try {
+        const { propertyId } = req.params;
+        const { isFeatured, title, description, pricing, specifications, amenities, status } = req.body;
+
+        // Check if current user is admin
+        const currentUser = await userModel.findById(req.userId);
+        if (!currentUser || currentUser.role !== 'ADMIN') {
+            return res.status(403).json({
+                message: "Access denied. Admin privileges required.",
+                error: true,
+                success: false
+            });
+        }
+
+        const Property = require('../models/propertyModel');
+        
+        // Build update object with allowed fields
+        const updateData = {};
+        if (title !== undefined) updateData.title = title;
+        if (description !== undefined) updateData.description = description;
+        if (pricing !== undefined) updateData.pricing = pricing;
+        if (specifications !== undefined) updateData.specifications = specifications;
+        if (amenities !== undefined) updateData.amenities = amenities;
+        if (status !== undefined) updateData.status = status;
+        if (isFeatured !== undefined) updateData.isFeatured = isFeatured;
+
+        // Update property
+        const updatedProperty = await Property.findByIdAndUpdate(
+            propertyId,
+            updateData,
+            { new: true, runValidators: true }
+        ).populate('agent', 'name email phone').populate('uploadedBy', 'name email');
+
+        if (!updatedProperty) {
+            return res.status(404).json({
+                message: "Property not found",
+                error: true,
+                success: false
+            });
+        }
+
+        res.json({
+            message: "Property updated successfully",
+            data: updatedProperty,
+            success: true,
+            error: false
+        });
+
+    } catch (err) {
+        res.status(400).json({
+            message: err.message || err,
+            error: true,
+            success: false
+        });
+    }
+}
+
+// Toggle featured status of a property (admin only)
+async function togglePropertyFeatured(req, res) {
+    try {
+        const { propertyId } = req.params;
+
+        // Check if current user is admin
+        const currentUser = await userModel.findById(req.userId);
+        if (!currentUser || currentUser.role !== 'ADMIN') {
+            return res.status(403).json({
+                message: "Access denied. Admin privileges required.",
+                error: true,
+                success: false
+            });
+        }
+
+        const Property = require('../models/propertyModel');
+        
+        // Get current property
+        const property = await Property.findById(propertyId);
+        if (!property) {
+            return res.status(404).json({
+                message: "Property not found",
+                error: true,
+                success: false
+            });
+        }
+
+        // Toggle featured status
+        const updatedProperty = await Property.findByIdAndUpdate(
+            propertyId,
+            { isFeatured: !property.isFeatured },
+            { new: true }
+        ).populate('agent', 'name email phone').populate('uploadedBy', 'name email');
+
+        res.json({
+            message: `Property ${updatedProperty.isFeatured ? 'featured' : 'unfeatured'} successfully`,
+            data: updatedProperty,
+            success: true,
+            error: false
+        });
+
+    } catch (err) {
+        res.status(400).json({
+            message: err.message || err,
+            error: true,
+            success: false
+        });
+    }
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -802,5 +947,8 @@ module.exports = {
     grantProductPermissions,
     getAllStaff,
     getStaffUploadStats,
-    promoteToVerifiedSeller
+    promoteToVerifiedSeller,
+    getFeaturedProperties,
+    updateFeaturedProperty,
+    togglePropertyFeatured
 };

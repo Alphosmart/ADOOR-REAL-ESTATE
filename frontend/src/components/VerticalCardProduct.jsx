@@ -4,11 +4,11 @@ import { useProducts } from '../context/ProductContext'
 import { formatCurrency } from '../helper/settingsUtils'
 import SocialFeatures from './SocialFeatures'
 
-const VerticalCardProduct = memo(({ category, heading }) => {
-    console.log('🔍 VerticalCardProduct: Rendered with category:', category, 'heading:', heading);
+const VerticalCardProduct = memo(({ category, heading, featured = false }) => {
+    console.log('🔍 VerticalCardProduct: Rendered with category:', category, 'heading:', heading, 'featured:', featured);
     console.log('🔍 VerticalCardProduct: Component mounted/updated at:', new Date().toISOString());
     
-    const { getProductsByCategory, loading: globalLoading, allProducts, error } = useProducts()
+    const { getProductsByCategory, getFeaturedProducts, loading: globalLoading, allProducts, error } = useProducts()
     const [loading, setLoading] = useState(true)
     const [hoveredProduct, setHoveredProduct] = useState(null)
     const [currentImageIndex, setCurrentImageIndex] = useState({})
@@ -17,6 +17,7 @@ const VerticalCardProduct = memo(({ category, heading }) => {
         globalLoading, 
         allProductsLength: allProducts.length,
         category,
+        featured,
         error,
         allProductsSample: allProducts.slice(0, 2).map(p => ({ id: p._id, name: p.productName }))
     });
@@ -27,10 +28,10 @@ const VerticalCardProduct = memo(({ category, heading }) => {
             console.log('🔍 VerticalCardProduct: No data available - globalLoading:', globalLoading, 'allProducts:', allProducts.length);
             return []
         }
-        const products = getProductsByCategory(category);
-        console.log('🔍 VerticalCardProduct: Got', products.length, 'products for category:', category);
+        const products = featured ? getFeaturedProducts() : getProductsByCategory(category);
+        console.log('🔍 VerticalCardProduct: Got', products.length, 'products for category:', category, 'featured:', featured);
         return products;
-    }, [getProductsByCategory, category, globalLoading, allProducts.length])
+    }, [getProductsByCategory, getFeaturedProducts, category, featured, globalLoading, allProducts.length])
 
     // Update loading state based on context
     useEffect(() => {

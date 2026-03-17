@@ -21,18 +21,21 @@ const getUserOrdersController = require('../controller/getUserOrders');
 const updateProductController = require('../controller/updateProduct');
 const deleteProductController = require('../controller/deleteProduct');
 const updateOrderStatusController = require('../controller/updateOrderStatus');
-const { 
+const {
     createUser,
-    getAllUsers, 
-    updateUserRole, 
-    getAllProductsAdmin, 
-    deleteProductAdmin, 
-    updateProductStatus, 
+    getAllUsers,
+    updateUserRole,
+    getAllProductsAdmin,
+    deleteProductAdmin,
+    updateProductStatus,
     getDashboardStats,
     promoteToAdmin,
     grantProductPermissions,
     getAllStaff,
-    getStaffUploadStats
+    getStaffUploadStats,
+    getFeaturedProperties,
+    updateFeaturedProperty,
+    togglePropertyFeatured
 } = require('../controller/adminController');
 const createAdminUser = require('../controller/createAdminUser');
 const {
@@ -269,6 +272,11 @@ router.put('/admin/update-user-role/:userId', authToken, updateUserRole);
 router.get('/admin/all-products', authToken, getAllProductsAdmin);
 router.delete('/admin/delete-product/:productId', authToken, deleteProductAdmin);
 router.put('/admin/update-product-status/:productId', authToken, updateProductStatus);
+
+// Featured properties management routes
+router.get('/admin/featured-properties', authToken, getFeaturedProperties);
+router.put('/admin/featured-properties/:propertyId', authToken, updateFeaturedProperty);
+router.put('/admin/featured-properties/:propertyId/toggle', authToken, togglePropertyFeatured);
 
 // Category management routes
 router.get('/admin/categories', authToken, getCategories);

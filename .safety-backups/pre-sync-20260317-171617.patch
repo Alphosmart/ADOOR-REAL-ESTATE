@@ -1,0 +1,13 @@
+diff --git a/frontend/src/components/AuthGuard.jsx b/frontend/src/components/AuthGuard.jsx
+index 47636e5..178b91e 100755
+--- a/frontend/src/components/AuthGuard.jsx
++++ b/frontend/src/components/AuthGuard.jsx
+@@ -26,7 +26,7 @@ export const GuestRoute = ({ children }) => {
+     const from = location.state?.from?.pathname || '/';
+     return <Navigate to={from} replace />;
+   }
+-  
++  Discover our exclusive collection of premium residential and commercial properties. Professional consultation and property management services included.
+   return children;
+ };
+ 

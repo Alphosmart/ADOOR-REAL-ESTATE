@@ -20,6 +20,11 @@ const AdminPanel = () => {
       icon: <FaBoxOpen />
     },
     {
+      label: 'Featured Properties',
+      path: '/admin-panel/featured-properties',
+      icon: <FaStar />
+    },
+    {
       label: 'Category Management',
       path: '/admin-panel/categories',
       icon: <FaTags />
