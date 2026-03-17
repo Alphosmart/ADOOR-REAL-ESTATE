@@ -9,7 +9,7 @@ export const ProtectedRoute = ({ children }) => {
   
   if (!user?._id) {
     // Redirect to login with the attempted location
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/admin-login" state={{ from: location }} replace />;
   }
   
   return children;
@@ -35,7 +35,7 @@ export const AdminRoute = ({ children }) => {
   const location = useLocation();
   
   if (!user?._id) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/admin-login" state={{ from: location }} replace />;
   }
   
   if (user?.role !== 'ADMIN') {

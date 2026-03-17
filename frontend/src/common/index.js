@@ -1,6 +1,8 @@
-const backendDomain = process.env.NODE_ENV === 'production' 
-    ? "https://adoo-real-estate.onrender.com" 
-    : "http://localhost:8080"  // Use local backend for development
+const backendDomain = process.env.REACT_APP_API_URL || (
+    process.env.NODE_ENV === 'production'
+        ? "https://adoor-real-estate.onrender.com"
+        : "http://localhost:8080"
+)  // Use env-configured backend; fallback to local backend for development
 
 const SummaryApi = {
     // User signup removed - no regular user accounts
