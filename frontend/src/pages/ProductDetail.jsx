@@ -60,14 +60,18 @@ const ProductDetail = () => {
                 ? product.location
                 : `${product.location.neighborhood || product.location.address || ''}, ${product.location.city || ''}, ${product.location.state || ''}`.replace(/^,\s*|,\s*$/g, ''))
             : '';
-        const propertyUrl = window.location.href;
+        
+        // Build shortened property URL
+        const baseUrl = window.location.origin;
+        const shortUrl = `${baseUrl}/product/${id}`;
 
         const message = [
             'Hello, I am interested in this property.',
             `Property: ${propertyName}`,
             `Price: ₦${Number(propertyPrice || 0).toLocaleString()}`,
             location ? `Location: ${location}` : null,
-            `Link: ${propertyUrl}`
+            '',
+            shortUrl
         ].filter(Boolean).join('\n');
 
         const encodedMessage = encodeURIComponent(message);

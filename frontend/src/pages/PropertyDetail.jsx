@@ -80,7 +80,10 @@ const PropertyDetail = () => {
             return;
         }
 
-        const propertyUrl = window.location.href;
+        // Build shortened property URL
+        const baseUrl = window.location.origin;
+        const shortUrl = `${baseUrl}/property/${propertyId}`;
+        
         const propertyTitle = property.title || property.productName || 'Property';
         const propertyPrice = property.pricing?.amount || property.sellingPrice || property.price || 0;
         const propertyLocation = property.location?.city
@@ -94,7 +97,7 @@ const PropertyDetail = () => {
             `Price: ₦${Number(propertyPrice).toLocaleString()}`,
             propertyLocation ? `Location: ${propertyLocation}` : null,
             '',
-            `Property Link: ${propertyUrl}`
+            shortUrl
         ].filter(Boolean).join('\n');
 
         const encodedMessage = encodeURIComponent(message);
