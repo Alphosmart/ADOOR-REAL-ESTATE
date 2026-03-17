@@ -22,6 +22,7 @@ const updateProductController = require('../controller/updateProduct');
 const deleteProductController = require('../controller/deleteProduct');
 const updateOrderStatusController = require('../controller/updateOrderStatus');
 const { 
+    createUser,
     getAllUsers, 
     updateUserRole, 
     getAllProductsAdmin, 
@@ -263,6 +264,7 @@ router.post('/cart/sync', checkMaintenanceMode, authToken, syncCart);
 
 // Admin routes
 router.get('/admin/all-users', authToken, getAllUsers);
+router.post('/admin/create-user', authToken, createUser);
 router.put('/admin/update-user-role/:userId', authToken, updateUserRole);
 router.get('/admin/all-products', authToken, getAllProductsAdmin);
 router.delete('/admin/delete-product/:productId', authToken, deleteProductAdmin);
