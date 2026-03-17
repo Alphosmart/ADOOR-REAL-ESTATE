@@ -77,6 +77,10 @@ const SummaryApi = {
         url : `${backendDomain}/api/admin/all-users`,
         method : 'get'
     },
+    adminCreateUser : {
+        url : `${backendDomain}/api/admin/create-user`,
+        method : 'post'
+    },
     adminUpdateUserRole : {
         url : `${backendDomain}/api/admin/update-user-role`,
         method : 'put'

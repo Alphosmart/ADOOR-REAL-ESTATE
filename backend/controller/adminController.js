@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel");
 const productModel = require("../models/productModel");
+const bcrypt = require('bcryptjs');
 
 // Get all users (admin only)
 async function getAllUsers(req, res) {
@@ -41,6 +42,86 @@ async function getAllUsers(req, res) {
     }
 }
 
+// Create user (admin only)
+async function createUser(req, res) {
+    try {
+        const { name, email, password, role = 'GENERAL' } = req.body;
+
+        const currentUser = await userModel.findById(req.userId);
+        if (!currentUser || currentUser.role !== 'ADMIN') {
+            return res.status(403).json({
+                message: "Access denied. Admin privileges required.",
+                error: true,
+                success: false
+            });
+        }
+
+        if (!name || !email || !password) {
+            return res.status(400).json({
+                message: "Name, email, and password are required",
+                error: true,
+                success: false
+            });
+        }
+
+        if (!['GENERAL', 'STAFF', 'ADMIN'].includes(role)) {
+            return res.status(400).json({
+                message: "Invalid role. Must be GENERAL, STAFF, or ADMIN",
+                error: true,
+                success: false
+            });
+        }
+
+        const normalizedEmail = email.toLowerCase().trim();
+        const existingUser = await userModel.findOne({ email: normalizedEmail });
+        if (existingUser) {
+            return res.status(409).json({
+                message: "User already exists with this email address",
+                error: true,
+                success: false
+            });
+        }
+
+        const salt = bcrypt.genSaltSync(10);
+        const hashPassword = bcrypt.hashSync(password, salt);
+
+        const userPayload = {
+            name: name.trim(),
+            email: normalizedEmail,
+            password: hashPassword,
+            role
+        };
+
+        if (role === 'ADMIN') {
+            userPayload.permissions = {
+                canUploadProducts: true,
+                canEditProducts: true,
+                canDeleteProducts: true,
+                canManageOrders: true,
+                grantedBy: req.userId,
+                grantedAt: new Date()
+            };
+        }
+
+        const createdUser = await userModel.create(userPayload);
+        const userResponse = createdUser.toObject();
+        delete userResponse.password;
+
+        res.status(201).json({
+            message: "User created successfully",
+            data: userResponse,
+            success: true,
+            error: false
+        });
+    } catch (err) {
+        res.status(400).json({
+            message: err.message || err,
+            error: true,
+            success: false
+        });
+    }
+}
+
 // Update user role (admin only)
 async function updateUserRole(req, res) {
     try {
@@ -66,9 +147,9 @@ async function updateUserRole(req, res) {
         }
 
         // Validate role
-        if (!['GENERAL', 'ADMIN'].includes(role)) {
+        if (!['GENERAL', 'STAFF', 'ADMIN'].includes(role)) {
             return res.status(400).json({
-                message: "Invalid role. Must be GENERAL or ADMIN",
+                message: "Invalid role. Must be GENERAL, STAFF, or ADMIN",
                 error: true,
                 success: false
             });
@@ -84,9 +165,33 @@ async function updateUserRole(req, res) {
         }
 
         // Update user role
+        const updatePayload = { role };
+
+        if (role === 'GENERAL') {
+            updatePayload.permissions = {
+                canUploadProducts: false,
+                canEditProducts: false,
+                canDeleteProducts: false,
+                canManageOrders: false,
+                grantedBy: null,
+                grantedAt: null
+            };
+        }
+
+        if (role === 'ADMIN') {
+            updatePayload.permissions = {
+                canUploadProducts: true,
+                canEditProducts: true,
+                canDeleteProducts: true,
+                canManageOrders: true,
+                grantedBy: req.userId,
+                grantedAt: new Date()
+            };
+        }
+
         const updatedUser = await userModel.findByIdAndUpdate(
             userId,
-            { role },
+            updatePayload,
             { new: true }
         ).select("-password");
 
@@ -683,6 +788,7 @@ async function promoteToVerifiedSeller(req, res) {
 }
 
 module.exports = {
+    createUser,
     getAllUsers,
     updateUserRole,
     getAllProductsAdmin,
