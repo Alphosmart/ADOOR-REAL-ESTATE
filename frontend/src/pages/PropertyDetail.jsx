@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
     FaBed, FaBath, FaRulerCombined, FaMapMarkerAlt, FaCar, 
-    FaHeart, FaShare, FaPhone, FaEnvelope, FaCalendar, FaWhatsapp 
+    FaHeart, FaShare, FaEnvelope, FaCalendar, FaWhatsapp 
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import useSiteContent from '../hooks/useSiteContent';
 
 const PropertyDetail = () => {
     const { propertyId } = useParams();
@@ -14,12 +15,9 @@ const PropertyDetail = () => {
     const [activeImage, setActiveImage] = useState(0);
     const [showInquiryForm, setShowInquiryForm] = useState(false);
     const [showAppointmentForm, setShowAppointmentForm] = useState(false);
+    const { content: siteContent } = useSiteContent();
 
-    useEffect(() => {
-        fetchPropertyDetails();
-    }, [propertyId]);
-
-    const fetchPropertyDetails = async () => {
+    const fetchPropertyDetails = useCallback(async () => {
         try {
             const response = await fetch(`/api/properties/${propertyId}`);
             const data = await response.json();
@@ -36,7 +34,11 @@ const PropertyDetail = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [navigate, propertyId]);
+
+    useEffect(() => {
+        fetchPropertyDetails();
+    }, [fetchPropertyDetails]);
 
     const formatPrice = (amount, currency = 'NGN', rentPeriod = null) => {
         const formatted = new Intl.NumberFormat('en-NG', {
@@ -46,6 +48,62 @@ const PropertyDetail = () => {
         }).format(amount);
 
         return rentPeriod ? `${formatted}/${rentPeriod}` : formatted;
+    };
+
+    const normalizePhoneNumber = (value = '') => {
+        const digits = String(value).replace(/\D/g, '');
+        if (!digits) return '';
+        if (digits.startsWith('0')) return `234${digits.slice(1)}`;
+        return digits;
+    };
+
+    const getWhatsappNumber = () => {
+        const contactBusinessInfo = siteContent?.contactUs?.businessInfo;
+        const candidates = [
+            contactBusinessInfo?.whatsapp,
+            property?.agentInfo?.phone,
+            property?.uploadedByInfo?.phone
+        ];
+
+        for (const phone of candidates) {
+            const normalized = normalizePhoneNumber(phone);
+            if (normalized) return normalized;
+        }
+
+        return '';
+    };
+
+    const handleWhatsAppChat = () => {
+        const whatsappNumber = getWhatsappNumber();
+        if (!whatsappNumber) {
+            toast.error('WhatsApp contact is not available right now');
+            return;
+        }
+
+        const propertyUrl = window.location.href;
+        const propertyTitle = property.title || property.productName || 'Property';
+        const propertyPrice = property.pricing?.amount || property.sellingPrice || property.price || 0;
+        const propertyLocation = property.location?.city
+            ? `${property.location.city}, ${property.location.state || ''}`
+            : (property.location?.address || '');
+
+        const message = [
+            'Hello! I am interested in this property:',
+            '',
+            `${propertyTitle}`,
+            `Price: ₦${Number(propertyPrice).toLocaleString()}`,
+            propertyLocation ? `Location: ${propertyLocation}` : null,
+            '',
+            `Property Link: ${propertyUrl}`
+        ].filter(Boolean).join('\n');
+
+        const encodedMessage = encodeURIComponent(message);
+        const isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const whatsappUrl = isMobile
+            ? `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+            : `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     };
 
     const handleInquiry = async (e) => {
@@ -253,19 +311,7 @@ const PropertyDetail = () => {
                             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
                             
                             <button 
-                                onClick={() => {
-                                    const propertyUrl = window.location.href;
-                                    const propertyTitle = property.name || property.productName;
-                                    const propertyPrice = property.pricing?.sellingPrice?.amount || property.sellingPrice || property.price;
-                                    const propertyLocation = property.location?.city ? `${property.location.city}, ${property.location.state}` : (property.location?.address || '');
-                                    
-                                    const message = `Hi! I'm interested in this property:\n\n*${propertyTitle}*\nPrice: ₦${propertyPrice?.toLocaleString()}\nLocation: ${propertyLocation}\n\nProperty Link: ${propertyUrl}`;
-                                    
-                                    const whatsappNumber = '+2348012345678'; // Replace with your actual WhatsApp number
-                                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-                                    
-                                    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-                                }}
+                                onClick={handleWhatsAppChat}
                                 className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 mb-2 flex items-center justify-center"
                             >
                                 <FaWhatsapp className="mr-2 text-2xl" />

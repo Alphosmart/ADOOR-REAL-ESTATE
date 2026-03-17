@@ -27,54 +27,146 @@
     "businessHours": {
       "title": "Business Hours",
       "hours": [
-        { "days": "Monday - Friday", "time": "9:00 AM - 6:00 PM" },
-        { "days": "Saturday", "time": "10:00 AM - 4:00 PM" },
-        { "days": "Sunday", "time": "Closed" }
+        {
+          "days": "Monday - Friday",
+          "time": "9:00 AM - 6:00 PM"
+        },
+        {
+          "days": "Saturday",
+          "time": "10:00 AM - 4:00 PM"
+        },
+        {
+          "days": "Sunday",
+          "time": "Closed"
+        }
       ]
     },
     "socialMedia": [
-      { "platform": "Facebook", "url": "https://facebook.com/adoorealestate", "icon": "FaFacebook", "color": "#1877F2" },
-      { "platform": "Instagram", "url": "https://instagram.com/adoorealestate", "icon": "FaInstagram", "color": "#E4405F" },
-      { "platform": "Twitter", "url": "https://twitter.com/adoorealestate", "icon": "FaTwitter", "color": "#1DA1F2" },
-      { "platform": "Pinterest", "url": "https://pinterest.com/adoorealestate", "icon": "FaPinterest", "color": "#BD081C" }
+      {
+        "platform": "Facebook",
+        "url": "https://facebook.com/adoorealestate",
+        "icon": "FaFacebook",
+        "color": "#1877F2"
+      },
+      {
+        "platform": "Instagram",
+        "url": "https://instagram.com/adoorealestate",
+        "icon": "FaInstagram",
+        "color": "#E4405F"
+      },
+      {
+        "platform": "Twitter",
+        "url": "https://twitter.com/adoorealestate",
+        "icon": "FaTwitter",
+        "color": "#1DA1F2"
+      },
+      {
+        "platform": "Pinterest",
+        "url": "https://pinterest.com/adoorealestate",
+        "icon": "FaPinterest",
+        "color": "#BD081C"
+      }
     ],
     "quickLinks": {
       "shop": [
-        { "label": "All Properties", "path": "/products" },
-        { "label": "Property Types", "path": "/categories" },
-        { "label": "New Listings", "path": "/new-arrivals" },
-        { "label": "Featured", "path": "/sale" }
+        {
+          "label": "All Properties",
+          "path": "/products"
+        },
+        {
+          "label": "Property Types",
+          "path": "/categories"
+        },
+        {
+          "label": "New Listings",
+          "path": "/new-arrivals"
+        },
+        {
+          "label": "Featured",
+          "path": "/sale"
+        }
       ],
       "support": [
-        { "label": "Help Center", "path": "/help-center" },
-        { "label": "Contact Us", "path": "/contact-us" },
-        { "label": "Track Order", "path": "/track-order" },
-        { "label": "Returns", "path": "/returns-refunds" }
+        {
+          "label": "Help Center",
+          "path": "/help-center"
+        },
+        {
+          "label": "Contact Us",
+          "path": "/contact-us"
+        },
+        {
+          "label": "Track Order",
+          "path": "/track-order"
+        },
+        {
+          "label": "Returns",
+          "path": "/returns-refunds"
+        }
       ],
       "company": [
-        { "label": "About Us", "path": "/about-us" },
-        { "label": "Privacy Policy", "path": "/privacy-policy" },
-        { "label": "Terms of Service", "path": "/terms-of-service" },
-        { "label": "Cookie Policy", "path": "/cookie-policy" }
+        {
+          "label": "About Us",
+          "path": "/about-us"
+        },
+        {
+          "label": "Privacy Policy",
+          "path": "/privacy-policy"
+        },
+        {
+          "label": "Terms of Service",
+          "path": "/terms-of-service"
+        },
+        {
+          "label": "Cookie Policy",
+          "path": "/cookie-policy"
+        }
       ]
     },
     "paymentMethods": {
       "title": "We Accept",
       "methods": [
-        { "name": "Visa", "icon": "visa" },
-        { "name": "Mastercard", "icon": "mastercard" },
-        { "name": "American Express", "icon": "amex" },
-        { "name": "PayPal", "icon": "paypal" },
-        { "name": "Stripe", "icon": "stripe" }
+        {
+          "name": "Visa",
+          "icon": "visa"
+        },
+        {
+          "name": "Mastercard",
+          "icon": "mastercard"
+        },
+        {
+          "name": "American Express",
+          "icon": "amex"
+        },
+        {
+          "name": "PayPal",
+          "icon": "paypal"
+        },
+        {
+          "name": "Stripe",
+          "icon": "stripe"
+        }
       ]
     },
     "certifications": {
       "title": "Trusted & Secure",
       "items": [
-        { "text": "SSL Secured", "icon": "shield" },
-        { "text": "PCI Compliant", "icon": "certificate" },
-        { "text": "Money Back Guarantee", "icon": "guarantee" },
-        { "text": "24/7 Support", "icon": "support" }
+        {
+          "text": "SSL Secured",
+          "icon": "shield"
+        },
+        {
+          "text": "PCI Compliant",
+          "icon": "certificate"
+        },
+        {
+          "text": "Money Back Guarantee",
+          "icon": "guarantee"
+        },
+        {
+          "text": "24/7 Support",
+          "icon": "support"
+        }
       ]
     }
   },
@@ -94,47 +186,71 @@
     },
     "navigation": {
       "items": [
-        { 
-          "label": "Home", 
-          "path": "/", 
+        {
+          "label": "Home",
+          "path": "/",
           "dropdown": null,
           "isActive": true
         },
-        { 
-          "label": "Properties", 
+        {
+          "label": "Properties",
           "path": "/products",
           "dropdown": {
             "items": [
-              { "label": "All Properties", "path": "/products" },
-              { "label": "New Listings", "path": "/products?filter=new" },
-              { "label": "Featured", "path": "/products?filter=popular" },
-              { "label": "Price Reduced", "path": "/products?filter=sale" }
+              {
+                "label": "All Properties",
+                "path": "/products"
+              },
+              {
+                "label": "New Listings",
+                "path": "/products?filter=new"
+              },
+              {
+                "label": "Featured",
+                "path": "/products?filter=popular"
+              },
+              {
+                "label": "Price Reduced",
+                "path": "/products?filter=sale"
+              }
             ]
           },
           "isActive": true
         },
-        { 
-          "label": "Property Types", 
+        {
+          "label": "Property Types",
           "path": "/categories",
           "dropdown": {
             "items": [
-              { "label": "Houses", "path": "/categories/houses" },
-              { "label": "Apartments", "path": "/categories/apartments" },
-              { "label": "Villas", "path": "/categories/villas" },
-              { "label": "Commercial", "path": "/categories/commercial" }
+              {
+                "label": "Houses",
+                "path": "/categories/houses"
+              },
+              {
+                "label": "Apartments",
+                "path": "/categories/apartments"
+              },
+              {
+                "label": "Villas",
+                "path": "/categories/villas"
+              },
+              {
+                "label": "Commercial",
+                "path": "/categories/commercial"
+              }
             ]
           },
           "isActive": true
         },
-        { 
-          "label": "About", 
-          "path": "/about-us", 
+        {
+          "label": "About",
+          "path": "/about-us",
           "dropdown": null,
           "isActive": true
         },
-        { 
-          "label": "Contact", 
-          "path": "/contact-us", 
+        {
+          "label": "Contact",
+          "path": "/contact-us",
           "dropdown": null,
           "isActive": true
         }
@@ -180,13 +296,15 @@
       "address": "123 E-Commerce Street\nBusiness District\nCity, State 12345",
       "phone": "+1 (555) 123-4567",
       "email": "support@adoorealestate.com",
-      "hours": "Mon-Fri 9am-6pm"
+      "hours": "Mon-Fri 9am-6pm",
+      "whatsapp": "07036111707"
     },
     "responseInfo": {
       "emailResponse": "24-48 hours",
       "phoneHours": "Mon-Fri 9AM-6PM",
       "liveChatHours": "Mon-Fri 9AM-6PM"
-    }
+    },
+    "lastUpdated": "2026-03-17T20:57:27.228Z"
   },
   "maintenancePage": {
     "title": "Under Maintenance",

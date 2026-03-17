@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { FaStar, FaStarHalf, FaShoppingCart, FaHeart, FaRegHeart, FaChevronLeft, FaChevronRight, FaExpand } from 'react-icons/fa';
+import { FaStar, FaStarHalf, FaShoppingCart, FaHeart, FaRegHeart, FaChevronLeft, FaChevronRight, FaExpand, FaWhatsapp } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import SummaryApi from '../common';
 import SocialFeatures from '../components/SocialFeatures';
 import EnhancedReviews from '../components/EnhancedReviews';
+import useSiteContent from '../hooks/useSiteContent';
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -17,6 +18,66 @@ const ProductDetail = () => {
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [relatedLoading, setRelatedLoading] = useState(false);
+    const { content: siteContent } = useSiteContent();
+
+    const normalizeWhatsappNumber = (phone = '') => {
+        const digits = String(phone).replace(/\D/g, '');
+        if (!digits) return '';
+        if (digits.startsWith('0')) return `234${digits.slice(1)}`;
+        return digits;
+    };
+
+    const getWhatsAppNumber = () => {
+        const contactBusinessInfo = siteContent?.contactUs?.businessInfo;
+        const candidates = [
+            contactBusinessInfo?.whatsapp,
+            product?.agentInfo?.phone,
+            product?.uploadedByInfo?.phone,
+            product?.sellerInfo?.phone
+        ];
+
+        for (const phone of candidates) {
+            const normalized = normalizeWhatsappNumber(phone);
+            if (normalized) return normalized;
+        }
+
+        return '';
+    };
+
+    const handleWhatsAppChat = () => {
+        if (!product) return;
+
+        const whatsappNumber = getWhatsAppNumber();
+        if (!whatsappNumber) {
+            toast.error('WhatsApp contact is not available at the moment');
+            return;
+        }
+
+        const propertyName = product.productName || product.title || 'Property';
+        const propertyPrice = product.pricing?.sellingPrice?.amount || product.sellingPrice || 0;
+        const location = product.location
+            ? (typeof product.location === 'string'
+                ? product.location
+                : `${product.location.neighborhood || product.location.address || ''}, ${product.location.city || ''}, ${product.location.state || ''}`.replace(/^,\s*|,\s*$/g, ''))
+            : '';
+        const propertyUrl = window.location.href;
+
+        const message = [
+            'Hello, I am interested in this property.',
+            `Property: ${propertyName}`,
+            `Price: ₦${Number(propertyPrice || 0).toLocaleString()}`,
+            location ? `Location: ${location}` : null,
+            `Link: ${propertyUrl}`
+        ].filter(Boolean).join('\n');
+
+        const encodedMessage = encodeURIComponent(message);
+        const isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const whatsappUrl = isMobile
+            ? `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+            : `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    };
 
     const fetchProductDetails = useCallback(async () => {
         try {
@@ -423,6 +484,13 @@ const ProductDetail = () => {
                                 {isFavorite ? <FaHeart /> : <FaRegHeart />}
                             </button>
                         </div>
+                        <button
+                            className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+                            onClick={handleWhatsAppChat}
+                        >
+                            <FaWhatsapp />
+                            Chat on WhatsApp
+                        </button>
                     </div>
                 </div>
             </div>

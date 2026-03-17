@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import SummaryApi from '../common';
 
 // Custom hook to fetch and cache site content
 const useSiteContent = () => {
@@ -12,8 +11,9 @@ const useSiteContent = () => {
             try {
                 setLoading(true);
                 
-                // Try to get content from public endpoint first
-                const response = await fetch(SummaryApi.getSiteContent.url);
+                // Use public endpoint (doesn't require authentication)
+                const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+                const response = await fetch(`${baseUrl}/api/site-content`);
                 
                 if (response.ok) {
                     const data = await response.json();
@@ -130,6 +130,7 @@ const getDefaultContent = () => {
             businessInfo: {
                 address: "123 E-Commerce Street\nBusiness District\nCity, State 12345",
                 phone: "+1 (555) 123-4567",
+                whatsapp: "",
                 email: "support@adoorealestate.com",
                 hours: "Mon-Fri 9am-6pm"
             },
