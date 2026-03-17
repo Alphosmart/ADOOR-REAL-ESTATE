@@ -12,7 +12,7 @@ const AdminLogin = () => {
         password: ""
     })
     const navigate = useNavigate()
-    const { fetchUserDetails } = useContext(Context)
+    const { refreshUserDetails } = useContext(Context)
 
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -41,7 +41,7 @@ const AdminLogin = () => {
 
         if (dataApi.success) {
             toast.success(dataApi.message)
-            await fetchUserDetails()
+            await refreshUserDetails()
             navigate('/')
         }
 
