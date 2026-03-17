@@ -78,7 +78,6 @@ const ProductDetail = () => {
             `Price: ₦${Number(propertyPrice || 0).toLocaleString()}`,
             location ? `Location: ${location}` : null,
             '',
-            'Link:',
             propertyUrl
         ].filter(Boolean).join('\n');
 

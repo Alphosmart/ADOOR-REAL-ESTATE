@@ -104,7 +104,6 @@ const PropertyDetail = () => {
             `Price: ₦${Number(propertyPrice).toLocaleString()}`,
             propertyLocation ? `Location: ${propertyLocation}` : null,
             '',
-            'Link:',
             propertyUrl
         ].filter(Boolean).join('\n');
 
