@@ -67,6 +67,11 @@ const router = createBrowserRouter([
                 errorElement: <ErrorPage />
             },
             {
+                path: "login",
+                element: <AdminLogin />,
+                errorElement: <ErrorPage />
+            },
+            {
                 path: "dev-login",
                 element: <DevLogin />,
                 errorElement: <ErrorPage />
