@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // Custom hook to fetch and cache site content
-const useSiteContent = () => {
+const useSiteContent = (section = null) => {
     const [content, setContent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ const useSiteContent = () => {
                 
                 // Use public endpoint (doesn't require authentication)
                 const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-                const response = await fetch(`${baseUrl}/api/site-content`);
+                const response = await fetch(`${baseUrl}/api/site-content?_=${Date.now()}`, { cache: 'no-store' });
                 
                 if (response.ok) {
                     const data = await response.json();
@@ -38,8 +38,9 @@ const useSiteContent = () => {
 
         fetchContent();
         
-        // Return fetchContent for manual refetch
-        return fetchContent;
+        const handleContentUpdate = () => fetchContent();
+        window.addEventListener('siteContentUpdated', handleContentUpdate);
+        return () => window.removeEventListener('siteContentUpdated', handleContentUpdate);
     }, []);
 
     const refetch = async () => {
@@ -63,7 +64,7 @@ const useSiteContent = () => {
         }
     };
 
-    return { content, loading, error, refetch };
+    return { content: section ? content?.[section] : content, loading, error, refetch };
 };
 
 // Default content fallbacks
@@ -76,7 +77,10 @@ const getDefaultContent = () => {
                 primaryButtonText: "Shop Now",
                 primaryButtonLink: "/products",
                 secondaryButtonText: "Learn More",
-                secondaryButtonLink: "/about-us"
+                secondaryButtonLink: "/about-us",
+                slides: [
+                    { videoUrl: "", posterUrl: "" }
+                ]
             }
         },
         aboutUs: {

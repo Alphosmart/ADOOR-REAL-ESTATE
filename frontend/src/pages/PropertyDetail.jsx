@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import useSiteContent from '../hooks/useSiteContent';
+import PropertyVideo from '../components/PropertyVideo';
 
 const PropertyDetail = () => {
     const { propertyId } = useParams();
@@ -223,6 +224,13 @@ const PropertyDetail = () => {
                             </div>
                         )}
                     </div>
+
+                    {property.productVideo && (
+                        <div className="mb-6 overflow-hidden rounded-lg bg-black">
+                            <PropertyVideo src={property.productVideo} poster={images[0]?.url} className="w-full aspect-video max-h-[520px]" />
+                            <p className="bg-accent-800 px-4 py-3 text-sm font-medium text-white">Property walkthrough</p>
+                        </div>
+                    )}
 
                     {/* Title and Price */}
                     <div className="mb-6">

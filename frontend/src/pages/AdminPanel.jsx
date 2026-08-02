@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, Link } from 'react-router-dom';
-import { FaHome, FaUsers, FaBoxOpen, FaChartBar, FaCog, FaImage, FaEnvelope, FaUserCog, FaTags, FaStar, FaUserSecret } from 'react-icons/fa';
+import { FaHome, FaUsers, FaBoxOpen, FaChartBar, FaCog, FaImage, FaEnvelope, FaUserCog, FaTags, FaStar, FaUserSecret, FaVideo } from 'react-icons/fa';
 
 const AdminPanel = () => {
   const user = useSelector(state => state?.user?.user);
@@ -65,6 +65,11 @@ const AdminPanel = () => {
       icon: <FaCog />
     },
     {
+      label: 'Hero Videos',
+      path: '/admin-panel/site-content?tab=homePage#hero-videos',
+      icon: <FaVideo />
+    },
+    {
       label: 'Email Templates',
       path: '/admin-panel/email-templates',
       icon: <FaEnvelope />
@@ -82,11 +87,11 @@ const AdminPanel = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="flex">
+    <div className="min-h-[calc(100vh-4rem)] bg-gray-100">
+      <div className="flex min-h-[calc(100vh-4rem)]">
         {/* Sidebar */}
-        <div className="w-64 bg-white shadow-lg min-h-screen">
-          <div className="p-6">
+        <aside className="sticky top-16 flex h-[calc(100vh-4rem)] w-64 flex-shrink-0 flex-col overflow-hidden bg-white shadow-lg">
+          <div className="flex-1 overflow-y-auto p-6 pb-4">
             <h1 className="text-2xl font-bold text-gray-800 mb-6">Admin Panel</h1>
             <nav className="space-y-2">
               {adminMenuItems.map((item, index) => (
@@ -103,7 +108,7 @@ const AdminPanel = () => {
           </div>
           
           {/* User Info */}
-          <div className="absolute bottom-0 w-64 p-6 border-t bg-gray-50">
+          <div className="flex-shrink-0 border-t bg-gray-50 p-6">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-accent-600 rounded-full flex items-center justify-center">
                 <span className="text-white font-semibold">
@@ -116,10 +121,10 @@ const AdminPanel = () => {
               </div>
             </div>
           </div>
-        </div>
+        </aside>
 
         {/* Main Content */}
-        <div className="flex-1 p-8">
+        <div className="min-w-0 flex-1 p-8">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>

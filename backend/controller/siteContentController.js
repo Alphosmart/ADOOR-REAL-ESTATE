@@ -43,7 +43,10 @@ const getSiteContent = async (req, res) => {
                     primaryButtonText: "View Properties",
                     primaryButtonLink: "/products",
                     secondaryButtonText: "Learn More",
-                    secondaryButtonLink: "/about-us"
+                    secondaryButtonLink: "/about-us",
+                    slides: [
+                        { videoUrl: "", posterUrl: "" }
+                    ]
                 },
                 featuredSection: {
                     title: "Featured Property Types",
@@ -279,6 +282,20 @@ const updateSiteContent = async (req, res) => {
 
         const contentFilePath = path.join(__dirname, '../data/siteContent.json');
         const dataDir = path.dirname(contentFilePath);
+
+        // Never persist uploaded videos as multi-megabyte Base64 strings.
+        if (section === 'homePage' && Array.isArray(data.hero?.slides)) {
+            const videoDirectory = path.join(__dirname, '../uploads/videos');
+            await fs.mkdir(videoDirectory, { recursive: true });
+            for (const [index, slide] of data.hero.slides.entries()) {
+                const match = typeof slide.videoUrl === 'string' && slide.videoUrl.match(/^data:video\/([^;]+);base64,(.+)$/s);
+                if (!match) continue;
+                const extension = match[1] === 'quicktime' ? 'mov' : match[1].replace(/[^a-z0-9]/gi, '');
+                const filename = `hero-${Date.now()}-${index}.${extension || 'mp4'}`;
+                await fs.writeFile(path.join(videoDirectory, filename), Buffer.from(match[2], 'base64'));
+                slide.videoUrl = `${req.protocol}://${req.get('host')}/uploads/videos/${filename}`;
+            }
+        }
         
         // Ensure data directory exists
         try {

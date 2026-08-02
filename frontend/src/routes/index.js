@@ -150,6 +150,16 @@ const router = createBrowserRouter([
                 errorElement: <ErrorPage />
             },
             {
+                path: "products",
+                element: <EnhancedSearchResults />,
+                errorElement: <ErrorPage />
+            },
+            {
+                path: "properties",
+                element: <EnhancedSearchResults />,
+                errorElement: <ErrorPage />
+            },
+            {
                 path: "help-center",
                 element: <HelpCenter />,
                 errorElement: <ErrorPage />
