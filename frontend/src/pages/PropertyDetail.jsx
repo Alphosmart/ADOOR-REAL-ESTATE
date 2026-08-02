@@ -224,6 +224,13 @@ const PropertyDetail = () => {
                         )}
                     </div>
 
+                    {property.productVideo && (
+                        <div className="mb-6 overflow-hidden rounded-lg bg-black">
+                            <video src={property.productVideo} controls playsInline preload="metadata" poster={images[0]?.url} className="w-full max-h-[520px]" />
+                            <p className="bg-accent-800 px-4 py-3 text-sm font-medium text-white">Property walkthrough</p>
+                        </div>
+                    )}
+
                     {/* Title and Price */}
                     <div className="mb-6">
                         <div className="flex justify-between items-start mb-2">

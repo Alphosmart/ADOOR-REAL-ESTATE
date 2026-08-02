@@ -7,12 +7,17 @@ const SiteContentManagement = () => {
     const [contentData, setContentData] = useState({
         homePage: {
             hero: {
-                title: "Transform Your Space with Premium Properties",
-                subtitle: "Discover thousands of premium real estate properties from trusted sellers worldwide. From modern minimalist to classic elegant designs.",
-                primaryButtonText: "Shop Now",
-                primaryButtonLink: "/products",
-                secondaryButtonText: "Learn More",
-                secondaryButtonLink: "/about-us"
+                title: "Where do you want to live?",
+                subtitle: "Search verified homes and investment opportunities across Nigeria.",
+                primaryButtonText: "Show Properties",
+                primaryButtonLink: "/search",
+                secondaryButtonText: "Explore Lagos",
+                secondaryButtonLink: "/search?q=Lagos",
+                slides: [
+                    { title: "Exceptional homes. Remarkable places.", location: "Lagos, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
+                    { title: "Designed for the way you live.", location: "Abuja, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
+                    { title: "Property with lasting value.", location: "Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" }
+                ]
             }
         },
         aboutUs: {
@@ -215,6 +220,8 @@ const SiteContentManagement = () => {
             if (result.success) {
                 toast.success(`${section} content updated successfully!`);
                 console.log(`Saved ${section}:`, result.data);
+                sessionStorage.setItem('siteContentJustUpdated', 'true');
+                window.dispatchEvent(new CustomEvent('siteContentUpdated', { detail: { section } }));
             } else {
                 toast.error(result.message || 'Failed to save content');
             }
@@ -247,6 +254,28 @@ const SiteContentManagement = () => {
                 }
             }
         }));
+    };
+
+    const updateHeroSlide = (index, field, value) => {
+        setContentData(prev => {
+            const slides = [...(prev.homePage?.hero?.slides || [])];
+            slides[index] = { ...(slides[index] || {}), [field]: value };
+            return { ...prev, homePage: { ...prev.homePage, hero: { ...prev.homePage?.hero, slides } } };
+        });
+    };
+
+    const addHeroSlide = () => {
+        setContentData(prev => {
+            const slides = [...(prev.homePage?.hero?.slides || []), { title: "New featured property", location: "Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" }];
+            return { ...prev, homePage: { ...prev.homePage, hero: { ...prev.homePage?.hero, slides } } };
+        });
+    };
+
+    const removeHeroSlide = (index) => {
+        setContentData(prev => {
+            const slides = (prev.homePage?.hero?.slides || []).filter((_, slideIndex) => slideIndex !== index);
+            return { ...prev, homePage: { ...prev.homePage, hero: { ...prev.homePage?.hero, slides } } };
+        });
     };
 
     const updateQuickLink = (index, field, value) => {
@@ -792,6 +821,25 @@ const SiteContentManagement = () => {
                                                 rows={3}
                                                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                             />
+                                        </div>
+                                        <div className="border-t pt-5">
+                                            <div className="flex items-center justify-between mb-3">
+                                                <div><h4 className="font-medium text-gray-800">Hero video carousel</h4><p className="text-xs text-gray-500">Paste direct MP4/WebM and poster-image URLs. Empty video URLs display the poster image.</p></div>
+                                                <button type="button" onClick={addHeroSlide} className="px-3 py-2 bg-gray-900 text-white text-xs rounded-md">Add slide</button>
+                                            </div>
+                                            <div className="space-y-4">
+                                                {(contentData.homePage?.hero?.slides || []).map((slide, index) => (
+                                                    <div key={index} className="rounded-lg border bg-gray-50 p-4">
+                                                        <div className="flex justify-between mb-3"><p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Slide {index + 1}</p><button type="button" onClick={() => removeHeroSlide(index)} className="text-xs text-red-600">Remove</button></div>
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                            <input aria-label={`Slide ${index + 1} title`} value={slide.title || ''} onChange={e => updateHeroSlide(index, 'title', e.target.value)} placeholder="Slide caption" className="w-full px-3 py-2 border rounded-md" />
+                                                            <input aria-label={`Slide ${index + 1} location`} value={slide.location || ''} onChange={e => updateHeroSlide(index, 'location', e.target.value)} placeholder="Location" className="w-full px-3 py-2 border rounded-md" />
+                                                            <input aria-label={`Slide ${index + 1} video URL`} value={slide.videoUrl || ''} onChange={e => updateHeroSlide(index, 'videoUrl', e.target.value)} placeholder="https://.../property-video.mp4" className="w-full px-3 py-2 border rounded-md" />
+                                                            <input aria-label={`Slide ${index + 1} poster URL`} value={slide.posterUrl || ''} onChange={e => updateHeroSlide(index, 'posterUrl', e.target.value)} placeholder="https://.../poster.jpg" className="w-full px-3 py-2 border rounded-md" />
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>

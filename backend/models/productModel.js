@@ -5,6 +5,10 @@ const productSchema = new mongoose.Schema({
     brandName: String,
     category: String,
     productImage: [],
+    productVideo: {
+        type: String,
+        default: ''
+    },
     description: String,
     
     // Social features

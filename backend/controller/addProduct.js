@@ -61,6 +61,7 @@ async function addProductController(req, res) {
                 brandName,
                 category,
                 productImage, // base64 images from frontend
+                productVideo,
                 description,
                 price,
                 sellingPrice,
@@ -160,6 +161,7 @@ async function addProductController(req, res) {
                 brandName,
                 category,
                 productImage: allImages,
+                productVideo: typeof productVideo === 'string' ? productVideo : '',
                 description,
                 
                 // New multi-currency pricing structure

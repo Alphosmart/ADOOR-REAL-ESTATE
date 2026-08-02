@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import Logo from './Logo';
-import SmartSearchBar from './SmartSearchBar';
 import {FaRegCircleUser} from 'react-icons/fa6';
 import { FaChevronDown, FaEnvelope, FaSignOutAlt, FaShieldAlt, FaBars, FaTimes } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
@@ -53,12 +52,6 @@ const Header = () => {
       toast.error(data.message)
     }
   }, [dispatch, navigate])
-
-  const handleSearch = useCallback((query) => {
-    if(query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query.trim())}`)
-    }
-  }, [navigate])
 
   const toggleMenu = useCallback(() => {
     setMenuDisplay(prev => !prev)
@@ -127,7 +120,7 @@ const Header = () => {
   }, [isAdminOrStaff, user, closeMenu])
 
   return (
-    <header className='h-16 shadow-md bg-white fixed w-full z-40'>
+    <header className='h-[72px] border-b border-gray-200 bg-white/95 backdrop-blur-md fixed w-full z-40'>
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
         <div className=''>
           <Link to={'/'}>
@@ -135,27 +128,19 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className='hidden lg:block w-full max-w-sm'>
-          <SmartSearchBar 
-            onSearch={handleSearch}
-            placeholder="Search properties, locations..."
-            showSuggestions={true}
-          />
-        </div>
-
         {/* Main Navigation */}
-        <nav className='hidden lg:flex items-center gap-6 text-gray-700'>
-          <Link to='/search' className='bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-all font-medium shadow-md'>
-            🏠 Browse Properties
+        <nav className='hidden lg:flex items-center gap-8 text-[#243743] text-sm'>
+          <Link to='/search' className='hover:text-primary-600 transition-colors font-semibold'>
+            Properties
           </Link>
           <Link to='/' className='hover:text-primary-600 transition-colors font-medium'>
-            🏡 Home
+            Home
           </Link>
           <Link to='/about-us' className='hover:text-primary-600 transition-colors font-medium'>
             About
           </Link>
           <Link to='/contact-us' className='hover:text-primary-600 transition-colors font-medium'>
-            Contact
+            Our team
           </Link>
         </nav>
 
@@ -303,9 +288,8 @@ const Header = () => {
 
           {/* Admin Login Button - Only show if not logged in */}
           {!isAdminOrStaff && (
-            <Link to={"/admin-login"} className='px-4 py-2 rounded-full text-white bg-accent-700 hover:bg-accent-800 transition-colors flex items-center gap-2'>
-              <FaShieldAlt />
-              Staff Login
+            <Link to={"/contact-us"} className='px-5 py-3 text-[#121f2f] bg-primary-500 hover:bg-primary-400 transition-colors font-bold'>
+              Book a consultation
             </Link>
           )}
         </div>

@@ -38,12 +38,17 @@ const getSiteContent = async (req, res) => {
             },
             homePage: {
                 hero: {
-                    title: "Find Your Dream Home",
-                    subtitle: "Discover our exclusive collection of premium residential and commercial properties. From modern minimalist to classic elegant designs, professionally curated by Adoo Real Estate.",
-                    primaryButtonText: "View Properties",
-                    primaryButtonLink: "/products",
-                    secondaryButtonText: "Learn More",
-                    secondaryButtonLink: "/about-us"
+                    title: "Where do you want to live?",
+                    subtitle: "Search verified homes and investment opportunities across Nigeria.",
+                    primaryButtonText: "Show Properties",
+                    primaryButtonLink: "/search",
+                    secondaryButtonText: "Explore Lagos",
+                    secondaryButtonLink: "/search?q=Lagos",
+                    slides: [
+                        { title: "Exceptional homes. Remarkable places.", location: "Lagos, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
+                        { title: "Designed for the way you live.", location: "Abuja, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
+                        { title: "Property with lasting value.", location: "Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" }
+                    ]
                 },
                 featuredSection: {
                     title: "Featured Property Types",

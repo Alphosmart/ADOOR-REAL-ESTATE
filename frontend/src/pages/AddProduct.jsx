@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import SummaryApi from '../common';
 import imageTobase64 from '../helper/imageTobase64';
+import uploadVideo from '../helper/uploadVideo';
 
 const AddProduct = () => {
     const user = useSelector(state => state?.user?.user);
@@ -69,6 +70,7 @@ const AddProduct = () => {
         
         // Images
         productImage: [],
+        productVideo: "",
         
 
         
@@ -79,6 +81,7 @@ const AddProduct = () => {
     });
 
     const [uploadProductImageInput, setUploadProductImageInput] = useState("");
+    const [videoUploading, setVideoUploading] = useState(false);
 
     // Currency mapping for countries
     const countryCurrencyMap = {
@@ -283,6 +286,22 @@ const AddProduct = () => {
         }));
     };
 
+    const handleUploadVideo = async (event) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        setVideoUploading(true);
+        try {
+            const videoUrl = await uploadVideo(file);
+            setData(prev => ({ ...prev, productVideo: videoUrl }));
+            toast.success('Property video uploaded successfully.');
+        } catch (error) {
+            toast.error(error.message || 'Unable to upload video.');
+        } finally {
+            setVideoUploading(false);
+            event.target.value = '';
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -328,6 +347,7 @@ const AddProduct = () => {
                     brandName: "",
                     category: "",
                     productImage: [],
+                    productVideo: "",
                     description: "",
                     price: "",
                     sellingPrice: "",
@@ -1058,6 +1078,20 @@ const AddProduct = () => {
                             <p className='text-secondary-600 text-xs'>*Please upload at least one property image</p>
                         )}
                     </div>
+
+                    <h3 className='font-bold text-md mt-5 mb-2 text-primary-500'>🎥 Property Video</h3>
+                    <p className='text-xs text-gray-500'>Optional. Upload one MP4, WebM, MOV or M4V walkthrough. Cloud uploads support up to 100MB.</p>
+                    {!data.productVideo ? (
+                        <label htmlFor='uploadVideoInput' className='p-4 bg-slate-100 border border-dashed rounded min-h-28 flex justify-center items-center cursor-pointer'>
+                            <div className='text-slate-500 flex items-center flex-col gap-2'><span className='text-4xl'><IoCloudUpload/></span><p className='text-sm'>{videoUploading ? 'Uploading video…' : 'Upload property walkthrough'}</p></div>
+                            <input id='uploadVideoInput' type='file' className='hidden' accept='video/mp4,video/webm,video/quicktime,video/x-m4v' onChange={handleUploadVideo} disabled={videoUploading} />
+                        </label>
+                    ) : (
+                        <div className='relative rounded overflow-hidden bg-black'>
+                            <video src={data.productVideo} controls preload='metadata' className='w-full max-h-72' />
+                            <button type='button' onClick={() => setData(prev => ({ ...prev, productVideo: '' }))} className='absolute top-2 right-2 flex items-center gap-1 bg-red-600 text-white px-3 py-2 rounded'><MdDelete/> Remove</button>
+                        </div>
+                    )}
 
                     {/* ⚙️ Additional Metadata */}
                     <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>⚙️ Additional Metadata</h3>

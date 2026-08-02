@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { FaCloudUploadAlt, FaTimes, FaArrowLeft } from 'react-icons/fa';
 import uploadImage from '../helper/uploadImage';
+import uploadVideo from '../helper/uploadVideo';
 import SummaryApi from '../common';
 
 const EditProduct = () => {
@@ -19,11 +20,13 @@ const EditProduct = () => {
         brandName: "",
         category: "",
         productImage: [],
+        productVideo: "",
         description: "",
         price: "",
         sellingPrice: "",
         condition: "New"
     });
+    const [videoUploading, setVideoUploading] = useState(false);
 
     // Fetch product data when component mounts
     useEffect(() => {
@@ -105,8 +108,24 @@ const EditProduct = () => {
         
         setData(prev => ({
             ...prev,
-            productImage: [...prev.productImage, uploadImageCloudinary.url]
+            productImage: [...prev.productImage, uploadImageCloudinary.url || uploadImageCloudinary]
         }));
+    };
+
+    const handleUploadVideo = async (event) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        setVideoUploading(true);
+        try {
+            const productVideo = await uploadVideo(file);
+            setData(prev => ({ ...prev, productVideo }));
+            toast.success('Property video uploaded successfully.');
+        } catch (error) {
+            toast.error(error.message || 'Unable to upload video.');
+        } finally {
+            setVideoUploading(false);
+            event.target.value = '';
+        }
     };
 
     const handleDeleteProductImage = (index) => {
@@ -315,6 +334,23 @@ const EditProduct = () => {
                                     </div>
                                 ))}
                             </div>
+                        )}
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Property walkthrough video</label>
+                        {data.productVideo ? (
+                            <div className="relative overflow-hidden rounded-lg bg-black">
+                                <video src={data.productVideo} controls preload="metadata" className="w-full max-h-80" />
+                                <button type="button" onClick={() => setData(prev => ({ ...prev, productVideo: '' }))} className="absolute right-2 top-2 bg-red-600 text-white rounded-full p-2"><FaTimes /></button>
+                            </div>
+                        ) : (
+                            <label htmlFor="editVideoInput" className="block cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-6 text-center hover:border-accent-500">
+                                <FaCloudUploadAlt className="mx-auto mb-2 text-4xl text-gray-400" />
+                                <p>{videoUploading ? 'Uploading video…' : 'Upload an optional walkthrough video'}</p>
+                                <p className="text-sm text-gray-500">MP4, WebM, MOV or M4V</p>
+                                <input id="editVideoInput" type="file" className="hidden" accept="video/mp4,video/webm,video/quicktime,video/x-m4v" onChange={handleUploadVideo} disabled={videoUploading} />
+                            </label>
                         )}
                     </div>
 

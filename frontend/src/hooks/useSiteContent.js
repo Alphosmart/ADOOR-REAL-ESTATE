@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // Custom hook to fetch and cache site content
-const useSiteContent = () => {
+const useSiteContent = (section = null) => {
     const [content, setContent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ const useSiteContent = () => {
                 
                 // Use public endpoint (doesn't require authentication)
                 const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-                const response = await fetch(`${baseUrl}/api/site-content`);
+                const response = await fetch(`${baseUrl}/api/site-content?_=${Date.now()}`, { cache: 'no-store' });
                 
                 if (response.ok) {
                     const data = await response.json();
@@ -38,8 +38,9 @@ const useSiteContent = () => {
 
         fetchContent();
         
-        // Return fetchContent for manual refetch
-        return fetchContent;
+        const handleContentUpdate = () => fetchContent();
+        window.addEventListener('siteContentUpdated', handleContentUpdate);
+        return () => window.removeEventListener('siteContentUpdated', handleContentUpdate);
     }, []);
 
     const refetch = async () => {
@@ -63,7 +64,7 @@ const useSiteContent = () => {
         }
     };
 
-    return { content, loading, error, refetch };
+    return { content: section ? content?.[section] : content, loading, error, refetch };
 };
 
 // Default content fallbacks
@@ -71,12 +72,17 @@ const getDefaultContent = () => {
     const defaultContent = {
         homePage: {
             hero: {
-                title: "Transform Your Space with Premium Properties",
-                subtitle: "Discover thousands of premium real estate properties from trusted sellers worldwide. From modern minimalist to classic elegant designs.",
-                primaryButtonText: "Shop Now",
-                primaryButtonLink: "/products",
-                secondaryButtonText: "Learn More",
-                secondaryButtonLink: "/about-us"
+                title: "Where do you want to live?",
+                subtitle: "Search verified homes and investment opportunities across Nigeria.",
+                primaryButtonText: "Show Properties",
+                primaryButtonLink: "/search",
+                secondaryButtonText: "Explore Lagos",
+                secondaryButtonLink: "/search?q=Lagos",
+                slides: [
+                    { title: "Exceptional homes. Remarkable places.", location: "Lagos, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
+                    { title: "Designed for the way you live.", location: "Abuja, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
+                    { title: "Property with lasting value.", location: "Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" }
+                ]
             }
         },
         aboutUs: {

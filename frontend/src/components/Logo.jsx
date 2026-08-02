@@ -11,8 +11,9 @@ const Logo = ({ w = 120, h = 40, showText = true, className = "" }) => {
         className="object-contain rounded"
       />
       {showText && (
-        <div className='text-xl font-bold text-gray-800'>
-          Adoo Real Estate
+        <div className='hidden sm:block leading-none text-[#121f2f]'>
+          <span className='block text-xl font-extrabold tracking-[0.08em]'>ADOOR</span>
+          <span className='block text-[8px] tracking-[0.25em] mt-1'>REAL ESTATE</span>
         </div>
       )}
     </div>
