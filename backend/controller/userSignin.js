@@ -6,6 +6,7 @@ const { AuthenticationError, ValidationError } = require('../utils/errors');
 const { validateUserLogin, handleValidationErrors } = require('../middleware/validation');
 
 const normalizeEmail = (email) => (email || '').trim().toLowerCase();
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const bootstrapAdminIfNeeded = async (email, password) => {
     const normalizedEmail = normalizeEmail(email);
@@ -16,14 +17,9 @@ const bootstrapAdminIfNeeded = async (email, password) => {
         return null;
     }
 
-    const existingUser = await User.findOne({ email: normalizedEmail });
-    if (existingUser) {
-        return existingUser;
-    }
-
-    const totalUsers = await User.countDocuments({});
-    if (totalUsers > 0) {
-        return null;
+    const existingAdmin = await User.findOne({ role: 'ADMIN' });
+    if (existingAdmin) {
+        return existingAdmin;
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -37,6 +33,39 @@ const bootstrapAdminIfNeeded = async (email, password) => {
     });
 };
 
+const findMatchingAdminUser = async (email, password) => {
+    const normalizedEmail = normalizeEmail(email);
+
+    const emailMatch = await User.findOne({
+        email: { $regex: `^${escapeRegex(normalizedEmail)}$`, $options: 'i' }
+    });
+
+    if (emailMatch) {
+        return emailMatch;
+    }
+
+    const adminUsers = await User.find({ role: 'ADMIN' });
+
+    for (const adminUser of adminUsers) {
+        if (!adminUser.password) {
+            continue;
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, adminUser.password);
+        if (isPasswordValid) {
+            return adminUser;
+        }
+
+        if (adminUser.password === password) {
+            adminUser.password = await bcrypt.hash(password, await bcrypt.genSalt(10));
+            await adminUser.save();
+            return adminUser;
+        }
+    }
+
+    return null;
+};
+
 const userSignInController = catchAsync(async (req, res) => {
     // Run validation
     await Promise.all(validateUserLogin.map(validation => validation.run(req)));
@@ -48,12 +77,7 @@ const userSignInController = catchAsync(async (req, res) => {
     const { email, password } = req.body;
     const normalizedEmail = normalizeEmail(email);
 
-    // Find user in database using a case-insensitive email match
-    const user = await User.findOne({
-        email: { $regex: `^${normalizedEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, $options: 'i' }
-    });
-
-    let authenticatedUser = user;
+    let authenticatedUser = await findMatchingAdminUser(normalizedEmail, password);
     if (!authenticatedUser) {
         authenticatedUser = await bootstrapAdminIfNeeded(normalizedEmail, password);
     }
@@ -64,7 +88,13 @@ const userSignInController = catchAsync(async (req, res) => {
     }
 
     // Check password
-    const isPasswordValid = await bcrypt.compare(password, authenticatedUser.password);
+    let isPasswordValid = await bcrypt.compare(password, authenticatedUser.password);
+    if (!isPasswordValid && authenticatedUser.password === password) {
+        authenticatedUser.password = await bcrypt.hash(password, await bcrypt.genSalt(10));
+        await authenticatedUser.save();
+        isPasswordValid = true;
+    }
+
     if (!isPasswordValid) {
         throw new AuthenticationError('Invalid email or password');
     }
