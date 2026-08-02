@@ -2,6 +2,19 @@ const userModel = require("../models/userModel");
 const productModel = require("../models/productModel");
 const bcrypt = require('bcryptjs');
 
+async function ensureAdmin(req, res) {
+    if (!req.userId) {
+        return { error: res.status(401).json({ message: 'Please login to access this resource', error: true, success: false }) };
+    }
+
+    const currentUser = await userModel.findById(req.userId);
+    if (!currentUser || currentUser.role !== 'ADMIN') {
+        return { error: res.status(403).json({ message: 'Access denied. Admin privileges required.', error: true, success: false }) };
+    }
+
+    return { currentUser };
+}
+
 // Get all users (admin only)
 async function getAllUsers(req, res) {
     try {
@@ -119,6 +132,86 @@ async function createUser(req, res) {
             error: true,
             success: false
         });
+    }
+}
+
+async function resetUserPassword(req, res) {
+    try {
+        const { userId } = req.params;
+        const { newPassword } = req.body;
+
+        const adminCheck = await ensureAdmin(req, res);
+        if (adminCheck && adminCheck.error) {
+            return adminCheck.error;
+        }
+
+        if (!newPassword || newPassword.length < 6) {
+            return res.status(400).json({ message: 'New password must be at least 6 characters', error: true, success: false });
+        }
+
+        const targetUser = await userModel.findById(userId);
+        if (!targetUser) {
+            return res.status(404).json({ message: 'User not found', error: true, success: false });
+        }
+
+        const salt = bcrypt.genSaltSync(10);
+        targetUser.password = bcrypt.hashSync(newPassword, salt);
+        await targetUser.save();
+
+        res.json({ message: 'Password reset successfully', data: { userId: targetUser._id, email: targetUser.email }, success: true, error: false });
+    } catch (err) {
+        res.status(400).json({ message: err.message || err, error: true, success: false });
+    }
+}
+
+async function updateUserAccountStatus(req, res) {
+    try {
+        const { userId } = req.params;
+        const { action } = req.body;
+
+        const adminCheck = await ensureAdmin(req, res);
+        if (adminCheck && adminCheck.error) {
+            return adminCheck.error;
+        }
+
+        if (!['deactivate', 'activate', 'archive'].includes(action)) {
+            return res.status(400).json({ message: 'Invalid action', error: true, success: false });
+        }
+
+        const targetUser = await userModel.findById(userId);
+        if (!targetUser) {
+            return res.status(404).json({ message: 'User not found', error: true, success: false });
+        }
+
+        if (req.userId === userId) {
+            return res.status(400).json({ message: 'You cannot change your own account status', error: true, success: false });
+        }
+
+        if (action === 'deactivate') {
+            targetUser.status = 'inactive';
+            targetUser.deactivatedAt = new Date();
+            targetUser.deactivatedBy = req.userId;
+            targetUser.archivedAt = null;
+            targetUser.archivedBy = null;
+        } else if (action === 'activate') {
+            targetUser.status = 'active';
+            targetUser.deactivatedAt = null;
+            targetUser.deactivatedBy = null;
+            targetUser.archivedAt = null;
+            targetUser.archivedBy = null;
+        } else if (action === 'archive') {
+            targetUser.status = 'archived';
+            targetUser.archivedAt = new Date();
+            targetUser.archivedBy = req.userId;
+            targetUser.deactivatedAt = null;
+            targetUser.deactivatedBy = null;
+        }
+
+        await targetUser.save();
+
+        res.json({ message: `User ${action}d successfully`, data: { userId: targetUser._id, status: targetUser.status }, success: true, error: false });
+    } catch (err) {
+        res.status(400).json({ message: err.message || err, error: true, success: false });
     }
 }
 
@@ -936,6 +1029,8 @@ module.exports = {
     createUser,
     getAllUsers,
     updateUserRole,
+    resetUserPassword,
+    updateUserAccountStatus,
     getAllProductsAdmin,
     deleteProductAdmin,
     updateProductStatus,

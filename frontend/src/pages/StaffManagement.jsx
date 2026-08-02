@@ -10,6 +10,9 @@ const StaffManagement = () => {
     const [loading, setLoading] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
     const [showPermissionModal, setShowPermissionModal] = useState(false);
+    const [selectedUserForAction, setSelectedUserForAction] = useState(null);
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
+    const [newPassword, setNewPassword] = useState('');
     const [permissions, setPermissions] = useState({
         canUploadProducts: false,
         canEditProducts: false,
@@ -125,6 +128,63 @@ const StaffManagement = () => {
             canManageOrders: user.permissions?.canManageOrders || false
         });
         setShowPermissionModal(true);
+    };
+
+    const resetPassword = async () => {
+        if (!selectedUserForAction) return;
+        if (!newPassword || newPassword.length < 6) {
+            alert('Password must be at least 6 characters');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${SummaryApi.resetUserPassword.url}/${selectedUserForAction._id}`, {
+                method: SummaryApi.resetUserPassword.method,
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ newPassword })
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                alert('Password reset successfully');
+                setShowPasswordModal(false);
+                setNewPassword('');
+                setSelectedUserForAction(null);
+                fetchAllStaff();
+                fetchAllUsers();
+            } else {
+                alert(data.message || 'Failed to reset password');
+            }
+        } catch (error) {
+            console.error('Error resetting password:', error);
+            alert('Error resetting password');
+        }
+    };
+
+    const updateAccountStatus = async (user, action) => {
+        if (!window.confirm(`Are you sure you want to ${action} this account?`)) return;
+
+        try {
+            const response = await fetch(`${SummaryApi.updateUserAccountStatus.url}/${user._id}`, {
+                method: SummaryApi.updateUserAccountStatus.method,
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action })
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                alert(`Account ${action}d successfully`);
+                fetchAllStaff();
+                fetchAllUsers();
+            } else {
+                alert(data.message || 'Failed to update account status');
+            }
+        } catch (error) {
+            console.error('Error updating account status:', error);
+            alert('Error updating account status');
+        }
     };
 
     const grantPermissions = async () => {
@@ -305,6 +365,27 @@ const StaffManagement = () => {
                                                                 >
                                                                     Edit Permissions
                                                                 </button>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setSelectedUserForAction(member);
+                                                                        setShowPasswordModal(true);
+                                                                    }}
+                                                                    className="text-blue-600 hover:text-blue-900 mr-3"
+                                                                >
+                                                                    Reset Password
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => updateAccountStatus(member, member.status === 'inactive' ? 'activate' : 'deactivate')}
+                                                                    className="text-orange-600 hover:text-orange-900 mr-3"
+                                                                >
+                                                                    {member.status === 'inactive' ? 'Activate' : 'Deactivate'}
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => updateAccountStatus(member, 'archive')}
+                                                                    className="text-red-600 hover:text-red-900"
+                                                                >
+                                                                    Archive
+                                                                </button>
                                                             </td>
                                                         </tr>
                                                     ))}
@@ -362,6 +443,27 @@ const StaffManagement = () => {
                                                                     className="text-accent-600 hover:text-accent-900 mr-3"
                                                                 >
                                                                     Grant Permissions
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setSelectedUserForAction(user);
+                                                                        setShowPasswordModal(true);
+                                                                    }}
+                                                                    className="text-blue-600 hover:text-blue-900 mr-3"
+                                                                >
+                                                                    Reset Password
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => updateAccountStatus(user, user.status === 'inactive' ? 'activate' : 'deactivate')}
+                                                                    className="text-orange-600 hover:text-orange-900 mr-3"
+                                                                >
+                                                                    {user.status === 'inactive' ? 'Activate' : 'Deactivate'}
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => updateAccountStatus(user, 'archive')}
+                                                                    className="text-red-600 hover:text-red-900"
+                                                                >
+                                                                    Archive
                                                                 </button>
                                                                 <button
                                                                     onClick={() => promoteToAdmin(user._id)}
@@ -499,7 +601,39 @@ const StaffManagement = () => {
                     </div>
                 )}
             </div>
-        </div>
+            {showPasswordModal && selectedUserForAction && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-md">
+                        <h3 className="text-xl font-semibold mb-4">Reset Password</h3>
+                        <p className="text-sm text-gray-600 mb-4">Set a new password for {selectedUserForAction.email}</p>
+                        <input
+                            type="password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            className="w-full border rounded px-3 py-2 mb-4"
+                            placeholder="New password"
+                        />
+                        <div className="flex justify-end gap-3">
+                            <button
+                                onClick={() => {
+                                    setShowPasswordModal(false);
+                                    setNewPassword('');
+                                    setSelectedUserForAction(null);
+                                }}
+                                className="px-4 py-2 text-gray-700 border rounded"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={resetPassword}
+                                className="px-4 py-2 bg-accent-600 text-white rounded"
+                            >
+                                Reset Password
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}        </div>
     );
 };
 

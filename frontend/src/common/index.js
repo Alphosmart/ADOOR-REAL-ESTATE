@@ -182,6 +182,14 @@ const SummaryApi = {
         url : `${backendDomain}/api/admin/all-users`,
         method : 'get'
     },
+    resetUserPassword : {
+        url : `${backendDomain}/api/admin/reset-password`,
+        method : 'put'
+    },
+    updateUserAccountStatus : {
+        url : `${backendDomain}/api/admin/account-status`,
+        method : 'put'
+    },
     promoteToAdmin : {
         url : `${backendDomain}/api/admin/promote-to-admin`,
         method : 'post'

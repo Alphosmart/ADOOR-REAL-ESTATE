@@ -26,6 +26,8 @@ const {
     createUser,
     getAllUsers,
     updateUserRole,
+    resetUserPassword,
+    updateUserAccountStatus,
     getAllProductsAdmin,
     deleteProductAdmin,
     updateProductStatus,
@@ -271,6 +273,8 @@ router.post('/cart/sync', checkMaintenanceMode, authToken, syncCart);
 router.get('/admin/all-users', authToken, getAllUsers);
 router.post('/admin/create-user', authToken, createUser);
 router.put('/admin/update-user-role/:userId', authToken, updateUserRole);
+router.put('/admin/reset-password/:userId', authToken, resetUserPassword);
+router.put('/admin/account-status/:userId', authToken, updateUserAccountStatus);
 router.get('/admin/all-products', authToken, getAllProductsAdmin);
 router.delete('/admin/delete-product/:productId', authToken, deleteProductAdmin);
 router.put('/admin/update-product-status/:productId', authToken, updateProductStatus);
