@@ -6,8 +6,15 @@
       "primaryButtonText": "View Properties",
       "primaryButtonLink": "/products",
       "secondaryButtonText": "Learn More",
-      "secondaryButtonLink": "/about-us"
-    }
+      "secondaryButtonLink": "/about-us",
+      "slides": [
+        {
+          "videoUrl": "https://res.cloudinary.com/dudumm9d2/video/upload/v1785706623/adoo-property-videos/xqeyce9rrc58az9uarbt.mp4",
+          "posterUrl": ""
+        }
+      ]
+    },
+    "lastUpdated": "2026-08-02T21:48:42.726Z"
   },
   "aboutUs": {
     "hero": {

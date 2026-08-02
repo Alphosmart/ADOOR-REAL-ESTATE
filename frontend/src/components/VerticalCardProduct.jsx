@@ -75,7 +75,7 @@ const VerticalCardProduct = memo(({ category, heading, featured = false }) => {
         return (
             <div className='container mx-auto px-4 my-6 relative'>
                 <h2 className='text-2xl font-semibold py-4'>{heading}</h2>
-                <p className='text-center text-gray-500 py-8'>No properties are available in this category yet.</p>
+                <p className='text-center text-gray-500 py-8'>No products available in this category</p>
             </div>
         )
     }
@@ -86,9 +86,9 @@ const VerticalCardProduct = memo(({ category, heading, featured = false }) => {
             
             <div className='grid grid-cols-[repeat(auto-fit,minmax(260px,300px))] justify-center md:justify-between md:gap-4 overflow-x-scroll scrollbar-none transition-all'>
                 {data.map((product, index) => (
-                    <Link key={product._id} to={`/product/${product._id}`} className='group w-full min-w-[260px] md:min-w-[300px] max-w-[260px] md:max-w-[300px] bg-white border border-gray-200 hover:shadow-xl transition-all'>
+                    <Link key={product._id} to={`/product/${product._id}`} className='w-full min-w-[260px] md:min-w-[300px] max-w-[260px] md:max-w-[300px] bg-white rounded-sm shadow hover:shadow-lg transition-shadow'>
                         <div 
-                            className='bg-slate-200 h-56 min-w-[260px] md:min-w-[300px] flex justify-center items-center relative overflow-hidden'
+                            className='bg-slate-200 h-48 p-4 min-w-[260px] md:min-w-[300px] flex justify-center items-center relative group'
                             onMouseEnter={() => setHoveredProduct(product._id)}
                             onMouseLeave={() => setHoveredProduct(null)}
                         >
@@ -99,7 +99,7 @@ const VerticalCardProduct = memo(({ category, heading, featured = false }) => {
                                 } 
                                 alt={product.productName}
                                 loading="lazy"
-                                className='object-cover w-full h-full group-hover:scale-105 transition-all duration-500'
+                                className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply'
                                 onError={(e) => {
                                     e.target.src = '/placeholder-image.png'; // Fallback image
                                 }}
@@ -133,14 +133,16 @@ const VerticalCardProduct = memo(({ category, heading, featured = false }) => {
                             )}
                         </div>
                         <div className='p-4 grid gap-3'>
-                            <div className='flex items-center gap-2 text-[10px] uppercase tracking-wider text-green-700 font-bold'><span>●</span> Verified property</div>
-                            <h2 className='font-bold text-base md:text-lg text-ellipsis line-clamp-1 text-[#121f2f]'>
+                            <h2 className='font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black'>
                                 {product.productName}
                             </h2>
                             <p className='capitalize text-slate-500'>{product.category}</p>
                             <div className='flex gap-3'>
-                                <p className='text-[#121f2f] text-lg font-bold'>
+                                <p className='text-red-600 font-medium'>
                                     {product.displayPricing?.formatted?.sellingPrice || formatPrice(product.sellingPrice)}
+                                </p>
+                                <p className='text-slate-500 line-through'>
+                                    {product.displayPricing?.formatted?.originalPrice || formatPrice(product.price)}
                                 </p>
                             </div>
                             {product.originalCurrency && product.displayPricing?.currency && 
@@ -153,8 +155,8 @@ const VerticalCardProduct = memo(({ category, heading, featured = false }) => {
                             {/* Social features */}
                             <SocialFeatures product={product} compact={true} />
                             
-                            <button className='text-xs bg-[#121f2f] hover:bg-[#92bc1b] hover:text-[#121f2f] text-white px-4 py-3 font-bold transition-colors'>
-                                View property details
+                            <button className='text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-0.5 rounded-full'>
+                                Add to Cart
                             </button>
                         </div>
                     </Link>

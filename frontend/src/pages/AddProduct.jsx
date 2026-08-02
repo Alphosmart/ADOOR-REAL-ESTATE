@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import SummaryApi from '../common';
 import imageTobase64 from '../helper/imageTobase64';
 import uploadVideo from '../helper/uploadVideo';
+import PropertyVideo from '../components/PropertyVideo';
 
 const AddProduct = () => {
     const user = useSelector(state => state?.user?.user);
@@ -1080,7 +1081,8 @@ const AddProduct = () => {
                     </div>
 
                     <h3 className='font-bold text-md mt-5 mb-2 text-primary-500'>🎥 Property Video</h3>
-                    <p className='text-xs text-gray-500'>Optional. Upload one MP4, WebM, MOV or M4V walkthrough. Cloud uploads support up to 100MB.</p>
+                    <p className='text-xs text-gray-500 mb-2'>Optional. Upload a video or paste a YouTube, Vimeo, Dailymotion, MP4, or WebM link.</p>
+                    <input type='url' value={data.productVideo || ''} onChange={event => setData(prev => ({ ...prev, productVideo: event.target.value }))} placeholder='https://youtube.com/watch?v=... or direct video URL' className='mb-3 w-full rounded border bg-slate-100 p-3' />
                     {!data.productVideo ? (
                         <label htmlFor='uploadVideoInput' className='p-4 bg-slate-100 border border-dashed rounded min-h-28 flex justify-center items-center cursor-pointer'>
                             <div className='text-slate-500 flex items-center flex-col gap-2'><span className='text-4xl'><IoCloudUpload/></span><p className='text-sm'>{videoUploading ? 'Uploading video…' : 'Upload property walkthrough'}</p></div>
@@ -1088,7 +1090,7 @@ const AddProduct = () => {
                         </label>
                     ) : (
                         <div className='relative rounded overflow-hidden bg-black'>
-                            <video src={data.productVideo} controls preload='metadata' className='w-full max-h-72' />
+                            <PropertyVideo src={data.productVideo} className='w-full aspect-video max-h-72' />
                             <button type='button' onClick={() => setData(prev => ({ ...prev, productVideo: '' }))} className='absolute top-2 right-2 flex items-center gap-1 bg-red-600 text-white px-3 py-2 rounded'><MdDelete/> Remove</button>
                         </div>
                     )}

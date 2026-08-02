@@ -1,22 +1,18 @@
-const MAX_FALLBACK_SIZE = 12 * 1024 * 1024;
 const cloudName = process.env.REACT_APP_CLOUD_NAME_CLOUDINARY;
-
-const toDataUrl = (file) => new Promise((resolve, reject) => {
-  if (file.size > MAX_FALLBACK_SIZE) {
-    reject(new Error('Cloud storage is not configured. Videos must be under 12MB for local fallback.'));
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = () => reject(new Error('Could not read the selected video.'));
-  reader.readAsDataURL(file);
-});
 
 const uploadVideo = async (file) => {
   if (!file?.type?.startsWith('video/')) throw new Error('Please select a valid video file.');
   if (file.size > 100 * 1024 * 1024) throw new Error('Video must be smaller than 100MB.');
 
-  if (!cloudName || cloudName.includes('your')) return toDataUrl(file);
+  if (!cloudName || cloudName.includes('your')) {
+    const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+    const localFormData = new FormData();
+    localFormData.append('video', file);
+    const localResponse = await fetch(`${baseUrl}/api/admin/upload-video`, { method: 'POST', credentials: 'include', body: localFormData });
+    const localResult = await localResponse.json();
+    if (!localResponse.ok || !localResult.success) throw new Error(localResult.message || 'Video upload failed.');
+    return localResult.data.url;
+  }
 
   const formData = new FormData();
   formData.append('file', file);

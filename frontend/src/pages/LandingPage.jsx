@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { trackLandingPageInteraction, trackShopButtonClick, trackNewsletterSignup } from '../utils/analytics';
 import SummaryApi from '../common';
+import useSiteContent from '../hooks/useSiteContent';
 import { 
   FaStar, 
-  FaShieldAlt, 
   FaHeadset, 
   FaUsers, 
   FaAward,
@@ -14,13 +14,43 @@ import {
   FaHeart,
   FaHome,
   FaBrush,
-  FaRuler
+  FaRuler,
+  FaChevronLeft,
+  FaChevronRight
 } from 'react-icons/fa';
 
 const LandingPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('houses');
   const [email, setEmail] = useState('');
   const [testimonials, setTestimonials] = useState([]);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const { content: homeContent } = useSiteContent('homePage');
+  const heroContent = homeContent?.hero || {
+    title: 'Find Your Dream Home',
+    subtitle: 'Discover our exclusive collection of premium residential and commercial properties.',
+    primaryButtonText: 'View Properties',
+    primaryButtonLink: '/search',
+    slides: []
+  };
+  const heroSlides = useMemo(() => {
+    const configuredSlides = heroContent.slides?.filter(slide => slide?.videoUrl || slide?.posterUrl) || [];
+    return configuredSlides.length ? configuredSlides : [{ videoUrl: '', posterUrl: '' }];
+  }, [heroContent.slides]);
+
+  const showNextHeroSlide = () => setActiveHeroSlide(current => (current + 1) % heroSlides.length);
+  const showPreviousHeroSlide = () => setActiveHeroSlide(current => (current - 1 + heroSlides.length) % heroSlides.length);
+
+  useEffect(() => {
+    if (activeHeroSlide >= heroSlides.length) setActiveHeroSlide(0);
+  }, [activeHeroSlide, heroSlides.length]);
+
+  useEffect(() => {
+    if (heroSlides.length < 2 || heroSlides[activeHeroSlide]?.videoUrl) return undefined;
+    const timer = window.setTimeout(() => {
+      setActiveHeroSlide(current => (current + 1) % heroSlides.length);
+    }, 7000);
+    return () => window.clearTimeout(timer);
+  }, [activeHeroSlide, heroSlides]);
 
   // Fetch testimonials on component mount
   useEffect(() => {
@@ -202,61 +232,39 @@ const LandingPage = () => {
       </Link>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-accent-800 via-accent-700 to-primary-500 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="relative container mx-auto px-4 py-20 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                Transform Your Space with 
-                <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-                  {" "}Premium Properties
-                </span>
-              </h1>
-              <p className="text-xl lg:text-2xl text-gray-100 leading-relaxed">
-                Discover our exclusive collection of premium residential and commercial properties. 
-                Professional consultation and property management services included.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link 
-                  to="/search" 
-                  onClick={() => trackShopButtonClick('hero_section', '/search')}
-                  className="bg-white text-accent-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
-                >
-                  🏠 View Properties <FaArrowRight />
-                </Link>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="flex flex-wrap gap-6 pt-4">
-                <div className="flex items-center gap-2">
-                  <FaShieldAlt className="text-green-300" />
-                  <span className="text-sm">SSL Secured</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaHome className="text-accent-300" />
-                  <span className="text-sm">Verified Listings</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaAward className="text-yellow-300" />
-                  <span className="text-sm">Award Winning</span>
-                </div>
-              </div>
+      <section className="relative isolate min-h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-br from-accent-800 via-accent-700 to-primary-500 text-white">
+        <div className="absolute inset-0 -z-10">
+          {heroSlides.map((slide, index) => (
+            <div key={`${slide.videoUrl || slide.posterUrl}-${index}`} className={`absolute inset-0 transition-opacity duration-700 ${index === activeHeroSlide ? 'opacity-100' : 'pointer-events-none opacity-0'}`}>
+              {slide.videoUrl && index === activeHeroSlide ? (
+                <video src={slide.videoUrl} poster={slide.posterUrl || undefined} autoPlay muted playsInline loop={heroSlides.length === 1} preload="auto" onEnded={showNextHeroSlide} className="h-full w-full object-cover" />
+              ) : slide.posterUrl ? (
+                <img src={slide.posterUrl} alt="" className="h-full w-full object-cover" />
+              ) : null}
             </div>
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/50" />
+        </div>
 
-            {/* Hero Image/Video */}
-            <div className="relative">
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                <img 
-                  src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop" 
-                  alt="Beautiful property interior" 
-                  className="rounded-xl w-full h-80 object-cover"
-                />
-              </div>
-            </div>
+        <div className="container mx-auto flex min-h-[calc(100vh-4rem)] items-end px-4 pb-24 pt-20">
+          <div className="max-w-4xl">
+            <h1 className="text-4xl font-bold leading-tight drop-shadow-lg lg:text-6xl">{heroContent.title}</h1>
+            <p className="mb-8 mt-5 max-w-3xl text-lg leading-relaxed text-gray-100 drop-shadow lg:text-xl">{heroContent.subtitle}</p>
+            <Link to={heroContent.primaryButtonLink || '/search'} onClick={() => trackShopButtonClick('hero_section', heroContent.primaryButtonLink || '/search')} className="inline-flex items-center gap-2 border border-white bg-white px-8 py-4 font-semibold text-accent-700 transition hover:bg-transparent hover:text-white">
+              {heroContent.primaryButtonText || 'View Properties'} <FaArrowRight />
+            </Link>
           </div>
         </div>
+
+        {heroSlides.length > 1 && (
+          <>
+            <div className="absolute bottom-8 left-4 z-10 flex gap-2 md:left-8">
+              {heroSlides.map((slide, index) => <button key={`landing-hero-dot-${index}`} type="button" onClick={() => setActiveHeroSlide(index)} aria-label={`Show hero video ${index + 1}`} className={`h-2.5 rounded-full transition-all ${index === activeHeroSlide ? 'w-8 bg-primary-400' : 'w-2.5 bg-white/60 hover:bg-white'}`} />)}
+            </div>
+            <button type="button" onClick={showPreviousHeroSlide} aria-label="Previous hero video" className="absolute bottom-6 right-20 z-10 border border-white/60 bg-black/30 p-3 backdrop-blur-sm transition hover:bg-white hover:text-black"><FaChevronLeft /></button>
+            <button type="button" onClick={showNextHeroSlide} aria-label="Next hero video" className="absolute bottom-6 right-6 z-10 border border-white/60 bg-black/30 p-3 backdrop-blur-sm transition hover:bg-white hover:text-black"><FaChevronRight /></button>
+          </>
+        )}
       </section>
 
       {/* Stats Section */}

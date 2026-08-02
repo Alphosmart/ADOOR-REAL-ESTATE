@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { FaCloudUploadAlt, FaTimes, FaArrowLeft } from 'react-icons/fa';
 import uploadImage from '../helper/uploadImage';
 import uploadVideo from '../helper/uploadVideo';
+import PropertyVideo from '../components/PropertyVideo';
 import SummaryApi from '../common';
 
 const EditProduct = () => {
@@ -339,9 +340,11 @@ const EditProduct = () => {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Property walkthrough video</label>
+                        <p className="mb-2 text-sm text-gray-500">Upload a file or paste a YouTube, Vimeo, Dailymotion, MP4, or WebM link.</p>
+                        <input type="url" value={data.productVideo || ''} onChange={event => setData(prev => ({ ...prev, productVideo: event.target.value }))} placeholder="https://youtube.com/watch?v=... or direct video URL" className="mb-3 w-full rounded-lg border border-gray-300 p-3" />
                         {data.productVideo ? (
                             <div className="relative overflow-hidden rounded-lg bg-black">
-                                <video src={data.productVideo} controls preload="metadata" className="w-full max-h-80" />
+                                <PropertyVideo src={data.productVideo} className="w-full aspect-video max-h-80" />
                                 <button type="button" onClick={() => setData(prev => ({ ...prev, productVideo: '' }))} className="absolute right-2 top-2 bg-red-600 text-white rounded-full p-2"><FaTimes /></button>
                             </div>
                         ) : (

@@ -38,16 +38,14 @@ const getSiteContent = async (req, res) => {
             },
             homePage: {
                 hero: {
-                    title: "Where do you want to live?",
-                    subtitle: "Search verified homes and investment opportunities across Nigeria.",
-                    primaryButtonText: "Show Properties",
-                    primaryButtonLink: "/search",
-                    secondaryButtonText: "Explore Lagos",
-                    secondaryButtonLink: "/search?q=Lagos",
+                    title: "Find Your Dream Home",
+                    subtitle: "Discover our exclusive collection of premium residential and commercial properties. From modern minimalist to classic elegant designs, professionally curated by Adoo Real Estate.",
+                    primaryButtonText: "View Properties",
+                    primaryButtonLink: "/products",
+                    secondaryButtonText: "Learn More",
+                    secondaryButtonLink: "/about-us",
                     slides: [
-                        { title: "Exceptional homes. Remarkable places.", location: "Lagos, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
-                        { title: "Designed for the way you live.", location: "Abuja, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
-                        { title: "Property with lasting value.", location: "Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" }
+                        { videoUrl: "", posterUrl: "" }
                     ]
                 },
                 featuredSection: {
@@ -284,6 +282,20 @@ const updateSiteContent = async (req, res) => {
 
         const contentFilePath = path.join(__dirname, '../data/siteContent.json');
         const dataDir = path.dirname(contentFilePath);
+
+        // Never persist uploaded videos as multi-megabyte Base64 strings.
+        if (section === 'homePage' && Array.isArray(data.hero?.slides)) {
+            const videoDirectory = path.join(__dirname, '../uploads/videos');
+            await fs.mkdir(videoDirectory, { recursive: true });
+            for (const [index, slide] of data.hero.slides.entries()) {
+                const match = typeof slide.videoUrl === 'string' && slide.videoUrl.match(/^data:video\/([^;]+);base64,(.+)$/s);
+                if (!match) continue;
+                const extension = match[1] === 'quicktime' ? 'mov' : match[1].replace(/[^a-z0-9]/gi, '');
+                const filename = `hero-${Date.now()}-${index}.${extension || 'mp4'}`;
+                await fs.writeFile(path.join(videoDirectory, filename), Buffer.from(match[2], 'base64'));
+                slide.videoUrl = `${req.protocol}://${req.get('host')}/uploads/videos/${filename}`;
+            }
+        }
         
         // Ensure data directory exists
         try {

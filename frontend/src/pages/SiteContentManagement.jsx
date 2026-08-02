@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import SummaryApi from '../common';
+import uploadVideo from '../helper/uploadVideo';
+import PropertyVideo from '../components/PropertyVideo';
 
 const SiteContentManagement = () => {
     const isLoadingData = useRef(false);
     const [contentData, setContentData] = useState({
         homePage: {
             hero: {
-                title: "Where do you want to live?",
-                subtitle: "Search verified homes and investment opportunities across Nigeria.",
-                primaryButtonText: "Show Properties",
-                primaryButtonLink: "/search",
-                secondaryButtonText: "Explore Lagos",
-                secondaryButtonLink: "/search?q=Lagos",
+                title: "Transform Your Space with Premium Properties",
+                subtitle: "Discover thousands of premium real estate properties from trusted sellers worldwide. From modern minimalist to classic elegant designs.",
+                primaryButtonText: "Shop Now",
+                primaryButtonLink: "/products",
+                secondaryButtonText: "Learn More",
+                secondaryButtonLink: "/about-us",
                 slides: [
-                    { title: "Exceptional homes. Remarkable places.", location: "Lagos, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
-                    { title: "Designed for the way you live.", location: "Abuja, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
-                    { title: "Property with lasting value.", location: "Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" }
+                    { videoUrl: "", posterUrl: "" }
                 ]
             }
         },
@@ -151,6 +151,9 @@ const SiteContentManagement = () => {
         return 'homePage';
     });
     const [isLoading, setIsLoading] = useState(false);
+    const [uploadingHeroSlide, setUploadingHeroSlide] = useState(null);
+    const [heroVideoPreviews, setHeroVideoPreviews] = useState({});
+    const [heroVideoErrors, setHeroVideoErrors] = useState({});
 
     // Load content data from backend only once
     useEffect(() => {
@@ -266,7 +269,7 @@ const SiteContentManagement = () => {
 
     const addHeroSlide = () => {
         setContentData(prev => {
-            const slides = [...(prev.homePage?.hero?.slides || []), { title: "New featured property", location: "Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" }];
+            const slides = [...(prev.homePage?.hero?.slides || []), { videoUrl: "", posterUrl: "" }];
             return { ...prev, homePage: { ...prev.homePage, hero: { ...prev.homePage?.hero, slides } } };
         });
     };
@@ -276,6 +279,32 @@ const SiteContentManagement = () => {
             const slides = (prev.homePage?.hero?.slides || []).filter((_, slideIndex) => slideIndex !== index);
             return { ...prev, homePage: { ...prev.homePage, hero: { ...prev.homePage?.hero, slides } } };
         });
+    };
+
+    const handleHeroVideoUpload = async (index, file) => {
+        if (!file) return;
+        const localPreviewUrl = URL.createObjectURL(file);
+        setHeroVideoPreviews(prev => {
+            if (prev[index]?.startsWith('blob:')) URL.revokeObjectURL(prev[index]);
+            return { ...prev, [index]: localPreviewUrl };
+        });
+        setHeroVideoErrors(prev => ({ ...prev, [index]: '' }));
+        setUploadingHeroSlide(index);
+        try {
+            const videoUrl = await uploadVideo(file);
+            updateHeroSlide(index, 'videoUrl', videoUrl);
+            toast.success('Hero video uploaded. Save Home Page Content to publish it.');
+        } catch (error) {
+            toast.error(error.message || 'Hero video upload failed');
+        } finally {
+            setUploadingHeroSlide(null);
+        }
+    };
+
+    const getHeroPreviewUrl = (url = '') => {
+        const trimmedUrl = url.trim();
+        if (!trimmedUrl || !trimmedUrl.includes('res.cloudinary.com')) return trimmedUrl;
+        return `${trimmedUrl}${trimmedUrl.includes('?') ? '&' : '?'}preview=1`;
     };
 
     const updateQuickLink = (index, field, value) => {
@@ -801,7 +830,7 @@ const SiteContentManagement = () => {
                                 <h2 className="text-xl font-semibold text-gray-900">Home Page Content</h2>
                                 
                                 {/* Hero Section */}
-                                <div className="border rounded-lg p-4">
+                                <div id="hero-videos" className="border rounded-lg p-4 scroll-mt-6">
                                     <h3 className="text-lg font-medium text-gray-800 mb-4">Hero Section</h3>
                                     <div className="space-y-4">
                                         <div>
@@ -824,17 +853,34 @@ const SiteContentManagement = () => {
                                         </div>
                                         <div className="border-t pt-5">
                                             <div className="flex items-center justify-between mb-3">
-                                                <div><h4 className="font-medium text-gray-800">Hero video carousel</h4><p className="text-xs text-gray-500">Paste direct MP4/WebM and poster-image URLs. Empty video URLs display the poster image.</p></div>
+                                                <div><h4 className="font-medium text-gray-800">Hero video carousel</h4><p className="text-xs text-gray-500">Upload MP4, WebM, MOV, or M4V videos. Add multiple slides to create the carousel.</p></div>
                                                 <button type="button" onClick={addHeroSlide} className="px-3 py-2 bg-gray-900 text-white text-xs rounded-md">Add slide</button>
                                             </div>
                                             <div className="space-y-4">
                                                 {(contentData.homePage?.hero?.slides || []).map((slide, index) => (
                                                     <div key={index} className="rounded-lg border bg-gray-50 p-4">
                                                         <div className="flex justify-between mb-3"><p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Slide {index + 1}</p><button type="button" onClick={() => removeHeroSlide(index)} className="text-xs text-red-600">Remove</button></div>
+                                                        <div className="mb-3 overflow-hidden rounded-lg border bg-black">
+                                                            {(heroVideoPreviews[index] || slide.videoUrl) ? (
+                                                                <PropertyVideo
+                                                                    src={heroVideoPreviews[index] || getHeroPreviewUrl(slide.videoUrl)}
+                                                                    poster={slide.posterUrl || undefined}
+                                                                    muted
+                                                                    className="h-56 w-full object-contain"
+                                                                    onLoadedMetadata={() => setHeroVideoErrors(prev => ({ ...prev, [index]: '' }))}
+                                                                    onError={() => setHeroVideoErrors(prev => ({ ...prev, [index]: 'This video could not be loaded. Check that the URL is public and points to a supported video.' }))}
+                                                                />
+                                                            ) : (
+                                                                <div className="flex h-40 items-center justify-center text-sm text-gray-400">No video uploaded</div>
+                                                            )}
+                                                        </div>
+                                                        {heroVideoErrors[index] && <p className="mb-3 rounded bg-red-50 px-3 py-2 text-sm text-red-700">{heroVideoErrors[index]}</p>}
+                                                        <label className={`mb-3 flex cursor-pointer items-center justify-center rounded-md border-2 border-dashed px-4 py-4 text-sm font-semibold transition ${uploadingHeroSlide === index ? 'cursor-wait bg-gray-100 text-gray-400' : 'border-primary-400 bg-primary-50 text-accent-700 hover:bg-primary-100'}`}>
+                                                            {uploadingHeroSlide === index ? 'Uploading video…' : slide.videoUrl ? 'Replace video' : 'Upload hero video'}
+                                                            <input type="file" className="hidden" accept="video/mp4,video/webm,video/quicktime,video/x-m4v" disabled={uploadingHeroSlide !== null} onChange={event => handleHeroVideoUpload(index, event.target.files?.[0])} />
+                                                        </label>
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                            <input aria-label={`Slide ${index + 1} title`} value={slide.title || ''} onChange={e => updateHeroSlide(index, 'title', e.target.value)} placeholder="Slide caption" className="w-full px-3 py-2 border rounded-md" />
-                                                            <input aria-label={`Slide ${index + 1} location`} value={slide.location || ''} onChange={e => updateHeroSlide(index, 'location', e.target.value)} placeholder="Location" className="w-full px-3 py-2 border rounded-md" />
-                                                            <input aria-label={`Slide ${index + 1} video URL`} value={slide.videoUrl || ''} onChange={e => updateHeroSlide(index, 'videoUrl', e.target.value)} placeholder="https://.../property-video.mp4" className="w-full px-3 py-2 border rounded-md" />
+                                                            <input aria-label={`Slide ${index + 1} video URL`} value={slide.videoUrl || ''} onChange={e => updateHeroSlide(index, 'videoUrl', e.target.value)} placeholder="Video URL (filled after upload)" className="w-full px-3 py-2 border rounded-md" />
                                                             <input aria-label={`Slide ${index + 1} poster URL`} value={slide.posterUrl || ''} onChange={e => updateHeroSlide(index, 'posterUrl', e.target.value)} placeholder="https://.../poster.jpg" className="w-full px-3 py-2 border rounded-md" />
                                                         </div>
                                                     </div>

@@ -1,9 +1,47 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const logger = require('../utils/logger');
+const User = require('../models/userModel');
+
+async function ensureDefaultAdmin() {
+    if (process.env.NODE_ENV === 'production') {
+        return;
+    }
+
+    try {
+        const adminEmail = process.env.DEFAULT_ADMIN_EMAIL || 'admin@test.com';
+        const adminPassword = process.env.DEFAULT_ADMIN_PASSWORD || 'admin123';
+
+        const existingAdmin = await User.findOne({ email: adminEmail });
+        if (existingAdmin) {
+            logger.info('Default admin already exists', { email: adminEmail });
+            return;
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(adminPassword, salt);
+
+        await User.create({
+            name: 'System Admin',
+            email: adminEmail,
+            password: hashedPassword,
+            role: 'ADMIN'
+        });
+
+        logger.info('Created default admin user', { email: adminEmail });
+    } catch (error) {
+        logger.error('Failed to create default admin user', { error: error.message });
+    }
+}
 
 async function connectDB() {
     try {
         const startTime = Date.now();
+        const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/adoor_real_estate';
+
+        if (!process.env.MONGODB_URI) {
+            logger.warn('MONGODB_URI not set, using local fallback', { uri: mongoUri });
+        }
         
         // Configure mongoose options for MongoDB Atlas with proper timeouts
         const options = {
@@ -16,10 +54,12 @@ async function connectDB() {
             w: 'majority' // Write concern
         };
 
-        await mongoose.connect(process.env.MONGODB_URI, options);
+        await mongoose.connect(mongoUri, options);
         
         const connectionTime = Date.now() - startTime;
         logger.info('MongoDB connected successfully', { connectionTime });
+
+        await ensureDefaultAdmin();
         
         // Log database events
         mongoose.connection.on('connected', () => {

@@ -6,6 +6,7 @@ import SummaryApi from '../common';
 import SocialFeatures from '../components/SocialFeatures';
 import EnhancedReviews from '../components/EnhancedReviews';
 import useSiteContent from '../hooks/useSiteContent';
+import PropertyVideo from '../components/PropertyVideo';
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -368,7 +369,7 @@ const ProductDetail = () => {
                     )}
                     {product.productVideo && (
                         <div className="mt-5 overflow-hidden rounded-lg bg-black">
-                            <video src={product.productVideo} controls playsInline preload="metadata" poster={product.productImage?.[0]} className="w-full max-h-[520px]" />
+                            <PropertyVideo src={product.productVideo} poster={product.productImage?.[0]} className="w-full aspect-video max-h-[520px]" />
                             <p className="bg-[#121f2f] px-4 py-3 text-sm font-medium text-white">Property walkthrough</p>
                         </div>
                     )}

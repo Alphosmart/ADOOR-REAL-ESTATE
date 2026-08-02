@@ -1,88 +1,229 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { FaArrowRight, FaBuilding, FaChevronLeft, FaChevronRight, FaHome, FaKey, FaMapMarkerAlt, FaSearch } from 'react-icons/fa'
+import React from 'react'
+import HorizontalCardProduct from '../components/HorizontalCardProduct.jsx'
 import VerticalCardProduct from '../components/VerticalCardProduct.jsx'
 import useSiteContent from '../hooks/useSiteContent'
+import { Link } from 'react-router-dom'
+import { FaHome, FaBuilding, FaKey, FaHandshake, FaStar, FaMapMarkerAlt, FaPhone, FaCheckCircle, FaUsers, FaAward, FaShieldAlt } from 'react-icons/fa'
 
 const Home = () => {
-  const { content: siteContent } = useSiteContent()
-  const navigate = useNavigate()
-  const [location, setLocation] = useState('')
-  const [intent, setIntent] = useState('buy')
-  const [propertyType, setPropertyType] = useState('')
-  const [activeSlide, setActiveSlide] = useState(0)
-  const hero = siteContent?.homePage?.hero || {
-    title: 'Where do you want to live?',
-    subtitle: 'Search verified homes and investment opportunities across Nigeria.',
-    primaryButtonText: 'Show properties',
-    primaryButtonLink: '/search',
-    secondaryButtonText: 'Explore Lagos',
-    secondaryButtonLink: '/search?q=Lagos'
-  }
-  const slides = hero.slides?.filter(slide => slide?.videoUrl || slide?.posterUrl) || []
-  const heroSlides = slides.length ? slides : [{ title: 'Exceptional homes. Remarkable places.', location: 'Nigeria', posterUrl: `${process.env.PUBLIC_URL}/adoo.jpeg`, videoUrl: '' }]
-  const activeVideoUrl = heroSlides[activeSlide]?.videoUrl
-  const nextSlide = () => setActiveSlide(current => (current + 1) % heroSlides.length)
-  const previousSlide = () => setActiveSlide(current => (current - 1 + heroSlides.length) % heroSlides.length)
+  const { content: homeContent } = useSiteContent('homePage')
 
-  useEffect(() => {
-    if (activeVideoUrl || heroSlides.length < 2) return undefined
-    const timer = setTimeout(() => setActiveSlide(current => (current + 1) % heroSlides.length), 6500)
-    return () => clearTimeout(timer)
-  }, [activeSlide, activeVideoUrl, heroSlides.length])
-  const submitSearch = (event) => {
-    event.preventDefault()
-    const params = new URLSearchParams({ q: location, intent, ...(propertyType && { category: propertyType }) })
-    navigate(`/search?${params.toString()}`)
+  // Default content fallback
+  const heroContent = homeContent?.hero || {
+    title: "Find Your Dream Property in Nigeria",
+    subtitle: "Discover premium residential and commercial properties across Lagos, Abuja, and major Nigerian cities. Expert guidance from property search to ownership.",
+    primaryButtonText: "Browse Properties",
+    primaryButtonLink: "/properties",
+    secondaryButtonText: "Contact Us",
+    secondaryButtonLink: "/contact-us"
   }
+
+  const stats = [
+    { number: '500+', label: 'Properties Listed', icon: FaHome },
+    { number: '2,000+', label: 'Happy Clients', icon: FaUsers },
+    { number: '10+', label: 'Years Experience', icon: FaAward },
+    { number: '98%', label: 'Client Satisfaction', icon: FaStar }
+  ]
+
+  const services = [
+    {
+      icon: FaHome,
+      title: 'Property Sales',
+      description: 'Buy your dream home from our extensive portfolio of residential and commercial properties.'
+    },
+    {
+      icon: FaKey,
+      title: 'Property Rentals',
+      description: 'Find the perfect rental property that suits your budget and lifestyle needs.'
+    },
+    {
+      icon: FaHandshake,
+      title: 'Property Management',
+      description: 'Professional property management services for landlords and investors.'
+    },
+    {
+      icon: FaBuilding,
+      title: 'Real Estate Consulting',
+      description: 'Expert advice on property investment, valuation, and market trends.'
+    }
+  ]
+
+  const features = [
+    { icon: FaCheckCircle, text: 'Verified Property Listings' },
+    { icon: FaShieldAlt, text: 'Secure Transactions' },
+    { icon: FaMapMarkerAlt, text: 'Prime Locations' },
+    { icon: FaPhone, text: '24/7 Customer Support' }
+  ]
 
   return (
-    <div className="adoo-home">
-      <section className="adoo-video-hero">
-        <div className="adoo-video-stage">
-          {heroSlides.map((slide, index) => (
-            <div className={`adoo-video-slide ${index === activeSlide ? 'active' : ''}`} key={`${slide.videoUrl}-${index}`}>
-              {slide.videoUrl ? <video src={slide.videoUrl} poster={slide.posterUrl || undefined} autoPlay muted playsInline onEnded={nextSlide} /> : <div className="adoo-slide-poster" style={{ backgroundImage: `url(${slide.posterUrl})` }} />}
+    <div className="bg-gray-50">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-accent-800 via-accent-700 to-primary-500 text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              {heroContent.title}
+            </h1>
+            <p className="text-xl md:text-2xl mb-10 max-w-4xl mx-auto opacity-90 leading-relaxed">
+              {heroContent.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Link 
+                to={heroContent.primaryButtonLink} 
+                className="bg-primary-500 text-white px-10 py-5 rounded-lg font-semibold text-lg hover:bg-primary-600 transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+              >
+                {heroContent.primaryButtonText}
+              </Link>
+              <Link 
+                to={heroContent.secondaryButtonLink} 
+                className="bg-white text-accent-800 px-10 py-5 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all shadow-xl border-2 border-white"
+              >
+                {heroContent.secondaryButtonText}
+              </Link>
             </div>
-          ))}
-          <div className="adoo-video-overlay" />
-          <div className="adoo-video-copy">
-            <p className="adoo-kicker">ADOOR presents</p>
-            <h1>{hero.title}</h1>
-            <p>{hero.subtitle}</p>
+            
+            {/* Features */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
+              {features.map((feature, idx) => (
+                <div key={idx} className="flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                  <feature.icon className="text-primary-300 text-xl" />
+                  <span className="text-sm md:text-base font-medium">{feature.text}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="adoo-slide-label"><span>{String(activeSlide + 1).padStart(2, '0')} / {String(heroSlides.length).padStart(2, '0')}</span><div><small>{heroSlides[activeSlide]?.location || 'Featured property'}</small><strong>{heroSlides[activeSlide]?.title || 'Find your next address'}</strong></div></div>
-          {heroSlides.length > 1 && <div className="adoo-carousel-controls"><button onClick={previousSlide} aria-label="Previous video"><FaChevronLeft /></button><button onClick={nextSlide} aria-label="Next video"><FaChevronRight /></button></div>}
-        </div>
-        <form className="adoo-hero-search" onSubmit={submitSearch}>
-          <div className="adoo-intent-tabs">{['buy', 'rent', 'invest'].map(option => <button type="button" key={option} className={intent === option ? 'active' : ''} onClick={() => setIntent(option)}>{option}</button>)}</div>
-          <label><span>Location</span><div><FaMapMarkerAlt /><input value={location} onChange={e => setLocation(e.target.value)} placeholder="City, area or landmark" /></div></label>
-          <label><span>Property type</span><select value={propertyType} onChange={e => setPropertyType(e.target.value)}><option value="">All properties</option><option value="houses">House or villa</option><option value="apartments">Apartment</option><option value="commercial">Commercial</option><option value="land">Land</option></select></label>
-          <button type="submit"><FaSearch /><span>Search</span></button>
-        </form>
-      </section>
-
-      <section className="adoo-market-bar">
-        <div className="adoo-shell"><p>Explore by market</p>{['Lagos', 'Abuja', 'Port Harcourt', 'Ibadan'].map(city => <Link key={city} to={`/search?q=${encodeURIComponent(city)}`}>{city}<FaArrowRight /></Link>)}</div>
-      </section>
-
-      <section className="adoo-shell adoo-listings-section">
-        <div className="adoo-heading"><div><p className="adoo-kicker">Curated for you</p><h2>Properties worth seeing</h2></div><Link to="/search">View all properties <FaArrowRight /></Link></div>
-        <VerticalCardProduct featured heading="Featured properties" limit={8} />
-      </section>
-
-      <section className="adoo-shell adoo-paths">
-        <div className="adoo-heading"><div><p className="adoo-kicker">Start your journey</p><h2>What brings you to ADOOR?</h2></div></div>
-        <div className="adoo-path-grid">
-          <Link to="/search?intent=buy"><FaHome /><span>01</span><h3>Buy a home</h3><p>Find a verified home that fits the way you live.</p><b>Explore homes <FaArrowRight /></b></Link>
-          <Link to="/search?intent=rent"><FaKey /><span>02</span><h3>Find a rental</h3><p>Discover flexible living in the right neighbourhood.</p><b>Browse rentals <FaArrowRight /></b></Link>
-          <Link to="/contact-us"><FaBuilding /><span>03</span><h3>Invest in property</h3><p>Build a stronger portfolio with local market insight.</p><b>Speak to an adviser <FaArrowRight /></b></Link>
         </div>
       </section>
 
-      <section className="adoo-advice"><div className="adoo-shell adoo-advice-grid"><div><p className="adoo-kicker">People before property</p><h2>Good decisions start with good local advice.</h2></div><div><p>From the first shortlist to document verification and closing, our team gives you a clear path through the Nigerian property market.</p><div className="adoo-stats"><span><strong>500+</strong>verified listings</span><span><strong>2,000+</strong>clients guided</span><span><strong>10+</strong>years of insight</span></div><Link to="/about-us">Meet ADOOR <FaArrowRight /></Link></div></div></section>
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="text-center">
+                <stat.icon className="text-primary-500 text-4xl mx-auto mb-4" />
+                <div className="text-4xl md:text-5xl font-bold text-accent-800 mb-2">{stat.number}</div>
+                <div className="text-gray-600 font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <section className="adoo-shell adoo-cta"><div><p className="adoo-kicker">Ready when you are</p><h2>Let’s find your place.</h2></div><Link to="/contact-us">Book a consultation <FaArrowRight /></Link></section>
+      {/* Services Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-accent-800 mb-4">Our Services</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive real estate solutions tailored to your needs
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, idx) => (
+              <div key={idx} className="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
+                <div className="bg-primary-50 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                  <service.icon className="text-primary-500 text-3xl" />
+                </div>
+                <h3 className="text-xl font-bold text-accent-800 mb-3">{service.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Properties */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-accent-800 mb-4">Featured Properties</h2>
+            <p className="text-xl text-gray-600">Explore our handpicked selection of premium properties</p>
+          </div>
+          <VerticalCardProduct featured={true} heading={"Featured Properties"} limit={8} />
+        </div>
+      </section>
+
+      {/* Property Categories */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-accent-800 mb-12 text-center">Browse by Category</h2>
+          <HorizontalCardProduct category={"houses"} heading={"Houses & Villas"} />
+          <HorizontalCardProduct category={"apartments"} heading={"Apartments & Condos"} />
+          <HorizontalCardProduct category={"commercial"} heading={"Commercial Properties"} />
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-accent-800 mb-4">Why Choose Adoo Real Estate</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Your trusted partner in finding the perfect property
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-12">
+            <div className="text-center">
+              <div className="bg-primary-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FaShieldAlt className="text-primary-500 text-4xl" />
+              </div>
+              <h3 className="text-2xl font-bold text-accent-800 mb-4">Trusted & Verified</h3>
+              <p className="text-gray-600 leading-relaxed">
+                All our properties are thoroughly verified and legally documented to ensure your peace of mind.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="bg-primary-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FaUsers className="text-primary-500 text-4xl" />
+              </div>
+              <h3 className="text-2xl font-bold text-accent-800 mb-4">Expert Guidance</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Our experienced real estate professionals guide you through every step of your property journey.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="bg-primary-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FaAward className="text-primary-500 text-4xl" />
+              </div>
+              <h3 className="text-2xl font-bold text-accent-800 mb-4">Award Winning</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Recognized for excellence in real estate services across Nigeria with numerous industry awards.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-primary-500 to-accent-800">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Ready to Find Your Dream Property?
+          </h2>
+          <p className="text-xl text-white/90 mb-10">
+            Let our experts help you discover the perfect property that matches your needs and budget.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              to="/properties" 
+              className="bg-white text-primary-600 px-10 py-5 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all shadow-xl"
+            >
+              View All Properties
+            </Link>
+            <Link 
+              to="/contact-us" 
+              className="bg-transparent border-2 border-white text-white px-10 py-5 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary-600 transition-all"
+            >
+              Schedule a Consultation
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

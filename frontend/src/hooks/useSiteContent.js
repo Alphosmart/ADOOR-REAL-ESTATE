@@ -72,16 +72,14 @@ const getDefaultContent = () => {
     const defaultContent = {
         homePage: {
             hero: {
-                title: "Where do you want to live?",
-                subtitle: "Search verified homes and investment opportunities across Nigeria.",
-                primaryButtonText: "Show Properties",
-                primaryButtonLink: "/search",
-                secondaryButtonText: "Explore Lagos",
-                secondaryButtonLink: "/search?q=Lagos",
+                title: "Transform Your Space with Premium Properties",
+                subtitle: "Discover thousands of premium real estate properties from trusted sellers worldwide. From modern minimalist to classic elegant designs.",
+                primaryButtonText: "Shop Now",
+                primaryButtonLink: "/products",
+                secondaryButtonText: "Learn More",
+                secondaryButtonLink: "/about-us",
                 slides: [
-                    { title: "Exceptional homes. Remarkable places.", location: "Lagos, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
-                    { title: "Designed for the way you live.", location: "Abuja, Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" },
-                    { title: "Property with lasting value.", location: "Nigeria", videoUrl: "", posterUrl: "/adoo.jpeg" }
+                    { videoUrl: "", posterUrl: "" }
                 ]
             }
         },
