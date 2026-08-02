@@ -1,3 +1,5 @@
+import API_BASE_URL from '../config/api';
+
 const cloudName = process.env.REACT_APP_CLOUD_NAME_CLOUDINARY;
 
 const uploadVideo = async (file) => {
@@ -5,10 +7,9 @@ const uploadVideo = async (file) => {
   if (file.size > 100 * 1024 * 1024) throw new Error('Video must be smaller than 100MB.');
 
   if (!cloudName || cloudName.includes('your')) {
-    const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
     const localFormData = new FormData();
     localFormData.append('video', file);
-    const localResponse = await fetch(`${baseUrl}/api/admin/upload-video`, { method: 'POST', credentials: 'include', body: localFormData });
+    const localResponse = await fetch(`${API_BASE_URL}/api/admin/upload-video`, { method: 'POST', credentials: 'include', body: localFormData });
     const localResult = await localResponse.json();
     if (!localResponse.ok || !localResult.success) throw new Error(localResult.message || 'Video upload failed.');
     return localResult.data.url;
