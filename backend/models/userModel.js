@@ -38,6 +38,29 @@ const userSchema = new mongoose.Schema({
         enum : ['GENERAL', 'STAFF', 'ADMIN'], // Added 'STAFF' role for company staff members
         default : 'GENERAL'
     },
+    status: {
+        type: String,
+        enum: ['active', 'inactive', 'archived'],
+        default: 'active'
+    },
+    archivedAt: {
+        type: Date,
+        default: null
+    },
+    archivedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        default: null
+    },
+    deactivatedAt: {
+        type: Date,
+        default: null
+    },
+    deactivatedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        default: null
+    },
     
     // Staff permissions and tracking
     permissions: {

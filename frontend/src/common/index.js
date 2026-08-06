@@ -1,8 +1,4 @@
-const backendDomain = process.env.REACT_APP_API_URL || (
-    process.env.NODE_ENV === 'production'
-        ? "https://adoor-real-estate.onrender.com"
-        : "http://localhost:8080"
-)  // Use env-configured backend; fallback to local backend for development
+import backendDomain from '../config/api';
 
 const SummaryApi = {
     // User signup removed - no regular user accounts
@@ -181,6 +177,14 @@ const SummaryApi = {
     getAllUsers : {
         url : `${backendDomain}/api/admin/all-users`,
         method : 'get'
+    },
+    resetUserPassword : {
+        url : `${backendDomain}/api/admin/reset-password`,
+        method : 'put'
+    },
+    updateUserAccountStatus : {
+        url : `${backendDomain}/api/admin/account-status`,
+        method : 'put'
     },
     promoteToAdmin : {
         url : `${backendDomain}/api/admin/promote-to-admin`,

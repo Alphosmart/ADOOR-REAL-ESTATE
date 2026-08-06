@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 
 // Custom hook to fetch and cache site content
 const useSiteContent = (section = null) => {
@@ -12,8 +13,7 @@ const useSiteContent = (section = null) => {
                 setLoading(true);
                 
                 // Use public endpoint (doesn't require authentication)
-                const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-                const response = await fetch(`${baseUrl}/api/site-content?_=${Date.now()}`, { cache: 'no-store' });
+                const response = await fetch(`${API_BASE_URL}/api/site-content?_=${Date.now()}`, { cache: 'no-store' });
                 
                 if (response.ok) {
                     const data = await response.json();
@@ -47,8 +47,7 @@ const useSiteContent = (section = null) => {
         try {
             setLoading(true);
             
-            const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-            const response = await fetch(`${baseUrl}/api/site-content`);
+            const response = await fetch(`${API_BASE_URL}/api/site-content`);
             
             if (response.ok) {
                 const data = await response.json();

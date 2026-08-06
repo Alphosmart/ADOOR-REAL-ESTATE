@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/api/*"
-  to = "https://adoorealestate.onrender.com/api/:splat"
+  to = "https://adoor-real-estate.onrender.com/api/:splat"
   status = 200
 
 [[redirects]]
