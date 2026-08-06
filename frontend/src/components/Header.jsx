@@ -84,31 +84,42 @@ const Header = () => {
   }, [user?.profilePic, user?.name])
 
   const adminMenuItems = useMemo(() => {
-    if (!isAdminOrStaff) return null
+    if (!user?._id) return null
     
     // Show property management options for admin and staff with upload permissions
     const canManageProperties = user.role === 'ADMIN' || 
                                (user.role === 'STAFF' && user.permissions?.canUploadProducts);
     
-    if (canManageProperties) {
-      return (
-        <>
-          <Link 
-            to={'/add-product'} 
-            className='flex items-center gap-3 px-4 py-2 hover:bg-gray-50 text-gray-700 transition-colors' 
+    return (
+      <>
+          <Link
+            to={'/profile'}
+            className='flex items-center gap-3 px-4 py-2 hover:bg-gray-50 text-gray-700 transition-colors'
             onClick={closeMenu}
           >
-            <span className='text-sm'>➕</span>
-            Add Property
+            <span className='text-sm'>👤</span>
+            My Profile
           </Link>
-          <Link 
-            to={'/my-products'} 
-            className='flex items-center gap-3 px-4 py-2 hover:bg-gray-50 text-gray-700 transition-colors' 
-            onClick={closeMenu}
-          >
-            <span className='text-sm'>🏠</span>
-            Manage Properties
-          </Link>
+          {canManageProperties && (
+            <>
+              <Link 
+                to={'/add-product'} 
+                className='flex items-center gap-3 px-4 py-2 hover:bg-gray-50 text-gray-700 transition-colors' 
+                onClick={closeMenu}
+              >
+                <span className='text-sm'>➕</span>
+                Add Property
+              </Link>
+              <Link 
+                to={'/my-products'} 
+                className='flex items-center gap-3 px-4 py-2 hover:bg-gray-50 text-gray-700 transition-colors' 
+                onClick={closeMenu}
+              >
+                <span className='text-sm'>🏠</span>
+                Manage Properties
+              </Link>
+            </>
+          )}
           {user.role === 'ADMIN' && (
             <Link 
               to={'/admin-panel'} 
@@ -119,12 +130,9 @@ const Header = () => {
               Admin Panel
             </Link>
           )}
-        </>
-      )
-    }
-    
-    return null
-  }, [isAdminOrStaff, user, closeMenu])
+      </>
+    )
+  }, [user, closeMenu])
 
   return (
     <header className='h-16 shadow-md bg-white fixed w-full z-40'>
@@ -230,7 +238,7 @@ const Header = () => {
           )}
 
           {/* Admin/Staff Profile Dropdown */}
-          {isAdminOrStaff && (
+          {user?._id && (
             <div className='relative' ref={dropdownRef}>
               <div 
                 className='flex items-center gap-2 cursor-pointer p-2 rounded-lg'

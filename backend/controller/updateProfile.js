@@ -1,10 +1,20 @@
 const userModel = require('../models/userModel');
+const bcrypt = require('bcryptjs');
 
 // Update user profile
 async function updateProfile(req, res) {
     try {
         const userId = req.userId;
-        const { name, phone, address, profilePic, verificationDocuments, preferences } = req.body;
+        const {
+            name,
+            phone,
+            address,
+            profilePic,
+            verificationDocuments,
+            preferences,
+            currentPassword,
+            newPassword
+        } = req.body;
 
         // Find user
         const user = await userModel.findById(userId);
@@ -18,6 +28,46 @@ async function updateProfile(req, res) {
 
         // Prepare update data
         const updateData = {};
+
+        // A signed-in user may only change their own password and must prove
+        // that they know the current one first.
+        if (currentPassword !== undefined || newPassword !== undefined) {
+            if (!currentPassword || !newPassword) {
+                return res.status(400).json({
+                    message: 'Current password and new password are required',
+                    error: true,
+                    success: false
+                });
+            }
+
+            if (newPassword.length < 6) {
+                return res.status(400).json({
+                    message: 'New password must be at least 6 characters long',
+                    error: true,
+                    success: false
+                });
+            }
+
+            const passwordMatches = await bcrypt.compare(currentPassword, user.password || '');
+            if (!passwordMatches) {
+                return res.status(400).json({
+                    message: 'Current password is incorrect',
+                    error: true,
+                    success: false
+                });
+            }
+
+            const passwordIsUnchanged = await bcrypt.compare(newPassword, user.password);
+            if (passwordIsUnchanged) {
+                return res.status(400).json({
+                    message: 'New password must be different from the current password',
+                    error: true,
+                    success: false
+                });
+            }
+
+            updateData.password = await bcrypt.hash(newPassword, 10);
+        }
         
         if (name !== undefined) updateData.name = name;
         if (phone !== undefined) updateData.phone = phone;

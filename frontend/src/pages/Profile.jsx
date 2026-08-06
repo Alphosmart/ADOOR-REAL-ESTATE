@@ -466,9 +466,12 @@ const Profile = () => {
                                                 </label>
                                                 <input
                                                     type="password"
+                                                    id="current-password"
                                                     name="currentPassword"
+                                                    autoComplete="current-password"
                                                     value={passwordData.currentPassword}
                                                     onChange={handlePasswordChange}
+                                                    required
                                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                                 />
                                             </div>
@@ -479,9 +482,13 @@ const Profile = () => {
                                                 </label>
                                                 <input
                                                     type="password"
+                                                    id="new-password"
                                                     name="newPassword"
+                                                    autoComplete="new-password"
                                                     value={passwordData.newPassword}
                                                     onChange={handlePasswordChange}
+                                                    minLength={6}
+                                                    required
                                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                                 />
                                             </div>
@@ -492,9 +499,13 @@ const Profile = () => {
                                                 </label>
                                                 <input
                                                     type="password"
+                                                    id="confirm-password"
                                                     name="confirmPassword"
+                                                    autoComplete="new-password"
                                                     value={passwordData.confirmPassword}
                                                     onChange={handlePasswordChange}
+                                                    minLength={6}
+                                                    required
                                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
                                                 />
                                             </div>

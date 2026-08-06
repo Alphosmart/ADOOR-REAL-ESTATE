@@ -43,7 +43,8 @@ import StaffManagement from '../pages/StaffManagement';
 import EmailTemplateManager from '../components/EmailTemplateManager';
 import PaymentConfiguration from '../pages/PaymentConfiguration';
 import DevLogin from '../pages/DevLogin';
-import { AdminRoute } from '../components/AuthGuard';
+import Profile from '../pages/Profile';
+import { AdminRoute, ProtectedRoute } from '../components/AuthGuard';
 
 
 const router = createBrowserRouter([
@@ -93,11 +94,11 @@ const router = createBrowserRouter([
             //     element: <GuestRoute><SignUp /></GuestRoute>,
             //     errorElement: <ErrorPage />
             // },
-            // {
-            //     path: "profile",
-            //     element: <ProtectedRoute><Profile /></ProtectedRoute>,
-            //     errorElement: <ErrorPage />
-            // },
+            {
+                path: "profile",
+                element: <ProtectedRoute><Profile /></ProtectedRoute>,
+                errorElement: <ErrorPage />
+            },
             {
                 path: "add-product",
                 element: <AdminRoute><AddProduct /></AdminRoute>,
