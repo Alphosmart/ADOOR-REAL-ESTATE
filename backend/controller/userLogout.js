@@ -1,6 +1,9 @@
+const { clearAuthCookie } = require('../utils/authCookie');
+
 async function userLogout(req, res) {
     try {
-        res.clearCookie("token");
+        clearAuthCookie(res);
+        res.set('Cache-Control', 'no-store');
 
         res.json({
             message: "Logged out successfully",

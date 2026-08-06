@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const { ResponseHandler, catchAsync } = require('../utils/responseHandler');
 const { AuthenticationError, ValidationError } = require('../utils/errors');
 const { validateUserLogin, handleValidationErrors } = require('../middleware/validation');
+const { setAuthCookie } = require('../utils/authCookie');
 
 const normalizeEmail = (email) => (email || '').trim().toLowerCase();
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -107,16 +108,7 @@ const userSignInController = catchAsync(async (req, res) => {
     
     const token = jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, { expiresIn: '8h' });
 
-    // Set secure cookie with proper production settings
-    const isProduction = process.env.NODE_ENV === 'production';
-    const tokenOptions = {
-        httpOnly: true,
-        secure: isProduction, // Use secure cookies in production (HTTPS)
-        sameSite: isProduction ? 'none' : 'lax', // 'none' for cross-origin in production, 'lax' for localhost
-        maxAge: 8 * 60 * 60 * 1000 // 8 hours
-    };
-
-    res.cookie("token", token, tokenOptions);
+    setAuthCookie(res, token);
 
     // Return success response without sensitive data
     return ResponseHandler.success(res, {

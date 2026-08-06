@@ -35,22 +35,27 @@ const Header = () => {
   }, [])
 
   const handleLogout = useCallback(async () => {
-    const fetchData = await fetch(SummaryApi.logout_user.url, {
-      method: SummaryApi.logout_user.method,
-      credentials: 'include'
-    })
+    try {
+      const fetchData = await fetch(SummaryApi.logout_user.url, {
+        method: SummaryApi.logout_user.method,
+        credentials: 'include',
+        cache: 'no-store'
+      })
 
-    const data = await fetchData.json()
+      const data = await fetchData.json()
 
-    if(data.success) {
-      toast.success(data.message)
-      dispatch(setUserDetails(null))
-      navigate("/")
-      setMenuDisplay(false)
-    }
-
-    if(data.error) {
-      toast.error(data.message)
+      if (data.success) {
+        localStorage.removeItem('token')
+        sessionStorage.removeItem('token')
+        dispatch(setUserDetails(null))
+        toast.success(data.message)
+        navigate("/")
+        setMenuDisplay(false)
+      } else {
+        toast.error(data.message || 'Unable to log out')
+      }
+    } catch (error) {
+      toast.error('Unable to log out. Please try again.')
     }
   }, [dispatch, navigate])
 
