@@ -203,6 +203,8 @@ const SmartSearchBar = ({
                 <input
                     ref={searchRef}
                     type="text"
+                    id="site-search"
+                    name="search"
                     value={searchTerm}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}

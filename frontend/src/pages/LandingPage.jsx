@@ -525,6 +525,8 @@ const LandingPage = () => {
             <form onSubmit={handleNewsletterSubmit} className="flex gap-4">
               <input 
                 type="email" 
+                id="newsletter-email"
+                name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"

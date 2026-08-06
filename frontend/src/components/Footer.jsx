@@ -178,6 +178,8 @@ const Footer = () => {
               <div className='flex'>
                 <input 
                   type="email" 
+                  id="footer-newsletter-email"
+                  name="email"
                   placeholder="Enter your email" 
                   className='bg-gray-800 border border-gray-600 rounded-l-lg px-3 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-accent-500'
                 />
