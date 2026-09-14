@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { FaStar, FaStarHalf, FaShoppingCart, FaHeart, FaRegHeart, FaChevronLeft, FaChevronRight, FaExpand, FaWhatsapp } from 'react-icons/fa';
+import { FaStar, FaStarHalf, FaPhoneAlt, FaHeart, FaRegHeart, FaChevronLeft, FaChevronRight, FaExpand, FaWhatsapp } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import SummaryApi from '../common';
 import SocialFeatures from '../components/SocialFeatures';
@@ -194,12 +194,6 @@ const ProductDetail = () => {
         const count = reviews.length;
         const average = count ? reviews.reduce((sum, r) => sum + (Number(r.rating) || 0), 0) / count : 0;
         return { count, average };
-    };
-
-    const formatLocation = (location) => {
-        if (!location) return '';
-        if (typeof location === 'string') return location;
-        return [location.neighborhood || location.address, location.city, location.state].filter(Boolean).join(', ');
     };
 
     // Rows for the Property Details section; empty values are skipped
@@ -498,9 +492,6 @@ const ProductDetail = () => {
                                 </>
                             )}
                         </div>
-                        <p className="text-sm text-gray-600">
-                            Stock: <span className="font-semibold">{product.stock} available</span>
-                        </p>
                     </div>
 
                     {/* Property Details */}
@@ -530,15 +521,27 @@ const ProductDetail = () => {
                         </div>
                     )}
 
-                    {/* Seller Info */}
+                    {/* Listed by the company: this is a single-company site with no individual sellers.
+                        Phone/address are not shown because the site settings still hold template values. */}
                     <div className="bg-gray-50 p-4 rounded-lg">
-                        <h3 className="font-semibold mb-2">Seller Information</h3>
-                        <p className="text-gray-700">
-                            <span className="font-medium">Name:</span> {product.sellerInfo?.name || 'Anonymous'}
+                        <h3 className="font-semibold mb-1">Listed by</h3>
+                        <p className="text-gray-800 font-medium">
+                            {siteContent?.siteSettings?.siteName || siteContent?.footer?.companyInfo?.name || 'Adoo Real Estate'}
                         </p>
-                        {formatLocation(product.location) && (
-                            <p className="text-gray-700">
-                                <span className="font-medium">Location:</span> {formatLocation(product.location)}
+                        {siteContent?.contactUs?.businessInfo?.whatsapp && (
+                            <p className="text-gray-700 text-sm">
+                                <span className="font-medium">WhatsApp:</span> {siteContent.contactUs.businessInfo.whatsapp}
+                            </p>
+                        )}
+                        {(siteContent?.contactUs?.businessInfo?.email || siteContent?.siteSettings?.supportEmail) && (
+                            <p className="text-gray-700 text-sm">
+                                <span className="font-medium">Email:</span>{' '}
+                                <a
+                                    href={`mailto:${siteContent?.contactUs?.businessInfo?.email || siteContent?.siteSettings?.supportEmail}`}
+                                    className="underline"
+                                >
+                                    {siteContent?.contactUs?.businessInfo?.email || siteContent?.siteSettings?.supportEmail}
+                                </a>
                             </p>
                         )}
                     </div>
@@ -577,7 +580,7 @@ const ProductDetail = () => {
                                 className="flex-1 bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
                                 onClick={handleContactAgent}
                             >
-                                <FaShoppingCart />
+                                <FaPhoneAlt />
                                 Contact Agent
                             </button>
                             <button 
@@ -672,9 +675,6 @@ const ProductDetail = () => {
                                                     {formatPrice(relatedProduct.price, relatedProduct)}
                                                 </p>
                                             )}
-                                        </div>
-                                        <div className="text-xs text-gray-500">
-                                            Stock: {relatedProduct.stock}
                                         </div>
                                     </div>
                                 </div>

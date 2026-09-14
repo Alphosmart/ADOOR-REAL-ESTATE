@@ -5,7 +5,9 @@ const User = require('../models/userModel');
 // existing ones (including ones an admin deactivated) are never changed.
 const REQUIRED_CATEGORIES = [
     { name: 'fully-detached-terrace', displayName: 'Fully Detached Terrace' },
-    { name: 'semi-detached-terrace', displayName: 'Semi-Detached Terrace' }
+    { name: 'semi-detached-terrace', displayName: 'Semi-Detached Terrace' },
+    { name: 'fully-detached-duplex', displayName: 'Fully Detached Duplex' },
+    { name: 'semi-detached-duplex', displayName: 'Semi-Detached Duplex' }
 ];
 
 async function ensureRequiredCategories() {

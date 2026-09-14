@@ -20,7 +20,8 @@ const seedCategories = async () => {
                 'houses', 'apartments', 'villas', 'condos', 'land', 'commercial', 
                 'townhouses', 'duplexes', 'penthouses', 'studios', 'bungalow', 
                 'mansion', 'short-let', 'agricultural', 'farm',
-                'fully-detached-terrace', 'semi-detached-terrace'
+                'fully-detached-terrace', 'semi-detached-terrace',
+                'fully-detached-duplex', 'semi-detached-duplex'
             ];
 
             // Create admin user ID (you can replace this with actual admin ID)
