@@ -143,17 +143,22 @@ const EditProduct = () => {
         e.preventDefault();
         
         // Validation
-        if (!data.productName || !data.brandName || !data.category || !data.price || !data.sellingPrice) {
-            toast.error('Please fill in all required fields');
+        if (!data.productName || !data.category || !data.price) {
+            toast.error('Please enter the title, category and price');
             return;
         }
 
-        if (data.productImage.length === 0) {
-            toast.error('Please upload at least one product image');
+        if (data.productImage.length === 0 && !data.productVideo) {
+            toast.error('Please add at least one photo or a video');
             return;
         }
 
-        if (parseFloat(data.sellingPrice) > parseFloat(data.price)) {
+        if (videoUploading) {
+            toast.error('Please wait for the video to finish uploading');
+            return;
+        }
+
+        if (data.sellingPrice && parseFloat(data.sellingPrice) > parseFloat(data.price)) {
             toast.error('Selling price cannot be greater than original price');
             return;
         }
@@ -167,7 +172,7 @@ const EditProduct = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({ ...data, sellingPrice: data.sellingPrice || data.price })
             });
 
             const result = await response.json();
@@ -235,7 +240,7 @@ const EditProduct = () => {
                     {/* Brand Name */}
                     <div>
                         <label htmlFor="brandName" className="block text-sm font-medium text-gray-700 mb-2">
-                            Brand Name *
+                            Brand Name
                         </label>
                         <input
                             type="text"
@@ -245,7 +250,6 @@ const EditProduct = () => {
                             onChange={handleOnChange}
                             placeholder="Enter brand name"
                             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
-                            required
                         />
                     </div>
 
@@ -294,8 +298,9 @@ const EditProduct = () => {
                     {/* Product Images */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Product Images *
+                            Photos
                         </label>
+                        <p className="mb-2 text-sm text-gray-500">Add at least one photo or a video — you don't need both.</p>
                         
                         {/* Upload Area */}
                         <div className="mb-4">
@@ -350,7 +355,7 @@ const EditProduct = () => {
                         ) : (
                             <label htmlFor="editVideoInput" className="block cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-6 text-center hover:border-accent-500">
                                 <FaCloudUploadAlt className="mx-auto mb-2 text-4xl text-gray-400" />
-                                <p>{videoUploading ? 'Uploading video…' : 'Upload an optional walkthrough video'}</p>
+                                <p>{videoUploading ? 'Uploading video…' : 'Upload a walkthrough video'}</p>
                                 <p className="text-sm text-gray-500">MP4, WebM, MOV or M4V</p>
                                 <input id="editVideoInput" type="file" className="hidden" accept="video/mp4,video/webm,video/quicktime,video/x-m4v" onChange={handleUploadVideo} disabled={videoUploading} />
                             </label>
@@ -378,7 +383,7 @@ const EditProduct = () => {
                         </div>
                         <div>
                             <label htmlFor="sellingPrice" className="block text-sm font-medium text-gray-700 mb-2">
-                                Selling Price *
+                                Selling Price
                             </label>
                             <input
                                 type="number"
@@ -386,11 +391,10 @@ const EditProduct = () => {
                                 name="sellingPrice"
                                 value={data.sellingPrice}
                                 onChange={handleOnChange}
-                                placeholder="0.00"
+                                placeholder="Same as original price"
                                 min="0"
                                 step="0.01"
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-accent-500"
-                                required
                             />
                         </div>
                     </div>

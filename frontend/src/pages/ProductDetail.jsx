@@ -306,11 +306,16 @@ const ProductDetail = () => {
                 <div>
                     {/* Main Image Container */}
                     <div className="relative w-full h-96 bg-gray-100 rounded-lg overflow-hidden mb-4 group">
-                        <img 
-                            src={selectedImage} 
-                            alt={product.productName}
-                            className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
-                        />
+                        {selectedImage ? (
+                            <img 
+                                src={selectedImage} 
+                                alt={product.productName}
+                                className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                            />
+                        ) : (
+                            // Video-only listing: show the video in place of the main photo
+                            <PropertyVideo src={product.productVideo} className="w-full h-full bg-black" />
+                        )}
                         
                         {/* Image Navigation Arrows */}
                         {product.productImage.length > 1 && (
@@ -331,12 +336,14 @@ const ProductDetail = () => {
                         )}
                         
                         {/* Fullscreen Button */}
-                        <button
-                            onClick={toggleFullscreen}
-                            className="absolute top-2 right-2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-opacity-75"
-                        >
-                            <FaExpand />
-                        </button>
+                        {selectedImage && (
+                            <button
+                                onClick={toggleFullscreen}
+                                className="absolute top-2 right-2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-opacity-75"
+                            >
+                                <FaExpand />
+                            </button>
+                        )}
                         
                         {/* Image Counter */}
                         {product.productImage.length > 1 && (
@@ -367,7 +374,7 @@ const ProductDetail = () => {
                             ))}
                         </div>
                     )}
-                    {product.productVideo && (
+                    {product.productVideo && selectedImage && (
                         <div className="mt-5 overflow-hidden rounded-lg bg-black">
                             <PropertyVideo src={product.productVideo} poster={product.productImage?.[0]} className="w-full aspect-video max-h-[520px]" />
                             <p className="bg-[#121f2f] px-4 py-3 text-sm font-medium text-white">Property walkthrough</p>

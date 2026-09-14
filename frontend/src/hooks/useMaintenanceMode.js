@@ -1,14 +1,18 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import SummaryApi from '../common';
 
 const useMaintenanceMode = () => {
     const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const hasCheckedRef = useRef(false);
 
     const checkMaintenanceMode = useCallback(async () => {
         try {
-            setIsLoading(true);
+            // Only block the UI on the very first check. Background re-checks must stay
+            // silent: toggling isLoading unmounts the whole app (MaintenanceGuard renders
+            // a loader), which wipes any in-progress form such as Add Property.
+            if (!hasCheckedRef.current) setIsLoading(true);
             setError(null);
 
             // Add timeout for maintenance check
@@ -50,6 +54,7 @@ const useMaintenanceMode = () => {
             // On error, assume maintenance is off to prevent blocking users
             setIsMaintenanceMode(false);
         } finally {
+            hasCheckedRef.current = true;
             setIsLoading(false);
         }
     }, []);

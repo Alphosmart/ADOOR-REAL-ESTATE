@@ -319,13 +319,18 @@ const AddProduct = () => {
             return;
         }
 
-        if (!data.productName || !data.category || !data.price || !data.sellingPrice) {
-            toast.error("Please fill in all required fields");
+        if (!data.productName || !data.category || !data.price) {
+            toast.error("Please enter the property title, category and price");
             return;
         }
 
-        if (data.productImage.length === 0) {
-            toast.error("Please upload at least one product image");
+        if (data.productImage.length === 0 && !data.productVideo) {
+            toast.error("Please add at least one photo or a video");
+            return;
+        }
+
+        if (videoUploading) {
+            toast.error("Please wait for the video to finish uploading");
             return;
         }
 
@@ -336,7 +341,8 @@ const AddProduct = () => {
                 headers: {
                     "content-type": "application/json"
                 },
-                body: JSON.stringify(data)
+                // There is no separate selling price input, so it defaults to the listed price
+                body: JSON.stringify({ ...data, sellingPrice: data.sellingPrice || data.price })
             });
 
             const responseData = await response.json();
@@ -395,17 +401,20 @@ const AddProduct = () => {
 
                 <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
                     
+                    <p className='text-sm text-gray-600 bg-slate-50 border rounded p-3'>
+                        Only fields marked <span className='text-red-600'>*</span> are required, plus at least one photo <strong>or</strong> a video. Fill in the rest if you have it.
+                    </p>
+
                     {/* 🏡 Property Details Section */}
                     <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>🏡 Property Details</h3>
                     
-                    <label htmlFor='country'>Country <span className='text-secondary-600'>*</span>:</label>
+                    <label htmlFor='country'>Country:</label>
                     <select
                         id='country'
                         name='country'
                         value={data.country}
                         onChange={handleOnChange}
                         className='p-2 bg-slate-100 border rounded'
-                        required
                     >
                         <option value="">Select Country</option>
                         {Object.keys(locationData).map(country => (
@@ -413,9 +422,8 @@ const AddProduct = () => {
                         ))}
                     </select>
 
-                    <label htmlFor='currency' className='mt-3'>Currency <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='currency' className='mt-3'>Currency:</label>
                     <select 
-                        required 
                         value={data.currency} 
                         name='currency' 
                         onChange={handleOnChange}
@@ -433,17 +441,16 @@ const AddProduct = () => {
                     <input 
                         type='text' 
                         id='productName' 
+                        required
                         placeholder='e.g., 3-Bedroom Duplex in Gwarinpa' 
                         name='productName' 
                         value={data.productName} 
                         onChange={handleOnChange}
                         className='p-2 bg-slate-100 border rounded'
-                        required
                     />
 
-                    <label htmlFor='listingType' className='mt-3'>Listing Type <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='listingType' className='mt-3'>Listing Type:</label>
                     <select 
-                        required 
                         value={data.listingType} 
                         name='listingType' 
                         onChange={handleOnChange}
@@ -459,17 +466,17 @@ const AddProduct = () => {
                     <input 
                         type='number' 
                         id='price' 
+                        required
                         placeholder='e.g., 45000000'
                         value={data.price} 
                         name='price' 
                         onChange={handleOnChange}
                         className='p-2 bg-slate-100 border rounded'
-                        required
                     />
 
                     <label htmlFor='category' className='mt-3'>Property Category <span className='text-red-600'>*</span>:</label>
                     <select 
-                        required 
+                        required
                         value={data.category} 
                         name='category' 
                         onChange={handleOnChange}
@@ -483,7 +490,7 @@ const AddProduct = () => {
                         ))}
                     </select>
 
-                    <label htmlFor='description' className='mt-3'>Description <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='description' className='mt-3'>Description:</label>
                     <textarea 
                         className='h-28 bg-slate-100 border resize-none p-2 rounded' 
                         placeholder='Spacious 3-bedroom duplex with fitted kitchen and 24-hour security...'
@@ -491,14 +498,13 @@ const AddProduct = () => {
                         onChange={handleOnChange} 
                         name='description'
                         value={data.description}
-                        required
                     >
                     </textarea>
 
                     {/* 📍 Location Section */}
                     <h3 className='font-bold text-md mt-4 mb-2 text-primary-600'>📍 Location</h3>
                     
-                    <label htmlFor='address'>Address <span className='text-secondary-600'>*</span>:</label>
+                    <label htmlFor='address'>Address:</label>
                     <input 
                         type='text' 
                         id='address' 
@@ -507,10 +513,9 @@ const AddProduct = () => {
                         name='address' 
                         onChange={handleOnChange}
                         className='p-2 bg-slate-100 border rounded'
-                        required
                     />
 
-                    <label htmlFor='city' className='mt-3'>City <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='city' className='mt-3'>City:</label>
                     <input 
                         type='text' 
                         id='city' 
@@ -519,17 +524,15 @@ const AddProduct = () => {
                         name='city' 
                         onChange={handleOnChange}
                         className='p-2 bg-slate-100 border rounded'
-                        required
                     />
 
-                    <label htmlFor='state' className='mt-3'>State/Region <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='state' className='mt-3'>State/Region:</label>
                     <select
                         id='state'
                         name='state'
                         value={data.state}
                         onChange={handleOnChange}
                         className='p-2 bg-slate-100 border rounded'
-                        required
                         disabled={!data.country || states.length === 0}
                     >
                         <option value="">Select State/Region</option>
@@ -588,7 +591,7 @@ const AddProduct = () => {
                         <>
                             <div className='grid grid-cols-3 gap-2'>
                                 <div>
-                                    <label htmlFor='bedrooms'>Bedrooms <span className='text-red-600'>*</span>:</label>
+                                    <label htmlFor='bedrooms'>Bedrooms:</label>
                                     <input 
                                         type='number' 
                                         id='bedrooms' 
@@ -597,12 +600,11 @@ const AddProduct = () => {
                                         name='bedrooms' 
                                         onChange={handleOnChange}
                                         className='p-2 bg-slate-100 border rounded w-full'
-                                        required
                                         min="0"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor='bathrooms'>Bathrooms <span className='text-red-600'>*</span>:</label>
+                                    <label htmlFor='bathrooms'>Bathrooms:</label>
                                     <input 
                                         type='number' 
                                         id='bathrooms' 
@@ -611,7 +613,6 @@ const AddProduct = () => {
                                         name='bathrooms' 
                                         onChange={handleOnChange}
                                         className='p-2 bg-slate-100 border rounded w-full'
-                                        required
                                         min="0"
                                     />
                                 </div>
@@ -642,33 +643,31 @@ const AddProduct = () => {
                                 min="0"
                             />
 
-                            <label htmlFor='furnishing' className='mt-3'>Furnishing <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='furnishing' className='mt-3'>Furnishing:</label>
                             <select 
                                 value={data.furnishing} 
                                 name='furnishing' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             >
                                 <option value="Unfurnished">Unfurnished</option>
                                 <option value="Partly Furnished">Partly Furnished</option>
                                 <option value="Furnished">Furnished</option>
                             </select>
 
-                            <label htmlFor='condition' className='mt-3'>Condition <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='condition' className='mt-3'>Condition:</label>
                             <select 
                                 value={data.condition} 
                                 name='condition' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             >
                                 <option value="Newly Built">Newly Built</option>
                                 <option value="Renovated">Renovated</option>
                                 <option value="Old">Old</option>
                             </select>
 
-                            <label htmlFor='size' className='mt-3'>Size (sqm) <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='size' className='mt-3'>Size (sqm):</label>
                             <input 
                                 type='text' 
                                 id='size' 
@@ -677,7 +676,6 @@ const AddProduct = () => {
                                 name='size' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             />
 
                             <label htmlFor='amenities' className='mt-3'>Amenities (comma-separated):</label>
@@ -695,7 +693,7 @@ const AddProduct = () => {
                     {/* LAND FIELDS */}
                     {categoryType === 'land' && (
                         <>
-                            <label htmlFor='landSize'>Land Size <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='landSize'>Land Size:</label>
                             <input 
                                 type='text' 
                                 id='landSize' 
@@ -704,29 +702,26 @@ const AddProduct = () => {
                                 name='landSize' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             />
 
-                            <label htmlFor='landType' className='mt-3'>Land Type <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='landType' className='mt-3'>Land Type:</label>
                             <select 
                                 value={data.landType} 
                                 name='landType' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             >
                                 <option value="Residential">Residential</option>
                                 <option value="Commercial">Commercial</option>
                                 <option value="Agricultural">Agricultural</option>
                             </select>
 
-                            <label htmlFor='topography' className='mt-3'>Topography <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='topography' className='mt-3'>Topography:</label>
                             <select 
                                 value={data.topography} 
                                 name='topography' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             >
                                 <option value="Flat">Flat</option>
                                 <option value="Sloppy">Sloppy</option>
@@ -771,13 +766,12 @@ const AddProduct = () => {
                     {/* COMMERCIAL FIELDS */}
                     {categoryType === 'commercial' && (
                         <>
-                            <label htmlFor='propertyType'>Property Type <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='propertyType'>Property Type:</label>
                             <select 
                                 value={data.propertyType} 
                                 name='propertyType' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             >
                                 <option value="Office">Office</option>
                                 <option value="Shop">Shop</option>
@@ -786,7 +780,7 @@ const AddProduct = () => {
                                 <option value="Hotel">Hotel</option>
                             </select>
 
-                            <label htmlFor='totalArea' className='mt-3'>Total Area <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='totalArea' className='mt-3'>Total Area:</label>
                             <input 
                                 type='text' 
                                 id='totalArea' 
@@ -795,7 +789,6 @@ const AddProduct = () => {
                                 name='totalArea' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             />
 
                             <div className='grid grid-cols-2 gap-2 mt-3'>
@@ -866,7 +859,7 @@ const AddProduct = () => {
                         <>
                             <div className='grid grid-cols-2 gap-2'>
                                 <div>
-                                    <label htmlFor='pricePerNight'>Price Per Night ({data.currency}) <span className='text-red-600'>*</span>:</label>
+                                    <label htmlFor='pricePerNight'>Price Per Night ({data.currency}):</label>
                                     <input 
                                         type='number' 
                                         id='pricePerNight' 
@@ -875,7 +868,6 @@ const AddProduct = () => {
                                         name='pricePerNight' 
                                         onChange={handleOnChange}
                                         className='p-2 bg-slate-100 border rounded w-full'
-                                        required
                                         min="0"
                                     />
                                 </div>
@@ -896,7 +888,7 @@ const AddProduct = () => {
 
                             <div className='grid grid-cols-2 gap-2 mt-3'>
                                 <div>
-                                    <label htmlFor='bedrooms'>Bedrooms <span className='text-red-600'>*</span>:</label>
+                                    <label htmlFor='bedrooms'>Bedrooms:</label>
                                     <input 
                                         type='number' 
                                         id='bedrooms' 
@@ -905,12 +897,11 @@ const AddProduct = () => {
                                         name='bedrooms' 
                                         onChange={handleOnChange}
                                         className='p-2 bg-slate-100 border rounded w-full'
-                                        required
                                         min="0"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor='bathrooms'>Bathrooms <span className='text-red-600'>*</span>:</label>
+                                    <label htmlFor='bathrooms'>Bathrooms:</label>
                                     <input 
                                         type='number' 
                                         id='bathrooms' 
@@ -919,13 +910,12 @@ const AddProduct = () => {
                                         name='bathrooms' 
                                         onChange={handleOnChange}
                                         className='p-2 bg-slate-100 border rounded w-full'
-                                        required
                                         min="0"
                                     />
                                 </div>
                             </div>
 
-                            <label htmlFor='amenities' className='mt-3'>Amenities (comma-separated) <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='amenities' className='mt-3'>Amenities (comma-separated):</label>
                             <input 
                                 type='text' 
                                 id='amenities' 
@@ -933,7 +923,6 @@ const AddProduct = () => {
                                 value={data.amenities.join(', ')} 
                                 onChange={(e) => handleArrayInput('amenities', e.target.value)}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             />
 
                             <div className='grid grid-cols-2 gap-2 mt-3'>
@@ -966,7 +955,7 @@ const AddProduct = () => {
                     {/* AGRICULTURAL FIELDS */}
                     {categoryType === 'agricultural' && (
                         <>
-                            <label htmlFor='landSize'>Land Size <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='landSize'>Land Size:</label>
                             <input 
                                 type='text' 
                                 id='landSize' 
@@ -975,16 +964,14 @@ const AddProduct = () => {
                                 name='landSize' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             />
 
-                            <label htmlFor='soilType' className='mt-3'>Soil Type <span className='text-red-600'>*</span>:</label>
+                            <label htmlFor='soilType' className='mt-3'>Soil Type:</label>
                             <select 
                                 value={data.soilType} 
                                 name='soilType' 
                                 onChange={handleOnChange}
                                 className='p-2 bg-slate-100 border rounded'
-                                required
                             >
                                 <option value="Loamy">Loamy</option>
                                 <option value="Clay">Clay</option>
@@ -1032,9 +1019,10 @@ const AddProduct = () => {
                     )}
 
                     {/* 🖼️ Images Section */}
-                    <h3 className='font-bold text-md mt-4 mb-2 text-primary-500'>🖼️ Property Images</h3>
+                    <h3 className='font-bold text-md mt-4 mb-2 text-primary-500'>🖼️ Photos &amp; Video <span className='text-red-600'>*</span></h3>
+                    <p className='text-xs text-gray-500'>Add at least one photo or a video — you don't need both.</p>
                     
-                    <label htmlFor='productImage'>Upload Images <span className='text-red-600'>*</span>:</label>
+                    <label htmlFor='productImage'>Photos:</label>
                     <label htmlFor='uploadImageInput'>
                         <div className='p-2 bg-slate-100 border rounded h-32 w-full flex justify-center items-center cursor-pointer'>
                             <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
@@ -1076,12 +1064,12 @@ const AddProduct = () => {
                                 ))}
                             </div>
                         ) : (
-                            <p className='text-secondary-600 text-xs'>*Please upload at least one property image</p>
+                            <p className='text-gray-500 text-xs'>No photos yet — that's fine if you add a video below.</p>
                         )}
                     </div>
 
-                    <h3 className='font-bold text-md mt-5 mb-2 text-primary-500'>🎥 Property Video</h3>
-                    <p className='text-xs text-gray-500 mb-2'>Optional. Upload a video or paste a YouTube, Vimeo, Dailymotion, MP4, or WebM link.</p>
+                    <label className='mt-3'>Video:</label>
+                    <p className='text-xs text-gray-500 mb-2'>Upload a video or paste a YouTube, Vimeo, Dailymotion, MP4, or WebM link.</p>
                     <input type='url' value={data.productVideo || ''} onChange={event => setData(prev => ({ ...prev, productVideo: event.target.value }))} placeholder='https://youtube.com/watch?v=... or direct video URL' className='mb-3 w-full rounded border bg-slate-100 p-3' />
                     {!data.productVideo ? (
                         <label htmlFor='uploadVideoInput' className='p-4 bg-slate-100 border border-dashed rounded min-h-28 flex justify-center items-center cursor-pointer'>
@@ -1126,8 +1114,9 @@ const AddProduct = () => {
                     <button 
                         className='px-3 py-2 bg-gradient-to-r from-primary-500 to-accent-500 text-white mb-10 hover:from-primary-600 hover:to-accent-600 rounded-lg mt-5 shadow-md transition-all font-medium'
                         type='submit'
+                        disabled={videoUploading}
                     >
-                        Add Property
+                        {videoUploading ? 'Waiting for video upload…' : 'Add Property'}
                     </button>
                 </form>
             </div>

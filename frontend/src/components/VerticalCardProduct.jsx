@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useProducts } from '../context/ProductContext'
 import { formatCurrency } from '../helper/settingsUtils'
 import SocialFeatures from './SocialFeatures'
+import { VideoThumbnail } from './PropertyVideo'
 
 const VerticalCardProduct = memo(({ category, heading, featured = false }) => {
     console.log('🔍 VerticalCardProduct: Rendered with category:', category, 'heading:', heading, 'featured:', featured);
@@ -92,18 +93,22 @@ const VerticalCardProduct = memo(({ category, heading, featured = false }) => {
                             onMouseEnter={() => setHoveredProduct(product._id)}
                             onMouseLeave={() => setHoveredProduct(null)}
                         >
-                            <img 
-                                src={hoveredProduct === product._id && product.productImage.length > 1 
-                                    ? product.productImage[currentImageIndex[product._id] || 1] || product.productImage[0]
-                                    : product.productImage[0]
-                                } 
-                                alt={product.productName}
-                                loading="lazy"
-                                className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply'
-                                onError={(e) => {
-                                    e.target.src = '/placeholder-image.png'; // Fallback image
-                                }}
-                            />
+                            {product.productImage?.length ? (
+                                <img 
+                                    src={hoveredProduct === product._id && product.productImage.length > 1 
+                                        ? product.productImage[currentImageIndex[product._id] || 1] || product.productImage[0]
+                                        : product.productImage[0]
+                                    } 
+                                    alt={product.productName}
+                                    loading="lazy"
+                                    className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply'
+                                    onError={(e) => {
+                                        e.target.src = '/placeholder-image.png'; // Fallback image
+                                    }}
+                                />
+                            ) : (
+                                <VideoThumbnail src={product.productVideo} alt={product.productName} className='object-cover h-full w-full' />
+                            )}
                             
                             {/* Image indicators for products with multiple images */}
                             {product.productImage.length > 1 && (

@@ -31,4 +31,20 @@ const PropertyVideo = ({ src, poster, className = 'w-full aspect-video', muted =
   return <video key={src} src={src} controls playsInline preload="metadata" poster={poster} muted={muted} onError={onError} onLoadedMetadata={onLoadedMetadata} className={className} />;
 };
 
+// Still image for a video, used where a listing has a video but no photos
+export const getVideoThumbnail = (url = '') => {
+  const embedUrl = getEmbedUrl(url);
+  if (!embedUrl?.startsWith('https://www.youtube.com/embed/')) return null;
+  return `https://img.youtube.com/vi/${embedUrl.split('/').pop()}/hqdefault.jpg`;
+};
+
+export const VideoThumbnail = ({ src, alt = 'Property video', className = '' }) => {
+  if (!src) return null;
+  const thumbnail = getVideoThumbnail(src);
+  if (thumbnail) return <img src={thumbnail} alt={alt} loading="lazy" className={className} />;
+  // Direct files: the #t fragment makes the browser paint the first frame
+  if (!getEmbedUrl(src)) return <video src={`${src}#t=0.1`} muted playsInline preload="metadata" className={className} />;
+  return <div className={`flex items-center justify-center text-4xl text-gray-500 ${className}`}>▶</div>;
+};
+
 export default PropertyVideo;

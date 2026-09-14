@@ -73,9 +73,9 @@ async function addProductController(req, res) {
             } = req.body;
 
             // Validate required fields
-            if (!productName || !category || !price || !sellingPrice) {
+            if (!productName || !category || !price) {
                 return res.status(400).json({
-                    message: "Product name, category, price, and selling price are required",
+                    message: "Title, category and price are required",
                     error: true,
                     success: false
                 });
@@ -155,6 +155,18 @@ async function addProductController(req, res) {
                 allImages.push(productImage);
             }
 
+            // A listing needs at least one photo or a video - not necessarily both
+            if (allImages.length === 0 && !(typeof productVideo === 'string' && productVideo.trim())) {
+                return res.status(400).json({
+                    message: "Please add at least one photo or a video",
+                    error: true,
+                    success: false
+                });
+            }
+
+            // Selling price is optional; it defaults to the listed price
+            const finalSellingPrice = sellingPrice || price;
+
             // Create new product with multi-currency support
             const newProduct = new Product({
                 productName,
@@ -171,14 +183,14 @@ async function addProductController(req, res) {
                         currency: sellerCurrency
                     },
                     sellingPrice: {
-                        amount: parseFloat(sellingPrice),
+                        amount: parseFloat(finalSellingPrice),
                         currency: sellerCurrency
                     }
                 },
                 
                 // Legacy fields for backward compatibility
                 price: parseFloat(price),
-                sellingPrice: parseFloat(sellingPrice),
+                sellingPrice: parseFloat(finalSellingPrice),
                 
                 seller: sellerId, // Assign to the current seller (admin or verified seller)
                 sellerInfo: {
