@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch, FaFilter, FaTimes } from 'react-icons/fa';
 import SummaryApi from '../common';
+import { VideoThumbnail } from '../components/PropertyVideo';
 
 const SearchResults = () => {
     const location = useLocation();
@@ -259,12 +260,18 @@ const SearchResults = () => {
                     {products.map((product) => (
                         <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                             <div className="aspect-square overflow-hidden">
-                                <img
-                                    src={product.productImage?.[0] || '/api/placeholder/300/300'}
-                                    alt={product.productName}
-                                    className="w-full h-full object-cover hover:scale-105 transition-transform cursor-pointer"
-                                    onClick={() => navigate(`/product/${product._id}`)}
-                                />
+                                {!product.productImage?.[0] && product.productVideo ? (
+                                    <div className="w-full h-full cursor-pointer" onClick={() => navigate(`/product/${product._id}`)}>
+                                        <VideoThumbnail src={product.productVideo} alt={product.productName} className="w-full h-full object-cover" />
+                                    </div>
+                                ) : (
+                                    <img
+                                        src={product.productImage?.[0] || '/api/placeholder/300/300'}
+                                        alt={product.productName}
+                                        className="w-full h-full object-cover hover:scale-105 transition-transform cursor-pointer"
+                                        onClick={() => navigate(`/product/${product._id}`)}
+                                    />
+                                )}
                             </div>
                             <div className="p-4">
                                 <h3 

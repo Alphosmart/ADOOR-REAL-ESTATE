@@ -3,15 +3,21 @@ import { IoCloudUpload } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SummaryApi from '../common';
 import imageTobase64 from '../helper/imageTobase64';
 import uploadVideo from '../helper/uploadVideo';
 import PropertyVideo from '../components/PropertyVideo';
 
-const AddProduct = () => {
+// Used for both Add Property and Edit Property (mode="edit", listing id from the URL),
+// so the two forms always have the same fields
+const AddProduct = ({ mode = 'add' }) => {
     const user = useSelector(state => state?.user?.user);
     const navigate = useNavigate();
+    const { id } = useParams();
+    const isEdit = mode === 'edit' && Boolean(id);
+    const [productLoading, setProductLoading] = useState(isEdit);
+    const [saving, setSaving] = useState(false);
     const [categories, setCategories] = useState([]);
     const [states, setStates] = useState([]);
     const [lgas, setLgas] = useState([]);
@@ -99,10 +105,6 @@ const AddProduct = () => {
         if (countryData) {
             const statesList = Object.keys(countryData.states || countryData.regions || countryData.provinces || {});
             setStates(statesList);
-            // Reset state and LGA when country changes, and set currency based on country
-            const defaultCurrency = countryCurrencyMap[country] || "NGN";
-            setData(prev => ({ ...prev, state: "", lga: "", currency: defaultCurrency }));
-            setLgas([]);
         }
     };
 
@@ -112,8 +114,6 @@ const AddProduct = () => {
             const stateData = countryData.states || countryData.regions || countryData.provinces || {};
             const lgasList = stateData[state] || [];
             setLgas(lgasList);
-            // Reset LGA when state changes
-            setData(prev => ({ ...prev, lga: "" }));
         }
     };
 
@@ -154,6 +154,69 @@ const AddProduct = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.state, data.country]);
+
+    // Edit mode: load the listing into the same form state Add Property uses
+    useEffect(() => {
+        if (!isEdit) return;
+        let cancelled = false;
+        const loadProduct = async () => {
+            try {
+                const response = await fetch(`${SummaryApi.productForEdit.url}/${id}`, {
+                    method: SummaryApi.productForEdit.method,
+                    credentials: 'include'
+                });
+                const result = await response.json();
+                if (cancelled) return;
+                if (!result.success) {
+                    toast.error(result.message || 'Failed to load property');
+                    navigate('/admin-panel/all-products');
+                    return;
+                }
+
+                const product = result.data;
+                const location = product.location && typeof product.location === 'object' ? product.location : {};
+                const details = product.propertyDetails || {};
+                const statusLabels = { ACTIVE: 'Active', PENDING: 'Pending', SOLD: 'Sold', RENTED: 'Rented', INACTIVE: 'Inactive' };
+
+                setData(prev => {
+                    const next = { ...prev };
+                    Object.keys(details).forEach(key => {
+                        if (key in prev && details[key] !== undefined && details[key] !== null) next[key] = details[key];
+                    });
+                    return {
+                        ...next,
+                        productName: product.productName || '',
+                        listingType: product.listingType || prev.listingType,
+                        // The form has one price: load the price buyers currently see
+                        price: product.sellingPrice || product.price || '',
+                        currency: product.pricing?.originalPrice?.currency || prev.currency,
+                        category: product.category || '',
+                        description: product.description || '',
+                        country: location.country || prev.country,
+                        address: location.address || '',
+                        city: location.city || '',
+                        state: location.state || '',
+                        lga: location.lga || '',
+                        latitude: location.latitude ?? '',
+                        longitude: location.longitude ?? '',
+                        condition: product.condition || prev.condition,
+                        productImage: Array.isArray(product.productImage) ? product.productImage : [],
+                        productVideo: product.productVideo || '',
+                        status: statusLabels[product.status] || 'Active',
+                        tags: Array.isArray(product.tags) ? product.tags.join(', ') : (product.tags || '')
+                    };
+                });
+            } catch (error) {
+                if (cancelled) return;
+                toast.error('Failed to load property');
+                navigate('/admin-panel/all-products');
+            } finally {
+                if (!cancelled) setProductLoading(false);
+            }
+        };
+        loadProduct();
+        return () => { cancelled = true; };
+    }, [isEdit, id, navigate]);
     const locationData = {
         Nigeria: {
             states: {
@@ -209,15 +272,19 @@ const AddProduct = () => {
     // Fetch categories from Category Management API
     const handleOnChange = (e) => {
         const { name, value } = e.target;
-        setData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+        setData(prev => {
+            const next = { ...prev, [name]: value };
+            // Clear lower location levels only when the user changes them (not in the list-loading
+            // effects), so opening a saved listing in edit mode keeps its state and LGA
+            if (name === 'country') Object.assign(next, { state: '', lga: '', currency: countryCurrencyMap[value] || 'NGN' });
+            if (name === 'state') next.lga = '';
+            return next;
+        });
     };
 
     // Category type helpers
     const getPropertyCategoryType = (category) => {
-        const residential = ['houses', 'apartments', 'villas', 'condos', 'townhouses', 'duplexes', 'penthouses', 'studios', 'bungalow', 'mansion'];
+        const residential = ['houses', 'apartments', 'villas', 'condos', 'townhouses', 'duplexes', 'penthouses', 'studios', 'bungalow', 'mansion', 'terrace', 'detached'];
         const land = ['land'];
         const commercial = ['commercial'];
         const shortLet = ['short-let', 'shortlet'];
@@ -312,8 +379,8 @@ const AddProduct = () => {
             return;
         }
 
-        // Check if user is admin (only admins can add properties in single company model)
-        if (user.role !== 'ADMIN') {
+        // Adding is admin-only (single company model); for edits the server checks edit permissions
+        if (!isEdit && user.role !== 'ADMIN') {
             toast.error("Only administrators can add properties");
             navigate('/admin-panel');
             return;
@@ -334,36 +401,69 @@ const AddProduct = () => {
             return;
         }
 
+        // Only send the feature fields that belong to the chosen category, so a house
+        // isn't saved with land/commercial defaults such as "Soil type: Loamy"
+        const fieldsByType = {
+            residential: ['bedrooms', 'bathrooms', 'toilets', 'parking', 'furnishing', 'size', 'amenities'],
+            land: ['landSize', 'landType', 'topography', 'fencing', 'accessibility', 'documents'],
+            commercial: ['propertyType', 'totalArea', 'floors', 'parking', 'facilities', 'accessibility'],
+            shortlet: ['pricePerNight', 'pricePerWeek', 'bedrooms', 'bathrooms', 'amenities', 'checkInTime', 'checkOutTime'],
+            agricultural: ['landSize', 'soilType', 'waterSource', 'accessibility', 'documents']
+        };
+        const numericFields = ['bedrooms', 'bathrooms', 'toilets', 'parking', 'floors', 'pricePerNight', 'pricePerWeek'];
+        const propertyDetails = {};
+        fieldsByType[categoryType].forEach(field => {
+            const value = data[field];
+            if (value === '' || value === undefined || (Array.isArray(value) && value.length === 0)) return;
+            propertyDetails[field] = numericFields.includes(field) ? Number(value) : value;
+        });
+
+        // Only form fields are sent, so an edit can't overwrite reviews, likes or history
+        const payload = {
+            productName: data.productName,
+            listingType: data.listingType,
+            price: data.price,
+            // The form has a single price, so the selling price always matches it
+            sellingPrice: data.price,
+            currency: data.currency,
+            category: data.category,
+            description: data.description,
+            country: data.country,
+            state: data.state,
+            city: data.city,
+            lga: data.lga,
+            address: data.address,
+            latitude: data.latitude,
+            longitude: data.longitude,
+            productImage: data.productImage,
+            productVideo: data.productVideo,
+            status: data.status,
+            tags: data.tags ? String(data.tags).split(',').map(tag => tag.trim()).filter(Boolean) : [],
+            propertyDetails,
+            // Condition only applies to buildings
+            condition: ['residential', 'commercial'].includes(categoryType) ? data.condition : ''
+        };
+        const endpoint = isEdit
+            ? { url: `${SummaryApi.updateProduct.url}/${id}`, method: SummaryApi.updateProduct.method }
+            : SummaryApi.addProduct;
+
         try {
-            const response = await fetch(SummaryApi.addProduct.url, {
-                method: SummaryApi.addProduct.method,
+            setSaving(true);
+            const response = await fetch(endpoint.url, {
+                method: endpoint.method,
                 credentials: 'include',
                 headers: {
                     "content-type": "application/json"
                 },
-                // There is no separate selling price input, so it defaults to the listed price
-                body: JSON.stringify({ ...data, sellingPrice: data.sellingPrice || data.price })
+                body: JSON.stringify(payload)
             });
 
             const responseData = await response.json();
 
             if (responseData.success) {
-                toast.success(responseData.message);
-                setData({
-                    productName: "",
-                    brandName: "",
-                    category: "",
-                    productImage: [],
-                    productVideo: "",
-                    description: "",
-                    price: "",
-                    sellingPrice: "",
-                    stock: "",
-                    condition: "new",
-                    location: "",
-                    tags: "",
-                    currency: "NGN"
-                });
+                toast.success(isEdit ? 'Property updated successfully' : responseData.message);
+                // No form reset needed: we navigate away. (A partial reset dropped the
+                // amenities/documents/facilities arrays and crashed the re-render.)
                 // Navigate based on user role
                 if (user.role === 'ADMIN') {
                     navigate('/admin-panel/all-products');
@@ -374,23 +474,33 @@ const AddProduct = () => {
                 toast.error(responseData.message);
             }
         } catch (error) {
-            console.error("Error adding product:", error);
+            console.error(isEdit ? "Error updating product:" : "Error adding product:", error);
             if (error.message.includes("fetch")) {
                 toast.error("Network error. Please check your connection and try again.");
             } else if (error.message.includes("too large")) {
                 toast.error("Images are too large. Please compress your images and try again.");
             } else {
-                toast.error(error.message || "Failed to add property. Please try again.");
+                toast.error(error.message || "Failed to save property. Please try again.");
             }
+        } finally {
+            setSaving(false);
         }
     };
+
+    if (productLoading) {
+        return (
+            <div className='p-4'>
+                <p className='text-center text-gray-500 py-16'>Loading property…</p>
+            </div>
+        );
+    }
 
     return (
         <div className='p-4'>
             <div className='bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden mx-auto'>
                 
                 <div className='flex justify-between items-center pb-4'>
-                    <h2 className='font-bold text-lg'>Add New Property</h2>
+                    <h2 className='font-bold text-lg'>{isEdit ? 'Edit Property' : 'Add New Property'}</h2>
                     <button 
                         className='w-fit ml-auto block py-1 px-3 rounded-full hover:bg-red-600 text-red-600 hover:text-white'
                         onClick={() => navigate(-1)}
@@ -1097,6 +1207,7 @@ const AddProduct = () => {
                         <option value="Pending">Pending</option>
                         <option value="Sold">Sold</option>
                         <option value="Rented">Rented</option>
+                        <option value="Inactive">Inactive</option>
                     </select>
 
                     <label htmlFor='slug' className='mt-3'>URL Slug (optional):</label>
@@ -1114,9 +1225,9 @@ const AddProduct = () => {
                     <button 
                         className='px-3 py-2 bg-gradient-to-r from-primary-500 to-accent-500 text-white mb-10 hover:from-primary-600 hover:to-accent-600 rounded-lg mt-5 shadow-md transition-all font-medium'
                         type='submit'
-                        disabled={videoUploading}
+                        disabled={videoUploading || saving}
                     >
-                        {videoUploading ? 'Waiting for video upload…' : 'Add Property'}
+                        {videoUploading ? 'Waiting for video upload…' : saving ? 'Saving…' : isEdit ? 'Save Changes' : 'Add Property'}
                     </button>
                 </form>
             </div>

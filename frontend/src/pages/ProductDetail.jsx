@@ -7,6 +7,7 @@ import SocialFeatures from '../components/SocialFeatures';
 import EnhancedReviews from '../components/EnhancedReviews';
 import useSiteContent from '../hooks/useSiteContent';
 import PropertyVideo from '../components/PropertyVideo';
+import { formatCurrency } from '../helper/settingsUtils';
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -100,11 +101,19 @@ const ProductDetail = () => {
                     : "http://localhost:8080"
             );
             
-            // Use property endpoint instead of product
-            const response = await fetch(`${backendDomain}/api/properties/${id}`, {
+            // Try the property endpoint first, then fall back to the product endpoint:
+            // listings created through Add Property are stored as products, so they
+            // 404 on /api/properties/:id and would otherwise redirect back home.
+            let response = await fetch(`${backendDomain}/api/properties/${id}`, {
                 method: 'GET'
             });
-            const data = await response.json();
+            let data = await response.json();
+            if (!data.success) {
+                response = await fetch(`${SummaryApi.getSingleProduct.url}/${id}`, {
+                    method: SummaryApi.getSingleProduct.method
+                });
+                data = await response.json();
+            }
 
             if (data.success) {
                 const propertyData = data.data;
@@ -117,8 +126,9 @@ const ProductDetail = () => {
                     category: propertyData.propertyType || propertyData.category,
                     pricing: {
                         sellingPrice: {
-                            amount: propertyData.pricing?.amount || 0,
-                            currency: propertyData.pricing?.currency || 'NGN'
+                            // Property docs use pricing.amount/currency; product docs use pricing.sellingPrice
+                            amount: propertyData.pricing?.amount ?? propertyData.pricing?.sellingPrice?.amount ?? 0,
+                            currency: propertyData.pricing?.currency || propertyData.pricing?.sellingPrice?.currency || 'NGN'
                         }
                     }
                 };
@@ -173,11 +183,58 @@ const ProductDetail = () => {
         }
     }, [product, fetchRelatedProducts]);
 
-    const formatPrice = (price) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        }).format(price);
+    // Format in the listing's own currency (was hardcoded to USD, so ₦ prices showed as $)
+    const formatPrice = (price, item = product) => {
+        return formatCurrency(price, item?.sellerInfo?.currency || item?.pricing?.sellingPrice?.currency || item?.currency);
+    };
+
+    // Real rating from the listing's own reviews (replaces a hardcoded "4.5 • 123 reviews")
+    const getReviewSummary = (item) => {
+        const reviews = Array.isArray(item?.reviews) ? item.reviews : [];
+        const count = reviews.length;
+        const average = count ? reviews.reduce((sum, r) => sum + (Number(r.rating) || 0), 0) / count : 0;
+        return { count, average };
+    };
+
+    const formatLocation = (location) => {
+        if (!location) return '';
+        if (typeof location === 'string') return location;
+        return [location.neighborhood || location.address, location.city, location.state].filter(Boolean).join(', ');
+    };
+
+    // Rows for the Property Details section; empty values are skipped
+    const getPropertyDetailRows = (item) => {
+        const details = item?.propertyDetails || {};
+        const location = item?.location && typeof item.location === 'object' ? item.location : {};
+        const rows = [
+            ['Listing type', item?.listingType],
+            ['Address', location.address],
+            ['City', location.city],
+            ['LGA / County', location.lga],
+            ['State / Region', location.state],
+            ['Country', location.country],
+            ['Property type', details.propertyType],
+            ['Bedrooms', details.bedrooms],
+            ['Bathrooms', details.bathrooms],
+            ['Toilets', details.toilets],
+            ['Parking spaces', details.parking],
+            ['Floors', details.floors],
+            ['Furnishing', details.furnishing],
+            ['Size', details.size],
+            ['Total area', details.totalArea],
+            ['Land size', details.landSize],
+            ['Land type', details.landType],
+            ['Topography', details.topography],
+            ['Fenced', details.fencing === true ? 'Yes' : details.fencing === false ? 'No' : undefined],
+            ['Soil type', details.soilType],
+            ['Water source', details.waterSource],
+            ['Accessibility', details.accessibility],
+            ['Price per night', details.pricePerNight !== undefined && details.pricePerNight !== null ? formatPrice(details.pricePerNight, item) : undefined],
+            ['Price per week', details.pricePerWeek !== undefined && details.pricePerWeek !== null ? formatPrice(details.pricePerWeek, item) : undefined],
+            ['Check-in', details.checkInTime],
+            ['Check-out', details.checkOutTime]
+        ];
+        return rows.filter(([, value]) => value !== undefined && value !== null && value !== '');
     };
 
     const handleContactAgent = () => {
@@ -395,24 +452,32 @@ const ProductDetail = () => {
                             </p>
                         )}
                         
-                        <div className="flex items-center gap-2 mb-2">
-                            <div className="flex text-yellow-500">
-                                <FaStar />
-                                <FaStar />
-                                <FaStar />
-                                <FaStar />
-                                <FaStarHalf />
-                            </div>
-                            <span className="text-gray-600">(4.5) • 123 reviews</span>
-                        </div>
+                        {(() => {
+                            const { count, average } = getReviewSummary(product);
+                            if (!count) return <p className="text-gray-500 text-sm mb-2">No reviews yet</p>;
+                            return (
+                                <div className="flex items-center gap-2 mb-2">
+                                    <div className="flex">
+                                        {[1, 2, 3, 4, 5].map(star => (
+                                            star <= Math.floor(average) ? <FaStar key={star} className="text-yellow-500" />
+                                                : star - average < 1 && average % 1 >= 0.5 ? <FaStarHalf key={star} className="text-yellow-500" />
+                                                : <FaStar key={star} className="text-gray-300" />
+                                        ))}
+                                    </div>
+                                    <span className="text-gray-600">({average.toFixed(1)}) • {count} review{count === 1 ? '' : 's'}</span>
+                                </div>
+                            );
+                        })()}
 
                         <div className="flex items-center gap-2 mb-4">
                             <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">
                                 {product.status}
                             </span>
-                            <span className="bg-accent-100 text-accent-800 px-2 py-1 rounded text-sm font-medium capitalize">
-                                {product.condition}
-                            </span>
+                            {product.condition && (
+                                <span className="bg-accent-100 text-accent-800 px-2 py-1 rounded text-sm font-medium capitalize">
+                                    {product.condition}
+                                </span>
+                            )}
                         </div>
                     </div>
 
@@ -438,19 +503,42 @@ const ProductDetail = () => {
                         </p>
                     </div>
 
+                    {/* Property Details */}
+                    {(getPropertyDetailRows(product).length > 0 || ['amenities', 'facilities', 'documents'].some(key => product.propertyDetails?.[key]?.length)) && (
+                        <div>
+                            <h3 className="font-semibold mb-2">Property Details</h3>
+                            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                                {getPropertyDetailRows(product).map(([label, value]) => (
+                                    <div key={label} className="flex justify-between gap-4 border-b border-gray-100 py-1">
+                                        <dt className="text-gray-500">{label}</dt>
+                                        <dd className="font-medium text-gray-800 text-right">{value}</dd>
+                                    </div>
+                                ))}
+                            </dl>
+                            {[['amenities', 'Amenities'], ['facilities', 'Facilities'], ['documents', 'Documents']].map(([key, label]) => (
+                                product.propertyDetails?.[key]?.length > 0 && (
+                                    <div key={key} className="mt-3">
+                                        <p className="text-sm text-gray-500 mb-1">{label}</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {product.propertyDetails[key].map(item => (
+                                                <span key={item} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">{item}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )
+                            ))}
+                        </div>
+                    )}
+
                     {/* Seller Info */}
                     <div className="bg-gray-50 p-4 rounded-lg">
                         <h3 className="font-semibold mb-2">Seller Information</h3>
                         <p className="text-gray-700">
                             <span className="font-medium">Name:</span> {product.sellerInfo?.name || 'Anonymous'}
                         </p>
-                        {product.location && (
+                        {formatLocation(product.location) && (
                             <p className="text-gray-700">
-                                <span className="font-medium">Location:</span> {
-                                    typeof product.location === 'string' 
-                                        ? product.location 
-                                        : `${product.location.neighborhood || product.location.address || ''}, ${product.location.city || ''}, ${product.location.state || ''}`
-                                }
+                                <span className="font-medium">Location:</span> {formatLocation(product.location)}
                             </p>
                         )}
                     </div>
@@ -577,11 +665,11 @@ const ProductDetail = () => {
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="font-semibold text-red-600">
-                                                {formatPrice(relatedProduct.sellingPrice)}
+                                                {formatPrice(relatedProduct.sellingPrice, relatedProduct)}
                                             </p>
                                             {relatedProduct.price && relatedProduct.price > relatedProduct.sellingPrice && (
                                                 <p className="text-xs text-gray-500 line-through">
-                                                    {formatPrice(relatedProduct.price)}
+                                                    {formatPrice(relatedProduct.price, relatedProduct)}
                                                 </p>
                                             )}
                                         </div>

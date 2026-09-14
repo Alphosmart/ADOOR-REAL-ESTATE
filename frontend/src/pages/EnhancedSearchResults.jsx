@@ -4,6 +4,7 @@ import { FaSearch, FaFilter, FaTimes, FaSort, FaList, FaTh, FaChevronDown } from
 import SmartSearchBar from '../components/SmartSearchBar';
 import { trackSearchEvent } from '../utils/searchUtils';
 import SummaryApi from '../common';
+import { VideoThumbnail } from '../components/PropertyVideo';
 
 const EnhancedSearchResults = () => {
     console.log('🔍 EnhancedSearchResults component loaded at:', new Date().toISOString());
@@ -751,11 +752,15 @@ const EnhancedSearchResults = () => {
                                 <div className={`${
                                     viewMode === 'list' ? 'w-24 h-24 flex-shrink-0' : 'aspect-square'
                                 } overflow-hidden`}>
-                                    <img
-                                        src={product.productImage?.[0] || '/api/placeholder/300/300'}
-                                        alt={product.productName}
-                                        className="w-full h-full object-cover hover:scale-105 transition-transform"
-                                    />
+                                    {!product.productImage?.[0] && product.productVideo ? (
+                                        <VideoThumbnail src={product.productVideo} alt={product.productName} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <img
+                                            src={product.productImage?.[0] || '/api/placeholder/300/300'}
+                                            alt={product.productName}
+                                            className="w-full h-full object-cover hover:scale-105 transition-transform"
+                                        />
+                                    )}
                                 </div>
 
                                 {/* Product Info */}

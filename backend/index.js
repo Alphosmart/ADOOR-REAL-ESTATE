@@ -156,6 +156,7 @@ async function startServer() {
         if (dbConnected) {
             console.log('✅ Database connected successfully')
             logger.info('Database connected successfully')
+            await require('./utils/ensureCategories').ensureRequiredCategories()
         } else {
             console.log('⚠️  Database connection failed, but server will continue')
             logger.warn('Database connection failed, server continuing without DB')

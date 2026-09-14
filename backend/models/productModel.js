@@ -158,13 +158,15 @@ const productSchema = new mongoose.Schema({
         default: 1
     },
     condition: {
+        // Free text: property forms send values like "Newly Built", "Renovated" or a
+        // description, which a fixed enum rejected and crashed product creation.
         type: String,
-        enum: ['new', 'like-new', 'good', 'fair', 'poor'],
+        trim: true,
         default: 'new'
     },
     status: {
         type: String,
-        enum: ['ACTIVE', 'SOLD', 'PENDING', 'INACTIVE'],
+        enum: ['ACTIVE', 'SOLD', 'PENDING', 'RENTED', 'INACTIVE'],
         default: 'ACTIVE'
     },
     // Detailed location for real estate properties
@@ -191,6 +193,39 @@ const productSchema = new mongoose.Schema({
         },
         latitude: Number,
         longitude: Number
+    },
+    // For Sale / For Rent / For Lease / Shortlet
+    listingType: {
+        type: String,
+        trim: true,
+        default: ''
+    },
+    // Optional property features from the Add Property form (only the fields that
+    // apply to the listing's category are sent)
+    propertyDetails: {
+        bedrooms: Number,
+        bathrooms: Number,
+        toilets: Number,
+        parking: Number,
+        floors: Number,
+        furnishing: String,
+        size: String,
+        landSize: String,
+        landType: String,
+        topography: String,
+        fencing: Boolean,
+        accessibility: String,
+        propertyType: String,
+        totalArea: String,
+        pricePerNight: Number,
+        pricePerWeek: Number,
+        checkInTime: String,
+        checkOutTime: String,
+        soilType: String,
+        waterSource: String,
+        amenities: [String],
+        documents: [String],
+        facilities: [String]
     },
     tags: [String]
 }, {

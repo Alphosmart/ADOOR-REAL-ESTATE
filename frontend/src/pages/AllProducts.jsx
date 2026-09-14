@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaEdit, FaTrash, FaEye, FaPlus } from 'react-icons/fa';
 import SummaryApi from '../common';
+import { VideoThumbnail } from '../components/PropertyVideo';
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -291,11 +292,15 @@ const AllProducts = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-12 w-12">
-                          <img
-                            className="h-12 w-12 rounded-lg object-cover"
-                            src={product.productImage?.[0] || '/placeholder-image.jpg'}
-                            alt={product.productName}
-                          />
+                          {!product.productImage?.[0] && product.productVideo ? (
+                            <VideoThumbnail src={product.productVideo} alt={product.productName} className="h-12 w-12 rounded-lg object-cover" />
+                          ) : (
+                            <img
+                              className="h-12 w-12 rounded-lg object-cover"
+                              src={product.productImage?.[0] || '/placeholder-image.jpg'}
+                              alt={product.productName}
+                            />
+                          )}
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">

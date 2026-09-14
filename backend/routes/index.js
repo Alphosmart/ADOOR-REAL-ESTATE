@@ -13,6 +13,7 @@ const { checkMaintenanceMode } = require('../middleware/maintenanceMiddleware');
 const { getMaintenanceStatus } = require('../controller/maintenanceController');
 const getProductController = require('../controller/getProduct');
 const getSingleProductController = require('../controller/getSingleProduct');
+const getProductForEditController = require('../controller/getProductForEdit');
 const addProductController = require('../controller/addProduct');
 const uploadVideoController = require('../controller/uploadVideo');
 const buyProductController = require('../controller/buyProduct');
@@ -209,6 +210,7 @@ router.post('/add-product', checkMaintenanceMode, authToken, addProductControlle
 router.post('/admin/upload-video', authToken, uploadVideoController);
 router.get('/user-products', checkMaintenanceMode, authToken, getUserProductsController);
 router.put('/update-product/:productId', checkMaintenanceMode, authToken, updateProductController);
+router.get('/edit-product/:productId', authToken, getProductForEditController);
 router.delete('/delete-product/:productId', checkMaintenanceMode, authToken, deleteProductController);
 
 // ===== REAL ESTATE ROUTES =====

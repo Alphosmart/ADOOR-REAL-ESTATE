@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { trackLandingPageInteraction, trackShopButtonClick, trackNewsletterSignup } from '../utils/analytics';
 import SummaryApi from '../common';
 import useSiteContent from '../hooks/useSiteContent';
+import { formatCurrency } from '../helper/settingsUtils';
+import { VideoThumbnail } from '../components/PropertyVideo';
 import { 
   FaStar, 
   FaHeadset, 
@@ -20,7 +22,7 @@ import {
 } from 'react-icons/fa';
 
 const LandingPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState('houses');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [email, setEmail] = useState('');
   const [testimonials, setTestimonials] = useState([]);
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
@@ -143,77 +145,42 @@ const LandingPage = () => {
     }
   ];
 
-  const featuredProducts = {
-    houses: [
-      {
-        id: "697dbd235d42b12cdaa06a1b",
-        name: "Luxury Villa Lekki",
-        price: "₦85,000,000",
-        originalPrice: "₦95,000,000",
-        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=300&h=300&fit=crop",
-        rating: 4.8,
-        reviews: 127
-      },
-      {
-        id: "697dbd235d42b12cdaa06a1d",
-        name: "Modern Duplex Ikoyi",
-        price: "₦120,000,000",
-        originalPrice: "₦135,000,000",
-        image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&h=300&fit=crop",
-        rating: 4.9,
-        reviews: 203
-      },
-      {
-        id: "697dbd235d42b12cdaa06a1e",
-        name: "Family Home Victoria Island",
-        price: "₦75,000,000",
-        originalPrice: "₦88,000,000",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&h=300&fit=crop",
-        rating: 4.7,
-        reviews: 89
-      }
-    ],
-    apartments: [
-      {
-        id: "697dbd235d42b12cdaa06a1c",
-        name: "3BR Apartment Lekki",
-        price: "₦45,000,000",
-        originalPrice: "₦52,000,000",
-        image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=300&h=300&fit=crop",
-        rating: 4.6,
-        reviews: 156
-      },
-      {
-        id: "697dbd235d42b12cdaa06a1f",
-        name: "2BR Flat Yaba",
-        price: "₦28,500,000",
-        originalPrice: "₦32,000,000",
-        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=300&h=300&fit=crop",
-        rating: 4.8,
-        reviews: 94
-      }
-    ],
-    commercial: [
-      {
-        id: "697dbd235d42b12cdaa06a1b",
-        name: "Office Space Ikeja",
-        price: "₦150,000,000",
-        originalPrice: "₦175,000,000",
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&h=300&fit=crop",
-        rating: 4.9,
-        reviews: 78
-      },
-      {
-        id: "697dbd235d42b12cdaa06a1c",
-        name: "Retail Shop VI",
-        price: "₦95,000,000",
-        originalPrice: "₦110,000,000",
-        image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300&h=300&fit=crop",
-        rating: 4.7,
-        reviews: 112
-      }
-    ]
-  };  const stats = [
+  // Featured Properties: real active listings (newest first) instead of hardcoded demo data
+  const [featuredListings, setFeaturedListings] = useState([]);
+  const [featuredLoading, setFeaturedLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(SummaryApi.allProduct.url, { method: SummaryApi.allProduct.method })
+      .then(response => response.json())
+      .then(result => {
+        if (!cancelled && result.success && Array.isArray(result.data)) {
+          setFeaturedListings([...result.data].sort((x, y) => new Date(y.createdAt || 0) - new Date(x.createdAt || 0)));
+        }
+      })
+      .catch(() => {})
+      .finally(() => { if (!cancelled) setFeaturedLoading(false); });
+    return () => { cancelled = true; };
+  }, []);
+
+  // Tabs from the most common categories among the listings
+  const featuredTabs = useMemo(() => {
+    const counts = {};
+    featuredListings.forEach(listing => {
+      if (listing.category) counts[listing.category] = (counts[listing.category] || 0) + 1;
+    });
+    const top = Object.keys(counts).sort((x, y) => counts[y] - counts[x]).slice(0, 4);
+    const toLabel = name => name.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    return [{ key: 'all', label: 'All' }, ...top.map(name => ({ key: name, label: toLabel(name) }))];
+  }, [featuredListings]);
+
+  const visibleFeatured = useMemo(() => (
+    featuredListings
+      .filter(listing => selectedCategory === 'all' || listing.category === selectedCategory)
+      .slice(0, 6)
+  ), [featuredListings, selectedCategory]);
+
+  const stats = [
     { number: "50K+", label: "Happy Clients", icon: FaUsers },
     { number: "5K+", label: "Properties Sold", icon: FaHome },
     { number: "20+", label: "Years Experience", icon: FaAward },
@@ -295,71 +262,89 @@ const LandingPage = () => {
           </div>
 
           {/* Category Tabs */}
-          <div className="flex justify-center mb-12">
-            <div className="bg-gray-100 rounded-lg p-1 flex">
-              {[
-                { key: 'houses', label: 'Houses' },
-                { key: 'apartments', label: 'Apartments' },
-                { key: 'commercial', label: 'Commercial' }
-              ].map((category) => (
-                <button
-                  key={category.key}
-                  onClick={() => setSelectedCategory(category.key)}
-                  className={`px-6 py-3 rounded-md font-medium transition-all ${
-                    selectedCategory === category.key
-                      ? 'bg-white text-accent-600 shadow-md'
-                      : 'text-gray-600 hover:text-accent-600'
-                  }`}
-                >
-                  {category.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Product Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts[selectedCategory]?.map((product) => (
-              <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all transform hover:-translate-y-2">
-                <div className="relative">
-                  <img 
-                    src={product.image} 
-                    alt={product.name}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{product.name}</h3>
-                  
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <FaStar 
-                          key={i} 
-                          className={`text-sm ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`} 
-                        />
-                      ))}
-                    </div>
-                    <span className="text-sm text-gray-600">({product.reviews} reviews)</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl font-bold text-accent-600">{product.price}</span>
-                      <span className="text-gray-500 line-through">{product.originalPrice}</span>
-                    </div>
-                    <Link 
-                      to={`/product/${product.id}`}
-                      className="bg-gradient-to-r from-accent-800 to-primary-500 text-white px-4 py-2 rounded-lg hover:from-accent-900 hover:to-primary-600 transition-all transform hover:scale-105 font-medium"
-                    >
-                      🏠 View Details
-                    </Link>
-                  </div>
-                </div>
+          {featuredTabs.length > 2 && (
+            <div className="flex justify-center mb-12">
+              <div className="bg-gray-100 rounded-lg p-1 flex flex-wrap justify-center">
+                {featuredTabs.map((category) => (
+                  <button
+                    key={category.key}
+                    onClick={() => setSelectedCategory(category.key)}
+                    className={`px-6 py-3 rounded-md font-medium transition-all ${
+                      selectedCategory === category.key
+                        ? 'bg-white text-accent-600 shadow-md'
+                        : 'text-gray-600 hover:text-accent-600'
+                    }`}
+                  >
+                    {category.label}
+                  </button>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
+
+          {/* Listing Grid */}
+          {featuredLoading ? (
+            <p className="text-center text-gray-500">Loading properties…</p>
+          ) : visibleFeatured.length === 0 ? (
+            <p className="text-center text-gray-500">New properties are coming soon.</p>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {visibleFeatured.map((listing) => {
+                const reviewCount = Array.isArray(listing.reviews) ? listing.reviews.length : 0;
+                const averageRating = reviewCount ? listing.reviews.reduce((sum, r) => sum + (Number(r.rating) || 0), 0) / reviewCount : 0;
+                const currency = listing.sellerInfo?.currency || listing.pricing?.sellingPrice?.currency;
+                const price = listing.sellingPrice || listing.price;
+                return (
+                  <div key={listing._id} className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all transform hover:-translate-y-2">
+                    <div className="relative h-64 overflow-hidden bg-gray-100">
+                      {listing.productImage?.[0] ? (
+                        <img
+                          src={listing.productImage[0]}
+                          alt={listing.productName}
+                          className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      ) : (
+                        <VideoThumbnail src={listing.productVideo} alt={listing.productName} className="w-full h-64 object-cover" />
+                      )}
+                    </div>
+
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">{listing.productName}</h3>
+
+                      {reviewCount > 0 && (
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="flex items-center">
+                            {[...Array(5)].map((_, i) => (
+                              <FaStar
+                                key={i}
+                                className={`text-sm ${i < Math.round(averageRating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                              />
+                            ))}
+                          </div>
+                          <span className="text-sm text-gray-600">({reviewCount} review{reviewCount === 1 ? '' : 's'})</span>
+                        </div>
+                      )}
+
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-2xl font-bold text-accent-600">{formatCurrency(price, currency)}</span>
+                          {listing.price > listing.sellingPrice && (
+                            <span className="text-gray-500 line-through">{formatCurrency(listing.price, currency)}</span>
+                          )}
+                        </div>
+                        <Link
+                          to={`/product/${listing._id}`}
+                          className="bg-gradient-to-r from-accent-800 to-primary-500 text-white px-4 py-2 rounded-lg hover:from-accent-900 hover:to-primary-600 transition-all transform hover:scale-105 font-medium shrink-0"
+                        >
+                          🏠 View Details
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           <div className="text-center mt-12">
             <Link 
@@ -369,7 +354,7 @@ const LandingPage = () => {
               🛍️ Explore All Products <FaArrowRight />
             </Link>
             <p className="text-gray-600 mt-4 text-lg">
-              Over 15,000+ premium products waiting for you!
+              {featuredListings.length > 0 ? `${featuredListings.length} ${featuredListings.length === 1 ? 'property' : 'properties'} available now` : 'Browse all our listings'}
             </p>
           </div>
         </div>

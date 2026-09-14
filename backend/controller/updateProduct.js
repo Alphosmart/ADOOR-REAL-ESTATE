@@ -1,10 +1,12 @@
 const Product = require("../models/productModel");
 const User = require("../models/userModel");
+const CurrencyService = require("../services/currencyService");
+const { buildPropertyFields, LOCATION_KEYS } = require('../utils/propertyFields');
 
 async function updateProductController(req, res) {
     try {
         const { productId } = req.params;
-        const updateData = req.body;
+        const updateData = { ...req.body };
 
         // Find the product
         const product = await Product.findById(productId);
@@ -59,6 +61,31 @@ async function updateProductController(req, res) {
         delete updateData.updatedAt;
         delete updateData.uploadedBy;
         delete updateData.uploadedByInfo;
+        // Never let a client overwrite social data or history with a stale copy
+        ['_id', '__v', 'likes', 'ratings', 'reviews', 'socialShares', 'editHistory', 'companyId',
+         'lastEditedBy', 'lastEditedAt', 'analytics', 'pricing', 'displayPricing', 'socialFeatures'].forEach(field => delete updateData[field]);
+
+        // Same property fields as add-product: flat location -> location object, status, details
+        LOCATION_KEYS.forEach(field => delete updateData[field]);
+        delete updateData.currency;
+        Object.assign(updateData, buildPropertyFields(req.body));
+
+        // Keep the structured pricing in sync with the legacy price fields
+        if (updateData.price !== undefined && updateData.price !== '') {
+            const price = parseFloat(updateData.price);
+            const sellingPrice = parseFloat(updateData.sellingPrice || updateData.price);
+            updateData.price = price;
+            updateData.sellingPrice = sellingPrice;
+            updateData['pricing.originalPrice.amount'] = price;
+            updateData['pricing.sellingPrice.amount'] = sellingPrice;
+        }
+        if (req.body.currency) {
+            updateData['pricing.originalPrice.currency'] = req.body.currency;
+            updateData['pricing.sellingPrice.currency'] = req.body.currency;
+        }
+        if (typeof updateData.tags === 'string') {
+            updateData.tags = updateData.tags.split(',').map(tag => tag.trim()).filter(Boolean);
+        }
 
         // Add edit tracking information
         const editInfo = {
@@ -88,6 +115,13 @@ async function updateProductController(req, res) {
             { new: true, runValidators: true }
         )
         .populate('uploadedBy', 'name email role');
+
+        // Refresh cached currency conversions for the new price
+        if (updatedProduct?.pricing?.originalPrice) {
+            const plainProduct = updatedProduct.toObject();
+            CurrencyService.updateCachedPrices(plainProduct);
+            await Product.updateOne({ _id: productId }, { $set: { 'pricing.convertedPrices': plainProduct.pricing.convertedPrices } });
+        }
 
         res.status(200).json({
             message: "Product updated successfully",

@@ -48,6 +48,11 @@ const SummaryApi = {
         url : `${backendDomain}/api/update-product`,
         method : 'put'
     },
+    // Loads any listing (any status) for the edit form, with edit permission checks
+    productForEdit : {
+        url : `${backendDomain}/api/edit-product`,
+        method : 'get'
+    },
     deleteProduct : {
         url : `${backendDomain}/api/delete-product`,
         method : 'delete'
